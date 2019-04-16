@@ -21,7 +21,7 @@ public class Greeter {
      * @return a nice hello message.
      */
     public String sayHello() {
-        return "Hello " + this.name + "!";
+        return "";
     }
 
     /**
@@ -29,6 +29,6 @@ public class Greeter {
      * @return a nice goodbye message.
      */
     public String sayGoodBye() {
-        return "See you around, " + this.name + ".";
+        return "";
     }
 }
