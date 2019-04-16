@@ -25,6 +25,8 @@ jobs:
 
       # run tests!
       - run:
-            working_directory: helloWorld
+            working_directory: demoAssignment
             command: mvn integration-test
-
+      # - run:
+      #       working_directory: helloWorld
+      #       command: mvn integration-test
