@@ -1,4 +1,3 @@
-package nl.rug.oop.helloWorld;
 import java.util.HashSet;
 
 public class Memory{
