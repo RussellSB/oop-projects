@@ -1,31 +1,62 @@
 package nl.rug.oop.introduction;
 
-public class Room{
+import java.util.*;
 
-    //Attributes
-    private String color;
-    private String description;
 
-    //Constructor
-    public Room(String color){
-        this.color = color;
+public class Room extends Inspectable {
+    // Attributes;
+    private ArrayList<Door> doors = new ArrayList<>();
+
+
+    // Constructor
+    public Room(String description) {
+        super(description);
     }
+
+    public Room(String description, ArrayList<Door> doors) {
+        super(description);
+        this.doors = doors;
+    }
+
+
     //Getters and Setters
-    public void setColor(String color){
-        this.color = color;
+
+
+    // Other methods
+    public void addDoor(Door door) {
+        if(door != null)
+            this.doors.add(door);
     }
-    public String getColor(){
-        return this.color;
+
+    public void inspectDoors() {
+        for(int i=0; i<doors.size(); i++) {
+            System.out.print("  ("+ i + ") ");
+            doors.get(i).inspect();
+        }
     }
-    public void setDescription(String description){
-        this.description = description;
-    }
-    public String getDescription(){
-        return this.description;
-    }
-    //Other methods
-    public void inspected(String description){
-        System.out.println(description);
+
+    public void interactWithDoors(Player player) {
+        System.out.println("You look around for doors. You see: ");
+        this.inspectDoors();
+
+        boolean quit = false;
+        Scanner in = new Scanner(System.in); //Scanner for input
+        int menuItem;
+
+        do {
+            System.out.println("Which door do you take?  (-1: stay here)");
+            System.out.print("-> ");
+            menuItem = in.nextInt();
+
+            if(menuItem == -1) {
+                quit = true;
+            } else if (menuItem > doors.size() || menuItem < 0) {
+                System.out.println("Invalid choice.");
+            } else {
+                doors.get(menuItem).interact(player);
+                quit = true;
+            }
+        } while (!quit);
     }
     
 }
