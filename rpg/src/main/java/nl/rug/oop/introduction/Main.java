@@ -3,8 +3,7 @@ import java.util.*;
 
 
 public class Main {
-
-    public static Player initWorldAndReturnPlayer(){
+    public static Player initWorldAndReturnPlayer() {
         // Initializing rooms
         Room room1 = new Room("a dark omnious room with a space themed door.");
         Room room2 = new Room("an icey cold room with a space themed door and another with a game of thrones reference.");
@@ -52,11 +51,11 @@ public class Main {
         Player player = new Player(room1); // Placing player in room1
         return player;
     }
+
     public static void main(String[] args) {
-        
         Player player = initWorldAndReturnPlayer();
 
-        // User Interface
+        // Main Menu
         boolean quit = false;
         Scanner in = new Scanner(System.in); //Scanner for input
         int menuItem;
@@ -67,7 +66,13 @@ public class Main {
             System.out.println("  (1) Look for doors");
             System.out.println("  (2) Look for living entities satisfying the seven vital functions");
             System.out.print("-> ");
-            menuItem = in.nextInt();
+            try {
+                menuItem = in.nextInt();
+            } catch (Exception e) {
+                System.out.println("Input must be a number");
+                menuItem = -10000;
+                in.nextLine();
+            }
 
             switch (menuItem) {
                 case 0:

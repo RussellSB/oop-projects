@@ -16,13 +16,16 @@ public class Room extends Inspectable {
 
     public Room(String description, ArrayList<Door> doors) {
         super(description);
-        this.doors = doors;
+        for (Door door : doors)
+            this.addDoor(door); // To prevent null values
     }
 
     public Room(String description, ArrayList<Door> doors, ArrayList<NPC> npcs) {
         super(description);
-        this.doors = doors;
-        this.npcs = npcs;
+        for (Door door : doors)
+            this.addDoor(door); // To prevent null values
+        for (NPC npc : npcs)
+            this.addNPC(npc); // To prevent null values
     }
 
 
@@ -44,7 +47,11 @@ public class Room extends Inspectable {
     public void inspectDoors() {
         for(int i=0; i<doors.size(); i++) {
             System.out.print("  ("+ i + ") ");
-            doors.get(i).inspect();
+            try {
+                doors.get(i).inspect();
+            } catch (Exception e) {
+                System.out.println("NULL door");
+            }
         }
     }
 
@@ -63,14 +70,24 @@ public class Room extends Inspectable {
             do {
                 System.out.println("Which door do you take?  (-1: stay here)");
                 System.out.print("-> ");
-                menuItem = in.nextInt();
+                try {
+                    menuItem = in.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Input must be a number");
+                    menuItem = -10000;
+                    in.nextLine();
+                }
 
                 if (menuItem == -1) {
                     quit = true;
                 } else if (menuItem > doors.size() || menuItem < 0) {
                     System.out.println("Invalid choice.");
                 } else {
-                    doors.get(menuItem).interact(player);
+                    try {
+                        doors.get(menuItem).interact(player);
+                    } catch (Exception e) {
+                        System.out.println("You cannot interact with a NULL door");
+                    }
                     quit = true;
                 }
             } while (!quit);
@@ -85,7 +102,11 @@ public class Room extends Inspectable {
     public void inspectNPCs() {
         for(int i=0; i<npcs.size(); i++) {
             System.out.print("  ("+ i + ") ");
-            npcs.get(i).inspect();
+            try {
+                npcs.get(i).inspect();
+            } catch (Exception e) {
+                System.out.println("NULL NPC");
+            }
         }
     }
 
@@ -104,14 +125,24 @@ public class Room extends Inspectable {
             do {
                 System.out.println("Interact with who?  (-1: be antisocial)");
                 System.out.print("-> ");
-                menuItem = in.nextInt();
+                try {
+                    menuItem = in.nextInt();
+                } catch (Exception e) {
+                    System.out.println("Input must be a number");
+                    menuItem = -10000;
+                    in.nextLine();
+                }
 
                 if (menuItem == -1) {
                     quit = true;
                 } else if (menuItem > npcs.size() || menuItem < 0) {
                     System.out.println("Invalid choice.");
                 } else {
-                    npcs.get(menuItem).interact(player);
+                    try {
+                        npcs.get(menuItem).interact(player);
+                    } catch (Exception e) {
+                        System.out.println("You cannot interact with a NULL NPC");
+                    }
                     quit = true;
                 }
             } while (!quit);
