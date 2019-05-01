@@ -34,14 +34,18 @@ public class Main {
         room5.addDoor(door5_1);
         room5.addDoor(door5_2);
         // Initializing NPCs
-        NPC hodor = new NPC("A beefy man repeatedly yelling Hodor. His eyes are pearl white.", "\"HODOR!\"", room2);
-        NPC branStark = new NPC("A little boy in a wheelchair. His eyes are also pearl white.", "He ignores you. You assume he might be mind-controlling the beefy man.", room2);
-        NPC girl = new NPC("A girl concerned about the door the beefy man is pushing. She seems exhausted.", "\"My brother died for the three eyed-raven, he did.\"", room2);
-        // Adding NPCs
+        Adult hodor = new Adult("A beefy man repeatedly yelling Hodor. His eyes are pearl white.", "\"HODOR!\"");
+        Child branStark = new Child("A little boy in a wheelchair. His eyes are also pearl white.", "He ignores you. You assume he might be mind-controlling the beefy man.");
+        Child girl = new Child("A girl concerned about the door the beefy man is pushing. She seems exhausted.", "\"My brother died for the three eyed-raven, he did.\"");
+        Adult tom = new Adult("A man who doesn't appear as American as he initially seemed. He has a water bottle in his hand.", "\"I DID NOT HIT HER, I DID NOOT! Oh.... hi Mark.\"");
+        Adult trollMan = new Adult("A man in a classic beige suit. His smile is enchanting.", "He sings and dances to music that starts playing from the ceiling\n\"trolololololololololololololoolololo\"");
+        Unknown cantSee = new Unknown("sound coming from the corner of the room, far right of you", "The breathing stops momentarily.\n\"We're trapped! We're trapped! You're a monster! The 2012 apocalypse is real! I can't escape! The doors all the same! The doors all the same!\"");
+        // Adding NPCs to rooms
         room2.addNPC(hodor);
         room2.addNPC(branStark);
         room2.addNPC(girl);
-
+        room3.addNPC(tom);
+        room5.addNPC(trollMan);
         // Initializing player and their starting point
         Player player = new Player(room1); // Placing player in room1
 
