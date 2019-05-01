@@ -19,6 +19,7 @@ public class Door extends Inspectable implements Interactable {
 
 
     // Other methods
+    @Override
     public void interact(Player player) {
         player.setCurrentRoom(this.getBehindRoom());
     }

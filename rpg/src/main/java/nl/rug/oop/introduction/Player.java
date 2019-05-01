@@ -4,7 +4,6 @@ public class Player {
     // Attributes
     private Room currentRoom;
 
-
     // Constructor
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
