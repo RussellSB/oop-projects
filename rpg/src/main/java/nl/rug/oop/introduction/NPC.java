@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-public class NPC extends Inspectable implements Interactable {
+public abstract class NPC extends Inspectable implements Interactable {
     // Attributes
     private boolean metBefore = false;
     private Room currentRoom; // the current room or, atleast what the NPC beleives is their current room
