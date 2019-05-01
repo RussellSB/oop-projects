@@ -3,11 +3,10 @@ package nl.rug.oop.introduction;
 import java.util.*;
 
 
-public class Room extends Inspectable {
+public abstract class Room extends Inspectable {
     // Attributes;
     private ArrayList<Door> doors = new ArrayList<>();
     private ArrayList<NPC> npcs = new ArrayList<>();
-
 
     // Constructor
     public Room(String description) {
@@ -30,7 +29,9 @@ public class Room extends Inspectable {
 
 
     //Getters and Setters
-
+    public Player getPlayer(){
+        return this.player;
+    }
 
     // Other methods
     public void inspect() {
@@ -147,6 +148,10 @@ public class Room extends Inspectable {
                 }
             } while (!quit);
         }
+    }
+
+    public void actRoom(){
+        //initially a normal room, does nothing.
     }
     
 }
