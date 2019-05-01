@@ -39,7 +39,7 @@ public class Main {
         Child girl = new Child("A girl concerned about the door the beefy man is pushing. She seems exhausted.", "\"My brother died for the three eyed-raven, he did.\"");
         Adult tom = new Adult("A man who doesn't appear as American as he initially seemed. He has a water bottle in his hand.", "\"I DID NOT HIT HER, I DID NOOT! Oh.... hi Mark.\"");
         Adult trollMan = new Adult("A man in a classic beige suit. His smile is enchanting.", "He sings and dances to music that starts playing from the ceiling\n\"trolololololololololololololoolololo\"");
-        Unknown cantSee = new Unknown("sound coming from the corner of the room, far right of you", "The breathing stops momentarily.\n\"We're trapped! We're trapped! You're a monster! The 2012 apocalypse is real! I can't escape! The doors all the same! The doors all the same!\"");
+        Unknown cantSee = new Unknown("sound coming from the corner of the room, far right of you", "The breathing stops momentarily.\n\"We're trapped! We're trapped! You're a monster! The 2012 apocalypse is real! I can't escape! The door's all the same! The door's all the same!\"");
         // Adding NPCs to rooms
         room2.addNPC(hodor);
         room2.addNPC(branStark);
