@@ -34,7 +34,7 @@ public class Main {
         room4.addDoor(door4_1);
         room5.addDoor(door5_1);
         room5.addDoor(door5_2);
-        // Initializing NPCs
+        // Initializing NPCs with their descriptions and responses
         Adult hodor = new Adult("A beefy man repeatedly yelling Hodor. His eyes are pearl white.", "\"HODOR!\"");
         Child branStark = new Child("A little boy in a wheelchair. His eyes are also pearl white.", "He ignores you. You assume he might be mind-controlling the beefy man.");
         Child girl = new Child("A girl concerned about the door the beefy man is pushing. She seems exhausted.", "\"My brother died for the three eyed-raven, he did.\"");

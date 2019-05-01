@@ -9,7 +9,6 @@ public class Player {
         this.currentRoom = currentRoom;
     }
 
-
     // Getters and Setters
     public Room getCurrentRoom() {
         return currentRoom;
