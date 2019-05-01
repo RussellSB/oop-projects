@@ -46,6 +46,7 @@ public class Main {
         room2.addNPC(girl);
         room3.addNPC(tom);
         room5.addNPC(trollMan);
+        room4.addNPC(cantSee);
         // Initializing player and their starting point
         Player player = new Player(room1); // Placing player in room1
 

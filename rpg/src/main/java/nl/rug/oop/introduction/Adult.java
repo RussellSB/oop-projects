@@ -9,7 +9,7 @@ public class Adult extends NPC{
     //Other methods
     public void interact(Player player) {
         if(this.getMetBefore()==true){
-            System.out.println("Actually no. You feel overly-anxious that you might annoy them. The adult might be busy");
+            System.out.println("Actually no. You feel overly-anxious that you might annoy them. You recount that adults lead busy lives.");
 
         }else{
             System.out.println(this.getResponse());
