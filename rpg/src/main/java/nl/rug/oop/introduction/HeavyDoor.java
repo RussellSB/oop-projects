@@ -31,7 +31,7 @@ public class HeavyDoor extends Door implements HealthModifier {
             affectHealth(player, -10);
             super.interact(player);
         } else {
-            System.out.println("You pull with all your might. It opens by an inch but your arms start aching. You're fussy and lose a little motivation to live\nYou could keep trying though.");
+            System.out.println("You pull with all your might. It opens by an inch but your arms now ache more. You're fussy and lose a little motivation to live\nYou could keep trying though.");
             affectHealth(player, -5);
         }
     }
