@@ -5,12 +5,13 @@ import java.util.*;
 public class Main {
     public static Player initWorldAndReturnPlayer() {
         // Initializing rooms
-        Room room1 = new Room("a dark omnious room with a space themed door.");
-        Room room2 = new Room("an icey cold room with a space themed door and another with a game of thrones reference.");
-        Room room3 = new Room("wait a second, this isn't just any room - this is the Room! You see your somewhat typically average American man at the back of the room."); 
-        Room room4 = new Room("but you don't. Feeling scared and frightened, you look around you. It's pitch black! You hear heavy breathing. You can't shake the feeling of a somewhat nostalgic deja vu."); 
-        Room room5 = new Room("a beige texture covering the room's interior. There appears to be an overly optimistic Russian man at the back of the room.");
-        Room room6 = new Room("a room where everything's gold! There's even a treasure chest continuously spewing rainbows from its sides! If you're truly materialistic then congrats you won! Leave the game to go spend your highly-valued imaginary gold!");
+        Room room1 = new BadRoom("a dark omnious room with a space themed door.");
+        Room room2 = new BadRoom("an icey cold room with a space themed door and another with a game of thrones reference.");
+        Room room3 = new GoodRoom("wait a second, this isn't just any room - this is the Room! You see your somewhat typically average American man at the back of the room.");
+        Room room4 = new BadRoom("but you don't. Feeling scared and frightened, you look around you. It's pitch black! You hear heavy breathing. You can't shake the feeling of a somewhat nostalgic deja vu.");
+        Room room5 = new GoodRoom("a beige texture covering the room's interior. There appears to be an overly optimistic Russian man at the back of the room.");
+        Room room6 = new GoodRoom("a room where everything's gold! There's even a treasure chest continuously spewing rainbows from its sides! If you're truly materialistic then congrats you won! Leave the game to go spend your highly-valued imaginary gold!");
+
         // Initializing doors
         Door door1_1 = new Door("a door with an image of a blackhole imprinted on it.", room2);
         Door door2_1 = new Door("a door with the back of a blackhole imprinted on it.", room1); // go back

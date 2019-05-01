@@ -2,8 +2,9 @@ package nl.rug.oop.introduction;
 
 import java.util.*;
 
+public class BadRoom extends Room implements HealthModifier {
 
-public class BadRoom extends Room {
+    public static final int DECREASE_HEALTH = -10;
 
     // Constructors
     public BadRoom(String description) {
@@ -18,10 +19,16 @@ public class BadRoom extends Room {
         super(description, doors, npcs);
     }
 
-    @Override //gives you health cause its a good room!
-    public void actRoom(){
-        System.out.println("This room makes you feel uneasy. Your motivation to live drops.");
-        this.getPlayer().affectHealth(-10);
+
+    // Other methods
+    @Override
+    public void interact(Player player) {
+        affectHealth(player, DECREASE_HEALTH);
+        System.out.println("This room makes you feel uneasy. You slightly lose your motivation to live.");
     }
 
+    @Override
+    public void affectHealth(Player player, int amount) {
+        player.affectHealth(amount);
+    }
 }

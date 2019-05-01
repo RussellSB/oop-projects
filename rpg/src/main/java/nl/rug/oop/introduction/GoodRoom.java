@@ -2,7 +2,9 @@ package nl.rug.oop.introduction;
 
 import java.util.*;
 
-public class GoodRoom extends Room{
+public class GoodRoom extends Room implements HealthModifier {
+
+    public static final int INCREASE_HEALTH = 10;
 
     // Constructors
     public GoodRoom(String description) {
@@ -17,10 +19,16 @@ public class GoodRoom extends Room{
         super(description, doors, npcs);
     }
 
-    @Override //gives you health cause its a good room!
-    public void actRoom(){
+
+    // Other methods
+    @Override
+    public void interact(Player player) {
+        affectHealth(player, INCREASE_HEALTH);
         System.out.println("This room makes you feel safe. You feel your spirits lifting.");
-        this.getPlayer().affectHealth(10);
     }
 
+    @Override
+    public void affectHealth(Player player, int amount) {
+        player.affectHealth(amount);
+    }
 }
