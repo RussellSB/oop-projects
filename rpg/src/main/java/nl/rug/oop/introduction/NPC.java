@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-public abstract class NPC extends Inspectable implements Interactable{
+public abstract class NPC extends Inspectable implements Interactable {
     // Attributes
     private String response; // variable string to be returned when the user approaches NPC
 
