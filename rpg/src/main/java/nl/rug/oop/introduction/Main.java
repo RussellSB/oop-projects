@@ -65,7 +65,7 @@ public class Main {
             System.out.println("HP: "+ player.getHealth());
 
             if(player.stillAlive()==false){
-                System.out.println("My sincerest apolgies but you have deceased. You're even more dead than you previously were. Better luck next time!");
+                System.out.println("You've ceased to exist. Better luck next time!");
                 break;
             }
 

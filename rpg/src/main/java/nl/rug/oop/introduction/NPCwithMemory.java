@@ -4,7 +4,6 @@ public abstract class NPCwithMemory extends NPC {
     // Attributes
     private boolean metBefore = false;
 
-
     public NPCwithMemory(String description, String response) {
         super(description, response);
     }
