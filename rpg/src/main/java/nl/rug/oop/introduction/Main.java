@@ -3,7 +3,8 @@ import java.util.*;
 
 
 public class Main {
-    public static void main(String[] args) {
+
+    public static Player initWorldAndReturnPlayer(){
         // Initializing rooms
         Room room1 = new Room("a dark omnious room with a space themed door.");
         Room room2 = new Room("an icey cold room with a space themed door and another with a game of thrones reference.");
@@ -37,7 +38,7 @@ public class Main {
         Adult hodor = new Adult("A beefy man repeatedly yelling Hodor. His eyes are pearl white.", "\"HODOR!\"");
         Child branStark = new Child("A little boy in a wheelchair. His eyes are also pearl white.", "He ignores you. You assume he might be mind-controlling the beefy man.");
         Child girl = new Child("A girl concerned about the door the beefy man is pushing. She seems exhausted.", "\"My brother died for the three eyed-raven, he did.\"");
-        Adult tom = new Adult("A man who doesn't appear as American as he initially seemed. He has a water bottle in his hand.", "\"I DID NOT HIT HER, I DID NOOT! Oh.... hi Mark.\"");
+        Adult tom = new Adult("A man who doesn't appear as American as he initially seemed. He has a water bottle in his hand.", "\"I did not hit her, I did not! Oh.... hi Mark.\"");
         Adult trollMan = new Adult("A man in a classic beige suit. His smile is enchanting.", "He sings and dances to music that starts playing from the ceiling\n\"trolololololololololololololoolololo\"");
         Unknown cantSee = new Unknown("sound coming from the corner of the room, far right of you", "The breathing stops momentarily.\n\"We're trapped! We're trapped! You're a monster! The 2012 apocalypse is real! I can't escape! The door's all the same! The door's all the same!\"");
         // Adding NPCs to rooms
@@ -49,6 +50,11 @@ public class Main {
         room4.addNPC(cantSee);
         // Initializing player and their starting point
         Player player = new Player(room1); // Placing player in room1
+        return player;
+    }
+    public static void main(String[] args) {
+        
+        Player player = initWorldAndReturnPlayer();
 
         // User Interface
         boolean quit = false;
