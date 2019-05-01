@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-public class Child extends NPC{
+public class Child extends NPC {
 
     public Child(String description, String response) {
         super(description, response);

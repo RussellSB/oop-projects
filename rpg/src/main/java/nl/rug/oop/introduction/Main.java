@@ -14,8 +14,8 @@ public class Main {
         // Initializing doors
         Door door1_1 = new Door("a door with an image of a blackhole imprinted on it.", room2);
         Door door2_1 = new Door("a door with the back of a blackhole imprinted on it.", room1); // go back
-        Door door2_2 = new Door("a door with a beefy possesed fellow pushing at it, struggling to hold the door.", room3);
-        Door door3_1 = new Door("a door with tens of blue zombie-like creatures pushing at it. This hardly intimidates you. You're already dead inside.", room2); // go back
+        Door door2_2 = new HeavyDoor("a door with a beefy possesed fellow pushing at it, struggling to hold the door.", room3);
+        Door door3_1 = new HeavyDoor("a door with tens of blue zombie-like creatures pushing at it. This hardly intimidates you. You're already dead inside.", room2); // go back
         Door door3_2 = new Door("a door with the words YOURE TEARING ME APART LISA, written in blood.", room4);
         Door door3_3 = new Door("a door with a large troll face imprinted on it. It makes you cringe, reminding you of your memes obsession in the early 2010s.", room5);
         Door door3_4 = new Door("a door with a large crown painted in gold and glittered words reading PLS DO NOT DISTR0B.", room6);

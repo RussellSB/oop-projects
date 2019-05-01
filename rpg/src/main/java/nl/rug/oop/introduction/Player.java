@@ -2,8 +2,8 @@ package nl.rug.oop.introduction;
 
 public class Player {
 
-public static final int MAX_HEALTH = 100;
-public static final int MIN_HEALTH = 0;
+    public static final int MAX_HEALTH = 100;
+    public static final int MIN_HEALTH = 0;
 
     // Attributes
     private Room currentRoom;

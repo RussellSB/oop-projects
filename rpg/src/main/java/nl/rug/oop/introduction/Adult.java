@@ -7,8 +7,8 @@ public class Adult extends NPCwithMemory implements HealthModifier {
     }
 
     @Override
-    public void affectHealth(Player player) {
-        player.affectHealth(-20);
+    public void affectHealth(Player player, int amount) {
+        player.affectHealth(amount);
     }
 
     //Other methods
@@ -16,7 +16,7 @@ public class Adult extends NPCwithMemory implements HealthModifier {
         if(this.getMetBefore()==true) {
             System.out.println("Actually no. You feel overly-anxious that you might annoy them. You recount that adults lead busy lives.");
             System.out.println("You slap yourself out of indeciciveness.");
-            affectHealth(player);
+            affectHealth(player, -20);
         } else {
             System.out.println(this.getResponse());
             this.setMetBeforeTrue();
