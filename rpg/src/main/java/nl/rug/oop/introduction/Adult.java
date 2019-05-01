@@ -10,7 +10,8 @@ public class Adult extends NPC{
     public void interact(Player player) {
         if(this.getMetBefore()==true){
             System.out.println("Actually no. You feel overly-anxious that you might annoy them. You recount that adults lead busy lives.");
-
+            System.out.println("You slap yourself out of indeciciveness.");
+            player.affectHealth(-20);
         }else{
             System.out.println(this.getResponse());
             this.setMetBeforeTrue();

@@ -62,6 +62,14 @@ public class Main {
         int menuItem;
 
         do {
+
+            System.out.println("HP: "+ player.getHealth());
+
+            if(player.stillAlive()==false){
+                System.out.println("My sincerest apolgies but you have deceased. You're even more dead than you previously were. Better luck next time!");
+                break;
+            }
+
             System.out.println("\nWhat do you want to do?  (-1: leave game)");
             System.out.println("  (0) Spectate the environment");
             System.out.println("  (1) Look for doors");

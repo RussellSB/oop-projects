@@ -3,10 +3,11 @@ package nl.rug.oop.introduction;
 public class Player {
 
 public static final int MAX_HEALTH = 100;
+public static final int MIN_HEALTH = 0;
 
     // Attributes
     private Room currentRoom;
-    private int health=MAX_HEALTH;
+    private int hp=MAX_HEALTH;
 
     // Constructor
     public Player(Room currentRoom) {
@@ -23,22 +24,21 @@ public static final int MAX_HEALTH = 100;
     }
 
     public int getHealth(){
-        return this.health;
+        return this.hp;
     }
 
     public void affectHealth(int points){
-        if(this.health+points >= 100){
-            this.health = MAX_HEALTH;
+        if(this.hp+points >= MAX_HEALTH){
+            this.hp = MAX_HEALTH;
             System.out.println("Health maxed out! You're full of life and love.");
         }else{
-            this.health = this.health+points;
+            this.hp = this.hp+points;
         }
-        
     }
 
     // Other methods
     public boolean stillAlive(){ 
-        if(this.health<0){
+        if(this.hp<=MIN_HEALTH){
             return false;
         }else{
             return true;
