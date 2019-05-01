@@ -12,31 +12,29 @@ public class Main {
         room1.addDoor(redDoor);
         room1.addDoor(null); // Should be ignored
         room1.addDoor(hoDoor);
-        room2.addDoor(xDoor);
+        //room2.addDoor(xDoor);
         Player player = new Player(room1); // Placing player in room1
-
 
         boolean quit = false;
         Scanner in = new Scanner(System.in); //Scanner for input
         int menuItem;
 
-
-
         do {
-            System.out.println("What do you want to do?");
+            System.out.println("\nWhat do you want to do?  (-1: leave game)");
             System.out.println("  (0) Look around");
             System.out.println("  (1) Look for a way out");
-
             System.out.print("-> ");
             menuItem = in.nextInt();
 
             switch (menuItem) {
                 case 0:
-                    System.out.print("You see: ");
                     player.getCurrentRoom().inspect();
                     break;
                 case 1:
                     player.getCurrentRoom().interactWithDoors(player);
+                    break;
+                case -1:
+                    quit = true;
                     break;
                 default:
                     System.out.println("Invalid choice.");

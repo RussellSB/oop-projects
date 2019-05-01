@@ -23,6 +23,11 @@ public class Room extends Inspectable {
 
 
     // Other methods
+    public void inspect() {
+        System.out.println("\nYou look around");
+        System.out.print("You see: ");
+        super.inspect();
+    }
     public void addDoor(Door door) {
         if(door != null)
             this.doors.add(door);
@@ -36,27 +41,32 @@ public class Room extends Inspectable {
     }
 
     public void interactWithDoors(Player player) {
-        System.out.println("You look around for doors. You see: ");
-        this.inspectDoors();
+        System.out.println("\nYou look around for doors.");
+        if(this.doors.isEmpty()) {
+            System.out.println("There are no doors...");
+        } else {
+            System.out.println("You see:");
+            this.inspectDoors();
 
-        boolean quit = false;
-        Scanner in = new Scanner(System.in); //Scanner for input
-        int menuItem;
+            boolean quit = false;
+            Scanner in = new Scanner(System.in); //Scanner for input
+            int menuItem;
 
-        do {
-            System.out.println("Which door do you take?  (-1: stay here)");
-            System.out.print("-> ");
-            menuItem = in.nextInt();
+            do {
+                System.out.println("Which door do you take?  (-1: stay here)");
+                System.out.print("-> ");
+                menuItem = in.nextInt();
 
-            if(menuItem == -1) {
-                quit = true;
-            } else if (menuItem > doors.size() || menuItem < 0) {
-                System.out.println("Invalid choice.");
-            } else {
-                doors.get(menuItem).interact(player);
-                quit = true;
-            }
-        } while (!quit);
+                if (menuItem == -1) {
+                    quit = true;
+                } else if (menuItem > doors.size() || menuItem < 0) {
+                    System.out.println("Invalid choice.");
+                } else {
+                    doors.get(menuItem).interact(player);
+                    quit = true;
+                }
+            } while (!quit);
+        }
     }
     
 }
