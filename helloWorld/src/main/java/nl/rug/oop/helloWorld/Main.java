@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import nl.rug.oop.helloWorld.Memory;
 
 public class Main{
     /**
