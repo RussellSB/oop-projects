@@ -1,5 +1,6 @@
-import nl.rug.oop.introduction.*;
-import java.util.*;
+package nl.rug.oop.introduction;
+
+import java.util.Scanner;
 
 
 public class Main {

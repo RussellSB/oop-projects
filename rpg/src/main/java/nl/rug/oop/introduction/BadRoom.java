@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class BadRoom extends Room implements HealthModifier {
 

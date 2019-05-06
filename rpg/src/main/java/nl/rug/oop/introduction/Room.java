@@ -1,6 +1,7 @@
 package nl.rug.oop.introduction;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public abstract class Room extends Inspectable implements Interactable {
