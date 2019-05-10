@@ -1,7 +1,10 @@
 package nl.rug.oop.introduction;
 
-public class Door extends Inspectable implements Interactable {
+import java.io.Serializable;
+
+public class Door extends Inspectable implements Interactable, Serializable {
     // Attributes
+    private static final long serialVersionUID = 1L;
     private Room behindRoom;
 
 

@@ -1,7 +1,10 @@
 package nl.rug.oop.introduction;
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     // Attributes
+    private static final long serialVersionUID = 1L;
     private static final int MAX_HEALTH = 100;
     private static final int MIN_HEALTH = 0;
     private Room currentRoom;
@@ -23,26 +26,27 @@ public class Player {
         this.currentRoom = currentRoom;
     }
 
-    int getHealth() {
-        return this.hp;
-    }
-
 
     // Other methods
     void affectHealth(int amount) {
         if(this.hp+amount >= MAX_HEALTH){
             this.hp = MAX_HEALTH;
-            System.out.println("Health maxed out! You're full of life and love.");
+            System.out.println("# Health maxed out! You're full of life and love.");
         } else {
             this.hp = this.hp + amount;
             if(amount > 0)
-                System.out.println("You feel your body tingle. You're healed! HP +" + amount);
+                System.out.println("# You feel your body tingle. You're healed! HP +" + amount);
             else
-                System.out.println("You feel your body crumble. You're damaged! HP " + amount);
+                System.out.println("# You feel your body crumble. You're damaged! HP " + amount);
         }
     }
 
     boolean stillAlive() {
         return (this.hp >= MIN_HEALTH);
+    }
+
+    void printPlayerStats() {
+        System.out.println("# HP: "+ this.hp);
+
     }
 }

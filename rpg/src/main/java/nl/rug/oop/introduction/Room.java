@@ -1,13 +1,16 @@
 package nl.rug.oop.introduction;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 
-abstract class Room extends Inspectable implements Interactable {
+abstract class Room extends Inspectable implements Interactable, Serializable {
     // Attributes
-    private ArrayList<Door> doors = new ArrayList<>();
-    private ArrayList<NPC> npcs = new ArrayList<>();
+    private static final long serialVersionUID = 1L;
+    private List<Door> doors = new ArrayList<>();
+    private List<NPC> npcs = new ArrayList<>();
 
 
     // Constructor
@@ -35,7 +38,7 @@ abstract class Room extends Inspectable implements Interactable {
         super.inspect();
     }
 
-    private void inspectInspectables(ArrayList<? extends Inspectable> inspectables)
+    private void inspectInspectables(List<? extends Inspectable> inspectables)
     {
         for(int i=0; i<inspectables.size(); i++) {
             System.out.print("  ("+ i + ") ");
@@ -55,7 +58,7 @@ abstract class Room extends Inspectable implements Interactable {
         inspectInspectables(this.npcs);
     }
 
-    private void interactWithInteractables(ArrayList<? extends Interactable> interactables, Player player) {
+    private void interactWithInteractables(List<? extends Interactable> interactables, Player player) {
         boolean quit = false;
         Scanner in = new Scanner(System.in); //Scanner for input
         int menuItem;
@@ -78,7 +81,7 @@ abstract class Room extends Inspectable implements Interactable {
             } else {
                 try {
                     interactables.get(menuItem).interact(player);
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     System.out.println("You cannot interact with a NULL item");
                 }
                 quit = true;
