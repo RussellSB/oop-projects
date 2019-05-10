@@ -1,5 +1,5 @@
 package nl.rug.oop.introduction;
 
-public interface HealthModifier {
-    public void affectHealth(Player player, int amount);
+interface HealthModifier {
+    void affectHealth(Player player, int amount);
 }
