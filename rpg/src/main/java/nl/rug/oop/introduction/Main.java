@@ -12,6 +12,7 @@ public class Main {
         Room room4 = new HealthModifierRoom("but you don't. Feeling scared and frightened, you look around you. It's pitch black! You hear heavy breathing. You can't shake the feeling of a somewhat nostalgic deja vu.", -10);
         Room room5 = new HealthModifierRoom("a beige texture covering the room's interior. There appears to be an overly optimistic Russian man at the back of the room.", +10);
         Room room6 = new HealthModifierRoom("a room where everything's gold! There's even a treasure chest continuously spewing rainbows from its sides! If you're truly materialistic then congrats you won! Leave the game to go spend your highly-valued imaginary gold!", +10);
+        Room room7 = new PortalRoom("a room with a portal. The player can't see this because he's too busy getting teleported to inspect", room1);
 
         // Initializing doors
         Door door1_1 = new Door("a door with an image of a blackhole imprinted on it.", room2);
@@ -24,6 +25,8 @@ public class Main {
         Door door4_1 = new Door("actually you don't. It's too dark to see but feeling the door's surface it feels particularly familiar.", room4);
         Door door5_1 = new Door("a door with the back of the troll face imprinted on it. It still makes you cringe, making you look back on when memes were worse.", room3); // go back
         Door door5_2 = new Door("a door looking similar to the gold one you saw earlier, with diamond blue words reading BACK OFF PLS N THX.", room6);
+        Door door5_3 = new Door("a door with a hand drawn cake on it. Underneath it you read the words \"THE CAKE IS A LIE\"", room7);
+
         // Adding doors
         room1.addDoor(door1_1);
         room2.addDoor(door2_1);
@@ -35,6 +38,8 @@ public class Main {
         room4.addDoor(door4_1);
         room5.addDoor(door5_1);
         room5.addDoor(door5_2);
+        room5.addDoor(door5_3);
+
         // Initializing NPCs with their descriptions and responses
         Adult hodor = new Adult("A beefy man repeatedly yelling Hodor. His eyes are pearl white.", "\"HODOR!\"");
         Child branStark = new Child("A little boy in a wheelchair. His eyes are also pearl white.", "He ignores you. You assume he might be mind-controlling the beefy man.");
@@ -42,6 +47,7 @@ public class Main {
         Adult tom = new Adult("A man who doesn't appear as American as he initially seemed. He has a water bottle in his hand.", "\"I did not hit her, I did not! Oh.... hi Mark.\"");
         Adult trollMan = new Adult("A man in a classic beige suit. His smile is enchanting.", "He sings and dances to music that starts playing from the ceiling\n\"trolololololololololololololoolololo\"");
         Unknown cantSee = new Unknown("sound coming from the corner of the room, far right of you", "The breathing stops momentarily.\n\"We're trapped! We're trapped! You're a monster! The 2012 apocalypse is real! I can't escape! The door's all the same! The door's all the same!\"");
+
         // Adding NPCs to rooms
         room2.addNPC(hodor);
         room2.addNPC(branStark);
@@ -49,6 +55,7 @@ public class Main {
         room3.addNPC(tom);
         room5.addNPC(trollMan);
         room4.addNPC(cantSee);
+
         // Initializing player and their starting point
         Player player = new Player(room1); // Placing player in room1
         return player;
