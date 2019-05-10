@@ -1,47 +1,48 @@
 package nl.rug.oop.introduction;
 
 public class Player {
-
-    public static final int MAX_HEALTH = 100;
-    public static final int MIN_HEALTH = 0;
-
     // Attributes
+    private static final int MAX_HEALTH = 100;
+    private static final int MIN_HEALTH = 0;
     private Room currentRoom;
     private int hp=MAX_HEALTH;
+
 
     // Constructor
     public Player(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
 
+
     // Getters and Setters
-    public Room getCurrentRoom() {
+    Room getCurrentRoom() {
         return currentRoom;
     }
 
-    public void setCurrentRoom(Room currentRoom) {
+    void setCurrentRoom(Room currentRoom) {
         this.currentRoom = currentRoom;
     }
 
-    public int getHealth(){
+    int getHealth() {
         return this.hp;
     }
 
-    public void affectHealth(int points){
-        if(this.hp+points >= MAX_HEALTH){
+
+    // Other methods
+    void affectHealth(int amount) {
+        if(this.hp+amount >= MAX_HEALTH){
             this.hp = MAX_HEALTH;
             System.out.println("Health maxed out! You're full of life and love.");
-        }else{
-            this.hp = this.hp+points;
+        } else {
+            this.hp = this.hp + amount;
+            if(amount > 0)
+                System.out.println("You feel your body tingle. You're healed! HP +" + amount);
+            else
+                System.out.println("You feel your body crumble. You're damaged! HP " + amount);
         }
     }
 
-    // Other methods
-    public boolean stillAlive(){ 
-        if(this.hp<=MIN_HEALTH){
-            return false;
-        }else{
-            return true;
-        }
+    boolean stillAlive() {
+        return (this.hp >= MIN_HEALTH);
     }
 }
