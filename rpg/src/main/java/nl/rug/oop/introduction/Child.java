@@ -6,6 +6,7 @@ public class Child extends NPC {
         super(description, response);
     }
 
+
     // Other methods
     public void interact(Player player) {
         System.out.println("The child seems to be forgetful...");

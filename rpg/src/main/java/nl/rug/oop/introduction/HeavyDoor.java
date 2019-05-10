@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-public class HeavyDoor extends Door implements HealthModifier {
+public class HeavyDoor extends Door {
     // Attributes
     public static final int MIN_PUSHES = 3;
     private int n_pushes = 0;
@@ -36,7 +36,6 @@ public class HeavyDoor extends Door implements HealthModifier {
         }
     }
 
-    @Override
     public void affectHealth(Player player, int amount) {
         player.affectHealth(amount);
     }

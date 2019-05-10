@@ -4,14 +4,14 @@ import java.util.Scanner;
 
 
 public class Main {
-    public static Player initWorldAndReturnPlayer() {
+    static Player initWorldAndReturnPlayer() {
         // Initializing rooms
-        Room room1 = new BadRoom("a dark omnious room with a space themed door.");
-        Room room2 = new BadRoom("an icey cold room with a space themed door and another with a game of thrones reference.");
-        Room room3 = new GoodRoom("wait a second, this isn't just any room - this is the Room! You see your somewhat typically average American man at the back of the room.");
-        Room room4 = new BadRoom("but you don't. Feeling scared and frightened, you look around you. It's pitch black! You hear heavy breathing. You can't shake the feeling of a somewhat nostalgic deja vu.");
-        Room room5 = new GoodRoom("a beige texture covering the room's interior. There appears to be an overly optimistic Russian man at the back of the room.");
-        Room room6 = new GoodRoom("a room where everything's gold! There's even a treasure chest continuously spewing rainbows from its sides! If you're truly materialistic then congrats you won! Leave the game to go spend your highly-valued imaginary gold!");
+        Room room1 = new HealthModifierRoom("a dark omnious room with a space themed door.", -10);
+        Room room2 = new HealthModifierRoom("an icey cold room with a space themed door and another with a game of thrones reference.", -10);
+        Room room3 = new HealthModifierRoom("wait a second, this isn't just any room - this is the Room! You see your somewhat typically average American man at the back of the room.", +10);
+        Room room4 = new HealthModifierRoom("but you don't. Feeling scared and frightened, you look around you. It's pitch black! You hear heavy breathing. You can't shake the feeling of a somewhat nostalgic deja vu.", -10);
+        Room room5 = new HealthModifierRoom("a beige texture covering the room's interior. There appears to be an overly optimistic Russian man at the back of the room.", +10);
+        Room room6 = new HealthModifierRoom("a room where everything's gold! There's even a treasure chest continuously spewing rainbows from its sides! If you're truly materialistic then congrats you won! Leave the game to go spend your highly-valued imaginary gold!", +10);
 
         // Initializing doors
         Door door1_1 = new Door("a door with an image of a blackhole imprinted on it.", room2);

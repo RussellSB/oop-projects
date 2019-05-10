@@ -1,24 +1,24 @@
 package nl.rug.oop.introduction;
 
-abstract public class Inspectable {
+abstract class Inspectable {
     // Attributes
     private String description;
 
 
     // Constructors
-    public Inspectable(String description) {
+    Inspectable(String description) {
         this.description = description;
     }
 
 
     // Getters and setters
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
 
     // Other methods
-    public void inspect() {
+    void inspect() {
         System.out.println(this.getDescription());
     }
 }

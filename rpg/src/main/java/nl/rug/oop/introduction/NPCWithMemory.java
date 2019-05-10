@@ -4,10 +4,12 @@ abstract class NPCWithMemory extends NPC {
     // Attributes
     private boolean metBefore = false;
 
+
     // Constructor
     NPCWithMemory(String description, String response) {
         super(description, response);
     }
+
 
     // Getters and Setters
     void setMetBeforeTrue() {
