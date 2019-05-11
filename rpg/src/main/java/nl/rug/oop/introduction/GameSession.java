@@ -75,8 +75,8 @@ public class GameSession implements Serializable {
         this.rooms.add(room6);
         this.rooms.add(room7);
 
-        // Initializing player and their starting point
-        this.player = new Player(room1); // Placing player in room1
+        // Initializing player with its starting room
+        this.player = new Player(this.rooms.get(0)); // Placing player in room1
     }
 
     Player getPlayer(){
