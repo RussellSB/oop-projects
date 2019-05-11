@@ -64,13 +64,18 @@ public class SessionManager {
                     quickSave();
                     break;
                 case 4:
-                    this.gameSession = quickLoad();
+                    if(checkSavegames() == 0){ //proceeds only if there exists save files
+                        this.gameSession = quickLoad();
+                    }
                     break;
                 case 5:
-                    save(""); //TODO
+                    save(DEFAULT_NAME); //TODO
                     break;
                 case 6:
-                    load(""); //TODO
+                    if(checkSavegames() == 0){ //proceeds only if there exists save files
+                        printSavegames();
+                        this.gameSession = load(DEFAULT_NAME); //TODO
+                    }
                     break;
                 case -1:
                     quit = true;
@@ -96,7 +101,7 @@ public class SessionManager {
             FileOutputStream fos = new FileOutputStream(DEFAULT_DIRECTORY + "/" + filename + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.gameSession);
-            System.out.println("Successfully saved as \"" + filename + "\".ser");
+            System.out.println("Successfully saved as \"" + filename + ".ser\" in folder " + DEFAULT_DIRECTORY);
             oos.flush();
             fos.close();
 
@@ -115,7 +120,7 @@ public class SessionManager {
         try {
             FileInputStream fis = new FileInputStream(DEFAULT_DIRECTORY  + "/" + filename + ".ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            System.out.println("Successfully loaded \"" + filename + "\".ser from folder");
+            System.out.println("Loading " + filename + ".ser from folder " + DEFAULT_DIRECTORY);
             return (GameSession) ois.readObject();
         } catch (Exception e) {
             // TODO Improve error handling
@@ -126,6 +131,30 @@ public class SessionManager {
 
     private GameSession quickLoad(){
         return load(DEFAULT_NAME);
+    }
+
+    private int checkSavegames(){
+        checkDefaultDir();
+        File folder = new File(DEFAULT_DIRECTORY);
+        File[] listOfFiles = folder.listFiles();
+
+        if(listOfFiles.length == 0){
+            System.out.println("There are no game files saved!");
+            return -1;
+        }else{
+            return 0;
+        }
+    }
+
+    private void printSavegames(){
+        checkDefaultDir();
+        File folder = new File(DEFAULT_DIRECTORY);
+        File[] listOfFiles = folder.listFiles();
+
+        System.out.println("Game files saved: ");
+        for(File file : listOfFiles){
+            System.out.println(file.getName());
+        }
     }
 
 }
