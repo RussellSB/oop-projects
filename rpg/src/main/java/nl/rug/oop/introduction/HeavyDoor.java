@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-public class HeavyDoor extends Door {
+class HeavyDoor extends Door {
     // Attributes
     private static final int MIN_PUSHES = 3;
     private int n_pushes = 0;
@@ -11,10 +11,12 @@ public class HeavyDoor extends Door {
         super(description, behindRoom);
     }
 
+
+    // Other methods
     @Override
     public void interact(Player player) {
-        this.n_pushes ++;
-        if(this.n_pushes >= MIN_PUSHES) {
+        this.n_pushes++;
+        if (this.n_pushes >= MIN_PUSHES) {
             System.out.println("You pull with all your might. You slip through, slightly taking damage as the door closes behind you on your foot.\nOuch\nYou pull your foot out, aggravated.");
             player.affectHealth(-10);
             super.interact(player);

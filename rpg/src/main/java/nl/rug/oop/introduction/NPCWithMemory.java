@@ -12,7 +12,7 @@ abstract class NPCWithMemory extends NPC {
 
 
     // Getters and Setters
-    void setMetBeforeTrue() {
+    void meet() {
         this.metBefore = true;
     }
 

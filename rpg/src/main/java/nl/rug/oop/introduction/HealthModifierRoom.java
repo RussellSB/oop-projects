@@ -1,10 +1,9 @@
 package nl.rug.oop.introduction;
 
-import java.io.Serializable;
-
-class HealthModifierRoom extends Room{
+class HealthModifierRoom extends Room {
     // Attributes
     private int affectHealthAmount;
+
 
     // Constructor
     HealthModifierRoom(String description, int affectHealthAmount) {
@@ -20,6 +19,7 @@ class HealthModifierRoom extends Room{
             System.out.println("This room makes you feel safe. You feel your spirits lifting.");
         else
             System.out.println("This room makes you feel uneasy. You slightly lose your motivation to live.");
+
         player.affectHealth(affectHealthAmount);
     }
 }

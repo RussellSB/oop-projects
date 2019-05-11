@@ -4,10 +4,11 @@ import java.io.Serializable;
 
 abstract class Inspectable implements Serializable {
     // Attributes
+    private static final long serialVersionUID = 1L;
     private String description;
 
 
-    // Constructors
+    // Constructor
     Inspectable(String description) {
         this.description = description;
     }

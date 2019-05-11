@@ -2,13 +2,13 @@ package nl.rug.oop.introduction;
 
 import java.io.Serializable;
 
-public class Player implements Serializable {
+class Player implements Serializable {
     // Attributes
     private static final long serialVersionUID = 1L;
     private static final int MAX_HEALTH = 100;
-    private static final int MIN_HEALTH = 0;
+    private static final int MIN_HEALTH = 1;
     private Room currentRoom;
-    private int hp=MAX_HEALTH;
+    private int hp = MAX_HEALTH;
 
 
     // Constructor

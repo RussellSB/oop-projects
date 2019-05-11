@@ -1,11 +1,8 @@
 package nl.rug.oop.introduction;
 
-import java.io.Serializable;
-
-abstract class NPC extends Inspectable implements Interactable{
+abstract class NPC extends Inspectable implements Interactable {
     // Attributes
-    private static final long serialVersionUID = 1L;
-    private String response; // variable string to be returned when the user approaches NPC
+    private String response; // String to be returned when the player interacts with NPC
 
 
     // Constructor
