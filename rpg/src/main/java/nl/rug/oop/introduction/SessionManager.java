@@ -69,12 +69,12 @@ public class SessionManager {
                     }
                     break;
                 case 5:
-                    save(DEFAULT_NAME); //TODO
+                    slowSave(DEFAULT_NAME); //TODO
                     break;
                 case 6:
                     if(checkSavegames() == 0){ //proceeds only if there exists save files
                         printSavegames();
-                        this.gameSession = load(DEFAULT_NAME); //TODO
+                        this.gameSession = slowLoad(DEFAULT_NAME); //TODO
                     }
                     break;
                 case -1:
@@ -95,13 +95,12 @@ public class SessionManager {
         }
     }
 
-    private void save (String filename) {
+    private void save (String filepath) {
         try {
             checkDefaultDir(); //creates directory if it doesn't previously exist
-            FileOutputStream fos = new FileOutputStream(DEFAULT_DIRECTORY + "/" + filename + ".ser");
+            FileOutputStream fos = new FileOutputStream(filepath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.gameSession);
-            System.out.println("Successfully saved as \"" + filename + ".ser\" in folder " + DEFAULT_DIRECTORY);
             oos.flush();
             fos.close();
 
@@ -111,16 +110,21 @@ public class SessionManager {
         }
     }
 
-    private void quickSave() {
-        save(DEFAULT_NAME);
+    private void slowSave(String filename){
+        System.out.println("Saving as \"" + filename + ".ser\" in folder " + DEFAULT_DIRECTORY);
+        save(DEFAULT_DIRECTORY + "/" + filename + ".ser");
     }
 
-    private GameSession load(String filename){
+    private void quickSave() {
+        System.out.println("Quick saving!");
+        save(DEFAULT_DIRECTORY + "/" + DEFAULT_NAME + ".ser");
+    }
+
+    private GameSession load(String filepath){
 
         try {
-            FileInputStream fis = new FileInputStream(DEFAULT_DIRECTORY  + "/" + filename + ".ser");
+            FileInputStream fis = new FileInputStream(filepath);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            System.out.println("Loading " + filename + ".ser from folder " + DEFAULT_DIRECTORY);
             return (GameSession) ois.readObject();
         } catch (Exception e) {
             // TODO Improve error handling
@@ -129,8 +133,14 @@ public class SessionManager {
         }
     }
 
+    private GameSession slowLoad(String filename){
+        System.out.println("Loading \"" + filename + ".ser\" from folder " + DEFAULT_DIRECTORY);
+        return load(DEFAULT_DIRECTORY  + "/" + filename + ".ser");
+    }
+
     private GameSession quickLoad(){
-        return load(DEFAULT_NAME);
+        System.out.println("Quick loading!");
+        return load(DEFAULT_DIRECTORY + "/" + DEFAULT_NAME + ".ser");
     }
 
     private int checkSavegames(){
