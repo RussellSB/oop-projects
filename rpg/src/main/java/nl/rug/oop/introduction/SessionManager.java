@@ -60,11 +60,11 @@ public class SessionManager {
                     break;
                 case 3:
                     System.out.println("NOT FULLY IMPLEMENTED YET"); // TODO
-                    quickSave(gameSession);
+                    quickSave();
                     break;
                 case 4:
                     System.out.println("NOT IMPLEMENTED YET"); // TODO
-                    gameSession = quickLoad(gameSession);
+                    this.gameSession = quickLoad();
                     break;
                 case 5:
                     System.out.println("NOT IMPLEMENTED YET"); // TODO
@@ -83,11 +83,11 @@ public class SessionManager {
         System.out.println("Bye-bye!");
     }
 
-    private void save (GameSession gameSession, String filename) {
+    private void save (String filename) {
         try {
             FileOutputStream fos = new FileOutputStream(filename);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(gameSession);
+            oos.writeObject(this.gameSession);
             oos.flush();
             fos.close();
         } catch (Exception e) {
@@ -96,11 +96,11 @@ public class SessionManager {
         }
     }
 
-    private void quickSave(GameSession gameSession) {
-        save(gameSession,"test.ser");
+    private void quickSave() {
+        save("test.ser");
     }
 
-    private GameSession load(String filename, GameSession gameSession){
+    private GameSession load(String filename){
 
         try {
             FileInputStream fis = new FileInputStream(filename);
@@ -109,12 +109,12 @@ public class SessionManager {
         } catch (Exception e) {
             // TODO Improve error handling
             e.printStackTrace();
-            return gameSession; //returns current session if fails to load new session
+            return this.gameSession; //returns current session if fails to load new session
         }
     }
 
-    private GameSession quickLoad(GameSession gameSession){
-        return load("test.ser", gameSession);
+    private GameSession quickLoad(){
+        return load("test.ser");
     }
 
 }
