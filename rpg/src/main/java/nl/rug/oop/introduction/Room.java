@@ -1,16 +1,15 @@
 package nl.rug.oop.introduction;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
-abstract class Room extends Inspectable implements Interactable{
+abstract class Room extends Inspectable implements Interactable {
     // Attributes
-    private static final long serialVersionUID = 1L;
     private List<Door> doors = new ArrayList<>();
     private List<NPC> npcs = new ArrayList<>();
+
 
     // Constructor
     Room(String description) {

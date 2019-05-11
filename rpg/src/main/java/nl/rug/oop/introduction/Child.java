@@ -1,6 +1,6 @@
 package nl.rug.oop.introduction;
 
-public class Child extends NPC {
+class Child extends NPC {
     // Constructor
     Child(String description, String response) {
         super(description, response);
@@ -8,6 +8,7 @@ public class Child extends NPC {
 
 
     // Other methods
+    @Override
     public void interact(Player player) {
         System.out.println("The child seems to be forgetful...");
         System.out.println(this.getResponse());

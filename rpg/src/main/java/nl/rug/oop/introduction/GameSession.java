@@ -1,19 +1,24 @@
 package nl.rug.oop.introduction;
 
-import java.io.*;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 
 
-public class GameSession implements Serializable {
+class GameSession implements Serializable {
     // Attributes
     private static final long serialVersionUID = 1L;
     private Player player;
     private List<Room> rooms = new ArrayList<>();
 
-    // Methods
+
+    // Getters and Setters
+    Player getPlayer(){
+        return this.player;
+    }
+
+
+    // Other Methods
     void initWorld1() {
         // Initializing rooms
         Room room1 = new HealthModifierRoom("a dark ominous room with a space themed door.", -10);
@@ -27,7 +32,7 @@ public class GameSession implements Serializable {
         // Initializing doors
         Door door1_1 = new Door("a door with an image of a blackhole imprinted on it.", room2);
         Door door2_1 = new Door("a door with the back of a blackhole imprinted on it.", room1); // go back
-        Door door2_2 = new HeavyDoor("a door with a beefy possesed fellow pushing at it, struggling to hold the door.", room3);
+        Door door2_2 = new HeavyDoor("a door with a beefy possessed fellow pushing at it, struggling to hold the door.", room3);
         Door door3_1 = new HeavyDoor("a door with tens of blue zombie-like creatures pushing at it. This hardly intimidates you. You're already dead inside.", room2); // go back
         Door door3_2 = new Door("a door with the words YOURE TEARING ME APART LISA, written in blood.", room4);
         Door door3_3 = new Door("a door with a large troll face imprinted on it. It makes you cringe, reminding you of your memes obsession in the early 2010s.", room5);
@@ -77,13 +82,5 @@ public class GameSession implements Serializable {
 
         // Initializing player with its starting room
         this.player = new Player(this.rooms.get(0)); // Placing player in room1
-    }
-
-    Player getPlayer(){
-        return this.player;
-    }
-
-    List<Room> getRooms(){
-        return this.rooms;
     }
 }
