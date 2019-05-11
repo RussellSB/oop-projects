@@ -63,7 +63,7 @@ abstract class Room extends Inspectable implements Interactable {
     }
 
     private void interactWithInteractables(List<? extends Interactable> interactables, Player player) {
-        Scanner in = new Scanner(System.in); //Scanner for input
+        Scanner in = new Scanner(System.in); // Scanner for input
         int selectedMenuItem;
 
         System.out.println("Which one do you choose?  (-1: cancel)");

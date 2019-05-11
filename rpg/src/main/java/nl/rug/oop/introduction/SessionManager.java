@@ -4,18 +4,22 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class SessionManager {
-
+    // Attributes
     private GameSession gameSession;
     private static final String DEFAULT_NAME = "default"; // for the quicksave / quickload functionality
     private static final String DEFAULT_DIRECTORY = "Savegames"; // the directory in which the save files will be
 
+
+    // Constructor
     SessionManager(GameSession gameSession){
         this.gameSession = gameSession;
     }
 
+
+    // Other methods
     private int mainMenu() {
-        Scanner in = new Scanner(System.in); //Scanner for input
-        int input;
+        Scanner in = new Scanner(System.in); // Scanner for input
+        int selectedMenuItem;
 
         gameSession.getPlayer().printPlayerStats();
 
@@ -30,15 +34,20 @@ public class SessionManager {
         System.out.println("   (6) Load");
 
         System.out.print("-> ");
+
         try {
-            input = in.nextInt();
+            selectedMenuItem = in.nextInt();
         } catch (InputMismatchException e) {
-            System.out.println("Input must be a number");
-            input = -10000;
-            in.nextLine();
+            System.out.println("** Input must be a number **");
+            selectedMenuItem = -10000; // Invalid choice
+            in.nextLine(); // Discards the rest of the input
+        } catch (Exception e) {
+            System.out.println("** A weird error occurred: " + e.toString() + " **");
+            selectedMenuItem = -10000; // Invalid choice
+            in.nextLine(); // Discards the rest of the input
         }
 
-        return input;
+        return selectedMenuItem;
     }
 
     void play() {
@@ -85,13 +94,25 @@ public class SessionManager {
             }
         } while (!quit);
 
-        System.out.println("Bye-bye!");
+        System.out.println("\nBye-bye!\n");
     }
 
     private void checkDefaultDir(){
         File serializedDir = new File(DEFAULT_DIRECTORY);
         if (!serializedDir.exists()){
             serializedDir.mkdir();
+        }
+    }
+
+    private void mySave(String filepath) {
+        try {
+            FileOutputStream fos = new FileOutputStream(filepath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(this.gameSession);
+            oos.flush();
+            fos.close();
+        } catch (Exception e) {
+            System.out.println("** A weird error occurred: " + e.toString() + " **");
         }
     }
 
