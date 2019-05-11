@@ -5,15 +5,14 @@ import java.io.ObjectInputStream;
 
 public class Main {
     public static void main(String[] args) {
-        /*Game game = new Game();
-        game.initWorld1();
-        game.play();*/
 
+        GameSession gameSession = new GameSession();
+        gameSession.initWorld1();
 
+        SessionManager sessionManager = new SessionManager(gameSession);
+        sessionManager.play();
 
-
-
-
+    }
 
         /*Game game = new Game();
 
@@ -29,5 +28,5 @@ public class Main {
         }
 
         game.play();*/
-    }
+    //}
 }

@@ -6,12 +6,12 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Game implements Serializable {
+
+public class GameSession implements Serializable {
     // Attributes
     private static final long serialVersionUID = 1L;
     private Player player;
     private List<Room> rooms = new ArrayList<>();
-
 
     // Methods
     void initWorld1() {
@@ -79,106 +79,11 @@ public class Game implements Serializable {
         this.player = new Player(room1); // Placing player in room1
     }
 
-    void play() {
-        boolean quit = false;
-
-        do {
-            if(!player.stillAlive()){
-                System.out.println("You've ceased to exist. Better luck next time!");
-                break;
-            }
-
-            switch (this.mainMenu()) {
-                case 0:
-                    player.getCurrentRoom().inspect();
-                    break;
-                case 1:
-                    player.getCurrentRoom().interactWithDoors(player);
-                    break;
-                case 2:
-                    player.getCurrentRoom().interactWithNPCs(player);
-                    break;
-                case 3:
-                    System.out.println("NOT FULLY IMPLEMENTED YET"); // TODO
-                    this.quickSave();
-                    break;
-                case 4:
-                    System.out.println("NOT IMPLEMENTED YET"); // TODO
-                    break;
-                case 5:
-                    System.out.println("NOT IMPLEMENTED YET"); // TODO
-                    break;
-                case 6:
-                    System.out.println("NOT IMPLEMENTED YET"); // TODO
-                    break;
-                case -1:
-                    quit = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice.");
-            }
-        } while (!quit);
-
-        System.out.println("Bye-bye!");
+    Player getPlayer(){
+        return this.player;
     }
 
-    private int mainMenu() {
-        Scanner in = new Scanner(System.in); //Scanner for input
-        int input;
-
-        player.printPlayerStats();
-
-        System.out.println("\nWhat do you want to do?");
-        System.out.println("  (-1) Give up");
-        System.out.println("   (0) Spectate the environment");
-        System.out.println("   (1) Look for doors");
-        System.out.println("   (2) Look for living entities satisfying the seven vital functions");
-        System.out.println("   (3) QuickSave");
-        System.out.println("   (4) QuickLoad");
-        System.out.println("   (5) Save");
-        System.out.println("   (6) Load");
-
-        System.out.print("-> ");
-        try {
-            input = in.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Input must be a number");
-            input = -10000;
-            in.nextLine();
-        }
-
-        return input;
+    List<Room> getRooms(){
+        return this.rooms;
     }
-
-    void save (String filename) {
-        try {
-            FileOutputStream fos = new FileOutputStream(filename);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(this);
-            oos.flush();
-            fos.close();
-        } catch (Exception e) {
-            // TODO Improve error handling
-            e.printStackTrace();
-        }
-    }
-
-    void quickSave() {
-        save("test.ser");
-    }
-
-    /*void load(String filename) {
-        try {
-            FileInputStream fis = new FileInputStream(filename);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            //this = (Game) ois.readObject();
-        } catch (Exception e) {
-            // TODO Improve error handling
-            e.printStackTrace();
-        }
-    }
-
-    void quickLoad() {
-        load("test.ser");
-    }*/
 }
