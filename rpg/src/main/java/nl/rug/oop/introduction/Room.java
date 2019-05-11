@@ -1,6 +1,7 @@
 package nl.rug.oop.introduction;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -30,6 +31,7 @@ abstract class Room extends Inspectable implements Interactable {
 
 
     // Other methods
+    @Override
     void inspect() {
         System.out.println("\nYou look around");
         System.out.print("You see: ");
@@ -43,7 +45,11 @@ abstract class Room extends Inspectable implements Interactable {
             try {
                 inspectables.get(i).inspect();
             } catch (NullPointerException e) {
-                System.out.println("NULL item");
+                System.out.println("** NULL item **");
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("** Error 404: Item not found **");
+            } catch (Exception e) {
+                System.out.println("** A weird error occurred: " + e.toString() + " **");
             }
         }
     }
@@ -57,34 +63,35 @@ abstract class Room extends Inspectable implements Interactable {
     }
 
     private void interactWithInteractables(List<? extends Interactable> interactables, Player player) {
-        boolean quit = false;
         Scanner in = new Scanner(System.in); //Scanner for input
-        int menuItem;
+        int selectedMenuItem;
 
-        do {
-            System.out.println("Which one do you choose?  (-1: cancel)");
-            System.out.print("-> ");
+        System.out.println("Which one do you choose?  (-1: cancel)");
+        System.out.print("-> ");
+
+        try {
+            selectedMenuItem = in.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("** Input must be a number **");
+            selectedMenuItem = -1; // Cancel
+            in.nextLine(); // Discards the rest of the input
+        } catch (Exception e) {
+            System.out.println("** A weird error occurred: " + e.toString() + " **");
+            selectedMenuItem = -1; // Cancel
+            in.nextLine(); // Discards the rest of the input
+        }
+
+        if (selectedMenuItem != -1) {
             try {
-                menuItem = in.nextInt();
+                interactables.get(selectedMenuItem).interact(player);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("** Error 404: Item not found **");
+            } catch (NullPointerException e) {
+                System.out.println("** You cannot interact with a NULL item **");
             } catch (Exception e) {
-                System.out.println("Input must be a number");
-                menuItem = -10000;
-                in.nextLine();
+                System.out.println("** A weird error occurred: " + e.toString() + " **");
             }
-
-            if (menuItem == -1) {
-                quit = true;
-            } else if (menuItem > interactables.size() || menuItem < 0) {
-                System.out.println("Invalid choice.");
-            } else {
-                try {
-                    interactables.get(menuItem).interact(player);
-                } catch (NullPointerException e) {
-                    System.out.println("You cannot interact with a NULL item");
-                }
-                quit = true;
-            }
-        } while (!quit);
+        }
     }
 
     void interactWithDoors(Player player) {

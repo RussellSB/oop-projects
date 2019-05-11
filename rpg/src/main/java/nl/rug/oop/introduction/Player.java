@@ -46,7 +46,7 @@ class Player implements Serializable {
     }
 
     void printPlayerStats() {
-        System.out.println("# HP: "+ this.hp);
+        System.out.println("\n# HP: "+ this.hp);
 
     }
 }
