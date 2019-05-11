@@ -8,10 +8,10 @@ import java.util.Scanner;
 
 class GameManager {
     // Attributes
-    private GameSession gameSession;
     private static final String TITLE_SCREEN_FILE = "TitleScreen.txt";
-    private static final String DEFAULT_SAVE_NAME = "QuickSave"; // For the quicksave / quickload functionality
+    private static final String DEFAULT_SAVE_NAME = "QuickSave"; // For the quickSave/quickLoad functionality
     private static final String DEFAULT_SAVE_DIRECTORY = "Savegames"; // The directory in which the save files will be
+    private GameSession gameSession;
 
 
     // Constructor
@@ -82,12 +82,14 @@ class GameManager {
                     break;
                 case 4:
                     quickLoad();
+                    gameSession.getPlayer().printPlayerStats();
                     break;
                 case 5:
                     luxuriousSave();
                     break;
                 case 6:
                     luxuriousLoad();
+                    gameSession.getPlayer().printPlayerStats();
                     break;
                 case -1:
                     quit = true;
@@ -163,7 +165,7 @@ class GameManager {
 
     private void quickLoad() {
         if(!saveGameFilesExist()) {
-            System.out.println("** ERROR: There are no save files **");
+            System.out.println("** There are no save files! **");
             return;
         }
 
@@ -200,7 +202,7 @@ class GameManager {
         List<File> files = getSaveFilesFromDir();
 
         if(files.isEmpty()) {
-            System.out.println("** ERROR: There are no save files **");
+            System.out.println("** There are no save files! **");
             return;
         }
 
