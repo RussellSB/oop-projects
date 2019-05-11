@@ -1,6 +1,8 @@
 package nl.rug.oop.introduction;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class SessionManager {
@@ -164,12 +166,26 @@ public class SessionManager {
         return load(DEFAULT_DIRECTORY + "/" + DEFAULT_NAME + ".ser");
     }
 
+    private List<File> filterFileList(File[] listOfFiles, String extension){
+
+        List<File> filteredFiles = new ArrayList<File>();
+
+        for(File file : listOfFiles){
+            if(file.getName().endsWith(extension)){
+                filteredFiles.add(file);
+            }
+        }
+
+        return filteredFiles;
+    }
+
     private int checkSavegames(){
         checkDefaultDir();
         File folder = new File(DEFAULT_DIRECTORY);
         File[] listOfFiles = folder.listFiles();
+        List<File> listOfGameFiles = filterFileList(listOfFiles, ".ser");
 
-        if(listOfFiles.length == 0){
+        if(listOfGameFiles.size() == 0){
             System.out.println("There are no game files saved!");
             return -1;
         }else{
@@ -181,9 +197,10 @@ public class SessionManager {
         checkDefaultDir();
         File folder = new File(DEFAULT_DIRECTORY);
         File[] listOfFiles = folder.listFiles();
+        List<File> listOfGameFiles = filterFileList(listOfFiles, ".ser");
 
         System.out.println("Game files saved: ");
-        for(File file : listOfFiles){
+        for(File file : listOfGameFiles){
             System.out.println(file.getName());
         }
     }
