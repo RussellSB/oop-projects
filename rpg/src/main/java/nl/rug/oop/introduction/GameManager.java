@@ -1,17 +1,19 @@
 package nl.rug.oop.introduction;
+
 import java.io.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class SessionManager {
+class GameManager {
     // Attributes
     private GameSession gameSession;
-    private static final String DEFAULT_NAME = "default"; // for the quicksave / quickload functionality
-    private static final String DEFAULT_DIRECTORY = "Savegames"; // the directory in which the save files will be
+    private static final String TITLE_SCREEN_FILE = "TitleScreen.txt";
+    private static final String DEFAULT_SAVE_NAME = "default"; // For the quicksave / quickload functionality
+    private static final String DEFAULT_SAVE_DIRECTORY = "Savegames"; // The directory in which the save files will be
 
 
     // Constructor
-    SessionManager(GameSession gameSession){
+    GameManager(GameSession gameSession) {
         this.gameSession = gameSession;
     }
 
@@ -53,8 +55,10 @@ public class SessionManager {
     void play() {
         boolean quit = false;
 
+        printTitleScreen();
+
         do {
-            if(!gameSession.getPlayer().stillAlive()){
+            if (!gameSession.getPlayer().stillAlive()) {
                 System.out.println("You've ceased to exist. Better luck next time!");
                 break;
             }
@@ -73,33 +77,48 @@ public class SessionManager {
                     quickSave();
                     break;
                 case 4:
-                    if(checkSavegames() == 0){ //proceeds only if there exists save files
+                    if (checkSavegames() == 0) { //proceeds only if there exists save files
                         this.gameSession = quickLoad();
                     }
                     break;
                 case 5:
-                    slowSave(DEFAULT_NAME); //TODO
+                    slowSave(DEFAULT_SAVE_NAME); //TODO
                     break;
                 case 6:
-                    if(checkSavegames() == 0){ //proceeds only if there exists save files
+                    if (checkSavegames() == 0) { //proceeds only if there exists save files
                         printSavegames();
-                        this.gameSession = slowLoad(DEFAULT_NAME); //TODO
+                        this.gameSession = slowLoad(DEFAULT_SAVE_NAME); //TODO
                     }
                     break;
                 case -1:
                     quit = true;
                     break;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("** Invalid choice **");
             }
         } while (!quit);
 
         System.out.println("\nBye-bye!\n");
     }
 
-    private void checkDefaultDir(){
-        File serializedDir = new File(DEFAULT_DIRECTORY);
-        if (!serializedDir.exists()){
+    private void printTitleScreen() {
+        try {
+            FileReader fr = new FileReader(TITLE_SCREEN_FILE);
+            BufferedReader br = new BufferedReader(fr);
+            String buffer;
+            while ((buffer = br.readLine()) != null) {
+                System.out.println(buffer);
+            }
+            br.close();
+            fr.close();
+        } catch (Exception e) {
+            System.out.println("** Title screen couldn't be shown: " + e.toString() + " **");
+        }
+    }
+
+    private void checkDefaultDir() {
+        File serializedDir = new File(DEFAULT_SAVE_DIRECTORY);
+        if (!serializedDir.exists()) {
             serializedDir.mkdir();
         }
     }
@@ -116,7 +135,7 @@ public class SessionManager {
         }
     }
 
-    private void save (String filepath) {
+    private void save(String filepath) {
         try {
             checkDefaultDir(); //creates directory if it doesn't previously exist
             FileOutputStream fos = new FileOutputStream(filepath);
@@ -131,17 +150,17 @@ public class SessionManager {
         }
     }
 
-    private void slowSave(String filename){
-        System.out.println("Saving as \"" + filename + ".ser\" in folder " + DEFAULT_DIRECTORY);
-        save(DEFAULT_DIRECTORY + "/" + filename + ".ser");
+    private void slowSave(String filename) {
+        System.out.println("Saving as \"" + filename + ".ser\" in folder " + DEFAULT_SAVE_DIRECTORY);
+        save(DEFAULT_SAVE_DIRECTORY + "/" + filename + ".ser");
     }
 
     private void quickSave() {
         System.out.println("Quick saving!");
-        save(DEFAULT_DIRECTORY + "/" + DEFAULT_NAME + ".ser");
+        save(DEFAULT_SAVE_DIRECTORY + "/" + DEFAULT_SAVE_NAME + ".ser");
     }
 
-    private GameSession load(String filepath){
+    private GameSession load(String filepath) {
 
         try {
             FileInputStream fis = new FileInputStream(filepath);
@@ -154,36 +173,36 @@ public class SessionManager {
         }
     }
 
-    private GameSession slowLoad(String filename){
-        System.out.println("Loading \"" + filename + ".ser\" from folder " + DEFAULT_DIRECTORY);
-        return load(DEFAULT_DIRECTORY  + "/" + filename + ".ser");
+    private GameSession slowLoad(String filename) {
+        System.out.println("Loading \"" + filename + ".ser\" from folder " + DEFAULT_SAVE_DIRECTORY);
+        return load(DEFAULT_SAVE_DIRECTORY + "/" + filename + ".ser");
     }
 
-    private GameSession quickLoad(){
+    private GameSession quickLoad() {
         System.out.println("Quick loading!");
-        return load(DEFAULT_DIRECTORY + "/" + DEFAULT_NAME + ".ser");
+        return load(DEFAULT_SAVE_DIRECTORY + "/" + DEFAULT_SAVE_NAME + ".ser");
     }
 
-    private int checkSavegames(){
+    private int checkSavegames() {
         checkDefaultDir();
-        File folder = new File(DEFAULT_DIRECTORY);
+        File folder = new File(DEFAULT_SAVE_DIRECTORY);
         File[] listOfFiles = folder.listFiles();
 
-        if(listOfFiles.length == 0){
+        if (listOfFiles.length == 0) {
             System.out.println("There are no game files saved!");
             return -1;
-        }else{
+        } else {
             return 0;
         }
     }
 
-    private void printSavegames(){
+    private void printSavegames() {
         checkDefaultDir();
-        File folder = new File(DEFAULT_DIRECTORY);
+        File folder = new File(DEFAULT_SAVE_DIRECTORY);
         File[] listOfFiles = folder.listFiles();
 
         System.out.println("Game files saved: ");
-        for(File file : listOfFiles){
+        for (File file : listOfFiles) {
             System.out.println(file.getName());
         }
     }

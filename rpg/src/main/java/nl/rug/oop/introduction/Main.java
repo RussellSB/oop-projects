@@ -5,7 +5,7 @@ public class Main {
         GameSession gameSession = new GameSession();
         gameSession.initWorld1();
 
-        SessionManager sessionManager = new SessionManager(gameSession);
-        sessionManager.play();
+        GameManager gameManager = new GameManager(gameSession);
+        gameManager.play();
     }
 }
