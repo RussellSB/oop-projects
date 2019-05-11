@@ -6,6 +6,8 @@ import java.util.Scanner;
 public class SessionManager {
 
     private GameSession gameSession;
+    private static final String DEFAULT_NAME = "default"; // for the quicksave / quickload functionality
+    private static final String DEFAULT_DIRECTORY = "Savegames"; // the directory in which the save files will be
 
     SessionManager(GameSession gameSession){
         this.gameSession = gameSession;
@@ -59,18 +61,16 @@ public class SessionManager {
                     gameSession.getPlayer().getCurrentRoom().interactWithNPCs(gameSession.getPlayer());
                     break;
                 case 3:
-                    System.out.println("NOT FULLY IMPLEMENTED YET"); // TODO
                     quickSave();
                     break;
                 case 4:
-                    System.out.println("NOT IMPLEMENTED YET"); // TODO
                     this.gameSession = quickLoad();
                     break;
                 case 5:
-                    System.out.println("NOT IMPLEMENTED YET"); // TODO
+                    save(""); //TODO
                     break;
                 case 6:
-                    System.out.println("NOT IMPLEMENTED YET"); // TODO
+                    load(""); //TODO
                     break;
                 case -1:
                     quit = true;
@@ -83,13 +83,23 @@ public class SessionManager {
         System.out.println("Bye-bye!");
     }
 
+    private void checkDefaultDir(){
+        File serializedDir = new File(DEFAULT_DIRECTORY);
+        if (!serializedDir.exists()){
+            serializedDir.mkdir();
+        }
+    }
+
     private void save (String filename) {
         try {
-            FileOutputStream fos = new FileOutputStream(filename);
+            checkDefaultDir(); //creates directory if it doesn't previously exist
+            FileOutputStream fos = new FileOutputStream(DEFAULT_DIRECTORY + "/" + filename + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.gameSession);
+            System.out.println("Successfully saved as \"" + filename + "\".ser");
             oos.flush();
             fos.close();
+
         } catch (Exception e) {
             // TODO Improve error handling
             e.printStackTrace();
@@ -97,14 +107,15 @@ public class SessionManager {
     }
 
     private void quickSave() {
-        save("test.ser");
+        save(DEFAULT_NAME);
     }
 
     private GameSession load(String filename){
 
         try {
-            FileInputStream fis = new FileInputStream(filename);
+            FileInputStream fis = new FileInputStream(DEFAULT_DIRECTORY  + "/" + filename + ".ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
+            System.out.println("Successfully loaded \"" + filename + "\".ser from folder");
             return (GameSession) ois.readObject();
         } catch (Exception e) {
             // TODO Improve error handling
@@ -114,7 +125,7 @@ public class SessionManager {
     }
 
     private GameSession quickLoad(){
-        return load("test.ser");
+        return load(DEFAULT_NAME);
     }
 
 }
