@@ -1,6 +1,8 @@
 package nl.rug.oop.introduction;
 
-abstract class Inspectable {
+import java.io.Serializable;
+
+abstract class Inspectable implements Serializable {
     // Attributes
     private String description;
 

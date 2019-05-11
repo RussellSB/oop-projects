@@ -1,9 +1,10 @@
 package nl.rug.oop.introduction;
 
-class HealthModifierRoom extends Room {
+import java.io.Serializable;
+
+class HealthModifierRoom extends Room{
     // Attributes
     private int affectHealthAmount;
-
 
     // Constructor
     HealthModifierRoom(String description, int affectHealthAmount) {

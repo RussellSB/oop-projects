@@ -6,12 +6,11 @@ import java.util.List;
 import java.util.Scanner;
 
 
-abstract class Room extends Inspectable implements Interactable, Serializable {
+abstract class Room extends Inspectable implements Interactable{
     // Attributes
     private static final long serialVersionUID = 1L;
     private List<Door> doors = new ArrayList<>();
     private List<NPC> npcs = new ArrayList<>();
-
 
     // Constructor
     Room(String description) {
