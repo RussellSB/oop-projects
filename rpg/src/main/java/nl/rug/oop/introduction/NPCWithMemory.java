@@ -1,18 +1,22 @@
 package nl.rug.oop.introduction;
 
-public abstract class NPCwithMemory extends NPC {
+abstract class NPCWithMemory extends NPC {
     // Attributes
     private boolean metBefore = false;
 
-    public NPCwithMemory(String description, String response) {
+
+    // Constructor
+    NPCWithMemory(String description, String response) {
         super(description, response);
     }
 
-    public void setMetBeforeTrue() {
+
+    // Getters and Setters
+    void meet() {
         this.metBefore = true;
     }
 
-    public boolean getMetBefore() {
+    boolean metBefore() {
         return this.metBefore;
     }
 }

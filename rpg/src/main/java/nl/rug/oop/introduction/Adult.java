@@ -1,25 +1,26 @@
 package nl.rug.oop.introduction;
 
-public class Adult extends NPCwithMemory implements HealthModifier {
+class Adult extends NPCWithMemory {
+    // Attributes
+    private static final int affectHealthAmount = -20;
 
-    public Adult(String description, String response) {
+
+    // Constructor
+    Adult(String description, String response) {
         super(description, response);
     }
 
-    @Override
-    public void affectHealth(Player player, int amount) {
-        player.affectHealth(amount);
-    }
 
-    //Other methods
+    // Other methods
+    @Override
     public void interact(Player player) {
-        if(this.getMetBefore()==true) {
+        if(this.metBefore()) {
             System.out.println("Actually no. You feel overly-anxious that you might annoy them. You recount that adults lead busy lives.");
-            System.out.println("You slap yourself out of indeciciveness.");
-            affectHealth(player, -20);
+            System.out.println("You slap yourself out of indecisiveness.");
+            player.affectHealth(affectHealthAmount);
         } else {
             System.out.println(this.getResponse());
-            this.setMetBeforeTrue();
+            this.meet();
         }
     }
 }

@@ -1,24 +1,27 @@
 package nl.rug.oop.introduction;
 
-abstract public class Inspectable {
+import java.io.Serializable;
+
+abstract class Inspectable implements Serializable {
     // Attributes
+    private static final long serialVersionUID = 1L;
     private String description;
 
 
-    // Constructors
-    public Inspectable(String description) {
+    // Constructor
+    Inspectable(String description) {
         this.description = description;
     }
 
 
     // Getters and setters
-    public String getDescription() {
+    String getDescription() {
         return description;
     }
 
 
     // Other methods
-    public void inspect() {
+    void inspect() {
         System.out.println(this.getDescription());
     }
 }
