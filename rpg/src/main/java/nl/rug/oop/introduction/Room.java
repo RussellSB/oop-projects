@@ -20,12 +20,12 @@ abstract class Room extends Inspectable implements Interactable {
 
     // Getters and Setters
     void addDoor(Door door) {
-        if(door != null)
+        if (door != null)
             this.doors.add(door);
     }
 
     void addNPC(NPC npc) {
-        if(npc != null)
+        if (npc != null)
             this.npcs.add(npc);
     }
 
@@ -38,10 +38,9 @@ abstract class Room extends Inspectable implements Interactable {
         super.inspect();
     }
 
-    private void inspectInspectables(List<? extends Inspectable> inspectables)
-    {
-        for(int i=0; i<inspectables.size(); i++) {
-            System.out.print("  ("+ i + ") ");
+    private void inspectInspectables(List<? extends Inspectable> inspectables) {
+        for (int i = 0; i < inspectables.size(); i++) {
+            System.out.print("  (" + i + ") ");
             try {
                 inspectables.get(i).inspect();
             } catch (NullPointerException e) {
@@ -96,7 +95,7 @@ abstract class Room extends Inspectable implements Interactable {
 
     void interactWithDoors(Player player) {
         System.out.println("\nYou look around for doors.");
-        if(this.doors.isEmpty()) {
+        if (this.doors.isEmpty()) {
             System.out.println("There are no doors...");
         } else {
             System.out.println("You see:");
@@ -107,7 +106,7 @@ abstract class Room extends Inspectable implements Interactable {
 
     void interactWithNPCs(Player player) {
         System.out.println("\nYou look around for signs of life.");
-        if(this.npcs.isEmpty()) {
+        if (this.npcs.isEmpty()) {
             System.out.println("There's nobody around. You're so lonely...");
         } else {
             System.out.println("You perceive:");
