@@ -28,11 +28,10 @@ public class SnapAction extends AbstractAction implements Observer {
      * Check if the action can be performed.
      */
     private void fixEnabled() {
-        // TODO: This will need to be adapted if we add the extra pile
-        if (snap.getPlayerUpPile().isEmpty() || snap.getNpcUpPile().isEmpty())
-            setEnabled(false);
-        else
+        if (snap.matchDetected())
             setEnabled(true);
+        else
+            setEnabled(false);
     }
 
     /**

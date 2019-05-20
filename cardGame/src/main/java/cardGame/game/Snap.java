@@ -1,11 +1,14 @@
 package cardGame.game;
 
 import cardGame.model.AbstractDeck;
+import cardGame.model.Card;
 import cardGame.model.CompleteDeck;
 import cardGame.model.Pile;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import static cardGame.model.Card.Face.JOKER;
 
 /**
  * Represents a simplified version of the snap cards game
@@ -79,20 +82,34 @@ public class Snap extends Observable implements Observer {
             playerTurn = !playerTurn;
         }
     }
-    
-    
+
+
     /**
      * Draw a card from the player face-down pile and put it on the player
      * face-up pile
      */
     public void playerMoves() {
-        if(movable != null)
+        if (movable != null)
             playerUpPile.put(movable.getCard());
+
         createMovableCard();
         setChanged();
         notifyObservers();
+
+        npcMoves();
     }
-    
+
+    /**
+     * Draw a card from the player face-down pile and put it on the player
+     * face-up pile
+     */
+    public void npcMoves() {
+        npcUpPile.put(npcDownPile.draw());
+
+        setChanged();
+        notifyObservers();
+    }
+
     /**
      * Empty piles and shuffle again
      */
@@ -112,10 +129,48 @@ public class Snap extends Observable implements Observer {
      * TODO
      */
     public void playerSnaps() {
-        // TODO
+        if (matchDetected()) {
+            Pile newDownPile = new Pile();
+
+            // Move cards from the npc's face-up pile to the player's new face-down pile
+            for (Card card : npcUpPile) {
+                newDownPile.put(card);
+            }
+            npcUpPile.empty();
+
+            // Move cards from the players's face-up pile to the player's new face-down pile
+            for (Card card : playerUpPile) {
+                newDownPile.put(card);
+            }
+            playerUpPile.empty();
+
+            // Move cards from the players's face-down pile to the player's new face-down pile
+            for (Card card : playerDownPile) {
+                newDownPile.put(card);
+            }
+
+            // Swap face-down piles
+            playerDownPile = newDownPile;
+
+            createMovableCard();
+            setChanged();
+            notifyObservers();
+        }
     }
 
-    /** 
+    /**
+     * Returns true if a match is detected between the up piles
+     */
+    public boolean matchDetected() {
+        if (playerUpPile.top() == null || npcUpPile.top() == null)
+            return false;
+        else
+            return playerUpPile.top().getFace() == npcUpPile.top().getFace()
+                    || playerUpPile.top().getFace() == JOKER
+                    || npcUpPile.top().getFace() == JOKER;
+    }
+
+    /**
      * If the movable card updates this updates too
      */
     @Override
