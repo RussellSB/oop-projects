@@ -16,8 +16,8 @@ import java.util.Observer;
 public class DrawPanel extends JPanel implements Observer {
 
     private static final int CARD_SPACING = 2; //pixels
-    private static final int Y_OFFSET_NPC = (int)(Card.values().length * CARD_SPACING);
-    private static final int Y_OFFSET_PLAYER = (int)(Card.values().length * CARD_SPACING * 4.25);
+    private static final int Y_OFFSET_NPC = Card.values().length * CARD_SPACING;
+    private static final int Y_OFFSET_PLAYER = (int) (Card.values().length * CARD_SPACING * 4.25);
 
     private Snap snap;
 
@@ -49,9 +49,9 @@ public class DrawPanel extends JPanel implements Observer {
         return movableY;
     }
 
-    // TODO: Fix this function to take into account the new area size and position
     public boolean inPlayerFaceUpArea(Point point) {
-        return point.getX() > getWidth() / 2;
+        return point.getX() > getWidth() / (float) 2
+                && point.getY() > getHeight() / (float) 2;
     }
 
     /**
@@ -90,8 +90,8 @@ public class DrawPanel extends JPanel implements Observer {
      */
     public int cardWidth() {
         //if ((getHeight() * 600.0) / (getWidth() * 436.0) <= 1.0)
-            //return (int) ((cardHeight() * 436.0) / 600.0);
-        return (int)(436*0.3);
+        //return (int) ((cardHeight() * 436.0) / 600.0);
+        return (int) (436 * 0.3);
     }
 
     /**
@@ -101,14 +101,14 @@ public class DrawPanel extends JPanel implements Observer {
      */
     public int cardHeight() {
         //if ((getHeight() * 600.0) / (getWidth() * 436.0) > 1.0)
-            //return (int) ((cardWidth() * 600.0) / 436.0);
-        return (int)(600*0.3);
+        //return (int) ((cardWidth() * 600.0) / 436.0);
+        return (int) (600 * 0.3);
     }
 
     /**
      * Draw deck with parameterizable y_offset
      */
-    private void paintDownPile(Graphics g, int y_offset, Pile pile){
+    private void paintDownPile(Graphics g, int y_offset, Pile pile) {
         int depth;
         for (depth = 0; depth < pile.size(); ++depth) {
             int posX = getSpacing() + depth;
@@ -117,7 +117,7 @@ public class DrawPanel extends JPanel implements Observer {
                     , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
         }
-        if(pile == snap.getPlayerDownPile()){
+        if (pile == snap.getPlayerDownPile()) {
             MovableCard dependency = snap.getMovableCard();
             if (dependency != null) {
                 movableX = getSpacing() + depth + dependency.getRelativeX();
