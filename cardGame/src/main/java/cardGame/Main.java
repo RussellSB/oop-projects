@@ -26,7 +26,7 @@ public class Main {
         DrawPanel panel = new DrawPanel(draw);
         CardDragger cd = new CardDragger(draw, panel);
         frame.getContentPane().add(panel);
-        frame.setPreferredSize(new Dimension(800, 600));
+        frame.setPreferredSize(new Dimension(660, 1000));
         frame.pack();
         frame.setLocationRelativeTo (null); // Center on screen.
         frame.setVisible(true);

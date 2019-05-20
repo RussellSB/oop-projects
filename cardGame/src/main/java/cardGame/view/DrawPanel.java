@@ -61,11 +61,21 @@ public class DrawPanel extends JPanel implements Observer {
      * Paint the areas in which deck and discard pile can be found
      */
     private void paintAreas(Graphics g) {
+
         g.setColor(Color.YELLOW);
-        g.drawRect(0, 0, getWidth() / 2, getHeight() - 1);
-        g.drawString("Deck Area", getWidth() / 4, 10);
-        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight() - 1);
-        g.drawString("Discard Area", 3 * (getWidth() / 4), 10);
+
+        //Draws NPC's row
+        g.drawRect(0, 0, getWidth() / 2, getHeight()*1/2 - 1);
+        g.drawString("NPC Face-Down Area", getWidth() / 4, 15);
+        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight()*1/2 - 1);
+        g.drawString("NPC Face-Up Area", 3 * (getWidth() / 4), 15);
+
+        //Draw's Player's row
+        g.drawRect(0, getHeight() * 1/2, getWidth() / 2, getHeight() - 1);
+        g.drawString("Player Face-Down Area", getWidth() / 4, getHeight() * 1/2 + 15);
+        g.drawRect(getWidth() / 2, getHeight() * 1/2, getWidth() / 2 - 1, getHeight() - 1);
+        g.drawString("Player Face-Up Area", 3 * (getWidth() / 4), getHeight() * 1/2 + 15);
+
         g.setColor(Color.BLACK);
     }
     
