@@ -3,6 +3,7 @@ package cardGame.view;
 import cardGame.game.MovableCard;
 import cardGame.game.Snap;
 import cardGame.model.Card;
+import cardGame.model.Pile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,8 @@ import java.util.Observer;
 public class DrawPanel extends JPanel implements Observer {
 
     private static final int CARD_SPACING = 2; //pixels
-    private static final int Y_OFFSET = Card.values().length * CARD_SPACING;
+    private static final int Y_OFFSET_NPC = (int)(Card.values().length * CARD_SPACING);
+    private static final int Y_OFFSET_PLAYER = (int)(Card.values().length * CARD_SPACING * 4.25);
 
     private Snap snap;
 
@@ -87,9 +89,9 @@ public class DrawPanel extends JPanel implements Observer {
      * their relative dimensions
      */
     public int cardWidth() {
-        if ((getHeight() * 600.0) / (getWidth() * 436.0) <= 1.0)
-            return (int) ((cardHeight() * 436.0) / 600.0);
-        return (getWidth() - getSpacing() * 3 - 2 * Card.values().length) / 2;
+        //if ((getHeight() * 600.0) / (getWidth() * 436.0) <= 1.0)
+            //return (int) ((cardHeight() * 436.0) / 600.0);
+        return (int)(436*0.3);
     }
 
     /**
@@ -98,48 +100,78 @@ public class DrawPanel extends JPanel implements Observer {
      * their relative dimensions
      */
     public int cardHeight() {
-        if ((getHeight() * 600.0) / (getWidth() * 436.0) > 1.0)
-            return (int) ((cardWidth() * 600.0) / 436.0);
-        return (getHeight() - getSpacing() * 2 - 2 * Card.values().length);
+        //if ((getHeight() * 600.0) / (getWidth() * 436.0) > 1.0)
+            //return (int) ((cardWidth() * 600.0) / 436.0);
+        return (int)(600*0.3);
     }
 
     /**
-     * Snap the deck
+     * Draw deck with parameterizable y_offset
      */
-    private void paintPlayerDownPile(Graphics g) {
+    private void paintDownPile(Graphics g, int y_offset, Pile pile){
         int depth;
-        for (depth = 0; depth < snap.getPlayerDownPile().size(); ++depth) {
+        for (depth = 0; depth < pile.size(); ++depth) {
             int posX = getSpacing() + depth;
-            int posY = getSpacing() + Y_OFFSET - CARD_SPACING * depth;
+            int posY = getSpacing() + y_offset - CARD_SPACING * depth;
             g.drawImage(CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
                     , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
         }
-        MovableCard dependency = snap.getMovableCard();
-        if (dependency != null) {
-            movableX = getSpacing() + depth + dependency.getRelativeX();
-            movableY = getSpacing() + Y_OFFSET - CARD_SPACING * depth
-                    + dependency.getRelativeY();
-            g.drawImage(CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
-                    , movableX, movableY, cardWidth(), cardHeight(), this);
-            g.drawRect(movableX, movableY, cardWidth(), cardHeight());
+        if(pile == snap.getPlayerDownPile()){
+            MovableCard dependency = snap.getMovableCard();
+            if (dependency != null) {
+                movableX = getSpacing() + depth + dependency.getRelativeX();
+                movableY = getSpacing() + y_offset - CARD_SPACING * depth
+                        + dependency.getRelativeY();
+                g.drawImage(CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
+                        , movableX, movableY, cardWidth(), cardHeight(), this);
+                g.drawRect(movableX, movableY, cardWidth(), cardHeight());
+            }
         }
     }
 
     /**
-     * Snap the discard pile
+     * Draw the discard pile with parameterizable y_offset
      */
-    private void paintPlayerUpPile(Graphics g) {
+    private void paintUpPile(Graphics g, int y_offset, Pile pile) {
         int depth = 0;
-        for (Card card : snap.getPlayerUpPile()) {
+        for (Card card : pile) {
             int posX = getWidth() - getSpacing() - cardWidth()
                     + depth - Card.values().length;
-            int posY = getSpacing() + Y_OFFSET - CARD_SPACING * depth;
+            int posY = getSpacing() + y_offset - CARD_SPACING * depth;
             g.drawImage(CardTextures.getTexture(card)
                     , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
             ++depth;
         }
+    }
+
+    /**
+     * Draw player's deck
+     */
+    private void paintPlayerDownPile(Graphics g) {
+        paintDownPile(g, Y_OFFSET_PLAYER, snap.getPlayerDownPile());
+    }
+
+    /**
+     * Draw the player's discard pile
+     */
+    private void paintPlayerUpPile(Graphics g) {
+        paintUpPile(g, Y_OFFSET_PLAYER, snap.getPlayerUpPile());
+    }
+
+    /**
+     * Draw the NPC's deck
+     */
+    private void paintNpcDownPile(Graphics g) {
+        paintDownPile(g, Y_OFFSET_NPC, snap.getNpcDownPile());
+    }
+
+    /**
+     * Draw the NPC's discard pile
+     */
+    private void paintNpcUpPile(Graphics g) {
+        paintUpPile(g, Y_OFFSET_NPC, snap.getNpcUpPile());
     }
 
     /**
@@ -153,6 +185,8 @@ public class DrawPanel extends JPanel implements Observer {
         paintAreas(g);
         paintPlayerUpPile(g);
         paintPlayerDownPile(g);
+        paintNpcUpPile(g);
+        paintNpcDownPile(g);
     }
 
     /**
