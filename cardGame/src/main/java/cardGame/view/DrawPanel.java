@@ -62,16 +62,16 @@ public class DrawPanel extends JPanel implements Observer {
         g.setColor(Color.YELLOW);
 
         //Draws NPC's row
-        g.drawRect(0, 0, getWidth() / 2, getHeight() * 1 / 2 - 1);
-        g.drawString("NPC Face-Down Area", getWidth() / 4, 15);
-        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight() * 1 / 2 - 1);
-        g.drawString("NPC Face-Up Area", 3 * (getWidth() / 4), 15);
+        g.drawRect(0, 0, getWidth() / 2, getHeight() / 2 - 1);
+        g.drawString("NPC Face-Down Area", (getWidth() / 4) - 60, 15);
+        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight() / 2 - 1);
+        g.drawString("NPC Face-Up Area", 3 * (getWidth() / 4) - 60, 15);
 
         //Draw's Player's row
-        g.drawRect(0, getHeight() * 1 / 2, getWidth() / 2, getHeight() - 1);
-        g.drawString("Player Face-Down Area", getWidth() / 4, getHeight() * 1 / 2 + 15);
-        g.drawRect(getWidth() / 2, getHeight() * 1 / 2, getWidth() / 2 - 1, getHeight() - 1);
-        g.drawString("Player Face-Up Area", 3 * (getWidth() / 4), getHeight() * 1 / 2 + 15);
+        g.drawRect(0, getHeight() / 2, getWidth() / 2, getHeight() - 1);
+        g.drawString("Player Face-Down Area", (getWidth() / 4) - 60, getHeight() / 2 + 15);
+        g.drawRect(getWidth() / 2, getHeight() / 2, getWidth() / 2 - 1, getHeight() - 1);
+        g.drawString("Player Face-Up Area", 3 * (getWidth() / 4) - 60, getHeight() / 2 + 15);
 
         g.setColor(Color.BLACK);
     }
@@ -106,7 +106,7 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Draw deck with parameterizable y_offset
+     * Draw deck with parameterizable y_offset and pile
      */
     private void paintDownPile(Graphics g, int y_offset, Pile pile) {
         int depth;
@@ -131,7 +131,7 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Draw the discard pile with parameterizable y_offset
+     * Draw the discard pile with parameterizable y_offset and pile
      */
     private void paintUpPile(Graphics g, int y_offset, Pile pile) {
         int depth = 0;
