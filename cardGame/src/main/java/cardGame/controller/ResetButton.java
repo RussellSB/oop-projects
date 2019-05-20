@@ -27,7 +27,7 @@ class ResetButton extends JButton {
         setVerticalTextPosition(AbstractButton.CENTER);
         setHorizontalTextPosition(AbstractButton.CENTER);
         setMnemonic(KeyEvent.VK_S);
-        setToolTipText("Reset game and start from 0");
+        setToolTipText("Start a new game");
     }
 
 }

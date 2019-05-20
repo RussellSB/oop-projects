@@ -7,6 +7,7 @@ import cardGame.model.Pile;
 
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 import static cardGame.model.Card.Face.JOKER;
 
@@ -15,6 +16,9 @@ import static cardGame.model.Card.Face.JOKER;
  */
 public class Snap extends Observable implements Observer {
 
+    private final static double NPC_SNAPPING_PERCENTAGE = 0.99;
+
+    private boolean gameFinished = false;
     private Pile playerUpPile = new Pile();
     private Pile playerDownPile = new Pile();
     private Pile npcUpPile = new Pile();
@@ -28,6 +32,10 @@ public class Snap extends Observable implements Observer {
     public Snap() {
         shuffle();
         createMovableCard();
+    }
+
+    public boolean gameIsFinished() {
+        return gameFinished;
     }
 
     public Pile getPlayerUpPile() {
@@ -85,35 +93,78 @@ public class Snap extends Observable implements Observer {
 
 
     /**
-     * Draw a card from the player face-down pile and put it on the player
+     * Draw a card from the player's face-down pile and put it on the player's
      * face-up pile
      */
     public void playerMoves() {
-        if (movable != null)
-            playerUpPile.put(movable.getCard());
+        // If the face-down pile is empty we take the cards from the face-up one
+        // by flipping (reversing the order of) that pile
+        if (movable == null) {
+            int size = playerUpPile.size();
+            for (int i = 0; i < size; i++)
+                playerDownPile.put(playerUpPile.draw());
+            createMovableCard();
+        }
 
+        playerUpPile.put(movable.getCard());
         createMovableCard();
+
         setChanged();
         notifyObservers();
 
+        // NPC's turn
         npcMoves();
+
+        checkWinner();
     }
 
     /**
-     * Draw a card from the player face-down pile and put it on the player
+     * Checks if we have a winner and ends the game in such case
+     */
+    private void checkWinner() {
+        // If both piles are empty the player has lost the game
+        if ((movable == null && playerUpPile.isEmpty())
+             || (npcUpPile.isEmpty() && npcDownPile.isEmpty()))
+        {
+            if (movable == null && playerUpPile.isEmpty())
+                System.out.println("PLAYER LOOSES"); // TODO: Replace with a "Looser" window
+            else
+                System.out.println("PLAYER WINS"); // TODO: Replace with a "Winner" window
+
+            gameFinished = true;
+            setChanged();
+            notifyObservers();
+        }
+    }
+
+    /**
+     * Draw a card from the NPC's face-down pile and put it on the NPC's
      * face-up pile
      */
-    public void npcMoves() {
+    private void npcMoves() {
+        // If the face-down pile is empty we take the cards from the face-up one
+        // by flipping (reversing the order of) that pile
+        if (npcDownPile.isEmpty()) {
+            int size = npcUpPile.size();
+            for (int i = 0; i < size; i++)
+                npcDownPile.put(npcUpPile.draw());
+        }
+
         npcUpPile.put(npcDownPile.draw());
+
+        if (matchDetected())
+            npcTriesToSnap();
 
         setChanged();
         notifyObservers();
     }
 
     /**
-     * Empty piles and shuffle again
+     * Empty all piles and shuffle again
      */
     public void reset() {
+        gameFinished = false;
+
         playerUpPile.empty();
         playerDownPile.empty();
         npcUpPile.empty();
@@ -126,35 +177,71 @@ public class Snap extends Observable implements Observer {
     }
 
     /**
-     * TODO
+     * The player performs a snap!
      */
     public void playerSnaps() {
         if (matchDetected()) {
-            Pile newDownPile = new Pile();
-
-            // Move cards from the npc's face-up pile to the player's new face-down pile
-            for (Card card : npcUpPile) {
-                newDownPile.put(card);
-            }
-            npcUpPile.empty();
-
-            // Move cards from the players's face-up pile to the player's new face-down pile
-            for (Card card : playerUpPile) {
-                newDownPile.put(card);
-            }
-            playerUpPile.empty();
-
-            // Move cards from the players's face-down pile to the player's new face-down pile
-            for (Card card : playerDownPile) {
-                newDownPile.put(card);
-            }
-
-            // Swap face-down piles
-            playerDownPile = newDownPile;
+            playerDownPile = snap(playerDownPile, playerUpPile, npcUpPile);
 
             createMovableCard();
             setChanged();
             notifyObservers();
+            createMovableCard();
+
+            checkWinner();
+        }
+    }
+
+    /**
+     * The NPC performs a snap!
+     */
+    private void npcSnaps() {
+        if (matchDetected()) {
+            npcDownPile = snap(npcDownPile, npcUpPile, playerUpPile);
+
+            setChanged();
+            notifyObservers();
+
+            System.out.println("NPC SNAPS!"); // TODO: Replace with a "NPC snapped" window
+        }
+    }
+
+    /**
+     * Generic function to perform a snap (to avoid code duplication)
+     */
+    private Pile snap(Pile destination, Pile origin1, Pile origin2) {
+        int i, size;
+        Pile newDownPile = new Pile();
+
+        // Move cards from the origin1's face-up pile to the newDownPile by
+        // flipping (reversing the order of) the pile
+        size = origin1.size();
+        for (i = 0; i < size; i++)
+            newDownPile.put(origin1.draw());
+
+        // Move cards from the origin2's face-up pile to the newDownPile by
+        // flipping (reversing the order of) the pile
+        size = origin2.size();
+        for (i = 0; i < size; i++)
+            newDownPile.put(origin2.draw());
+
+        // Move cards from the destination's face-down pile to the newDownPile
+        for (Card card : destination) {
+            newDownPile.put(card);
+        }
+
+        return newDownPile;
+    }
+
+    /**
+     * To give the player a chance the win, the NPC will only snap a percentage
+     * of the time (NPC_SNAPPING_PERCENTAGE)
+     */
+    private void npcTriesToSnap () {
+        Random randObj = new Random();
+
+        if(randObj.nextFloat() <= NPC_SNAPPING_PERCENTAGE) {
+            npcSnaps();
         }
     }
 

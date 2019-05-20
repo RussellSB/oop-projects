@@ -28,7 +28,7 @@ public class DrawAction extends AbstractAction implements Observer {
      * Check if the action can be performed.
      */
     private void fixEnabled() {
-        if (snap.getPlayerDownPile().isEmpty() && snap.getMovableCard() == null)
+        if (snap.gameIsFinished())
             setEnabled(false);
         else
             setEnabled(true);
