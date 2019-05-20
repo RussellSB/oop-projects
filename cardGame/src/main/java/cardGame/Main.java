@@ -20,13 +20,13 @@ import java.awt.Color;
 public class Main {
     public static void main(String[] args) {
         Draw draw = new Draw();
-        JFrame frame = new JFrame("Card game");
+        JFrame frame = new JFrame("Simple Snap Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(new ButtonBar(draw));
         DrawPanel panel = new DrawPanel(draw);
         CardDragger cd = new CardDragger(draw, panel);
         frame.getContentPane().add(panel);
-        frame.setPreferredSize(new Dimension(660, 1000));
+        frame.setPreferredSize(new Dimension(660, 800));
         frame.pack();
         frame.setLocationRelativeTo (null); // Center on screen.
         frame.setVisible(true);

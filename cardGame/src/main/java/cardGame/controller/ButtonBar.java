@@ -17,6 +17,7 @@ public class ButtonBar extends JMenuBar {
     public ButtonBar(Draw draw) {
         add(new DrawButton(draw));
         add(new ResetButton(draw));
+        add(new SnapButton(draw));
     }
 
 }

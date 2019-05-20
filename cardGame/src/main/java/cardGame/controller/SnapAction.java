@@ -13,7 +13,7 @@ import java.util.Observable;
 /**
  * Represents an action made to draw a card.
  */
-public class DrawAction extends AbstractAction implements Observer {
+public class SnapAction extends AbstractAction implements Observer {
 
     private Draw draw;
 
@@ -31,8 +31,8 @@ public class DrawAction extends AbstractAction implements Observer {
     /**
      * Creates a new action to draw a card.
      */
-    public DrawAction(Draw draw) {
-        super("Draw [d]");
+    public SnapAction(Draw draw) {
+        super("SNAP! [spacebar]");
         this.draw = draw;
         draw.addObserver(this);
         fixEnabled();
@@ -45,9 +45,9 @@ public class DrawAction extends AbstractAction implements Observer {
     public void actionPerformed(ActionEvent e) {
         draw.move();
     }
-    
+
     /**
-     * Since availability of this action depends on the state of the 
+     * Since availability of this action depends on the state of the
      * resources it itself depends on, this action verifies
      * after every update of draw if it can still be performed.
      */
@@ -55,5 +55,5 @@ public class DrawAction extends AbstractAction implements Observer {
     public void update(Observable observed, Object message) {
         fixEnabled();
     }
-    
+
 }

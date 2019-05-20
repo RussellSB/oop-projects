@@ -65,9 +65,9 @@ public class DrawPanel extends JPanel implements Observer {
         g.setColor(Color.YELLOW);
 
         //Draws NPC's row
-        g.drawRect(0, 0, getWidth() / 2, getHeight()*1/2 - 1);
+        g.drawRect(0, 0, getWidth() / 2, getHeight() * 1/2 - 1);
         g.drawString("NPC Face-Down Area", getWidth() / 4, 15);
-        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight()*1/2 - 1);
+        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight() * 1/2 - 1);
         g.drawString("NPC Face-Up Area", 3 * (getWidth() / 4), 15);
 
         //Draw's Player's row
