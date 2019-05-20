@@ -25,7 +25,7 @@ public class Main {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(new ButtonBar(snap));
         frame.getContentPane().add(panel);
-        frame.setPreferredSize(new Dimension(650, 750));
+        frame.setPreferredSize(new Dimension(550, 750));
         frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo (null); // Center on screen.
