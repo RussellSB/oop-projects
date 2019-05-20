@@ -2,7 +2,7 @@ package cardGame.view;
 
 import cardGame.model.Card;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 import cardGame.game.MovableCard;
 
 import javax.swing.JPanel;
@@ -10,20 +10,19 @@ import javax.swing.JPanel;
 import java.awt.Point;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Dimension;
 
 import java.util.Observer;
 import java.util.Observable;
 
 /**
- * View of Draw
+ * View of Snap
  */
 public class DrawPanel extends JPanel implements Observer {
 
     private static final int CARD_SPACING = 2; //pixels
     private static final int Y_OFFSET = Card.values().length * CARD_SPACING;
     
-    private Draw draw;
+    private Snap snap;
     
     private int movableX;
     private int movableY;
@@ -45,9 +44,9 @@ public class DrawPanel extends JPanel implements Observer {
     /**
      * Create a new DrawPanel
      */
-    public DrawPanel(Draw draw) {
-        this.draw = draw;
-        draw.addObserver(this);
+    public DrawPanel(Snap snap) {
+        this.snap = snap;
+        snap.addObserver(this);
         setBackground(new Color(0x7E, 0x35, 0x4D));
         setVisible(true);
         setOpaque(true);
@@ -109,21 +108,21 @@ public class DrawPanel extends JPanel implements Observer {
     }
     
     /**
-     * Draw the deck
+     * Snap the deck
      */
     private void paintDeck(Graphics g) {
         int depth;
-        for(depth = 0; depth < draw.getDeck().size(); ++depth) {
+        for(depth = 0; depth < snap.getPlayerDownPile().size(); ++depth) {
             int posX = getSpacing() + depth;
             int posY = getSpacing() + Y_OFFSET - CARD_SPACING * depth;
             g.drawImage( CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
                        , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
         }
-        MovableCard dependency = draw.getMovableCard();
+        MovableCard dependency = snap.getMovableCard();
         if(dependency != null) {
             movableX = getSpacing() + depth + dependency.getRelativeX();
-            movableY = getSpacing() + Y_OFFSET - CARD_SPACING * depth 
+            movableY = getSpacing() + Y_OFFSET - CARD_SPACING * depth
                      + dependency.getRelativeY();
             g.drawImage( CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
                        , movableX, movableY, cardWidth(), cardHeight(), this);
@@ -132,11 +131,11 @@ public class DrawPanel extends JPanel implements Observer {
     }
     
     /**
-     * Draw the discard pile
+     * Snap the discard pile
      */
     private void paintDiscardPile(Graphics g) {
         int depth = 0;
-        for(Card card : draw.getDiscardPile()) {
+        for(Card card : snap.getPlayerUpPile()) {
             int posX = getWidth() - getSpacing() - cardWidth() 
                      + depth - Card.values().length;
             int posY = getSpacing() + Y_OFFSET - CARD_SPACING * depth;

@@ -1,6 +1,6 @@
 package cardGame.controller;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 
 import java.awt.event.KeyEvent;
 
@@ -27,8 +27,8 @@ public class ResetButton extends JButton {
     /**
      * Create a reset button
      */
-    public ResetButton(Draw draw) {
-        super(new ResetAction(draw));
+    public ResetButton(Snap snap) {
+        super(new ResetAction(snap));
         setButtonProperties();
     }
 

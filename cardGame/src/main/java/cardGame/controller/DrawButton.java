@@ -1,6 +1,6 @@
 package cardGame.controller;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 
 import java.awt.event.KeyEvent;
 
@@ -20,14 +20,14 @@ public class DrawButton extends JButton {
         setVerticalTextPosition(AbstractButton.CENTER);
         setHorizontalTextPosition(AbstractButton.CENTER);
         setMnemonic(KeyEvent.VK_D);
-        setToolTipText("Draw a card");
+        setToolTipText("Snap a card");
     }
     
     /**
-     * Create a draw button
+     * Create a snap button
      */
-    public DrawButton(Draw draw) {
-        super(new DrawAction(draw));
+    public DrawButton(Snap snap) {
+        super(new DrawAction(snap));
         setButtonProperties();
     }
 

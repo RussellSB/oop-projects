@@ -10,14 +10,14 @@ import java.util.ListIterator;
 /**
  * Pile of cards which has all cards open
  */
-public class DiscardPile implements Emptiable, Sized, Iterable<Card>  {
+public class Pile implements Emptiable, Sized, Iterable<Card>  {
 
     private Stack<Card> pile;
     
     /**
      * Create a new empty discard pile
      */
-    public DiscardPile() {
+    public Pile() {
         pile = new Stack<>();
     }
     
@@ -56,7 +56,7 @@ public class DiscardPile implements Emptiable, Sized, Iterable<Card>  {
         
         /**
          * Create an iterator for this immutable discard pile using the 
-         * iterator of the DiscardPile it protects
+         * iterator of the Pile it protects
          */
         public ConcreteDiscardPileIterator() {
             backing = pile.listIterator(0);
@@ -120,4 +120,13 @@ public class DiscardPile implements Emptiable, Sized, Iterable<Card>  {
         pile.clear();
     }
 
+    /**
+     * Draw a card from the deck. This method will return null if the
+     * deck is empty,
+     */
+    public Card draw() {
+        if(!isEmpty())
+            return pile.remove(pile.size() - 1);
+        return null;
+    }
 }

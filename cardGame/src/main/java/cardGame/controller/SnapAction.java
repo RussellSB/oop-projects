@@ -1,6 +1,6 @@
 package cardGame.controller;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 import cardGame.game.MovableCard;
 
 import java.awt.event.ActionEvent;
@@ -15,14 +15,14 @@ import java.util.Observable;
  */
 public class SnapAction extends AbstractAction implements Observer {
 
-    private Draw draw;
+    private Snap snap;
 
     /**
      * Makes sure the availability of the action reflects the availability of
      * the resource it acts on, namely, draw.
      */
     private void fixEnabled() {
-        if(draw.getDeck().isEmpty() && draw.getMovableCard() == null)
+        if(snap.getPlayerDownPile().isEmpty() && snap.getMovableCard() == null)
             setEnabled(false);
         else
             setEnabled(true);
@@ -31,10 +31,10 @@ public class SnapAction extends AbstractAction implements Observer {
     /**
      * Creates a new action to draw a card.
      */
-    public SnapAction(Draw draw) {
+    public SnapAction(Snap snap) {
         super("SNAP! [spacebar]");
-        this.draw = draw;
-        draw.addObserver(this);
+        this.snap = snap;
+        snap.addObserver(this);
         fixEnabled();
     }
 
@@ -43,7 +43,7 @@ public class SnapAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        draw.move();
+        snap.playerMoves();
     }
 
     /**

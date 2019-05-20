@@ -1,6 +1,6 @@
 package cardGame.controller;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 
 import java.awt.event.KeyEvent;
 
@@ -26,8 +26,8 @@ public class SnapButton extends JButton {
     /**
      * Create a draw button
      */
-    public SnapButton(Draw draw) {
-        super(new SnapAction(draw));
+    public SnapButton(Snap snap) {
+        super(new SnapAction(snap));
         setButtonProperties();
     }
 

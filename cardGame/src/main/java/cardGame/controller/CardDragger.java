@@ -1,6 +1,6 @@
 package cardGame.controller;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 import cardGame.view.DrawPanel;
 
 import javax.swing.event.MouseInputAdapter;
@@ -13,7 +13,7 @@ import java.awt.event.MouseEvent;
  */
 public class CardDragger extends MouseInputAdapter {
 
-    private Draw draw;
+    private Snap snap;
     private DrawPanel panel;
     
     private boolean selected;
@@ -24,8 +24,8 @@ public class CardDragger extends MouseInputAdapter {
      * Create a new card dragger that receives mouse events from the DrawPanel
      * supplied to this constructor
      */
-    public CardDragger(Draw draw, DrawPanel panel) {
-        this.draw = draw;
+    public CardDragger(Snap snap, DrawPanel panel) {
+        this.snap = snap;
         this.panel = panel;
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
@@ -39,7 +39,7 @@ public class CardDragger extends MouseInputAdapter {
      */
     @Override
     public void mousePressed(MouseEvent event) {
-        if(draw.getMovableCard() != null) {
+        if(snap.getMovableCard() != null) {
             if( event.getX() > panel.getMovableX() &&
                 event.getX() < panel.getMovableX() + panel.cardWidth() &&
                 event.getY() > panel.getMovableY() &&
@@ -63,10 +63,10 @@ public class CardDragger extends MouseInputAdapter {
     public void mouseReleased(MouseEvent event) {
         if(selected) {
             if(panel.inDiscardArea(event.getPoint()))
-                draw.move();
+                snap.playerMoves();
             else {
-                draw.getMovableCard().setRelativeX(0);
-                draw.getMovableCard().setRelativeY(0);
+                snap.getMovableCard().setRelativeX(0);
+                snap.getMovableCard().setRelativeY(0);
             }
         }
         selected = false;
@@ -79,8 +79,8 @@ public class CardDragger extends MouseInputAdapter {
     @Override
     public void mouseDragged(MouseEvent event) {
         if(selected) {
-            draw.getMovableCard().setRelativeX(event.getX() - startX);
-            draw.getMovableCard().setRelativeY(event.getY() - startY);
+            snap.getMovableCard().setRelativeX(event.getX() - startX);
+            snap.getMovableCard().setRelativeY(event.getY() - startY);
         }
     }
 

@@ -1,6 +1,6 @@
 package cardGame;
 
-import cardGame.game.Draw;
+import cardGame.game.Snap;
 
 import cardGame.view.DrawPanel;
 
@@ -8,10 +8,8 @@ import cardGame.controller.ButtonBar;
 import cardGame.controller.CardDragger;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import java.awt.Dimension;
-import java.awt.Color;
 
 /**
  * Runs the game. Although technically a controller this class can be found
@@ -19,12 +17,12 @@ import java.awt.Color;
  */
 public class Main {
     public static void main(String[] args) {
-        Draw draw = new Draw();
-        JFrame frame = new JFrame("Simple Snap Game");
+        Snap snap = new Snap();
+        JFrame frame = new JFrame("Simple Snap game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setJMenuBar(new ButtonBar(draw));
-        DrawPanel panel = new DrawPanel(draw);
-        CardDragger cd = new CardDragger(draw, panel);
+        frame.setJMenuBar(new ButtonBar(snap));
+        DrawPanel panel = new DrawPanel(snap);
+        CardDragger cd = new CardDragger(snap, panel);
         frame.getContentPane().add(panel);
         frame.setPreferredSize(new Dimension(660, 800));
         frame.pack();
