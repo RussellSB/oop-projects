@@ -90,7 +90,7 @@ public enum Card {
         JACK,
         QUEEN,
         KING,
-        JOKER;
+        JOKER
     }
     
     /**
@@ -98,7 +98,7 @@ public enum Card {
      */
     public enum Colour {
         RED,
-        BLACK;
+        BLACK
     }
     
     /**
@@ -115,7 +115,7 @@ public enum Card {
         /**
          * Create a new suit with the appropriate colour
          */
-        private Suit(Colour colour) {
+        Suit(Colour colour) {
             this.colour = colour;
         }
         
@@ -134,7 +134,7 @@ public enum Card {
     /**
      * Create a new card with the given face and suit
      */
-    private Card(Face face, Suit suit) {
+    Card(Face face, Suit suit) {
         this.face = face;
         this.suit = suit;
         this.colour = suit.getColour();
@@ -143,7 +143,7 @@ public enum Card {
     /**
      * Joker constructor since Jokers don't belong to a suit
      */
-    private Card(Face face, Colour colour) {
+    Card(Face face, Colour colour) {
         this.face = face;
         this.suit = null;
         this.colour = colour;

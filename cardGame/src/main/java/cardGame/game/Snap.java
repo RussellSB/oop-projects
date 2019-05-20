@@ -107,7 +107,14 @@ public class Snap extends Observable implements Observer {
         setChanged();
         notifyObservers();
     }
-    
+
+    /**
+     * TODO
+     */
+    public void playerSnaps() {
+        // TODO
+    }
+
     /** 
      * If the movable card updates this updates too
      */

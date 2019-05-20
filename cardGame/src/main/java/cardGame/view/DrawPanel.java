@@ -1,18 +1,13 @@
 package cardGame.view;
 
+import cardGame.game.MovableCard;
+import cardGame.game.Snap;
 import cardGame.model.Card;
 
-import cardGame.game.Snap;
-import cardGame.game.MovableCard;
-
-import javax.swing.JPanel;
-
-import java.awt.Point;
-import java.awt.Color;
-import java.awt.Graphics;
-
-import java.util.Observer;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * View of Snap
@@ -21,26 +16,12 @@ public class DrawPanel extends JPanel implements Observer {
 
     private static final int CARD_SPACING = 2; //pixels
     private static final int Y_OFFSET = Card.values().length * CARD_SPACING;
-    
+
     private Snap snap;
-    
+
     private int movableX;
     private int movableY;
-    
-    /**
-     * Get the number of pixels in X this card has been moved
-     */
-    public int getMovableX() {
-        return movableX;
-    }
-    
-    /**
-     * Get the number of pixels in Y this card has been moved
-     */
-    public int getMovableY() {
-        return movableY;
-    }
-    
+
     /**
      * Create a new DrawPanel
      */
@@ -51,11 +32,26 @@ public class DrawPanel extends JPanel implements Observer {
         setVisible(true);
         setOpaque(true);
     }
-    
-    public boolean inDiscardArea(Point point) {
+
+    /**
+     * Get the number of pixels in X this card has been moved
+     */
+    public int getMovableX() {
+        return movableX;
+    }
+
+    /**
+     * Get the number of pixels in Y this card has been moved
+     */
+    public int getMovableY() {
+        return movableY;
+    }
+
+    // TODO: Fix this function to take into account the new area size and position
+    public boolean inPlayerFaceUpArea(Point point) {
         return point.getX() > getWidth() / 2;
     }
-    
+
     /**
      * Paint the areas in which deck and discard pile can be found
      */
@@ -64,101 +60,101 @@ public class DrawPanel extends JPanel implements Observer {
         g.setColor(Color.YELLOW);
 
         //Draws NPC's row
-        g.drawRect(0, 0, getWidth() / 2, getHeight() * 1/2 - 1);
+        g.drawRect(0, 0, getWidth() / 2, getHeight() * 1 / 2 - 1);
         g.drawString("NPC Face-Down Area", getWidth() / 4, 15);
-        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight() * 1/2 - 1);
+        g.drawRect(getWidth() / 2, 0, getWidth() / 2 - 1, getHeight() * 1 / 2 - 1);
         g.drawString("NPC Face-Up Area", 3 * (getWidth() / 4), 15);
 
         //Draw's Player's row
-        g.drawRect(0, getHeight() * 1/2, getWidth() / 2, getHeight() - 1);
-        g.drawString("Player Face-Down Area", getWidth() / 4, getHeight() * 1/2 + 15);
-        g.drawRect(getWidth() / 2, getHeight() * 1/2, getWidth() / 2 - 1, getHeight() - 1);
-        g.drawString("Player Face-Up Area", 3 * (getWidth() / 4), getHeight() * 1/2 + 15);
+        g.drawRect(0, getHeight() * 1 / 2, getWidth() / 2, getHeight() - 1);
+        g.drawString("Player Face-Down Area", getWidth() / 4, getHeight() * 1 / 2 + 15);
+        g.drawRect(getWidth() / 2, getHeight() * 1 / 2, getWidth() / 2 - 1, getHeight() - 1);
+        g.drawString("Player Face-Up Area", 3 * (getWidth() / 4), getHeight() * 1 / 2 + 15);
 
         g.setColor(Color.BLACK);
     }
-    
+
     /**
      * Get the scaled spacing between edges and cards
      */
     private int getSpacing() {
         return (int) ((getHeight() * 20) / 600.0);
     }
-    
+
     /**
      * Get the scaled width of cards. Default height is 600, default
      * width is 436, and cards are scaled depending on which dimension limits
      * their relative dimensions
      */
     public int cardWidth() {
-        if((getHeight() * 600.0) / (getWidth() * 436.0) <= 1.0)
+        if ((getHeight() * 600.0) / (getWidth() * 436.0) <= 1.0)
             return (int) ((cardHeight() * 436.0) / 600.0);
         return (getWidth() - getSpacing() * 3 - 2 * Card.values().length) / 2;
     }
-    
+
     /**
      * Get the scaled height of cards. Default height is 600, default
      * width is 436, and cards are scaled depending on which dimension limits
      * their relative dimensions
      */
     public int cardHeight() {
-        if((getHeight() * 600.0) / (getWidth() * 436.0) > 1.0)
+        if ((getHeight() * 600.0) / (getWidth() * 436.0) > 1.0)
             return (int) ((cardWidth() * 600.0) / 436.0);
         return (getHeight() - getSpacing() * 2 - 2 * Card.values().length);
     }
-    
+
     /**
      * Snap the deck
      */
-    private void paintDeck(Graphics g) {
+    private void paintPlayerDownPile(Graphics g) {
         int depth;
-        for(depth = 0; depth < snap.getPlayerDownPile().size(); ++depth) {
+        for (depth = 0; depth < snap.getPlayerDownPile().size(); ++depth) {
             int posX = getSpacing() + depth;
             int posY = getSpacing() + Y_OFFSET - CARD_SPACING * depth;
-            g.drawImage( CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
-                       , posX, posY, cardWidth(), cardHeight(), this);
+            g.drawImage(CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
+                    , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
         }
         MovableCard dependency = snap.getMovableCard();
-        if(dependency != null) {
+        if (dependency != null) {
             movableX = getSpacing() + depth + dependency.getRelativeX();
             movableY = getSpacing() + Y_OFFSET - CARD_SPACING * depth
-                     + dependency.getRelativeY();
-            g.drawImage( CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
-                       , movableX, movableY, cardWidth(), cardHeight(), this);
+                    + dependency.getRelativeY();
+            g.drawImage(CardBackTextures.getTexture(CardBack.CARD_BACK_BLUE)
+                    , movableX, movableY, cardWidth(), cardHeight(), this);
             g.drawRect(movableX, movableY, cardWidth(), cardHeight());
         }
     }
-    
+
     /**
      * Snap the discard pile
      */
-    private void paintDiscardPile(Graphics g) {
+    private void paintPlayerUpPile(Graphics g) {
         int depth = 0;
-        for(Card card : snap.getPlayerUpPile()) {
-            int posX = getWidth() - getSpacing() - cardWidth() 
-                     + depth - Card.values().length;
+        for (Card card : snap.getPlayerUpPile()) {
+            int posX = getWidth() - getSpacing() - cardWidth()
+                    + depth - Card.values().length;
             int posY = getSpacing() + Y_OFFSET - CARD_SPACING * depth;
-            g.drawImage( CardTextures.getTexture(card)
-                       , posX, posY, cardWidth(), cardHeight(), this);
+            g.drawImage(CardTextures.getTexture(card)
+                    , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
             ++depth;
         }
     }
-    
+
     /**
      * Paint the items that this class alone is responsible for.
-     * 
-     * This method is part of a template method that calls  
+     * <p>
+     * This method is part of a template method that calls
      */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         paintAreas(g);
-        paintDiscardPile(g);
-        paintDeck(g);
+        paintPlayerUpPile(g);
+        paintPlayerDownPile(g);
     }
-    
+
     /**
      * Tell this DrawPanel that the object it displays has changed
      */

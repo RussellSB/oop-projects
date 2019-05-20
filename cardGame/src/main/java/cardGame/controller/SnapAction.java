@@ -1,14 +1,11 @@
 package cardGame.controller;
 
 import cardGame.game.Snap;
-import cardGame.game.MovableCard;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-
-import java.util.Observer;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Represents an action made to draw a card.
@@ -18,20 +15,9 @@ public class SnapAction extends AbstractAction implements Observer {
     private Snap snap;
 
     /**
-     * Makes sure the availability of the action reflects the availability of
-     * the resource it acts on, namely, draw.
-     */
-    private void fixEnabled() {
-        if(snap.getPlayerDownPile().isEmpty() && snap.getMovableCard() == null)
-            setEnabled(false);
-        else
-            setEnabled(true);
-    }
-
-    /**
      * Creates a new action to draw a card.
      */
-    public SnapAction(Snap snap) {
+    SnapAction(Snap snap) {
         super("SNAP! [spacebar]");
         this.snap = snap;
         snap.addObserver(this);
@@ -39,11 +25,22 @@ public class SnapAction extends AbstractAction implements Observer {
     }
 
     /**
-     * Draws a card
+     * Check if the action can be performed.
+     */
+    private void fixEnabled() {
+        // TODO: This will need to be adapted if we add the extra pile
+        if (snap.getPlayerUpPile().isEmpty() || snap.getNpcUpPile().isEmpty())
+            setEnabled(false);
+        else
+            setEnabled(true);
+    }
+
+    /**
+     * Snap!
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        snap.playerMoves();
+        snap.playerSnaps();
     }
 
     /**

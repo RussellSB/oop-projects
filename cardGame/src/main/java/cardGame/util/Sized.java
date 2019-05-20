@@ -8,5 +8,5 @@ public interface Sized {
     /**
      * The number of items in this sized
      */
-    public int size();
+    int size();
 }

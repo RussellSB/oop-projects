@@ -2,13 +2,12 @@ package cardGame.controller;
 
 import cardGame.game.Snap;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 
 /**
  * Represents an action made to shuffle all cards back into the deck. Although
- * useless on an empty discard pile, this action is always available.
+ * useless on an empty pile, this action is always available.
  */
 public class ResetAction extends AbstractAction {
 
@@ -17,17 +16,17 @@ public class ResetAction extends AbstractAction {
     /**
      * Creates a new action to shuffle all cards back into the deck
      */
-    public ResetAction(Snap snap) {
-        super("Shuffle");
+    ResetAction(Snap snap) {
+        super("Restart game [R]");
         this.snap = snap;
     }
 
     /**
-     * Draws a card
+     * Resets the game
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         snap.reset();
     }
-    
+
 }

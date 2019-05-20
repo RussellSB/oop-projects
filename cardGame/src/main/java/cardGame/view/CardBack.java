@@ -5,5 +5,5 @@ package cardGame.view;
  */
 public enum CardBack {
     CARD_BACK_BLUE,
-    CARD_BACK_RED;
+    CARD_BACK_RED
 }

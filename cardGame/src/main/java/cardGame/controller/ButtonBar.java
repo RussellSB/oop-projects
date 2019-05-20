@@ -2,10 +2,10 @@ package cardGame.controller;
 
 import cardGame.game.Snap;
 
-import javax.swing.JMenuBar;
+import javax.swing.*;
 
 /**
- * Panel with the buttons for the draw-class controllers
+ * Panel with the buttons for the snap-class controllers
  */
 public class ButtonBar extends JMenuBar {
 

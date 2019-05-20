@@ -18,15 +18,19 @@ import java.awt.Dimension;
 public class Main {
     public static void main(String[] args) {
         Snap snap = new Snap();
+
+        DrawPanel panel = new DrawPanel(snap);
+
         JFrame frame = new JFrame("Simple Snap game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(new ButtonBar(snap));
-        DrawPanel panel = new DrawPanel(snap);
-        CardDragger cd = new CardDragger(snap, panel);
         frame.getContentPane().add(panel);
-        frame.setPreferredSize(new Dimension(660, 800));
+        frame.setPreferredSize(new Dimension(650, 750));
+        frame.setResizable(false);
         frame.pack();
         frame.setLocationRelativeTo (null); // Center on screen.
         frame.setVisible(true);
+
+        CardDragger cd = new CardDragger(snap, panel);
     }
 }
