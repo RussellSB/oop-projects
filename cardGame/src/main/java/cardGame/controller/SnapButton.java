@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 class SnapButton extends JButton {
 
     /**
-     * Create a draw button
+     * Create a snap button
      */
     SnapButton(Snap snap) {
         super(new SnapAction(snap));

@@ -11,7 +11,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * View of Snap
+ * View of Draw
  */
 public class DrawPanel extends JPanel implements Observer {
 

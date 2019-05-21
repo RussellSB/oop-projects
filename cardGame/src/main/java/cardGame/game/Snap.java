@@ -12,11 +12,11 @@ import java.util.Random;
 import static cardGame.model.Card.Face.JOKER;
 
 /**
- * Represents a simplified version of the snap cards game
+ * Represents a simplified version of the Snap cards game
  */
 public class Snap extends Observable implements Observer {
 
-    private final static double NPC_SNAPPING_PERCENTAGE = 0.4;
+    private final static double NPC_SNAPPING_PERCENTAGE = 0.3;
 
     private boolean gameFinished = false;
     private Pile playerUpPile = new Pile();

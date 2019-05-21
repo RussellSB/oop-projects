@@ -8,14 +8,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Represents an action made to draw a card.
+ * Represents an action made to snap a card.
  */
 public class SnapAction extends AbstractAction implements Observer {
 
     private Snap snap;
 
     /**
-     * Creates a new action to draw a card.
+     * Creates a new action to snap a card.
      */
     SnapAction(Snap snap) {
         super("SNAP! [ALT+S]");
