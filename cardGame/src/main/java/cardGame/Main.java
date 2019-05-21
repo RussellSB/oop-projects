@@ -15,11 +15,15 @@ import java.awt.*;
  */
 public class Main {
     public static void main(String[] args) {
+
+        final int WIDTH = 550;
+        final int HEIGHT = 750;
+
         Snap snap = new Snap();
 
         SnapPanel panel = new SnapPanel(snap);
 
-        JFrame frame = new JFrame("Simple Snap game");
+        JFrame frame = new JFrame("SNAP!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setJMenuBar(new ButtonBar(snap));
         frame.getContentPane().add(panel);
