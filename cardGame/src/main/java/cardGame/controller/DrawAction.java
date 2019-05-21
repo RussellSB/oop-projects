@@ -18,7 +18,7 @@ public class DrawAction extends AbstractAction implements Observer {
      * Creates a new action to draw a card.
      */
     DrawAction(Snap snap) {
-        super("Draw [D]");
+        super("Draw [ALT+D]");
         this.snap = snap;
         snap.addObserver(this);
         fixEnabled();

@@ -4,6 +4,7 @@ import cardGame.game.Snap;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * Button that draws a card. It uses the Action API to perform its action
@@ -22,11 +23,11 @@ class DrawButton extends JButton {
     /**
      * Initialise the properties of this button
      */
-    private void setButtonProperties() {
+    private void setButtonProperties(){
         setVerticalTextPosition(AbstractButton.CENTER);
         setHorizontalTextPosition(AbstractButton.CENTER);
+        setToolTipText("Snap a card");
         setMnemonic(KeyEvent.VK_D);
-        setToolTipText("Draw a card");
     }
 
 }

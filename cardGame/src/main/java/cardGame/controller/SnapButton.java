@@ -3,6 +3,7 @@ package cardGame.controller;
 import cardGame.game.Snap;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 /**
@@ -25,8 +26,8 @@ class SnapButton extends JButton {
     private void setButtonProperties() {
         setVerticalTextPosition(AbstractButton.CENTER);
         setHorizontalTextPosition(AbstractButton.CENTER);
-        setMnemonic(KeyEvent.VK_D);
         setToolTipText("SNAP!");
+        setMnemonic(KeyEvent.VK_S);
     }
 
 }

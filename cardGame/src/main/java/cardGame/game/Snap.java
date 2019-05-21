@@ -16,7 +16,7 @@ import static cardGame.model.Card.Face.JOKER;
  */
 public class Snap extends Observable implements Observer {
 
-    private final static double NPC_SNAPPING_PERCENTAGE = 0.99;
+    private final static double NPC_SNAPPING_PERCENTAGE = 0.4;
 
     private boolean gameFinished = false;
     private Pile playerUpPile = new Pile();

@@ -17,7 +17,7 @@ public class ResetAction extends AbstractAction {
      * Creates a new action to shuffle all cards back into the deck
      */
     ResetAction(Snap snap) {
-        super("Restart game [R]");
+        super("Restart game [ALT+R]");
         this.snap = snap;
     }
 
