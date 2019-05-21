@@ -121,9 +121,9 @@ public class Snap extends Observable implements Observer {
         if ((movable == null && playerUpPile.isEmpty())
                 || (npcUpPile.isEmpty() && npcDownPile.isEmpty())) {
             if (movable == null && playerUpPile.isEmpty())
-                notifyDialogListeners("You have the attention span of a goldfish... YOU LOSE!");
+                notifyDialogListeners("You have the attention span of a goldfish...\nYOU LOSE!");
             else
-                notifyDialogListeners("You're as sharp as a hot knife with 24M views on YouTube! YOU WIN!!!");
+                notifyDialogListeners("You're as sharp as a hot knife with 24M views on YouTube!\nYOU WIN!!!");
 
             gameFinished = true;
             setChanged();

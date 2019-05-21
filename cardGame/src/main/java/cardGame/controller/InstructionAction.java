@@ -1,16 +1,12 @@
 package cardGame.controller;
 
-import cardGame.game.Snap;
-import cardGame.view.InstructionPanel;
+import cardGame.Main;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
 
 /**
- * Represents an action made to shuffle all cards back into the deck. Although
- * useless on an empty pile, this action is always available.
+ * Represents an action made to open the instructions window
  */
 public class InstructionAction extends AbstractAction {
     /**
@@ -25,14 +21,6 @@ public class InstructionAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        InstructionPanel panel = new InstructionPanel();
-        JFrame frame = new JFrame("Instructions");
-        frame.getContentPane().add(panel);
-        frame.setPreferredSize(new Dimension(3*550/4, 3*750/4));
-        frame.setResizable(false);
-        frame.pack();
-        frame.setLocationRelativeTo(null); // Center on screen.
-        frame.setVisible(true);
+        Main.getInstructionsDialog().openWindow();
     }
-
 }
