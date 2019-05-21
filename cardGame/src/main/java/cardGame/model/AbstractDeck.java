@@ -3,10 +3,13 @@ package cardGame.model;
 import cardGame.util.Emptiable;
 import cardGame.util.Sized;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
- * An arbitrary deck of cards. Cards in a deck are usually closed.
+ * An arbitrary deck of cards.
  */
 abstract public class AbstractDeck implements Emptiable, Sized {
 
@@ -19,8 +22,9 @@ abstract public class AbstractDeck implements Emptiable, Sized {
      */
     private List<Card> cards;
     private Random random;
+
     /**
-     * Create a new deck and add cards to it
+     * Create a new deck and add cards to it.
      */
     AbstractDeck() {
         cards = new ArrayList<>();
@@ -30,53 +34,22 @@ abstract public class AbstractDeck implements Emptiable, Sized {
 
     /**
      * To allow slight variation in the way games play out, the seed used
-     * is changed every time, but it is seeded to allow reproducible results
+     * is changed every time, but it is seeded to allow reproducible results.
      */
     private static int nextSeed() {
         return seed++;
     }
 
     /**
-     * reset the deck and put in the cards it has by default.
-     */
-    public void reset() {
-        empty();
-        addCards();
-    }
-
-    /**
-     * Adds the cards this deck has by default
+     * Adds the cards this deck has by default.
      */
     abstract protected void addCards();
 
     /**
-     * Place a card back on the deck at the top of the deck
+     * Place a card back on the deck at the top of the deck.
      */
     void addOnTop(Card card) {
         cards.add(card);
-    }
-
-    /**
-     * Place a card at the back of the deck. Due to the backing data structure
-     * this is slower than putting the card on top.
-     */
-    public void addOnBottom(Card card) {
-        cards.add(0, card);
-    }
-
-    /**
-     * Puts a card anywhere in the deck
-     */
-    public void addAnywhere(Card card) {
-        cards.add(random.nextInt(cards.size()), card);
-    }
-
-    /**
-     * Add all cards in the discard pile back into the deck. The deck is
-     * shuffled afterwards to eliminate the possibility of
-     */
-    public void addAll(Collection<Card> pile) {
-        cards.addAll(pile);
     }
 
     /**
@@ -91,7 +64,7 @@ abstract public class AbstractDeck implements Emptiable, Sized {
     }
 
     /**
-     * Check the number of cards in this deck
+     * Check the number of cards in this deck.
      */
     @Override
     public int size() {
@@ -107,7 +80,7 @@ abstract public class AbstractDeck implements Emptiable, Sized {
     }
 
     /**
-     * Make this deck empty (e.g. make isEmpty() return true)
+     * Make this deck empty (e.g. make isEmpty() return true).
      */
     @Override
     public void empty() {
@@ -116,13 +89,11 @@ abstract public class AbstractDeck implements Emptiable, Sized {
 
     /**
      * Draw a card from the deck. This method will return null if the
-     * deck is empty,
+     * deck is empty.
      */
     public Card draw() {
         if (!isEmpty())
             return cards.remove(cards.size() - 1);
         return null;
     }
-
-
 }

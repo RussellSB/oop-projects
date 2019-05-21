@@ -1,29 +1,29 @@
 package cardGame.controller;
 
 import cardGame.game.Snap;
-import cardGame.view.DrawPanel;
+import cardGame.view.SnapPanel;
 
 import javax.swing.event.MouseInputAdapter;
 import java.awt.event.MouseEvent;
 
 /**
- * Implements the ability to drag the top card of the player pile to the player
- * face-up area of the drawpanel
+ * Implements the ability to drag the top (movable) card of the player face-down
+ * pile to the player face-up area of the snapPanel.
  */
 public class CardDragger extends MouseInputAdapter {
 
     private Snap snap;
-    private DrawPanel panel;
+    private SnapPanel panel;
 
     private boolean selected;
     private int startX;
     private int startY;
 
     /**
-     * Create a new card dragger that receives mouse events from the DrawPanel
-     * supplied to this constructor
+     * Create a new card dragger that receives mouse events from the SnapPanel
+     * supplied to this constructor.
      */
-    public CardDragger(Snap snap, DrawPanel panel) {
+    public CardDragger(Snap snap, SnapPanel panel) {
         this.snap = snap;
         this.panel = panel;
         panel.addMouseListener(this);
@@ -32,7 +32,7 @@ public class CardDragger extends MouseInputAdapter {
     }
 
     /**
-     * If the mouse button is pressed in the area where the top card is
+     * If the mouse button is pressed in the area where the movable card is
      * drawn (obviously a lack of drawable cards makes this impossible)
      * that card is 'selected' so it can be dragged.
      */
@@ -52,8 +52,8 @@ public class CardDragger extends MouseInputAdapter {
     }
 
     /**
-     * When the top card is released with the mouse in the player face-up area,
-     * the card is moved.
+     * When the movable card is released with the mouse in the player face-up
+     * area, the card is moved.
      */
     @Override
     public void mouseReleased(MouseEvent event) {

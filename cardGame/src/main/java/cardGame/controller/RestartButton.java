@@ -6,16 +6,16 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 
 /**
- * Button that draws a card. It uses the Action API to perform its action
+ * Button that restarts the game. It uses the Action API to perform its action
  * which means that this is merely a default configuration for this button.
  */
-class DrawButton extends JButton {
+class RestartButton extends JButton {
 
     /**
-     * Create a draw button.
+     * Create a restart game button.
      */
-    DrawButton(Snap snap) {
-        super(new DrawAction(snap));
+    RestartButton(Snap snap) {
+        super(new RestartAction(snap));
         setButtonProperties();
     }
 
@@ -25,7 +25,7 @@ class DrawButton extends JButton {
     private void setButtonProperties() {
         setVerticalTextPosition(AbstractButton.CENTER);
         setHorizontalTextPosition(AbstractButton.CENTER);
-        setToolTipText("Snap a card");
-        setMnemonic(KeyEvent.VK_D);
+        setToolTipText("Reset game and start from 0");
+        setMnemonic(KeyEvent.VK_R);
     }
 }

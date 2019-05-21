@@ -22,7 +22,7 @@ class CardBackTextures {
      * that this process won't take time during execution.
      */
     static {
-        textures = new EnumMap<CardBack, BufferedImage>(CardBack.class);
+        textures = new EnumMap<>(CardBack.class);
         for (CardBack back : CardBack.values()) {
             BufferedImage texture = null;
             String fileName = "target/classes/textures/" + back + ".png";
@@ -42,5 +42,4 @@ class CardBackTextures {
     static BufferedImage getTexture(CardBack back) {
         return textures.get(back);
     }
-
 }

@@ -5,7 +5,7 @@ import cardGame.model.Card;
 import java.util.Observable;
 
 /**
- * Represents a card that may be moved between piles
+ * Represents a card that may be moved between piles.
  */
 public class MovableCard extends Observable {
 
@@ -14,7 +14,7 @@ public class MovableCard extends Observable {
     private int relativeY;
 
     /**
-     * Create a new movable card
+     * Create a new movable card.
      */
     MovableCard(Card card) {
         this.card = card;
@@ -23,21 +23,21 @@ public class MovableCard extends Observable {
     }
 
     /**
-     * Get the card this card is based on
+     * Get the card this card is based on.
      */
     public Card getCard() {
         return card;
     }
 
     /**
-     * Get the number of pixels in X this card has been moved
+     * Get the number of pixels in X this card has been moved.
      */
     public int getRelativeX() {
         return relativeX;
     }
 
     /**
-     * Change the number of pixels this card has been moved
+     * Change the number of pixels this card has been moved.
      */
     public void setRelativeX(int relativeX) {
         this.relativeX = relativeX;
@@ -46,19 +46,18 @@ public class MovableCard extends Observable {
     }
 
     /**
-     * Get the number of pixels in Y this card has been moved
+     * Get the number of pixels in Y this card has been moved.
      */
     public int getRelativeY() {
         return relativeY;
     }
 
     /**
-     * Change the number of pixels this card has been moved
+     * Change the number of pixels this card has been moved.
      */
     public void setRelativeY(int relativeY) {
         this.relativeY = relativeY;
         setChanged();
         notifyObservers();
     }
-
 }

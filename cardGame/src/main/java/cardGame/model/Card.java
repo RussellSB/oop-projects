@@ -1,14 +1,13 @@
 package cardGame.model;
 
 /**
- * Represents the kinds of playing cards found in ubiquitous 54-card decks
+ * Represents the kinds of playing cards found in ubiquitous 54-card decks.
  *
  * WARNING: enum types implement toString by default. This information is
  * used to load textures in view. If you override toString you may break
  * the texture loading mechanism.
  */
 public enum Card {
-    
     //Hearts
     ACE_HEARTS      (Face.ACE,   Suit.HEARTS),
     TWO_HEARTS      (Face.TWO,   Suit.HEARTS),
@@ -74,7 +73,7 @@ public enum Card {
     RED_JOKER       (Face.JOKER, Colour.BLACK);
     
     /**
-     * Represents the faces a card can have
+     * Represents the faces a card can have.
      */
     public enum Face {
         ACE,
@@ -94,7 +93,7 @@ public enum Card {
     }
     
     /**
-     * The colours a card can have
+     * The colours a card can have.
      */
     public enum Colour {
         RED,
@@ -113,7 +112,7 @@ public enum Card {
         private final Colour colour;
         
         /**
-         * Create a new suit with the appropriate colour
+         * Create a new suit with the appropriate colour.
          */
         Suit(Colour colour) {
             this.colour = colour;
@@ -132,7 +131,7 @@ public enum Card {
     private final Colour colour;
     
     /**
-     * Create a new card with the given face and suit
+     * Create a new card with the given face and suit.
      */
     Card(Face face, Suit suit) {
         this.face = face;
@@ -141,7 +140,7 @@ public enum Card {
     }
     
     /**
-     * Joker constructor since Jokers don't belong to a suit
+     * Joker constructor since Jokers don't belong to a suit.
      */
     Card(Face face, Colour colour) {
         this.face = face;
@@ -150,14 +149,14 @@ public enum Card {
     }
     
     /**
-     * Get the face of this card
+     * Get the face of this card.
      */
     public Face getFace() {
         return face;
     }
     
     /**
-     * Get the suit of this card (which might be null if getFace() is JOKER)
+     * Get the suit of this card (which might be null if getFace() is JOKER).
      */
     public Suit getSuit() {
         return suit;
@@ -169,5 +168,4 @@ public enum Card {
     public Colour getColour() {
         return colour;
     }
-
 }

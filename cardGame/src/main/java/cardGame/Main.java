@@ -1,25 +1,22 @@
 package cardGame;
 
-import cardGame.game.Snap;
-
-import cardGame.view.DrawPanel;
-
 import cardGame.controller.ButtonBar;
 import cardGame.controller.CardDragger;
+import cardGame.game.Snap;
+import cardGame.view.SnapPanel;
 
-import javax.swing.JFrame;
-
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 
 /**
- * Runs the game. Although technically a controller this class can be found
- * more easily if it's not in that package
+ * Runs the game. Although technically a controller, this class can be found
+ * more easily if it's not in that package.
  */
 public class Main {
     public static void main(String[] args) {
         Snap snap = new Snap();
 
-        DrawPanel panel = new DrawPanel(snap);
+        SnapPanel panel = new SnapPanel(snap);
 
         JFrame frame = new JFrame("Simple Snap game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +25,7 @@ public class Main {
         frame.setPreferredSize(new Dimension(550, 750));
         frame.setResizable(false);
         frame.pack();
-        frame.setLocationRelativeTo (null); // Center on screen.
+        frame.setLocationRelativeTo(null); // Center on screen.
         frame.setVisible(true);
 
         CardDragger cd = new CardDragger(snap, panel);

@@ -8,37 +8,28 @@ import java.util.ListIterator;
 import java.util.Stack;
 
 /**
- * Pile of cards which has all cards open
+ * Pile of cards.
  */
 public class Pile implements Emptiable, Sized, Iterable<Card> {
 
     private Stack<Card> pile;
 
     /**
-     * Create a new empty pile
+     * Create a new empty pile.
      */
     public Pile() {
         pile = new Stack<>();
     }
 
     /**
-     * Put a card on the pile
+     * Put a card on the pile.
      */
     public void put(Card card) {
         pile.push(card);
     }
 
     /**
-     * Remove all cards from this pile
-     */
-    public Stack<Card> emptyPile() {
-        Stack<Card> retVal = pile;
-        pile = new Stack<>();
-        return retVal;
-    }
-
-    /**
-     * Returns the top card of the pile, or null if none is present
+     * Returns the top card of the pile, or null if none is present.
      */
     public Card top() {
         if (!isEmpty())
@@ -56,7 +47,7 @@ public class Pile implements Emptiable, Sized, Iterable<Card> {
     }
 
     /**
-     * Check the number of cards in this pile
+     * Check the number of cards in this pile.
      */
     @Override
     public int size() {
@@ -72,7 +63,7 @@ public class Pile implements Emptiable, Sized, Iterable<Card> {
     }
 
     /**
-     * Remove all the cards in this pile
+     * Remove all the cards in this pile.
      */
     @Override
     public void empty() {
@@ -81,7 +72,7 @@ public class Pile implements Emptiable, Sized, Iterable<Card> {
 
     /**
      * Draw a card from the pile. This method will return null if the
-     * pile is empty,
+     * pile is empty.
      */
     public Card draw() {
         if (!isEmpty())
@@ -91,7 +82,7 @@ public class Pile implements Emptiable, Sized, Iterable<Card> {
 
     /**
      * Allows iterating over this pile without changing it
-     * Does not support remove, so will throw an UnsuportedOperationException
+     * Does not support remove, so will throw an UnsuportedOperationException.
      */
     private class ConcretePileIterator implements Iterator<Card> {
 
@@ -99,14 +90,14 @@ public class Pile implements Emptiable, Sized, Iterable<Card> {
 
         /**
          * Create an iterator for this immutable pile using the iterator of the
-         * Pile it protects
+         * Pile it protects.
          */
         ConcretePileIterator() {
             backing = pile.listIterator(0);
         }
 
         /**
-         * Find the next card in this pile
+         * Find the next card in this pile.
          */
         @Override
         public Card next() {
@@ -122,7 +113,7 @@ public class Pile implements Emptiable, Sized, Iterable<Card> {
         }
 
         /**
-         * Removes a card from this pile
+         * Removes a card from this pile.
          */
         @Override
         public void remove() {

@@ -11,10 +11,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * View of Draw
+ * View of Snap.
  */
-public class DrawPanel extends JPanel implements Observer {
-
+public class SnapPanel extends JPanel implements Observer {
+    private static final double CARDS_SCALE = 0.3;
+    private static final int CARDS_DEFAULT_HEIGHT = 600; // pixels
+    private static final int CARDS_DEFAULT_WIDTH = 436; // pixels
     private static final int CARD_SPACING = 2; //pixels
     private static final int Y_OFFSET_NPC = Card.values().length * CARD_SPACING;
     private static final int Y_OFFSET_PLAYER = (int) (Card.values().length * CARD_SPACING * 4.25);
@@ -25,9 +27,9 @@ public class DrawPanel extends JPanel implements Observer {
     private int movableY;
 
     /**
-     * Create a new DrawPanel
+     * Create a new SnapPanel.
      */
-    public DrawPanel(Snap snap) {
+    public SnapPanel(Snap snap) {
         this.snap = snap;
         snap.addObserver(this);
         setBackground(new Color(0x7E, 0x35, 0x4D));
@@ -36,29 +38,31 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Get the number of pixels in X this card has been moved
+     * Get the number of pixels in X this card has been moved.
      */
     public int getMovableX() {
         return movableX;
     }
 
     /**
-     * Get the number of pixels in Y this card has been moved
+     * Get the number of pixels in Y this card has been moved.
      */
     public int getMovableY() {
         return movableY;
     }
 
+    /**
+     * Return true if the mouse is over the player face-up area.
+     */
     public boolean inPlayerFaceUpArea(Point point) {
         return point.getX() > getWidth() / (float) 2
                 && point.getY() > getHeight() / (float) 2;
     }
 
     /**
-     * Paint the areas in which deck and discard pile can be found
+     * Paint the areas in which the card piles can be found.
      */
     private void paintAreas(Graphics g) {
-
         g.setColor(Color.YELLOW);
 
         //Draws NPC's row
@@ -77,36 +81,28 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Get the scaled spacing between edges and cards
+     * Get the scaled spacing between edges and cards.
      */
     private int getSpacing() {
         return (int) ((getHeight() * 20) / 600.0);
     }
 
     /**
-     * Get the scaled width of cards. Default height is 600, default
-     * width is 436, and cards are scaled depending on which dimension limits
-     * their relative dimensions
+     * Get the scaled width of cards.
      */
     public int cardWidth() {
-        //if ((getHeight() * 600.0) / (getWidth() * 436.0) <= 1.0)
-        //return (int) ((cardHeight() * 436.0) / 600.0);
-        return (int) (436 * 0.3);
+        return (int) (CARDS_DEFAULT_WIDTH * CARDS_SCALE);
     }
 
     /**
-     * Get the scaled height of cards. Default height is 600, default
-     * width is 436, and cards are scaled depending on which dimension limits
-     * their relative dimensions
+     * Get the scaled height of cards.
      */
     public int cardHeight() {
-        //if ((getHeight() * 600.0) / (getWidth() * 436.0) > 1.0)
-        //return (int) ((cardWidth() * 600.0) / 436.0);
-        return (int) (600 * 0.3);
+        return (int) (CARDS_DEFAULT_HEIGHT * CARDS_SCALE);
     }
 
     /**
-     * Draw deck with parameterizable y_offset and pile
+     * Draw face-down pile.
      */
     private void paintDownPile(Graphics g, int y_offset, Pile pile) {
         int depth;
@@ -117,6 +113,9 @@ public class DrawPanel extends JPanel implements Observer {
                     , posX, posY, cardWidth(), cardHeight(), this);
             g.drawRect(posX, posY, cardWidth(), cardHeight());
         }
+
+        // If we are with the player face-down pile we also have to draw the
+        // movable card
         if (pile == snap.getPlayerDownPile()) {
             MovableCard dependency = snap.getMovableCard();
             if (dependency != null) {
@@ -131,7 +130,7 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Draw the discard pile with parameterizable y_offset and pile
+     * Draw face-up pile.
      */
     private void paintUpPile(Graphics g, int y_offset, Pile pile) {
         int depth = 0;
@@ -147,28 +146,28 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Draw player's deck
+     * Draw the player's face-down pile.
      */
     private void paintPlayerDownPile(Graphics g) {
         paintDownPile(g, Y_OFFSET_PLAYER, snap.getPlayerDownPile());
     }
 
     /**
-     * Draw the player's discard pile
+     * Draw the player's face-up pile.
      */
     private void paintPlayerUpPile(Graphics g) {
         paintUpPile(g, Y_OFFSET_PLAYER, snap.getPlayerUpPile());
     }
 
     /**
-     * Draw the NPC's deck
+     * Draw the NPC's face-down pile.
      */
     private void paintNpcDownPile(Graphics g) {
         paintDownPile(g, Y_OFFSET_NPC, snap.getNpcDownPile());
     }
 
     /**
-     * Draw the NPC's discard pile
+     * Draw the NPC's face-up pile.
      */
     private void paintNpcUpPile(Graphics g) {
         paintUpPile(g, Y_OFFSET_NPC, snap.getNpcUpPile());
@@ -176,8 +175,8 @@ public class DrawPanel extends JPanel implements Observer {
 
     /**
      * Paint the items that this class alone is responsible for.
-     * <p>
-     * This method is part of a template method that calls
+     *
+     * This method is part of a template method that calls.
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -190,11 +189,10 @@ public class DrawPanel extends JPanel implements Observer {
     }
 
     /**
-     * Tell this DrawPanel that the object it displays has changed
+     * Tell this SnapPanel that the object it displays has changed.
      */
     @Override
     public void update(Observable observed, Object message) {
         repaint();
     }
-
 }

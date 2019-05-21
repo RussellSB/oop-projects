@@ -24,7 +24,7 @@ class CardTextures {
      * that this process won't take time during execution.
      */
     static {
-        textures = new EnumMap<Card, BufferedImage>(Card.class);
+        textures = new EnumMap<>(Card.class);
         for (Card card : Card.values()) {
             BufferedImage texture = null;
             String fileName = "target/classes/textures/" + card + ".png";
@@ -44,5 +44,4 @@ class CardTextures {
     static BufferedImage getTexture(Card card) {
         return textures.get(card);
     }
-
 }
