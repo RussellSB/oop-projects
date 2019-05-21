@@ -4,10 +4,9 @@ import cardGame.model.AbstractDeck;
 import cardGame.model.Card;
 import cardGame.model.CompleteDeck;
 import cardGame.model.Pile;
+import cardGame.util.SnapDialogListener;
 
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Random;
+import java.util.*;
 
 import static cardGame.model.Card.Face.JOKER;
 
@@ -24,6 +23,7 @@ public class Snap extends Observable implements Observer {
     private Pile npcUpPile = new Pile();
     private Pile npcDownPile = new Pile();
     private MovableCard movable;
+    private List<SnapDialogListener> dialogListeners = new ArrayList<>();
 
     /**
      * Create a new Snap game with all 54 different cards shuffled between the
@@ -121,9 +121,9 @@ public class Snap extends Observable implements Observer {
         if ((movable == null && playerUpPile.isEmpty())
                 || (npcUpPile.isEmpty() && npcDownPile.isEmpty())) {
             if (movable == null && playerUpPile.isEmpty())
-                System.out.println("PLAYER LOOSES"); // TODO: Replace with a "Looser" window
+                notifyDialogListeners("You have the attention span of a goldfish... YOU LOSE!");
             else
-                System.out.println("PLAYER WINS"); // TODO: Replace with a "Winner" window
+                notifyDialogListeners("You're as sharp as a hot knife with 24M views on YouTube! YOU WIN!!!");
 
             gameFinished = true;
             setChanged();
@@ -215,8 +215,7 @@ public class Snap extends Observable implements Observer {
 
             setChanged();
             notifyObservers();
-
-            System.out.println("NPC SNAPS!"); // TODO: Replace with a "NPC snapped" window
+            notifyDialogListeners("Tough luck... The NPC SNAPS!");
         }
     }
 
@@ -266,5 +265,21 @@ public class Snap extends Observable implements Observer {
     public void update(Observable observable, Object message) {
         setChanged();
         notifyObservers();
+    }
+
+    /**
+     * Allows to add a new SnapDialogListener
+     */
+    public void addDialogListener(SnapDialogListener listener) {
+        dialogListeners.add(listener);
+    }
+
+    /**
+     * Notifies all the SnapDialogListeners about a new dialog that should be
+     * printed
+     */
+    private void notifyDialogListeners(String dialog) {
+        for (SnapDialogListener listener : dialogListeners)
+            listener.onNewDialog(dialog);
     }
 }

@@ -3,6 +3,7 @@ package cardGame;
 import cardGame.controller.ButtonBar;
 import cardGame.controller.CardDragger;
 import cardGame.game.Snap;
+import cardGame.view.DialogWindowListener;
 import cardGame.view.SnapPanel;
 
 import javax.swing.*;
@@ -29,5 +30,7 @@ public class Main {
         frame.setVisible(true);
 
         CardDragger cd = new CardDragger(snap, panel);
+
+        DialogWindowListener dw = new DialogWindowListener(snap, frame);
     }
 }
