@@ -13,7 +13,7 @@ abstract class NPC extends Inspectable implements Interactable {
 
 
     // Getters and Setters
-    String getResponse(){
+    String getResponse() {
         return this.response;
     }
 }

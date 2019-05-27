@@ -59,37 +59,40 @@ class GameManager {
         gameSession.getPlayer().printPlayerStats();
 
         do {
-            if (!gameSession.getPlayer().stillAlive()) {
+            Player player = gameSession.getPlayer();
+            Room currentRoom = player.getCurrentRoom();
+
+            if (!player.stillAlive()) {
                 System.out.println("You've ceased to exist. Better luck next time!");
                 break;
             }
 
             switch (this.mainMenu()) {
                 case 0:
-                    gameSession.getPlayer().getCurrentRoom().inspect();
-                    gameSession.getPlayer().printPlayerStats();
+                    currentRoom.inspect();
+                    player.printPlayerStats();
                     break;
                 case 1:
-                    gameSession.getPlayer().getCurrentRoom().interactWithDoors(gameSession.getPlayer());
-                    gameSession.getPlayer().printPlayerStats();
+                    currentRoom.interactWithDoors(player);
+                    player.printPlayerStats();
                     break;
                 case 2:
-                    gameSession.getPlayer().getCurrentRoom().interactWithNPCs(gameSession.getPlayer());
-                    gameSession.getPlayer().printPlayerStats();
+                    currentRoom.interactWithNPCs(player);
+                    player.printPlayerStats();
                     break;
                 case 3:
                     quickSave();
                     break;
                 case 4:
                     quickLoad();
-                    gameSession.getPlayer().printPlayerStats();
+                    player.printPlayerStats();
                     break;
                 case 5:
                     luxuriousSave();
                     break;
                 case 6:
                     luxuriousLoad();
-                    gameSession.getPlayer().printPlayerStats();
+                    player.printPlayerStats();
                     break;
                 case -1:
                     quit = true;
@@ -123,7 +126,7 @@ class GameManager {
         if (!folder.exists()) {
             boolean created = folder.mkdir();
 
-            if(!created)
+            if (!created)
                 System.out.println("** Unable to create the default save directory **");
         }
     }
@@ -155,7 +158,7 @@ class GameManager {
     }
 
     private void quickSave() {
-        String filepath = DEFAULT_SAVE_DIRECTORY + "/" + DEFAULT_SAVE_NAME + ".ser";
+        String filepath = DEFAULT_SAVE_DIRECTORY + File.separator + DEFAULT_SAVE_NAME + ".ser";
 
         System.out.println("** Saving game progress in \"" + filepath + "\" **");
 
@@ -164,12 +167,12 @@ class GameManager {
     }
 
     private void quickLoad() {
-        if(!saveGameFilesExist()) {
+        if (!saveGameFilesExist()) {
             System.out.println("** There are no save files! **");
             return;
         }
 
-        String filepath = DEFAULT_SAVE_DIRECTORY + "/" + DEFAULT_SAVE_NAME + ".ser";
+        String filepath = DEFAULT_SAVE_DIRECTORY + File.separator + DEFAULT_SAVE_NAME + ".ser";
 
         System.out.println("** Loading game progress from \"" + filepath + "\" **");
 
@@ -184,10 +187,15 @@ class GameManager {
         System.out.println("Filename?");
         fileName = in.nextLine();
 
-        if(fileName.endsWith(".ser"))
-            filePath = DEFAULT_SAVE_DIRECTORY + "/" + fileName;
+        if (fileName.contains(File.separator)) {
+            System.out.println("** ERROR: Saving in folders is not supported **");
+            return;
+        }
+
+        if (fileName.endsWith(".ser"))
+            filePath = DEFAULT_SAVE_DIRECTORY + File.separator + fileName;
         else
-            filePath = DEFAULT_SAVE_DIRECTORY + "/" + fileName + ".ser";
+            filePath = DEFAULT_SAVE_DIRECTORY + File.separator + fileName + ".ser";
 
         System.out.println("** Saving game progress in \"" + filePath + "\" **");
 
@@ -201,15 +209,14 @@ class GameManager {
         String filePath;
         List<File> files = getSaveFilesFromDir();
 
-        if(files.isEmpty()) {
+        if (files.isEmpty()) {
             System.out.println("** There are no save files! **");
             return;
         }
 
         System.out.println("Which file?  (-1: none)");
 
-        for(int i=0; i<files.size(); i++)
-        {
+        for (int i = 0; i < files.size(); i++) {
             System.out.println("  (" + i + ") " + files.get(i).toString());
         }
 
@@ -227,7 +234,7 @@ class GameManager {
             in.nextLine(); // Discards the rest of the input
         }
 
-        if(selectedFile != -1) {
+        if (selectedFile != -1) {
             filePath = files.get(selectedFile).getPath();
             System.out.println("** Loading game progress from \"" + filePath + "\" **");
             load(filePath);

@@ -14,7 +14,7 @@ class Adult extends NPCWithMemory {
     // Other methods
     @Override
     public void interact(Player player) {
-        if(this.metBefore()) {
+        if (this.metBefore()) {
             System.out.println("Actually no. You feel overly-anxious that you might annoy them. You recount that adults lead busy lives.");
             System.out.println("You slap yourself out of indecisiveness.");
             player.affectHealth(affectHealthAmount);

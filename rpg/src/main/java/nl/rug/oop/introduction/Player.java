@@ -29,12 +29,12 @@ class Player implements Serializable {
 
     // Other methods
     void affectHealth(int amount) {
-        if(this.hp+amount >= MAX_HEALTH){
+        if (this.hp + amount >= MAX_HEALTH) {
             this.hp = MAX_HEALTH;
             System.out.println("# Health maxed out! You're full of life and love.");
         } else {
             this.hp = this.hp + amount;
-            if(amount > 0)
+            if (amount > 0)
                 System.out.println("# You feel your body tingle. You're healed! HP +" + amount);
             else
                 System.out.println("# You feel your body crumble. You're damaged! HP " + amount);
@@ -46,7 +46,7 @@ class Player implements Serializable {
     }
 
     void printPlayerStats() {
-        System.out.println("\n# HP: "+ this.hp);
+        System.out.println("\n# HP: " + this.hp);
 
     }
 }
