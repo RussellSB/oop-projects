@@ -41,8 +41,8 @@ public class Main {
 
         instructionsDialog = new InstructionsDialog(frame);
 
-        CardDragger cd = new CardDragger(snap, panel);
+        new CardDragger(snap, panel);
 
-        DialogWindowListener dw = new DialogWindowListener(snap, frame);
+        new DialogWindowListener(snap, frame);
     }
 }

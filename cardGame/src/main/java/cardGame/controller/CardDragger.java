@@ -79,5 +79,4 @@ public class CardDragger extends MouseInputAdapter {
             snap.getMovableCard().setRelativeY(event.getY() - startY);
         }
     }
-
 }
