@@ -1,6 +1,8 @@
 package graphEditor;
 
-import graphEditor.model.*;
+import graphEditor.model.GraphEdge;
+import graphEditor.model.GraphModel;
+import graphEditor.model.GraphVertex;
 
 import java.io.*;
 import java.util.ArrayList;
