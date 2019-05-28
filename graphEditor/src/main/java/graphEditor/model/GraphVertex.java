@@ -14,20 +14,20 @@ public class GraphVertex {
         this.name = name;
     }
 
-    public double getX() {
-        return rectangle.getX();
+    public int getX() {
+        return (int) rectangle.getX();
     }
 
-    public double getY() {
-        return rectangle.getY();
+    public int getY() {
+        return (int) rectangle.getY();
     }
 
-    public double getWidth() {
-        return rectangle.getWidth();
+    public int getWidth() {
+        return (int) rectangle.getWidth();
     }
 
-    public double getHeight() {
-        return rectangle.getHeight();
+    public int getHeight() {
+        return (int) rectangle.getHeight();
     }
 
     public String getName() {
