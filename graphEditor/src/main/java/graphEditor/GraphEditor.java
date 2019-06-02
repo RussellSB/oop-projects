@@ -3,6 +3,7 @@ package graphEditor;
 import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
+import graphEditor.view.GraphFrame;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class GraphEditor {
 
         System.out.println("Loading graph:");
         System.out.println(load("graph_test.txt"));
+
+        new GraphFrame();
     }
 
     /**

@@ -6,8 +6,8 @@ import graphEditor.controller.GraphMenuBar;
 
 public class GraphFrame extends JFrame {
 
-    public static final int WIDTH = 1000;
-    public static final int HEIGHT = 700;
+    private static final int WIDTH = 1000;
+    private static final int HEIGHT = 700;
 
 
     /**
