@@ -6,8 +6,15 @@ import java.awt.*;
  * A simple vertex class.
  */
 public class GraphVertex {
+    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(0, 0, 40, 30);
+    private static final String DEFAULT_NAME = "Unnamed 0";
     private Rectangle rectangle;
     private String name;
+
+    public GraphVertex() {
+        this.rectangle = DEFAULT_RECTANGLE;
+        this.name = DEFAULT_NAME;
+    }
 
     public GraphVertex(int x, int y, int width, int height, String name) {
         rectangle = new Rectangle(x, y, width, height);

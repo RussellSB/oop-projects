@@ -16,6 +16,30 @@ public class GraphEditor {
      * @param args Command line arguments. Unused for this example.
      */
     public static void main(String[] args) {
+        /*GraphVertex v1 = new GraphVertex(0, 0, 30, 40, "one");
+        GraphVertex v2 = new GraphVertex(0, 0, 30, 40, "one");
+        GraphVertex v3 = new GraphVertex(0, 0, 30, 40, "one");
+        GraphVertex v4 = new GraphVertex(0, 0, 30, 40, "one");
+
+        GraphModel g1 = new GraphModel();
+
+        g1.addVertex(v1);
+        g1.addVertex(v2);
+        g1.addVertex(v3);
+        g1.addVertex(v4);
+
+        g1.addEdge(v1, v2);
+        g1.addEdge(v2, v3);
+
+        System.out.println(g1.getVerticesCount());
+        System.out.println(g1.getEdgesCount());
+
+        g1.removeVertex(v3);
+        g1.removeEdge(v2, v1);
+
+        System.out.println(g1.getVerticesCount());
+        System.out.println(g1.getEdgesCount());*/
+
         GraphVertex v1 = new GraphVertex(0, 0, 30, 40, "one");
         GraphVertex v2 = new GraphVertex(100, 100, 30, 30, "two");
         GraphVertex v3 = new GraphVertex(50, 200, 80, 20, "three");
