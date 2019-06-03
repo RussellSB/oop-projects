@@ -6,8 +6,8 @@ import java.awt.*;
 public class GraphPanel extends JPanel {
 
     public GraphPanel() {
-        setBorder(BorderFactory.createLineBorder(new Color(10, 38, 70), 50));
-        setBackground(new Color(10, 37, 87));
+        setBorder(BorderFactory.createLineBorder(new Color(70, 60, 110), 50));
+        setBackground(new Color(83, 70, 126));
         setVisible(true);
         setOpaque(true);
     }
