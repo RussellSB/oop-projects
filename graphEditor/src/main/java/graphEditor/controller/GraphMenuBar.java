@@ -20,6 +20,7 @@ public class GraphMenuBar extends JMenuBar {
         menu = new JMenu("File");
         menu.setMnemonic(KeyEvent.VK_1);
         menu.getAccessibleContext().setAccessibleDescription("The File menu for file related functions.");
+
         // :save
         menuItem = new JMenuItem();
         menuItem.setAction(new SaveAction());
@@ -48,6 +49,7 @@ public class GraphMenuBar extends JMenuBar {
         menu = new JMenu("Edit");
         menu.setMnemonic(KeyEvent.VK_2);
         menu.getAccessibleContext().setAccessibleDescription("The edit menu for modifying current graph.");
+
         // :undo
         menuItem = new JMenuItem();
         menuItem.setAction(new UndoAction());
