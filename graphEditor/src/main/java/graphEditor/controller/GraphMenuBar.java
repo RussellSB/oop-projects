@@ -1,21 +1,25 @@
 package graphEditor.controller;
 
+import graphEditor.model.GraphModel;
+
 import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 public class GraphMenuBar extends JMenuBar {
-
+    private GraphModel graph;
     private JMenu menu;
     private JMenuItem menuItem;
 
-    public GraphMenuBar(){
-        super();
+    public GraphMenuBar(GraphModel graph) {
+        //super(); // TODO: What does this do??
+        this.graph = graph;
         this.addFileMenu();
         this.addEditMenu();
+        // TODO: addHelpMenu with user instructions
     }
 
-    private void addFileMenu(){
+    private void addFileMenu() {
         // File
         menu = new JMenu("File");
         menu.setMnemonic(KeyEvent.VK_1);
@@ -23,7 +27,7 @@ public class GraphMenuBar extends JMenuBar {
 
         // :save
         menuItem = new JMenuItem();
-        menuItem.setAction(new SaveAction());
+        menuItem.setAction(new SaveAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Saves current graph.");
         menu.add(menuItem);
@@ -44,7 +48,7 @@ public class GraphMenuBar extends JMenuBar {
         this.add(menu);
     }
 
-    private void addEditMenu(){
+    private void addEditMenu() {
         // Edit
         menu = new JMenu("Edit");
         menu.setMnemonic(KeyEvent.VK_2);

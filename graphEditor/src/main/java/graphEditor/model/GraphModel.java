@@ -3,12 +3,13 @@ package graphEditor.model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * A simple graph class which contains a collection of vertices and edges.
+ * TODO: Add setChanged(); & notifyObservers(); to all methods that modify the graph or its components
  */
-public class GraphModel {
-
+public class GraphModel extends Observable {
     private List<GraphVertex> vertices;
     private List<GraphEdge> edges;
 
@@ -179,7 +180,7 @@ public class GraphModel {
      */
     public void load(String filename) throws IOException {
         if (!fileFormatIsOK(filename))
-            throw new RuntimeException("Incompatible file format");
+            throw new IOException("Incompatible file format");
 
         BufferedReader reader = new BufferedReader(new FileReader(filename));
 
