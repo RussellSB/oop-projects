@@ -8,12 +8,13 @@ public class GraphEdge {
     private GraphVertex v2;
 
     /**
+     * TODO
      *
      * @param v1
      * @param v2
      * @throws IllegalArgumentException if v1 and v2 are the same
      */
-    public GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
+    GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
         // Self-loops are not allowed
         if (v1 == v2)
             throw new IllegalArgumentException("Self-loops are not allowed: v1 and v2 must be different");
