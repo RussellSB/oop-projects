@@ -3,10 +3,10 @@ package graphEditor.controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class AddNodeAction extends AbstractAction {
+public class AddVertexAction extends AbstractAction {
 
-    AddNodeAction(){
-        super("Add node");
+    AddVertexAction(){
+        super("Add vertex");
     }
 
     @Override

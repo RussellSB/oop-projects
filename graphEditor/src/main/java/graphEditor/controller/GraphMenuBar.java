@@ -68,15 +68,15 @@ public class GraphMenuBar extends JMenuBar {
         menu.add(menuItem);
         // :add node
         menuItem = new JMenuItem();
-        menuItem.setAction(new AddNodeAction());
+        menuItem.setAction(new AddVertexAction());
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Adds node to graph");
+        menuItem.getAccessibleContext().setAccessibleDescription("Adds vertex to graph");
         menu.add(menuItem);
         // :delete node
         menuItem = new JMenuItem();
-        menuItem.setAction(new DeleteNodeAction());
+        menuItem.setAction(new DeleteVertexAction());
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Deletes node from graph");
+        menuItem.getAccessibleContext().setAccessibleDescription("Deletes vertex from graph");
         menu.add(menuItem);
         // :add edge
         menuItem = new JMenuItem();

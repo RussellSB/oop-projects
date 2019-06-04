@@ -3,10 +3,10 @@ package graphEditor.controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class DeleteNodeAction extends AbstractAction {
+public class DeleteVertexAction extends AbstractAction {
 
-    DeleteNodeAction(){
-        super("Delete node");
+    DeleteVertexAction(){
+        super("Delete vertex");
     }
 
     @Override
