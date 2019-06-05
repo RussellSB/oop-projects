@@ -24,8 +24,17 @@ public class GraphEditor {
             }
         }
 
-        //g.fillRoundRect(200, 150, 100, 100, 20, 20);
-        //g.fillRoundRect(600, 150, 100, 100, 20, 20);
+        new GraphFrame(graph);
+
+
+        ////////////////////////////////////////////////////////////////////////
+        //////////////////////////////// TESTING ///////////////////////////////
+        // Sleep 1 second
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         GraphVertex v1 = new GraphVertex(200, 150, 100, 100, "One");
         GraphVertex v2 = new GraphVertex(600, 150, 100, 100, "Two");
@@ -34,34 +43,35 @@ public class GraphEditor {
         graph.addVertex(v1);
         graph.addVertex(v2);
         graph.addVertex(v3);
-        //graph.createNewVertex();
-        //graph.createNewVertex();
-        //graph.createNewVertex();
-        //graph.createNewVertex();
+
+        // Sleep 1 second
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         graph.addEdge(v1, v2);
         graph.addEdge(v2, v3);
         graph.addEdge(v3, v1);
 
-        //System.out.println(graph);
+        // Sleep 1 second
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        new GraphFrame(graph);
-
-
-
-        /*GraphVertex v1 = new GraphVertex(0, 0, 30, 40, "one");
-        GraphVertex v2 = new GraphVertex(100, 100, 30, 30, "two");
-        GraphVertex v3 = new GraphVertex(50, 200, 80, 20, "three");
-
-        graph.addVertex(v1);
-        graph.addVertex(v2);
-        graph.addVertex(v3);
         graph.createNewVertex();
         graph.createNewVertex();
         graph.createNewVertex();
 
-        graph.addEdge(v1, v2);
-        graph.addEdge(v2, v3);
+        // Sleep 1 second
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         System.out.println("Saving graph:");
         System.out.println(graph);
@@ -77,6 +87,11 @@ public class GraphEditor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(graph);*/
+        System.out.println(graph);
+        //////////////////////////////// TESTING ///////////////////////////////
+        ////////////////////////////////////////////////////////////////////////
+
+
+
     }
 }
