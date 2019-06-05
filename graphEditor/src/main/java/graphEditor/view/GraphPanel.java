@@ -59,8 +59,12 @@ public class GraphPanel extends JPanel implements Observer {
             g.setColor(new Color(21, 152, 145));
             g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
             g.setColor(Color.WHITE);
-            int width = g.getFontMetrics().stringWidth(v.getName()); // to center the text
-            g.drawString(v.getName(), (v.getX() + v.getWidth() / 2) - width / 2, v.getY() + v.getHeight() / 2);
+
+            // to center the text
+            int width = g.getFontMetrics().stringWidth(v.getName());
+            int height = g.getFontMetrics().getHeight();
+
+            g.drawString(v.getName(), (v.getX() + v.getWidth() / 2) - width / 2, (v.getY() + v.getHeight() / 2) + height / 4);
         }
     }
 
