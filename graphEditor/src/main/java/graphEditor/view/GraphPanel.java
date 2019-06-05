@@ -23,7 +23,7 @@ public class GraphPanel extends JPanel implements Observer {
         this.graph = graph;
         graph.addObserver(this);
 
-        setBorder(BorderFactory.createLineBorder(new Color(70, 60, 110), 50));
+        setBorder(BorderFactory.createLineBorder(new Color(70, 60, 110), 30));
         setBackground(new Color(83, 70, 126));
         setVisible(true);
         setOpaque(true);
@@ -34,20 +34,13 @@ public class GraphPanel extends JPanel implements Observer {
         graph.addObserver(this);
     }
 
-    private void paintVertices(Graphics g) {
-        g.setColor(new Color(21, 152, 145));
-        for (GraphVertex v : graph.getVertices()){
-            g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
-        }
-    }
-
     private void paintEdges(Graphics g) {
 
         int v1_x, v1_y, v2_x, v2_y;
         GraphVertex v1, v2;
 
         g.setColor(Color.WHITE);
-        for (GraphEdge e : graph.getEdges()){
+        for (GraphEdge e : graph.getEdges()) {
 
             v1 = e.getV1();
             v2 = e.getV2();
@@ -59,8 +52,16 @@ public class GraphPanel extends JPanel implements Observer {
 
             g.drawLine(v1_x, v1_y, v2_x, v2_y);
         }
-        //g.drawLine(300, 200, 600, 200);
+    }
 
+    private void paintVertices(Graphics g) {
+        for (GraphVertex v : graph.getVertices()){
+            g.setColor(new Color(21, 152, 145));
+            g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
+            g.setColor(Color.WHITE);
+            int width = g.getFontMetrics().stringWidth(v.getName()); // to center the text
+            g.drawString(v.getName(), (v.getX() + v.getWidth() / 2) - width / 2, v.getY() + v.getHeight() / 2);
+        }
     }
 
     /**
