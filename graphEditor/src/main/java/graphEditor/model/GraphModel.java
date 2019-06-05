@@ -58,12 +58,12 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Gets a list with edges connected to the specified vertex
+     * Gets a list with the edges connected to the specified vertex.
      *
      * @throws RuntimeException if the vertex v doesn't belong to the graph.
      */
     public List<GraphEdge> getConnectedEdges(GraphVertex v) throws RuntimeException {
-        // Check that v belongs to the graph
+        // Check that v belongs to the graph.
         if (!hasVertex(v))
             throw new RuntimeException("Vertex must belong to the graph");
 
@@ -77,7 +77,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Checks if the graph contains  the specified vertex.
+     * Checks if the graph contains the specified vertex.
      */
     public boolean hasVertex(GraphVertex v) {
         return vertices.indexOf(v) != -1;
@@ -96,7 +96,7 @@ public class GraphModel extends Observable implements Observer {
      * @throws RuntimeException if the vertices don't belong to the graph.
      */
     public boolean hasEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
-        // Check that both v1 and v2 belong to the graph
+        // Check that both v1 and v2 belong to the graph.
         if (!hasVertex(v1) || !hasVertex(v2))
             throw new RuntimeException("Vertices must belong to the graph");
 
@@ -108,12 +108,12 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Returns the edge (if exists) that connects the specified vertices, null otherwise.
+     * Returns the edge that connects the specified vertices (null if it doesn't exist).
      *
      * @throws RuntimeException if the vertices don't belong to the graph.
      */
     public GraphEdge findEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
-        // Check that both v1 and v2 belong to the graph
+        // Check that both v1 and v2 belong to the graph.
         if (!hasVertex(v1) || !hasVertex(v2))
             throw new RuntimeException("Vertices must belong to the graph");
 
@@ -127,10 +127,10 @@ public class GraphModel extends Observable implements Observer {
     /**
      * Adds a new vertex to the graph.
      *
-     * @throws RuntimeException if the introduced vertex is already in the graph
+     * @throws RuntimeException if the introduced vertex is already in the graph.
      */
     public void addVertex(GraphVertex v) throws RuntimeException {
-        // Check if v is already in the graph
+        // Check if v is already in the graph.
         if (hasVertex(v))
             throw new RuntimeException("The introduced vertex is already in the graph");
 
@@ -145,7 +145,7 @@ public class GraphModel extends Observable implements Observer {
     /**
      * Adds a new edge to the graph that connects the specified vertices.
      *
-     * @throws RuntimeException if an edge between v1 and v2 already exists
+     * @throws RuntimeException if an edge between v1 and v2 already exists.
      * @throws RuntimeException if the vertices don't belong to the graph.
      */
     public void addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
@@ -165,11 +165,11 @@ public class GraphModel extends Observable implements Observer {
      * @throws RuntimeException if the vertex doesn't belong to the graph.
      */
     public void removeVertex(GraphVertex v) throws RuntimeException {
-        // Check that v belongs to the graph
+        // Check that v belongs to the graph.
         if (!hasVertex(v))
             throw new RuntimeException("Vertex must belong to the graph");
 
-        // Remove every connected edge
+        // Remove every connected edge.
         for (GraphEdge edge : getConnectedEdges(v))
             edges.remove(edge);
 
@@ -203,7 +203,7 @@ public class GraphModel extends Observable implements Observer {
     public void removeEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         GraphEdge e = findEdge(v1, v2);
 
-        // Check that we found the edge
+        // Check that we found the edge.
         if (e == null)
             throw new RuntimeException("There must be an edge between v1 and v2");
 
@@ -214,7 +214,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Checks if there's another vertex with the same name as v
+     * Checks if there's another vertex with the same name as v.
      */
     public boolean conflictingName(GraphVertex v) {
         for (GraphVertex vertex : vertices)
@@ -303,7 +303,7 @@ public class GraphModel extends Observable implements Observer {
             words = line.split(" ");
             StringBuilder name = new StringBuilder(words[4]);
 
-            // For vertices with names that contain spaces
+            // For vertices with names that contain spaces.
             for (int j = 5; j < words.length; j++) {
                 name.append(" ");
                 name.append(words[j]);
@@ -327,7 +327,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Checks the file format line by line using regular expressions
+     * Checks the file format line by line using regular expressions.
      *
      * @throws IOException if there's a problem while opening the file.
      */

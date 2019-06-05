@@ -70,8 +70,6 @@ public class GraphVertex extends Observable {
 
     /**
      * Returns the rectangle that represents the vertex.
-     *
-     * @return
      */
     public Rectangle getRectangle() {
         return rectangle;
