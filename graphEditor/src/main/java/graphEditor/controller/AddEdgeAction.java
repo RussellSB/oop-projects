@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 public class AddEdgeAction extends AbstractAction {
 
     AddEdgeAction(){
-        super("Add edge");
+        super("Add Edge");
     }
 
     @Override

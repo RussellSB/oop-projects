@@ -9,13 +9,13 @@ public class AddVertexAction extends AbstractAction {
     private GraphModel graph;
 
     AddVertexAction(GraphModel graph) {
-        super("Add vertex");
+        super("Add Vertex");
         this.graph = graph;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand());
+        System.out.println(e.getActionCommand()); // TODO: Remove
         graph.createNewVertex();
     }
 }

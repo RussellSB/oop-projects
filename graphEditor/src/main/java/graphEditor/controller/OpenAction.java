@@ -8,12 +8,12 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class SaveAction extends AbstractAction {
+public class OpenAction extends AbstractAction {
     private GraphModel graph;
     private JFrame parentJFrame;
 
-    SaveAction(GraphModel graph, JFrame parentJFrame) {
-        super("Save");
+    OpenAction(GraphModel graph, JFrame parentJFrame) {
+        super("Open");
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }
@@ -24,17 +24,11 @@ public class SaveAction extends AbstractAction {
         fc.addChoosableFileFilter(new TxtFileFilter());
         fc.setAcceptAllFileFilterUsed(false);
 
-        if (fc.showSaveDialog(parentJFrame) == JFileChooser.APPROVE_OPTION) {
+        if (fc.showOpenDialog(parentJFrame) == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
 
-            String filename;
-            if (file.getName().endsWith(".txt"))
-                filename = file.getPath();
-            else
-                filename = file.getPath() + ".txt";
-
             try {
-                graph.save(filename);
+                graph.load(file.getPath());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }

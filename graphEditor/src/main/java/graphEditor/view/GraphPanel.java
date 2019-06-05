@@ -107,7 +107,7 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
-     * Tell this GraphPanel that the graph it displays has changed so it repaints.
+     * Tell this GraphPanel that the graph it displays has changed so it repaints it.
      */
     @Override
     public void update(Observable observed, Object message) {

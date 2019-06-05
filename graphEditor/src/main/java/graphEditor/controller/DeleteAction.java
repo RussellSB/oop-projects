@@ -3,10 +3,10 @@ package graphEditor.controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class DeleteEdgeAction extends AbstractAction {
+public class DeleteAction extends AbstractAction {
 
-    DeleteEdgeAction(){
-        super("Delete edge");
+    DeleteAction() {
+        super("Delete Selection");
     }
 
     @Override

@@ -3,10 +3,10 @@ package graphEditor.controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class LoadAction extends AbstractAction {
+public class QuitAction extends AbstractAction {
 
-    LoadAction(){
-        super("Load");
+    QuitAction() {
+        super("Quit");
     }
 
     @Override

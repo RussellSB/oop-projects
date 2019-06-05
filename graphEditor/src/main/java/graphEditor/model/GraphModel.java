@@ -331,6 +331,17 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Removes all vertices and edges.
+     */
+    public void reset() {
+        vertices = new ArrayList<>();
+        edges = new ArrayList<>();
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * Checks the file format line by line using regular expressions.
      *
      * @throws IOException if there's a problem while opening the file.

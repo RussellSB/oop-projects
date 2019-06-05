@@ -20,7 +20,7 @@ public class GraphFrame extends JFrame {
 
         getContentPane().add(new GraphPanel(graph));
 
-        setJMenuBar(new GraphMenuBar(graph));
+        setJMenuBar(new GraphMenuBar(graph, this));
 
         setVisible(true);
     }
