@@ -27,13 +27,13 @@ public class GraphPanel extends JPanel implements Observer {
         setOpaque(true);
     }
 
-    public void setModel(GraphModel graph) {
+    public void setGraphModel(GraphModel graph) {
         this.graph = graph;
         graph.addObserver(this);
     }
 
     private void paintEdges(Graphics g) {
-        int v1_center_x, v1_center_y, v2_center_x, v2_center_y;
+        int v1CenterX, v1CenterY, v2CenterX, v2CenterY;
         GraphVertex v1, v2;
 
         g.setColor(Color.WHITE);
@@ -42,26 +42,30 @@ public class GraphPanel extends JPanel implements Observer {
             v1 = e.getV1();
             v2 = e.getV2();
 
-            v1_center_x = v1.getX() + v1.getWidth() / 2;
-            v1_center_y = v1.getY() + v1.getHeight() / 2;
-            v2_center_x = v2.getX() + v2.getWidth() / 2;
-            v2_center_y = v2.getY() + v2.getHeight() / 2;
+            v1CenterX = v1.getX() + v1.getWidth() / 2;
+            v1CenterY = v1.getY() + v1.getHeight() / 2;
+            v2CenterX = v2.getX() + v2.getWidth() / 2;
+            v2CenterY = v2.getY() + v2.getHeight() / 2;
 
-            g.drawLine(v1_center_x, v1_center_y, v2_center_x, v2_center_y);
+            g.drawLine(v1CenterX, v1CenterY, v2CenterX, v2CenterY);
         }
     }
 
     private void paintVertices(Graphics g) {
         for (GraphVertex v : graph.getVertices()) {
+            // Paint rectangle.
             g.setColor(new Color(21, 152, 145));
             g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
+
+            // To center the text.
+            int textWidth = g.getFontMetrics().stringWidth(v.getName());
+            int textHeight = g.getFontMetrics().getHeight();
+            int vertexCenterX = v.getX() + v.getWidth() / 2;
+            int vertexCenterY = v.getY() + v.getHeight() / 2;
+
+            // Paint name.
             g.setColor(Color.WHITE);
-
-            // to center the text
-            int width = g.getFontMetrics().stringWidth(v.getName());
-            int height = g.getFontMetrics().getHeight();
-
-            g.drawString(v.getName(), (v.getX() + v.getWidth() / 2) - width / 2, (v.getY() + v.getHeight() / 2) + height / 4);
+            g.drawString(v.getName(), vertexCenterX - textWidth / 2, vertexCenterY + textHeight / 4);
         }
     }
 
