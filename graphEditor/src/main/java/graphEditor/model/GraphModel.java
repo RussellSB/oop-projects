@@ -9,7 +9,6 @@ import java.util.Observer;
 /**
  * A simple graph class which contains a collection of vertices and edges.
  * The graph is a observer of the vertices it contains.
- * TODO: Add setChanged(); & notifyObservers(); to all methods that modify the graph or its components
  */
 public class GraphModel extends Observable implements Observer {
     private List<GraphVertex> vertices;
