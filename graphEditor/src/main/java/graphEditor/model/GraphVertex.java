@@ -13,7 +13,7 @@ public class GraphVertex extends Observable {
     private String name;
 
     /**
-     * Constructor without parameters. Creates a new vertex with the default values.
+     * Creates a new vertex with the default values.
      */
     public GraphVertex() {
         this.rectangle = new Rectangle(DEFAULT_RECTANGLE);
@@ -69,6 +69,15 @@ public class GraphVertex extends Observable {
     }
 
     /**
+     * Returns the rectangle that represents the vertex.
+     *
+     * @return
+     */
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    /**
      * Returns the name of the vertex.
      */
     public String getName() {
@@ -76,7 +85,7 @@ public class GraphVertex extends Observable {
     }
 
     /**
-     * Set the name of the vertex.
+     * Sets the name of the vertex.
      *
      * @throws RuntimeException if the name is an empty string.
      */

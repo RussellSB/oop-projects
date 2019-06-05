@@ -8,7 +8,7 @@ public class GraphEdge {
     private GraphVertex v2;
 
     /**
-     * Create a new edge that connects vertices v1 and v2.
+     * Creates a new edge that connects vertices v1 and v2.
      *
      * @throws IllegalArgumentException if v1 and v2 are the same.
      */
@@ -22,21 +22,21 @@ public class GraphEdge {
     }
 
     /**
-     * Get the first vertex.
+     * Gets the first vertex.
      */
     public GraphVertex getV1() {
         return v1;
     }
 
     /**
-     * Get the second vertex.
+     * Gets the second vertex.
      */
     public GraphVertex getV2() {
         return v2;
     }
 
     /**
-     * Check if the edge contains v.
+     * Checks if the edge contains v.
      */
     public boolean hasVertex(GraphVertex v) {
         return this.v1 == v || this.v2 == v;

@@ -15,7 +15,7 @@ public class GraphModel extends Observable implements Observer {
     private List<GraphEdge> edges;
 
     /**
-     * Constructor without parameters. Creates an empty graph.
+     * Creates an empty graph.
      */
     public GraphModel() {
         vertices = new ArrayList<>();
@@ -23,42 +23,42 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Get the index of the specified vertex.
+     * Gets the index of the specified vertex.
      */
     public int getVertexIndex(GraphVertex vertex) {
         return this.vertices.indexOf(vertex);
     }
 
     /**
-     * Get the list of edges.
+     * Gets the list of edges.
      */
     public List<GraphEdge> getEdges() {
         return edges;
     }
 
     /**
-     * Get the list of vertices.
+     * Gets the list of vertices.
      */
     public List<GraphVertex> getVertices() {
         return vertices;
     }
 
     /**
-     * Get the total number of vertices contained in the graph.
+     * Gets the total number of vertices contained in the graph.
      */
     public int getVerticesCount() {
         return vertices.size();
     }
 
     /**
-     * Get the total number of edges contained in the graph.
+     * Gets the total number of edges contained in the graph.
      */
     public int getEdgesCount() {
         return edges.size();
     }
 
     /**
-     * Get a list with edges connected to the specified vertex
+     * Gets a list with edges connected to the specified vertex
      *
      * @throws RuntimeException if the vertex v doesn't belong to the graph.
      */
@@ -77,21 +77,21 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Check if the graph contains  the specified vertex.
+     * Checks if the graph contains  the specified vertex.
      */
     public boolean hasVertex(GraphVertex v) {
         return vertices.indexOf(v) != -1;
     }
 
     /**
-     * Check if the graph contains the specified edge
+     * Checks if the graph contains the specified edge.
      */
     public boolean hasEdge(GraphEdge e) {
         return edges.indexOf(e) != -1;
     }
 
     /**
-     * Check if the graph contains an edge between the specified vertices.
+     * Checks if the graph contains an edge between the specified vertices.
      *
      * @throws RuntimeException if the vertices don't belong to the graph.
      */
@@ -108,7 +108,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Return the edge (if exists) that connects the specified vertices. null otherwise.
+     * Returns the edge (if exists) that connects the specified vertices, null otherwise.
      *
      * @throws RuntimeException if the vertices don't belong to the graph.
      */
@@ -125,7 +125,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Add a new vertex to the graph.
+     * Adds a new vertex to the graph.
      *
      * @throws RuntimeException if the introduced vertex is already in the graph
      */
@@ -143,7 +143,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Add a new edge to the graph that connects the specified vertices.
+     * Adds a new edge to the graph that connects the specified vertices.
      *
      * @throws RuntimeException if an edge between v1 and v2 already exists
      * @throws RuntimeException if the vertices don't belong to the graph.
@@ -160,7 +160,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Remove the specified vertex and all the edges connected to it.
+     * Removes the specified vertex and all the edges connected to it.
      *
      * @throws RuntimeException if the vertex doesn't belong to the graph.
      */
@@ -180,7 +180,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Remove the specified edge.
+     * Removes the specified edge.
      *
      * @throws RuntimeException if the edge doesn't belong to the graph.
      */
@@ -196,7 +196,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Remove the edge that connects v1 and v2.
+     * Removes the edge that connects v1 and v2.
      *
      * @throws RuntimeException if there's no edge between v1 and v2.
      */
@@ -214,7 +214,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Check if there's another vertex with the same name as v
+     * Checks if there's another vertex with the same name as v
      */
     public boolean conflictingName(GraphVertex v) {
         for (GraphVertex vertex : vertices)
@@ -225,7 +225,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Check if there's another vertex with the same position as v
+     * Checks if there's another vertex with the same position as v.
      */
     public boolean conflictingLocation(GraphVertex v) {
         for (GraphVertex vertex : vertices)
@@ -236,7 +236,19 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Creates a new vertex with the default name and position
+     * Checks if there's another vertex whose rectangle overlaps with the rectangle of v.
+     */
+    public boolean overlappingLocation(GraphVertex v) {
+        for (GraphVertex vertex : vertices)
+            if (vertex.getRectangle().intersects(v.getRectangle()))
+                return true;
+
+        return false;
+    }
+
+    /**
+     * Creates a new vertex with the default name and position.
+     * Name and position will be changed so they don't conflict with already existing vertices.
      */
     public void createNewVertex() {
         GraphVertex v = new GraphVertex();
@@ -246,7 +258,7 @@ public class GraphModel extends Observable implements Observer {
             v.setName(GraphVertex.DEFAULT_NAME + " " + ++i);
 
         while (conflictingLocation(v))
-            v.setLocation(v.getX() + 50, v.getY() + 100);
+            v.setLocation(v.getX() + 30, v.getY() + 10);
 
         vertices.add(v);
 

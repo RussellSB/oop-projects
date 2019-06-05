@@ -10,14 +10,12 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class GraphPanel extends JPanel implements Observer {
-
-    private GraphModel graph;
-
     private final static int V_ARC_HEIGHT = 20;
     private final static int V_ARC_WIDTH = 20;
+    private GraphModel graph;
 
     /**
-     * Create a new GraphPanel, where vertices will be drawn
+     * Create a new GraphPanel, where vertices and edges will be drawn.
      */
     public GraphPanel(GraphModel graph) {
         this.graph = graph;
@@ -35,27 +33,26 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     private void paintEdges(Graphics g) {
-
-        int v1_x, v1_y, v2_x, v2_y;
+        int v1_center_x, v1_center_y, v2_center_x, v2_center_y;
         GraphVertex v1, v2;
 
         g.setColor(Color.WHITE);
-        for (GraphEdge e : graph.getEdges()) {
 
+        for (GraphEdge e : graph.getEdges()) {
             v1 = e.getV1();
             v2 = e.getV2();
 
-            v1_x = v1.getX() + v1.getWidth() / 2;
-            v1_y = v1.getY() + v1.getHeight() / 2;
-            v2_x = v2.getX() + v2.getWidth() / 2;
-            v2_y = v2.getY() + v2.getHeight() / 2;
+            v1_center_x = v1.getX() + v1.getWidth() / 2;
+            v1_center_y = v1.getY() + v1.getHeight() / 2;
+            v2_center_x = v2.getX() + v2.getWidth() / 2;
+            v2_center_y = v2.getY() + v2.getHeight() / 2;
 
-            g.drawLine(v1_x, v1_y, v2_x, v2_y);
+            g.drawLine(v1_center_x, v1_center_y, v2_center_x, v2_center_y);
         }
     }
 
     private void paintVertices(Graphics g) {
-        for (GraphVertex v : graph.getVertices()){
+        for (GraphVertex v : graph.getVertices()) {
             g.setColor(new Color(21, 152, 145));
             g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
             g.setColor(Color.WHITE);
@@ -79,7 +76,7 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
-     * Tell this GraphPanel that the object it displays has changed.
+     * Tell this GraphPanel that the graph it displays has changed so it repaints.
      */
     @Override
     public void update(Observable observed, Object message) {

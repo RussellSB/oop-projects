@@ -51,6 +51,10 @@ public class GraphEditor {
             e.printStackTrace();
         }
 
+        v1.setName("ONEEE");
+        v2.setName("TWOOO");
+        v3.setName("THREEEE");
+
         graph.addEdge(v1, v2);
         graph.addEdge(v2, v3);
         graph.addEdge(v3, v1);
