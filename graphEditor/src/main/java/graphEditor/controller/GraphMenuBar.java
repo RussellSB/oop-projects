@@ -68,7 +68,7 @@ public class GraphMenuBar extends JMenuBar {
         menu.add(menuItem);
         // :add node
         menuItem = new JMenuItem();
-        menuItem.setAction(new AddVertexAction());
+        menuItem.setAction(new AddVertexAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Adds vertex to graph");
         menu.add(menuItem);

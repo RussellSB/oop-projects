@@ -1,11 +1,14 @@
 package graphEditor.model;
 
+import graphEditor.util.Selectable;
+
 /**
  * A simple edge class which connects two vertices.
  */
-public class GraphEdge {
+public class GraphEdge implements Selectable {
     private GraphVertex v1;
     private GraphVertex v2;
+    private boolean isSelected = false;
 
     /**
      * Creates a new edge that connects vertices v1 and v2.
@@ -48,5 +51,29 @@ public class GraphEdge {
     @Override
     public String toString() {
         return this.v1.getName() + " " + this.v2.getName();
+    }
+
+    /**
+     * Marks the edge as selected.
+     */
+    @Override
+    public void select() {
+        this.isSelected = true;
+    }
+
+    /**
+     * Marks the edge as not selected.
+     */
+    @Override
+    public void deselect() {
+        this.isSelected = false;
+    }
+
+    /**
+     * Checks if the edge is selected or not.
+     */
+    @Override
+    public boolean isSelected() {
+        return this.isSelected;
     }
 }

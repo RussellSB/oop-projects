@@ -258,7 +258,7 @@ public class GraphModel extends Observable implements Observer {
             v.setName(GraphVertex.DEFAULT_NAME + " " + ++i);
 
         while (conflictingLocation(v))
-            v.setLocation(v.getX() + 30, v.getY() + 10);
+            v.setLocation(v.getX() + 40, v.getY() + 30);
 
         vertices.add(v);
 

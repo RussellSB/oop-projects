@@ -17,10 +17,11 @@ public class GraphFrame extends JFrame {
 
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
 
         getContentPane().add(new GraphPanel(graph));
 
         setJMenuBar(new GraphMenuBar(graph));
+
+        setVisible(true);
     }
 }
