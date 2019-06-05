@@ -24,6 +24,24 @@ public class GraphEditor {
             }
         }
 
+        //g.fillRoundRect(200, 150, 100, 100, 20, 20);
+        //g.fillRoundRect(600, 150, 100, 100, 20, 20);
+
+        GraphVertex v1 = new GraphVertex(200, 150, 100, 100, "one");
+        GraphVertex v2 = new GraphVertex(600, 150, 100, 100, "two");
+        GraphVertex v3 = new GraphVertex(400, 400, 100, 100, "three");
+
+        graph.addVertex(v1);
+        graph.addVertex(v2);
+        graph.addVertex(v3);
+        //graph.createNewVertex();
+        //graph.createNewVertex();
+        //graph.createNewVertex();
+
+        graph.addEdge(v1, v2);
+        graph.addEdge(v2, v3);
+        graph.addEdge(v3, v1);
+
         new GraphFrame(graph);
 
 
