@@ -8,13 +8,11 @@ public class GraphEdge {
     private GraphVertex v2;
 
     /**
-     * TODO
+     * Create a new edge that connects vertices v1 and v2.
      *
-     * @param v1
-     * @param v2
-     * @throws IllegalArgumentException if v1 and v2 are the same
+     * @throws IllegalArgumentException if v1 and v2 are the same.
      */
-    GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
+    public GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
         // Self-loops are not allowed
         if (v1 == v2)
             throw new IllegalArgumentException("Self-loops are not allowed: v1 and v2 must be different");
@@ -23,18 +21,30 @@ public class GraphEdge {
         this.v2 = v2;
     }
 
+    /**
+     * Get the first vertex.
+     */
     public GraphVertex getV1() {
         return v1;
     }
 
+    /**
+     * Get the second vertex.
+     */
     public GraphVertex getV2() {
         return v2;
     }
 
+    /**
+     * Check if the edge contains v.
+     */
     public boolean hasVertex(GraphVertex v) {
         return this.v1 == v || this.v2 == v;
     }
 
+    /**
+     * Returns the string representation of the object.
+     */
     @Override
     public String toString() {
         return this.v1.getName() + " " + this.v2.getName();

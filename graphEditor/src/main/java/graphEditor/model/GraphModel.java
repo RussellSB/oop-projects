@@ -4,40 +4,65 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * A simple graph class which contains a collection of vertices and edges.
+ * The graph is a observer of the vertices it contains.
  * TODO: Add setChanged(); & notifyObservers(); to all methods that modify the graph or its components
  */
-public class GraphModel extends Observable {
+public class GraphModel extends Observable implements Observer {
     private List<GraphVertex> vertices;
     private List<GraphEdge> edges;
 
+    /**
+     * Constructor without parameters. Creates an empty graph.
+     */
     public GraphModel() {
         vertices = new ArrayList<>();
         edges = new ArrayList<>();
     }
 
+    /**
+     * Get the index of the specified vertex.
+     */
     public int getVertexIndex(GraphVertex vertex) {
         return this.vertices.indexOf(vertex);
     }
 
+    /**
+     * Get the list of edges.
+     */
     public List<GraphEdge> getEdges() {
         return edges;
     }
 
+    /**
+     * Get the list of vertices.
+     */
     public List<GraphVertex> getVertices() {
         return vertices;
     }
 
+    /**
+     * Get the total number of vertices contained in the graph.
+     */
     public int getVerticesCount() {
         return vertices.size();
     }
 
+    /**
+     * Get the total number of edges contained in the graph.
+     */
     public int getEdgesCount() {
         return edges.size();
     }
 
+    /**
+     * Get a list with edges connected to the specified vertex
+     *
+     * @throws RuntimeException if the vertex v doesn't belong to the graph.
+     */
     public List<GraphEdge> getConnectedEdges(GraphVertex v) throws RuntimeException {
         // Check that v belongs to the graph
         if (!hasVertex(v))
@@ -52,14 +77,25 @@ public class GraphModel extends Observable {
         return list;
     }
 
+    /**
+     * Check if the graph contains  the specified vertex.
+     */
     public boolean hasVertex(GraphVertex v) {
         return vertices.indexOf(v) != -1;
     }
 
+    /**
+     * Check if the graph contains the specified edge
+     */
     public boolean hasEdge(GraphEdge e) {
         return edges.indexOf(e) != -1;
     }
 
+    /**
+     * Check if the graph contains an edge between the specified vertices.
+     *
+     * @throws RuntimeException if the vertices don't belong to the graph.
+     */
     public boolean hasEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that both v1 and v2 belong to the graph
         if (!hasVertex(v1) || !hasVertex(v2))
@@ -72,6 +108,11 @@ public class GraphModel extends Observable {
         return false;
     }
 
+    /**
+     * Return the edge (if exists) that connects the specified vertices. null otherwise.
+     *
+     * @throws RuntimeException if the vertices don't belong to the graph.
+     */
     public GraphEdge findEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that both v1 and v2 belong to the graph
         if (!hasVertex(v1) || !hasVertex(v2))
@@ -84,22 +125,46 @@ public class GraphModel extends Observable {
         return null;
     }
 
+    /**
+     * Add a new vertex to the graph.
+     *
+     * @throws RuntimeException if the introduced vertex is already in the graph
+     */
     public void addVertex(GraphVertex v) throws RuntimeException {
         // Check if v is already in the graph
         if (hasVertex(v))
             throw new RuntimeException("The introduced vertex is already in the graph");
 
         vertices.add(v);
+
+        v.addObserver(this); // Graph is an observer of every of its vertices.
+
+        setChanged();
+        notifyObservers();
     }
 
+    /**
+     * Add a new edge to the graph that connects the specified vertices.
+     *
+     * @throws RuntimeException if an edge between v1 and v2 already exists
+     * @throws RuntimeException if the vertices don't belong to the graph.
+     */
     public void addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that an edge between v1 and v2 doesn't exist already
         if (hasEdge(v1, v2))
             throw new RuntimeException("An edge between v1 and v2 already exists");
 
         edges.add(new GraphEdge(v1, v2));
+
+        setChanged();
+        notifyObservers();
     }
 
+    /**
+     * Remove the specified vertex and all the edges connected to it.
+     *
+     * @throws RuntimeException if the vertex doesn't belong to the graph.
+     */
     public void removeVertex(GraphVertex v) throws RuntimeException {
         // Check that v belongs to the graph
         if (!hasVertex(v))
@@ -110,16 +175,32 @@ public class GraphModel extends Observable {
             edges.remove(edge);
 
         vertices.remove(v);
+
+        setChanged();
+        notifyObservers();
     }
 
+    /**
+     * Remove the specified edge.
+     *
+     * @throws RuntimeException if the edge doesn't belong to the graph.
+     */
     public void removeEdge(GraphEdge e) throws RuntimeException {
         // Check that e belongs to the graph
         if (!hasEdge(e))
             throw new RuntimeException("Edge must belong to the graph");
 
         edges.remove(e);
+
+        setChanged();
+        notifyObservers();
     }
 
+    /**
+     * Remove the edge that connects v1 and v2.
+     *
+     * @throws RuntimeException if there's no edge between v1 and v2.
+     */
     public void removeEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         GraphEdge e = findEdge(v1, v2);
 
@@ -128,9 +209,15 @@ public class GraphModel extends Observable {
             throw new RuntimeException("There must be an edge between v1 and v2");
 
         edges.remove(e);
+
+        setChanged();
+        notifyObservers();
     }
 
-    private boolean conflictingName(GraphVertex v) {
+    /**
+     * Check if there's another vertex with the same name as v
+     */
+    public boolean conflictingName(GraphVertex v) {
         for (GraphVertex vertex : vertices)
             if (vertex.getName().equals(v.getName()) && vertex != v)
                 return true;
@@ -138,7 +225,10 @@ public class GraphModel extends Observable {
         return false;
     }
 
-    private boolean conflictingLocation(GraphVertex v) {
+    /**
+     * Check if there's another vertex with the same position as v
+     */
+    public boolean conflictingLocation(GraphVertex v) {
         for (GraphVertex vertex : vertices)
             if (vertex.getX() == v.getX() && vertex.getY() == v.getY() && vertex != v)
                 return true;
@@ -146,6 +236,9 @@ public class GraphModel extends Observable {
         return false;
     }
 
+    /**
+     * Creates a new vertex with the default name and position
+     */
     public void createNewVertex() {
         GraphVertex v = new GraphVertex();
         int i = 0;
@@ -154,15 +247,18 @@ public class GraphModel extends Observable {
             v.setName(GraphVertex.DEFAULT_NAME + " " + ++i);
 
         while (conflictingLocation(v))
-            v.setLocation(v.getX() + 1, v.getY() + 1);
+            v.setLocation(v.getX() + 50, v.getY() + 100);
 
         vertices.add(v);
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
      * Saves a graph to a file with the given name.
      *
-     * @param filename
+     * @throws IOException if there's a problem while creating/opening the file.
      */
     public void save(String filename) throws IOException {
         PrintWriter printWriter = new PrintWriter(new File(filename));
@@ -176,7 +272,7 @@ public class GraphModel extends Observable {
     /**
      * Loads a graph from the file with the given name.
      *
-     * @param filename
+     * @throws IOException if there's a problem while opening the file.
      */
     public void load(String filename) throws IOException {
         if (!fileFormatIsOK(filename))
@@ -214,13 +310,15 @@ public class GraphModel extends Observable {
         reader.close();
         this.vertices = vertices;
         this.edges = edges;
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
      * Checks the file format line by line using regular expressions
-     * @param filename
-     * @return
-     * @throws IOException
+     *
+     * @throws IOException if there's a problem while opening the file.
      */
     public boolean fileFormatIsOK(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -236,7 +334,7 @@ public class GraphModel extends Observable {
 
         for (int i = 0; i < vertexCount; i++) {
             line = reader.readLine();
-            if (!line.matches("\\d+ \\d+ \\d+ \\d+ .*"))
+            if (!line.matches("\\d+ \\d+ \\d+ \\d+ .+"))
                 return false;
         }
 
@@ -250,6 +348,9 @@ public class GraphModel extends Observable {
         return true;
     }
 
+    /**
+     * Returns the string representation of the object.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -257,5 +358,14 @@ public class GraphModel extends Observable {
         this.vertices.forEach(vertex -> sb.append(vertex.toString()).append('\n'));
         this.edges.forEach(edge -> sb.append(edge.toString()).append('\n'));
         return sb.toString();
+    }
+
+    /**
+     * If one of the vertices changed, the graph changes too and notifies its observers.
+     */
+    @Override
+    public void update(Observable o, Object arg) {
+        setChanged();
+        notifyObservers();
     }
 }
