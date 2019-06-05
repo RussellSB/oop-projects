@@ -2,10 +2,12 @@ package graphEditor.model;
 
 import graphEditor.util.Selectable;
 
+import java.util.Observable;
+
 /**
  * A simple edge class which connects two vertices.
  */
-public class GraphEdge implements Selectable {
+public class GraphEdge extends Observable implements Selectable {
     private GraphVertex v1;
     private GraphVertex v2;
     private boolean isSelected = false;
@@ -59,6 +61,8 @@ public class GraphEdge implements Selectable {
     @Override
     public void select() {
         this.isSelected = true;
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -67,6 +71,8 @@ public class GraphEdge implements Selectable {
     @Override
     public void deselect() {
         this.isSelected = false;
+        setChanged();
+        notifyObservers();
     }
 
     /**

@@ -134,6 +134,8 @@ public class GraphVertex extends Observable implements Selectable {
     @Override
     public void select() {
         this.isSelected = true;
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -142,6 +144,8 @@ public class GraphVertex extends Observable implements Selectable {
     @Override
     public void deselect() {
         this.isSelected = false;
+        setChanged();
+        notifyObservers();
     }
 
     /**

@@ -29,6 +29,8 @@ public class GraphEditor {
 
         ////////////////////////////////////////////////////////////////////////
         //////////////////////////////// TESTING ///////////////////////////////
+        // TODO: Remove all this testing stuff
+
         // Sleep 1 second
         try {
             Thread.sleep(1000);
@@ -66,13 +68,16 @@ public class GraphEditor {
             e.printStackTrace();
         }
 
-        graph.createNewVertex();
+        graph.findEdge(v1, v2).select();
+        graph.findEdge(v1, v3).select();
+        v1.select();
+
         graph.createNewVertex();
         graph.createNewVertex();
 
-        // Sleep 1 second
+        // Sleep 5 seconds
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,8 +99,5 @@ public class GraphEditor {
         System.out.println(graph);
         //////////////////////////////// TESTING ///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
-
-
-
     }
 }

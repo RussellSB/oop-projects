@@ -8,7 +8,7 @@ import java.util.Observer;
 
 /**
  * A simple graph class which contains a collection of vertices and edges.
- * The graph is a observer of the vertices it contains.
+ * The graph is a observer of the vertices and edges it contains.
  */
 public class GraphModel extends Observable implements Observer {
     private List<GraphVertex> vertices;
@@ -153,7 +153,11 @@ public class GraphModel extends Observable implements Observer {
         if (hasEdge(v1, v2))
             throw new RuntimeException("An edge between v1 and v2 already exists");
 
-        edges.add(new GraphEdge(v1, v2));
+        GraphEdge e = new GraphEdge(v1, v2);
+
+        edges.add(e);
+
+        e.addObserver(this);
 
         setChanged();
         notifyObservers();
