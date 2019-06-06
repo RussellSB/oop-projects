@@ -8,16 +8,25 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Represents the Open action.
+ */
 public class OpenAction extends AbstractAction {
     private GraphModel graph;
     private JFrame parentJFrame;
 
+    /**
+     * Creates the Open action.
+     */
     OpenAction(GraphModel graph, JFrame parentJFrame) {
         super("Open");
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }
 
+    /**
+     * Loads a graph from the specified file.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();

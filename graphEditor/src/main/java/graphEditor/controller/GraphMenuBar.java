@@ -6,10 +6,16 @@ import javax.swing.*;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+/**
+ * Menu bar for the graph editor.
+ */
 public class GraphMenuBar extends JMenuBar {
     private GraphModel graph;
     private JFrame parentJFrame;
 
+    /**
+     * Creates a new menu bar with all its menus.
+     */
     public GraphMenuBar(GraphModel graph, JFrame parentJFrame) {
         this.graph = graph;
         this.parentJFrame = parentJFrame;
@@ -18,6 +24,9 @@ public class GraphMenuBar extends JMenuBar {
         this.addEditMenu();
     }
 
+    /**
+     * Creates the file menu with all its menu items.
+     */
     private void addFileMenu() {
         JMenu menu;
         JMenuItem menuItem;
@@ -62,6 +71,9 @@ public class GraphMenuBar extends JMenuBar {
         this.add(menu);
     }
 
+    /**
+     * Creates the edit menu with all its menu items.
+     */
     private void addEditMenu() {
         JMenu menu;
         JMenuItem menuItem;

@@ -8,16 +8,25 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Represents the Save action.
+ */
 public class SaveAction extends AbstractAction {
     private GraphModel graph;
     private JFrame parentJFrame;
 
+    /**
+     * Creates the Save action.
+     */
     SaveAction(GraphModel graph, JFrame parentJFrame) {
         super("Save");
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }
 
+    /**
+     * Saves the graph in the specified file.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();

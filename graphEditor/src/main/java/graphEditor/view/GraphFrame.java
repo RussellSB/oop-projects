@@ -5,6 +5,9 @@ import graphEditor.model.GraphModel;
 
 import javax.swing.*;
 
+/**
+ * Frame for the Graph Editor
+ */
 public class GraphFrame extends JFrame {
     private static final int DEFAULT_WIDTH = 1000;
     private static final int DEFAULT_HEIGHT = 700;

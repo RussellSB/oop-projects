@@ -10,13 +10,16 @@ import java.awt.geom.Line2D;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * Panel for the graph editor, where vertices and edges will be painted.
+ */
 public class GraphPanel extends JPanel implements Observer {
     private final static int V_ARC_HEIGHT = 20;
     private final static int V_ARC_WIDTH = 20;
     private GraphModel graph;
 
     /**
-     * Create a new GraphPanel, where vertices and edges will be drawn.
+     * Create a new GraphPanel, where vertices and edges will be painted.
      */
     public GraphPanel(GraphModel graph) {
         this.graph = graph;
@@ -28,11 +31,17 @@ public class GraphPanel extends JPanel implements Observer {
         setOpaque(true);
     }
 
+    /**
+     * Sets the graph that will be painted by this panel.
+     */
     public void setGraphModel(GraphModel graph) {
         this.graph = graph;
         graph.addObserver(this);
     }
 
+    /**
+     * Paints the edges.
+     */
     private void paintEdges(Graphics g) {
         int v1CenterX, v1CenterY, v2CenterX, v2CenterY;
         GraphVertex v1, v2;
@@ -62,6 +71,9 @@ public class GraphPanel extends JPanel implements Observer {
         }
     }
 
+    /**
+     * Paints the vertices.
+     */
     private void paintVertices(Graphics g) {
         for (GraphVertex v : graph.getVertices()) {
             // To center the text.
@@ -76,7 +88,7 @@ public class GraphPanel extends JPanel implements Observer {
                 g.setColor(new Color(21, 194, 187));
                 g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
 
-                // Paint rectangle border
+                // Paint rectangle border.
                 g.setColor(Color.BLACK);
                 g.drawRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
 
@@ -96,7 +108,7 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
-     * Paint the items that this class is responsible for.
+     * Paints all the items that this class is responsible for.
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -107,7 +119,7 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
-     * Tell this GraphPanel that the graph it displays has changed so it repaints it.
+     * Tell this GraphPanel that the graph it displays has changed and it's time to repaint it.
      */
     @Override
     public void update(Observable observed, Object message) {
