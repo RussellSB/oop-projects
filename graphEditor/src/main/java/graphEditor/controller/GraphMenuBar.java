@@ -91,7 +91,6 @@ public class GraphMenuBar extends JMenuBar {
         menu.add(menuItem);
 
         // :redo
-        // TODO: Only available if the previous action was an undo
         menuItem = new JMenuItem();
         menuItem.setAction(new RedoAction());
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
@@ -101,7 +100,7 @@ public class GraphMenuBar extends JMenuBar {
         // Separator
         menu.add(new JSeparator());
 
-        // TODO: Copy, cut, paste will go here in that order
+        // TODO: Copy, cut, paste will go here in that order.
 
         // :add vertex
         menuItem = new JMenuItem();
@@ -111,9 +110,8 @@ public class GraphMenuBar extends JMenuBar {
         menu.add(menuItem);
 
         // :add edge
-        // TODO: Only available if one (and only one) vertex is selected
         menuItem = new JMenuItem();
-        menuItem.setAction(new AddEdgeAction());
+        menuItem.setAction(new AddEdgeAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
         menu.add(menuItem);
@@ -123,7 +121,7 @@ public class GraphMenuBar extends JMenuBar {
 
         // :delete selection
         menuItem = new JMenuItem();
-        menuItem.setAction(new DeleteAction());
+        menuItem.setAction(new DeleteAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Deletes the selected objects");
         menu.add(menuItem);

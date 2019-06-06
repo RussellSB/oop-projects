@@ -1,6 +1,7 @@
 package graphEditor;
 
 import graphEditor.model.GraphModel;
+import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
@@ -28,10 +29,10 @@ public class GraphEditor {
 
 
 
-        /*
+
         ////////////////////////////////////////////////////////////////////////
         //////////////////////////////// TESTING ///////////////////////////////
-        // TODO: Remove all this testing stuff
+        // TODO: Remove all this when testing is finished.
 
         // Sleep 1 second
         try {
@@ -77,7 +78,7 @@ public class GraphEditor {
         graph.createNewVertex();
         graph.createNewVertex();
 
-        // Sleep 5 seconds
+        /*// Sleep 5 seconds
         try {
             Thread.sleep(5000);
         } catch (Exception e) {

@@ -174,7 +174,8 @@ public class GraphModel extends Observable implements Observer {
             throw new RuntimeException("Vertex must belong to the graph");
 
         // Remove every connected edge.
-        for (GraphEdge edge : getConnectedEdges(v))
+        List<GraphEdge> connectedEdges = getConnectedEdges(v);
+        for (GraphEdge edge : connectedEdges)
             edges.remove(edge);
 
         vertices.remove(v);
