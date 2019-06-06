@@ -62,7 +62,7 @@ public class GraphMenuBar extends JMenuBar {
 
         // :quit
         menuItem = new JMenuItem();
-        menuItem.setAction(new QuitAction());
+        menuItem.setAction(new QuitAction(parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Quit program.");
         menu.add(menuItem);
