@@ -29,6 +29,7 @@ public class GraphPanel extends JPanel implements Observer {
         setBackground(new Color(83, 70, 126));
         setVisible(true);
         setOpaque(true);
+
     }
 
     /**

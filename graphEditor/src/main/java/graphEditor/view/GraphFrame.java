@@ -11,20 +11,23 @@ import javax.swing.*;
 public class GraphFrame extends JFrame {
     private static final int DEFAULT_WIDTH = 1000;
     private static final int DEFAULT_HEIGHT = 700;
+    private GraphPanel panel;
 
     /**
      * Create a new GraphFrame with a GraphPanel.
      */
     public GraphFrame(GraphModel graph) {
         super("Graph Editor");
+        panel = new GraphPanel(graph);
 
         setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        getContentPane().add(new GraphPanel(graph));
-
+        getContentPane().add(panel);
         setJMenuBar(new GraphMenuBar(graph, this));
-
         setVisible(true);
+    }
+
+    public GraphPanel getPanel() { // used for adding mouse listener in controller
+        return this.panel;
     }
 }
