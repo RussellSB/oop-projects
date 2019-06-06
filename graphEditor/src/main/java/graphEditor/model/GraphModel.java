@@ -267,6 +267,8 @@ public class GraphModel extends Observable implements Observer {
 
         vertices.add(v);
 
+        v.addObserver(this);
+
         setChanged();
         notifyObservers();
     }
