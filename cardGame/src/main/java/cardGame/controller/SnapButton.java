@@ -28,5 +28,4 @@ class SnapButton extends JButton {
         setToolTipText("SNAP!");
         setMnemonic(KeyEvent.VK_S);
     }
-
 }

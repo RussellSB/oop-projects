@@ -4,9 +4,11 @@ import cardGame.model.AbstractDeck;
 import cardGame.model.Card;
 import cardGame.model.CompleteDeck;
 import cardGame.model.Pile;
-import cardGame.util.SnapDialogListener;
+import cardGame.view.DialogWindowListener;
 
-import java.util.*;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.Random;
 
 import static cardGame.model.Card.Face.JOKER;
 
@@ -23,7 +25,7 @@ public class Snap extends Observable implements Observer {
     private Pile npcUpPile = new Pile();
     private Pile npcDownPile = new Pile();
     private MovableCard movable;
-    private List<SnapDialogListener> dialogListeners = new ArrayList<>();
+    private DialogWindowListener dialogListener;
 
     /**
      * Create a new Snap game with all 54 different cards shuffled between the
@@ -235,19 +237,19 @@ public class Snap extends Observable implements Observer {
      * Generic function to perform a snap (to avoid code duplication).
      */
     private Pile snap(Pile destination, Pile origin1, Pile origin2) {
-        int i, size;
+        int size;
         Pile newDownPile = new Pile();
 
         // Move cards from the origin1's face-up pile to the newDownPile by
         // flipping (reversing the order of) the pile.
         size = origin1.size();
-        for (i = 0; i < size; i++)
+        for (int i = 0; i < size; i++)
             newDownPile.put(origin1.draw());
 
         // Move cards from the origin2's face-up pile to the newDownPile by
         // flipping (reversing the order of) the pile.
         size = origin2.size();
-        for (i = 0; i < size; i++)
+        for (int i = 0; i < size; i++)
             newDownPile.put(origin2.draw());
 
         // Move cards from the destination's face-down pile to the newDownPile.
@@ -268,10 +270,10 @@ public class Snap extends Observable implements Observer {
     }
 
     /**
-     * Allows to add a new SnapDialogListener
+     * Allows to set the DialogWindowListener
      */
-    public void addDialogListener(SnapDialogListener listener) {
-        dialogListeners.add(listener);
+    public void setDialogListener(DialogWindowListener listener) {
+        dialogListener = listener;
     }
 
     /**
@@ -279,7 +281,6 @@ public class Snap extends Observable implements Observer {
      * printed
      */
     private void notifyDialogListeners(String dialog) {
-        for (SnapDialogListener listener : dialogListeners)
-            listener.onNewDialog(dialog);
+        dialogListener.onNewDialog(dialog);
     }
 }

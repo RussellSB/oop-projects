@@ -182,10 +182,10 @@ public class SnapPanel extends JPanel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         paintAreas(g);
-        paintPlayerUpPile(g);
-        paintPlayerDownPile(g);
         paintNpcUpPile(g);
         paintNpcDownPile(g);
+        paintPlayerUpPile(g);
+        paintPlayerDownPile(g);
     }
 
     /**
