@@ -7,6 +7,7 @@ import graphEditor.view.GraphPanel;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ListIterator;
 
 public class SelectionController implements MouseListener {
 
@@ -24,8 +25,10 @@ public class SelectionController implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         Point clickCoord = new Point(e.getX(), e.getY());
 
+        ListIterator listIterator = graph.getVertices().listIterator(graph.getVertices().size());
+        while (listIterator.hasPrevious()) {
+            GraphVertex vertex = (GraphVertex) listIterator.previous();
 
-        for (GraphVertex vertex : graph.getVertices()) { //TODO: make loop classic and work backwards
             if (vertex.getRectangle().contains(clickCoord)) {
                 if (vertex.isSelected()) {
                     vertex.deselect();
