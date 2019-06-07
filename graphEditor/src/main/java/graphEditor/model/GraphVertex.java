@@ -29,7 +29,7 @@ public class GraphVertex extends Observable implements Selectable {
      * @throws RuntimeException if the name is an empty string.
      */
     public GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
-        if (name.equals(""))
+        if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
 
         this.rectangle = new Rectangle(x, y, width, height);
@@ -91,7 +91,7 @@ public class GraphVertex extends Observable implements Selectable {
      * @throws RuntimeException if the name is an empty string.
      */
     public void setName(String name) throws RuntimeException {
-        if (name.equals(""))
+        if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
 
         this.name = name;
@@ -125,7 +125,7 @@ public class GraphVertex extends Observable implements Selectable {
      */
     @Override
     public String toString() {
-        return this.getX() + " " + this.getY() + " " + this.getWidth() + " " + this.getHeight() + " " + this.name;
+        return getX() + " " + getY() + " " + getWidth() + " " + getHeight() + " " + name;
     }
 
     /**

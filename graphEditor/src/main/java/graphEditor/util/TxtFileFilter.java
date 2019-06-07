@@ -15,7 +15,7 @@ public class TxtFileFilter extends FileFilter {
         if (f.isDirectory())
             return true;
         else
-            return f.getName().endsWith(".txt");
+            return f.getName().toLowerCase().endsWith(".txt");
     }
 
     /**
