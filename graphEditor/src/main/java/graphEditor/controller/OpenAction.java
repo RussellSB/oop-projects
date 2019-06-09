@@ -1,9 +1,9 @@
 package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
-import graphEditor.util.TxtFileFilter;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class OpenAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new TxtFileFilter());
+        fc.setFileFilter(new FileNameExtensionFilter(".txt", "txt"));
         fc.setAcceptAllFileFilterUsed(false);
 
         if (fc.showOpenDialog(parentJFrame) == JFileChooser.APPROVE_OPTION) {
