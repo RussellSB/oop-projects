@@ -118,7 +118,7 @@ public class GraphPanel extends JPanel implements Observer {
      */
     @Override
     public void paintComponent(Graphics g) {
-        System.out.println("Repainting... " + repaintingCount++); // TODO: Remove when testing is finished.
+        System.out.println("Repainting " + repaintingCount++ + "..."); // TODO: Remove when testing is finished.
         super.paintComponent(g);
         paintEdges(g);
         paintVertices(g);
