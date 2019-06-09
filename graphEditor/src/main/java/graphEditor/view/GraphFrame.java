@@ -27,7 +27,10 @@ public class GraphFrame extends JFrame {
         setVisible(true);
     }
 
-    public GraphPanel getPanel() { // used for adding mouse listener in controller
-        return this.panel;
+    /**
+     * Gets the GraphPanel.
+     */
+    public GraphPanel getPanel() {
+        return panel;
     }
 }

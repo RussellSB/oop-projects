@@ -52,7 +52,7 @@ public class GraphEdge extends Observable implements Selectable {
      */
     @Override
     public String toString() {
-        return this.v1.getName() + " " + this.v2.getName();
+        return v1.getName() + " " + v2.getName();
     }
 
     /**
@@ -80,6 +80,6 @@ public class GraphEdge extends Observable implements Selectable {
      */
     @Override
     public boolean isSelected() {
-        return this.isSelected;
+        return isSelected;
     }
 }

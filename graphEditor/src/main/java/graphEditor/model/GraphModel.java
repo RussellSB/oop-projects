@@ -26,7 +26,7 @@ public class GraphModel extends Observable implements Observer {
      * Gets the index of the specified vertex.
      */
     public int getVertexIndex(GraphVertex vertex) {
-        return this.vertices.indexOf(vertex);
+        return vertices.indexOf(vertex);
     }
 
     /**
@@ -406,9 +406,9 @@ public class GraphModel extends Observable implements Observer {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(this.vertices.size()).append(" vertices, ").append(this.edges.size()).append(" edges").append('\n');
-        this.vertices.forEach(vertex -> sb.append(vertex.toString()).append('\n'));
-        this.edges.forEach(edge -> sb.append(edge.toString()).append('\n'));
+        sb.append(vertices.size()).append(" vertices, ").append(edges.size()).append(" edges").append('\n');
+        vertices.forEach(vertex -> sb.append(vertex.toString()).append('\n'));
+        edges.forEach(edge -> sb.append(edge.toString()).append('\n'));
         return sb.toString();
     }
 

@@ -19,8 +19,8 @@ public class GraphVertex extends Observable implements Selectable {
      * Creates a new vertex with the default values.
      */
     public GraphVertex() {
-        this.rectangle = new Rectangle(DEFAULT_RECTANGLE);
-        this.name = DEFAULT_NAME + " 0";
+        rectangle = new Rectangle(DEFAULT_RECTANGLE);
+        name = DEFAULT_NAME + " 0";
     }
 
     /**
@@ -133,7 +133,7 @@ public class GraphVertex extends Observable implements Selectable {
      */
     @Override
     public void select() {
-        this.isSelected = true;
+        isSelected = true;
         setChanged();
         notifyObservers();
     }
@@ -143,7 +143,7 @@ public class GraphVertex extends Observable implements Selectable {
      */
     @Override
     public void deselect() {
-        this.isSelected = false;
+        isSelected = false;
         setChanged();
         notifyObservers();
     }

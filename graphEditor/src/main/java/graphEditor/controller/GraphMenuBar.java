@@ -20,8 +20,8 @@ public class GraphMenuBar extends JMenuBar {
         this.graph = graph;
         this.parentJFrame = parentJFrame;
 
-        this.addFileMenu();
-        this.addEditMenu();
+        addFileMenu();
+        addEditMenu();
     }
 
     /**
