@@ -168,7 +168,7 @@ public class GraphModel extends Observable implements Observer {
      *
      * @throws RuntimeException if the vertex doesn't belong to the graph.
      */
-    public void removeVertex(GraphVertex v) throws RuntimeException {
+    public void deleteVertex(GraphVertex v) throws RuntimeException {
         // Check that v belongs to the graph.
         if (!hasVertex(v))
             throw new RuntimeException("Vertex must belong to the graph");
@@ -189,7 +189,7 @@ public class GraphModel extends Observable implements Observer {
      *
      * @throws RuntimeException if the edge doesn't belong to the graph.
      */
-    public void removeEdge(GraphEdge e) throws RuntimeException {
+    public void deleteEdge(GraphEdge e) throws RuntimeException {
         // Check that e belongs to the graph
         if (!hasEdge(e))
             throw new RuntimeException("Edge must belong to the graph");
@@ -205,7 +205,7 @@ public class GraphModel extends Observable implements Observer {
      *
      * @throws RuntimeException if there's no edge between v1 and v2.
      */
-    public void removeEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
+    public void deleteEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         GraphEdge e = findEdge(v1, v2);
 
         // Check that we found the edge.
@@ -216,6 +216,29 @@ public class GraphModel extends Observable implements Observer {
 
         setChanged();
         notifyObservers();
+    }
+
+    /**
+     * Deletes the selection (whether they are vertices or edges).
+     */
+    public void deleteSelected() {
+        int i;
+
+        // Delete vertices
+        i = 0;
+        while (i < vertices.size())
+            if (vertices.get(i).isSelected())
+                deleteVertex(vertices.get(i));
+            else
+                i++;
+
+        // Delete edges
+        i = 0;
+        while (i < edges.size())
+            if (edges.get(i).isSelected())
+                deleteEdge(edges.get(i));
+            else
+                i++;
     }
 
     /**

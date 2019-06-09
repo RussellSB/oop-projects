@@ -6,21 +6,20 @@ import graphEditor.model.GraphVertex;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Represents the Delete action.
+ * Represents the Delete Selection action.
  */
 public class DeleteAction extends AbstractAction implements Observer {
     private GraphModel graph;
 
     /**
-     * Creates the Delete action.
+     * Creates the Delete Selection action.
      */
     DeleteAction(GraphModel graph) {
-        super("Delete");
+        super("Delete Selection");
         this.graph = graph;
         graph.addObserver(this);
         setEnabled(false);
@@ -31,25 +30,7 @@ public class DeleteAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        int i;
-
-        // Delete vertices
-        List<GraphVertex> vertices = graph.getVertices();
-        i = 0;
-        while (i < vertices.size())
-            if (vertices.get(i).isSelected())
-                graph.removeVertex(vertices.get(i));
-            else
-                i++;
-
-        // Delete edges
-        List<GraphEdge> edges = graph.getEdges();
-        i = 0;
-        while (i < edges.size())
-            if (edges.get(i).isSelected())
-                graph.removeEdge(edges.get(i));
-            else
-                i++;
+        graph.deleteSelected();
     }
 
     /**

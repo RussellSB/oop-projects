@@ -25,108 +25,165 @@ public class GraphMenuBar extends JMenuBar {
     }
 
     /**
-     * Creates the file menu with all its menu items.
+     * Creates the File menu with all its menu items.
      */
     private void addFileMenu() {
         JMenu menu;
-        JMenuItem menuItem;
 
-        // File menu
         menu = new JMenu("File");
         menu.setMnemonic(KeyEvent.VK_1);
         menu.getAccessibleContext().setAccessibleDescription("The File menu for file related functions.");
 
-        // :new graph
-        menuItem = new JMenuItem();
-        menuItem.setAction(new NewGraphAction(graph));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Resets current frame to new graph. Any unsaved changes will be lost.");
-        menu.add(menuItem);
+        addNewGraphMenuItem(menu);
 
-        // :open
-        menuItem = new JMenuItem();
-        menuItem.setAction(new OpenAction(graph, parentJFrame));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Loads specified graph.");
-        menu.add(menuItem);
+        addOpenMenuItem(menu);
 
-        // :save
-        menuItem = new JMenuItem();
-        menuItem.setAction(new SaveAction(graph, parentJFrame));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Saves current graph.");
-        menu.add(menuItem);
+        addSaveMenuItem(menu);
 
-        // Separator
-        menu.add(new JSeparator());
+        menu.add(new JSeparator()); // Separator
 
-        // :quit
-        menuItem = new JMenuItem();
-        menuItem.setAction(new QuitAction(parentJFrame));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Quit program.");
-        menu.add(menuItem);
+        addQuitMenuItem(menu);
 
         // Add menu to this bar
         this.add(menu);
     }
 
     /**
-     * Creates the edit menu with all its menu items.
+     * Adds the New Graph menu item to the menu.
+     */
+    private void addNewGraphMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new NewGraphAction(graph));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Resets current frame to new graph. Any unsaved changes will be lost.");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Open menu item to the menu.
+     */
+    private void addOpenMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new OpenAction(graph, parentJFrame));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Loads specified graph.");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Save menu item to the menu.
+     */
+    private void addSaveMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new SaveAction(graph, parentJFrame));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Saves current graph.");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Quit menu item to the menu.
+     */
+    private void addQuitMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new QuitAction(parentJFrame));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Quit program.");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Creates the Edit menu with all its menu items.
      */
     private void addEditMenu() {
         JMenu menu;
-        JMenuItem menuItem;
 
         // Edit menu
         menu = new JMenu("Edit");
         menu.setMnemonic(KeyEvent.VK_2);
         menu.getAccessibleContext().setAccessibleDescription("The edit menu for modifying current graph.");
 
-        // :undo
-        menuItem = new JMenuItem();
-        menuItem.setAction(new UndoAction());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Reverts graph to previous state");
-        menu.add(menuItem);
+        addUndoMenuItem(menu);
 
-        // :redo
-        menuItem = new JMenuItem();
-        menuItem.setAction(new RedoAction());
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Reverts the previous undo action");
-        menu.add(menuItem);
+        addRedoMenuItem(menu);
 
-        // Separator
-        menu.add(new JSeparator());
+        menu.add(new JSeparator()); // Separator
 
-        // TODO: Copy, cut, paste will go here in that order.
+        // TODO: Copy, cut, paste (plus separator) will go here in that order.
 
-        // :add vertex
-        menuItem = new JMenuItem();
-        menuItem.setAction(new AddVertexAction(graph));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Adds vertex to graph");
-        menu.add(menuItem);
+        addVertexMenuItem(menu);
 
-        // :add edge
-        menuItem = new JMenuItem();
-        menuItem.setAction(new AddEdgeAction(graph));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
-        menu.add(menuItem);
+        addEdgeMenuItem(menu);
 
-        // Separator
-        menu.add(new JSeparator());
+        menu.add(new JSeparator()); // Separator
 
-        // :delete selection
-        menuItem = new JMenuItem();
-        menuItem.setAction(new DeleteAction(graph));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Deletes the selected objects");
-        menu.add(menuItem);
+        addDeleteMenuItem(menu);
 
         // Add menu to this bar
         this.add(menu);
+    }
+
+    /**
+     * Adds the Undo menu item to the menu.
+     */
+    private void addUndoMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new UndoAction());
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Reverts graph to previous state");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Redo menu item to the menu.
+     */
+    private void addRedoMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new RedoAction());
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Reverts the previous undo action");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Add Vertex menu item to the menu.
+     */
+    private void addVertexMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new AddVertexAction(graph));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Adds vertex to graph");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Add Edge menu item to the menu.
+     */
+    private void addEdgeMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new AddEdgeAction(graph));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Delete Selection menu item to the menu.
+     */
+    private void addDeleteMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new DeleteAction(graph));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Deletes the selected objects");
+
+        menu.add(menuItem);
     }
 }

@@ -69,6 +69,7 @@ public class GraphPanel extends JPanel implements Observer {
             }
 
             g2.draw(new Line2D.Float(v1CenterX, v1CenterY, v2CenterX, v2CenterY));
+            g2.setStroke(new BasicStroke(1)); // Leave the stroke as it was.
         }
     }
 
@@ -90,8 +91,11 @@ public class GraphPanel extends JPanel implements Observer {
                 g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
 
                 // Paint rectangle border.
+                Graphics2D g2 = (Graphics2D) g;
+                g2.setStroke(new BasicStroke(5));
                 g.setColor(Color.BLACK);
                 g.drawRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
+                g2.setStroke(new BasicStroke(1)); // Leave the stroke as it was.
 
                 // Paint name.
                 g.setColor(Color.BLACK);
