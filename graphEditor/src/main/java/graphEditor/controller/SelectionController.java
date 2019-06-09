@@ -35,10 +35,10 @@ public class SelectionController implements MouseListener {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.getRectangle().contains(clickCoord)) {
-                if (graph.isSelected(vertex))
-                    graph.deSelect(vertex);
-                else
-                    graph.select(vertex);
+                // TODO: Unless ctrl is kept pressed:
+                graph.deselectAll();
+
+                graph.select(vertex);
 
                 return true;
             }

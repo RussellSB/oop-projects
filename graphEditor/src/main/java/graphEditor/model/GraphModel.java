@@ -435,7 +435,14 @@ public class GraphModel extends Observable implements Observer {
         if (!hasVertex(v))
             throw new RuntimeException("Vertex must belong to the graph");
 
-        selectedVertices.remove(v);
+        // Only if the vertex is indeed selected:
+        if (selectedVertices.contains(v)) {
+            // Deselect vertex:
+            selectedVertices.remove(v);
+
+            // Deselect connected edges:
+            selectedEdges.removeAll(getConnectedEdges(v));
+        }
 
         setChanged();
         notifyObservers();
