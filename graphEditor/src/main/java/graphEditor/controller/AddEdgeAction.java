@@ -1,7 +1,6 @@
 package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
-import graphEditor.model.GraphVertex;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,13 +38,7 @@ public class AddEdgeAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        int nVerticesSelected = 0;
-
-        for (GraphVertex vertex : graph.getVertices())
-            if (vertex.isSelected())
-                nVerticesSelected++;
-
-        if (nVerticesSelected == 1)
+        if (graph.getSelectedVertices().size() == 1)
             setEnabled(true);
         else
             setEnabled(false);

@@ -14,6 +14,7 @@ import java.util.Observer;
  * Panel for the graph editor, where vertices and edges will be painted.
  */
 public class GraphPanel extends JPanel implements Observer {
+    private int repaintingCount = 0; // TODO: Remove when testing is finished.
     private final static int V_ARC_HEIGHT = 20;
     private final static int V_ARC_WIDTH = 20;
     private GraphModel graph;
@@ -21,7 +22,7 @@ public class GraphPanel extends JPanel implements Observer {
     /**
      * Create a new GraphPanel, where vertices and edges will be painted.
      */
-    public GraphPanel(GraphModel graph) {
+    GraphPanel(GraphModel graph) {
         this.graph = graph;
         graph.addObserver(this);
 
@@ -60,7 +61,7 @@ public class GraphPanel extends JPanel implements Observer {
             Graphics2D g2 = (Graphics2D) g;
 
             // Style depends on whether the edge is selected or not.
-            if (e.isSelected()) {
+            if (graph.isSelected(e)) {
                 g.setColor(Color.BLACK);
                 g2.setStroke(new BasicStroke(5));
             } else {
@@ -85,7 +86,7 @@ public class GraphPanel extends JPanel implements Observer {
             int vertexCenterY = v.getY() + v.getHeight() / 2;
 
             // Style depends on whether the vertex is selected or not.
-            if (v.isSelected()) {
+            if (graph.isSelected(v)) {
                 // Paint rectangle.
                 g.setColor(new Color(21, 194, 187));
                 g.fillRoundRect(v.getX(), v.getY(), v.getWidth(), v.getHeight(), V_ARC_WIDTH, V_ARC_HEIGHT);
@@ -117,7 +118,7 @@ public class GraphPanel extends JPanel implements Observer {
      */
     @Override
     public void paintComponent(Graphics g) {
-        System.out.println("Repainting..."); // TODO: Remove when testing is finished.
+        System.out.println("Repainting... " + repaintingCount++); // TODO: Remove when testing is finished.
         super.paintComponent(g);
         paintEdges(g);
         paintVertices(g);

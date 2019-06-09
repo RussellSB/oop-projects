@@ -18,6 +18,7 @@ public class GraphEditor {
         GraphModel graph = new GraphModel();
 
         GraphFrame frame = new GraphFrame(graph);
+
         new SelectionController(graph, frame.getPanel());
 
         // When the program is executed by using "java graphEdit filename" the graph from the file "filename" has to be loaded and used.
@@ -63,6 +64,7 @@ public class GraphEditor {
         graph.addEdge(v2, v3);
         graph.addEdge(v3, v1);
 
+        /*
         // Sleep 1 second
         try {
             Thread.sleep(1000);
@@ -70,14 +72,13 @@ public class GraphEditor {
             e.printStackTrace();
         }
 
-        graph.findEdge(v1, v2).select();
-        graph.findEdge(v1, v3).select();
-        v1.select();
+        graph.select(v1);
+        graph.select(graph.findEdge(v2, v2));
 
         graph.createNewVertex();
         graph.createNewVertex();
 
-        /*// Sleep 5 seconds
+        // Sleep 5 seconds
         try {
             Thread.sleep(5000);
         } catch (Exception e) {
@@ -99,9 +100,8 @@ public class GraphEditor {
             e.printStackTrace();
         }
         System.out.println(graph);
+        */
         //////////////////////////////// TESTING ///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
-        */
-
     }
 }

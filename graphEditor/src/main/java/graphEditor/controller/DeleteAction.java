@@ -1,8 +1,6 @@
 package graphEditor.controller;
 
-import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
-import graphEditor.model.GraphVertex;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,18 +37,9 @@ public class DeleteAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        for (GraphVertex vertex : graph.getVertices())
-            if (vertex.isSelected()) {
-                setEnabled(true);
-                return;
-            }
-
-        for (GraphEdge edge : graph.getEdges())
-            if (edge.isSelected()) {
-                setEnabled(true);
-                return;
-            }
-
-        setEnabled(false);
+        if (graph.getSelectedVertices().size() > 0 || graph.getSelectedEdges().size() > 0)
+            setEnabled(true);
+        else
+            setEnabled(false);
     }
 }

@@ -1,24 +1,21 @@
 package graphEditor.model;
 
-import graphEditor.util.Selectable;
-
 import java.awt.*;
 import java.util.Observable;
 
 /**
  * A simple vertex class.
  */
-public class GraphVertex extends Observable implements Selectable {
+public class GraphVertex extends Observable {
     static final String DEFAULT_NAME = "Unnamed";
     private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 100);
     private Rectangle rectangle;
     private String name;
-    private boolean isSelected = false;
 
     /**
      * Creates a new vertex with the default values.
      */
-    public GraphVertex() {
+    GraphVertex() {
         rectangle = new Rectangle(DEFAULT_RECTANGLE);
         name = DEFAULT_NAME + " 0";
     }
@@ -126,33 +123,5 @@ public class GraphVertex extends Observable implements Selectable {
     @Override
     public String toString() {
         return getX() + " " + getY() + " " + getWidth() + " " + getHeight() + " " + name;
-    }
-
-    /**
-     * Marks the vertex as selected.
-     */
-    @Override
-    public void select() {
-        isSelected = true;
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Marks the vertex as not selected.
-     */
-    @Override
-    public void deselect() {
-        isSelected = false;
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Checks if the vertex is selected or not.
-     */
-    @Override
-    public boolean isSelected() {
-        return this.isSelected;
     }
 }
