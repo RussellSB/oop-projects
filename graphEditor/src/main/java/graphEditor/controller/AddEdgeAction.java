@@ -38,7 +38,7 @@ public class AddEdgeAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        if (graph.getSelectedVertices().size() == 1)
+        if (graph.getSelectedVerticesCount() == 1)
             setEnabled(true);
         else
             setEnabled(false);

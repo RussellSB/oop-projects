@@ -37,7 +37,7 @@ public class DeleteAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        if (graph.getSelectedVertices().size() > 0 || graph.getSelectedEdges().size() > 0)
+        if (graph.somethingIsSelected())
             setEnabled(true);
         else
             setEnabled(false);

@@ -21,10 +21,26 @@ public class SelectionController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         if (!vertexSelection(e))
             if (!edgeSelection(e))
                 if (!vertexRenaming(e))
                     graph.deselectAll();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
     private boolean vertexSelection(MouseEvent e) {
@@ -76,21 +92,5 @@ public class SelectionController implements MouseListener {
     private boolean vertexRenaming(MouseEvent e) {
         // TODO: Implement with double click.
         return false;
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
     }
 }

@@ -76,6 +76,27 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Gets the total number of selected vertices contained in the graph.
+     */
+    public int getSelectedVerticesCount() {
+        return selectedVertices.size();
+    }
+
+    /**
+     * Gets the total number of selected edges contained in the graph.
+     */
+    public int getSelectedEdgesCount() {
+        return selectedEdges.size();
+    }
+
+    /**
+     * Checks if there is something (edge or vertex) selected.
+     */
+    public boolean somethingIsSelected() {
+        return selectedEdges.size() + selectedVertices.size() > 0;
+    }
+
+    /**
      * Gets a list with the edges connected to the specified vertex.
      *
      * @throws RuntimeException if the vertex v doesn't belong to the graph.
