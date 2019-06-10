@@ -5,18 +5,23 @@ import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphPanel;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
  * TODO: Comments for the class & methods.
  */
-public class SelectionController implements MouseListener {
+public class SelectionController implements MouseListener, KeyListener {
     private GraphModel graph;
+    private boolean isControlDown;
 
     public SelectionController(GraphModel graph, GraphPanel panel) {
         this.graph = graph;
         panel.addMouseListener(this);
+        panel.addKeyListener(this);
+        panel.requestFocus();
     }
 
     @Override
@@ -29,7 +34,7 @@ public class SelectionController implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        preDraggingVertexSelection(e);
+        //preDraggingVertexSelection(e);
     }
 
     @Override
@@ -61,13 +66,12 @@ public class SelectionController implements MouseListener {
     }
 
     private boolean vertexSelection(MouseEvent e) {
-        System.out.println("Came to the good one");
         // We go trough the vertices list backwards so in case of overlap the vertex on top is selected.
         for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.intersects(e.getPoint())) {
-                if (false) { // TODO: Ctrl button is kept pressed
+                if (isControlDown) {
                     if (graph.isSelected(vertex))
                         graph.deSelect(vertex);
                     else
@@ -90,7 +94,7 @@ public class SelectionController implements MouseListener {
             GraphEdge edge = graph.getEdges().get(i);
 
             if (edge.intersects(e.getPoint())) {
-                if (false) { // TODO: Ctrl button is kept pressed
+                if (isControlDown) { // TODO: Ctrl button is kept pressed
                     if (graph.isSelected(edge))
                         graph.deSelect(edge);
                     else
@@ -123,5 +127,20 @@ public class SelectionController implements MouseListener {
         }
 
         return false;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        isControlDown = e.isControlDown();
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        isControlDown = e.isControlDown();
     }
 }
