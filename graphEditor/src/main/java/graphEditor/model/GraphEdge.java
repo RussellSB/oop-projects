@@ -49,49 +49,21 @@ public class GraphEdge {
      * Checks if the edge intersects with the specified click coordinates.
      */
     public boolean intersects(Point click) {
-        // TODO: Implement with imaginary circle surrounding the mouse click and intersecting it with the line.
-
-
-        /*int RADIUS = 33;
-        Circle circle = new Circle(click.getX(), click.getY(), RADIUS);
-        Line edgeLine = new Line(v1.getX(), v1.getY(), v2.getX(), v2.getY());
-
-
-        double baX = edgeLine.getEndX() - edgeLine.getStartX();
-        double baY = edgeLine.getEndY() - edgeLine.getStartY();
-        double caX = circle.getCenterX() - edgeLine.getStartX();
-        double caY = circle.getCenterY() - edgeLine.getStartY();
-
-        double a = baX * baX + baY * baY;
-        double bBy2 = baX * caX + baY * caY;
-        double c = caX * caX + caY * caY - circle.getRadius() * circle.getRadius();
-
-        double pBy2 = bBy2 / a;
-        double q = c / a;
-
-        double disc = pBy2 * pBy2 - q;
-
-        return !(disc < 0);*/
-
-        // TODO: Implement
-
-
-        int RADIUS = 10;
-        Line2D edgeLine = new Line2D.Float(v1.getX(), v1.getY(), v2.getX(), v2.getY());
+        // We create an imaginary rectangle around the click coordinates to make it easier to click the edge. This rectangle is 'RADIUS' pixels around the click coordinates. Then we just intersect this rectangle with the edge line.
+        int RADIUS = 5;
         Rectangle clickRectangle = new Rectangle(
-                (int) click.getX() - RADIUS * 2,
-                (int) click.getY() - RADIUS * 2,
-                RADIUS,
-                RADIUS);
+                (int) click.getX() - RADIUS,
+                (int) click.getY() - RADIUS,
+                RADIUS * 2,
+                RADIUS * 2);
 
-
-        System.out.println(click);
-        System.out.println(clickRectangle);
-        System.out.println(edgeLine);
-        System.out.println();
+        int v1CenterX = v1.getX() + v1.getWidth() / 2;
+        int v1CenterY = v1.getY() + v1.getHeight() / 2;
+        int v2CenterX = v2.getX() + v2.getWidth() / 2;
+        int v2CenterY = v2.getY() + v2.getHeight() / 2;
+        Line2D edgeLine = new Line2D.Float(v1CenterX, v1CenterY, v2CenterX, v2CenterY);
 
         return edgeLine.intersects(clickRectangle);
-
     }
 
     /**

@@ -21,6 +21,8 @@ public class SelectionController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2)
+            vertexRenaming(e);
     }
 
     @Override
@@ -90,6 +92,7 @@ public class SelectionController implements MouseListener {
     }
 
     private boolean vertexRenaming(MouseEvent e) {
+        System.out.println("asfdasd");
         // TODO: Implement with double click.
         return false;
     }
