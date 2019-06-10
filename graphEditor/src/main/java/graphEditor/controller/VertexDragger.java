@@ -12,6 +12,8 @@ public class VertexDragger implements MouseInputListener {
     private GraphModel graph;
 
     private boolean drag;
+    private int startX;
+    private int startY;
 
     public VertexDragger(GraphModel graph, GraphPanel panel) {
         this.graph = graph;
@@ -27,6 +29,8 @@ public class VertexDragger implements MouseInputListener {
 
             if (vertex.intersects(e.getPoint()) && graph.isSelected(vertex)) {
                 drag = true;
+                startX = e.getX();
+                startY = e.getY();
             }
         }
     }
@@ -34,7 +38,6 @@ public class VertexDragger implements MouseInputListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (drag) {
-            graph.deselectAll();
             drag = false;
         }
     }
