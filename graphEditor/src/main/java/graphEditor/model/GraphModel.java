@@ -426,6 +426,22 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Marks the specified edge as selected.
+     *
+     * @throws RuntimeException if the edge doesn't belong to the graph.
+     */
+    public void select(GraphEdge e) throws RuntimeException {
+        // Check that e belongs to the graph:
+        if (!hasEdge(e))
+            throw new RuntimeException("Edge must belong to the graph");
+
+        selectedEdges.add(e);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * Marks the specified vertex as not selected.
      *
      * @throws RuntimeException if the vertex doesn't belong to the graph.
@@ -449,35 +465,6 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Checks if the specified vertex is selected or not.
-     *
-     * @throws RuntimeException if the vertex doesn't belong to the graph.
-     */
-    public boolean isSelected(GraphVertex v) throws RuntimeException {
-        // Check that v belongs to the graph:
-        if (!hasVertex(v))
-            throw new RuntimeException("Vertex must belong to the graph");
-
-        return selectedVertices.contains(v);
-    }
-
-    /**
-     * Marks the specified edge as selected.
-     *
-     * @throws RuntimeException if the edge doesn't belong to the graph.
-     */
-    public void select(GraphEdge e) throws RuntimeException {
-        // Check that e belongs to the graph:
-        if (!hasEdge(e))
-            throw new RuntimeException("Edge must belong to the graph");
-
-        selectedEdges.add(e);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
      * Marks the specified edge as not selected.
      *
      * @throws RuntimeException if the edge doesn't belong to the graph.
@@ -491,6 +478,19 @@ public class GraphModel extends Observable implements Observer {
 
         setChanged();
         notifyObservers();
+    }
+
+    /**
+     * Checks if the specified vertex is selected or not.
+     *
+     * @throws RuntimeException if the vertex doesn't belong to the graph.
+     */
+    public boolean isSelected(GraphVertex v) throws RuntimeException {
+        // Check that v belongs to the graph:
+        if (!hasVertex(v))
+            throw new RuntimeException("Vertex must belong to the graph");
+
+        return selectedVertices.contains(v);
     }
 
     /**

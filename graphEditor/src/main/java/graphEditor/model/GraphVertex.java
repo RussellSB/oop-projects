@@ -118,6 +118,13 @@ public class GraphVertex extends Observable {
     }
 
     /**
+     * Checks if the vertex intersects with the specified click coordinates.
+     */
+    public boolean intersects(Point click) {
+        return rectangle.contains(click);
+    }
+
+    /**
      * Returns the string representation of the object.
      */
     @Override
