@@ -1,6 +1,7 @@
 package graphEditor;
 
 import graphEditor.controller.SelectionController;
+import graphEditor.controller.VertexDragger;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphFrame;
@@ -20,6 +21,8 @@ public class GraphEditor {
         GraphFrame frame = new GraphFrame(graph);
 
         new SelectionController(graph, frame.getPanel());
+
+        new VertexDragger(graph, frame.getPanel());
 
         // When the program is executed by using "java graphEdit filename" the graph from the file "filename" has to be loaded and used.
         if (args.length == 1) {
@@ -63,6 +66,8 @@ public class GraphEditor {
         graph.addEdge(v1, v2);
         graph.addEdge(v2, v3);
         graph.addEdge(v3, v1);
+
+        graph.selectAll();
 
         /*
         // Sleep 1 second
