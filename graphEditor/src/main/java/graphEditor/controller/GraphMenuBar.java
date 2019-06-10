@@ -22,16 +22,14 @@ public class GraphMenuBar extends JMenuBar {
 
         addFileMenu();
         addEditMenu();
+        addWindowMenu();
     }
 
     /**
      * Creates the File menu with all its menu items.
      */
     private void addFileMenu() {
-        JMenu menu;
-
-        menu = new JMenu("File");
-        menu.setMnemonic(KeyEvent.VK_1);
+        JMenu menu = new JMenu("File");
         menu.getAccessibleContext().setAccessibleDescription("The File menu for file related functions.");
 
         addNewGraphMenuItem(menu);
@@ -100,11 +98,7 @@ public class GraphMenuBar extends JMenuBar {
      * Creates the Edit menu with all its menu items.
      */
     private void addEditMenu() {
-        JMenu menu;
-
-        // Edit menu
-        menu = new JMenu("Edit");
-        menu.setMnemonic(KeyEvent.VK_2);
+        JMenu menu = new JMenu("Edit");
         menu.getAccessibleContext().setAccessibleDescription("The edit menu for modifying current graph.");
 
         addUndoMenuItem(menu);
@@ -215,6 +209,32 @@ public class GraphMenuBar extends JMenuBar {
         menuItem.setAction(new DeleteAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Deletes the selected objects");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Creates the Window menu with all its menu items.
+     */
+    private void addWindowMenu() {
+        JMenu menu = new JMenu("Window");
+        menu.getAccessibleContext().setAccessibleDescription("The window menu for modifying the program's window.");
+
+        addDefaultSizeMenuItem(menu);
+
+        menu.add(new JSeparator()); // Separator
+
+        // Add menu to this bar
+        this.add(menu);
+    }
+
+    /**
+     * Adds the Default Size menu item to the menu.
+     */
+    private void addDefaultSizeMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new DefaultSizeAction(parentJFrame));
+        menuItem.getAccessibleContext().setAccessibleDescription("Re-size the window to its default size");
 
         menu.add(menuItem);
     }
