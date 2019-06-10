@@ -115,9 +115,17 @@ public class GraphMenuBar extends JMenuBar {
 
         // TODO: Copy, cut, paste (plus separator) will go here in that order.
 
-        addVertexMenuItem(menu);
+        addAddVertexMenuItem(menu);
 
-        addEdgeMenuItem(menu);
+        addAddEdgeMenuItem(menu);
+
+        menu.add(new JSeparator()); // Separator
+
+        addSelectAllMenuItem(menu);
+
+        menu.add(new JSeparator()); // Separator
+
+        addRenameVertexMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
 
@@ -154,7 +162,7 @@ public class GraphMenuBar extends JMenuBar {
     /**
      * Adds the Add Vertex menu item to the menu.
      */
-    private void addVertexMenuItem(JMenu menu) {
+    private void addAddVertexMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new AddVertexAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_MASK));
@@ -166,11 +174,35 @@ public class GraphMenuBar extends JMenuBar {
     /**
      * Adds the Add Edge menu item to the menu.
      */
-    private void addEdgeMenuItem(JMenu menu) {
+    private void addAddEdgeMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new AddEdgeAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Select All menu item to the menu.
+     */
+    private void addSelectAllMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new SelectAllAction(graph));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Selects all the vertices and edges");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Rename Vertex menu item to the menu.
+     */
+    private void addRenameVertexMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new RenameVertexAction(graph, parentJFrame));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Renames the selected vertex");
 
         menu.add(menuItem);
     }

@@ -3,8 +3,9 @@ package graphEditor.controller;
 import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
-import graphEditor.view.GraphPanel;
+import graphEditor.view.GraphFrame;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -15,13 +16,15 @@ import java.awt.event.MouseListener;
  */
 public class SelectionController implements MouseListener, KeyListener {
     private GraphModel graph;
+    private JFrame parentJFrame;
     private boolean isControlDown;
 
-    public SelectionController(GraphModel graph, GraphPanel panel) {
+    public SelectionController(GraphModel graph, GraphFrame parentJFrame) {
         this.graph = graph;
-        panel.addMouseListener(this);
-        panel.addKeyListener(this);
-        panel.requestFocus();
+        this.parentJFrame = parentJFrame;
+        parentJFrame.getPanel().addMouseListener(this);
+        parentJFrame.getPanel().addKeyListener(this);
+        parentJFrame.getPanel().requestFocus();
     }
 
     @Override
@@ -121,7 +124,7 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.intersects(e.getPoint())) {
-                System.out.println("RENAMING"); // TODO: Call renaming action
+                RenameVertexAction.renameVertex(graph, parentJFrame);
                 return true;
             }
         }
