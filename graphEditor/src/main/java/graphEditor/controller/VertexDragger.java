@@ -5,48 +5,72 @@ import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphPanel;
 
 import javax.swing.event.MouseInputListener;
+import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VertexDragger implements MouseInputListener {
 
     private GraphModel graph;
 
-    private boolean drag;
-    private int startX;
-    private int startY;
+    private boolean dragSelected = false; // flag that enables dragging
+    private List<Point> initialLocations; // for selected vertices to be dragged
+    private Point dragStart; // initial point we started dragging from
 
     public VertexDragger(GraphModel graph, GraphPanel panel) {
         this.graph = graph;
+        initialLocations = new ArrayList<>();
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        // We go trough the vertices list backwards so in case of overlap the vertex on top is dragged.
-        for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
-            GraphVertex vertex = graph.getVertices().get(i);
 
-            if (vertex.intersects(e.getPoint()) && graph.isSelected(vertex)) {
-                drag = true;
-                startX = e.getX();
-                startY = e.getY();
+        // Check if mouse pressed one of the selected vertices
+        for (int i = 0; i < graph.getSelectedVerticesCount(); i++) {
+            GraphVertex selectedVertex = graph.getSelectedVertices().get(i);
+
+            if (selectedVertex.intersects(e.getPoint())) {
+                dragStart = new Point(e.getX(), e.getY());
+                dragSelected = true; // flagged true, enables dragging
+                break;
+            }
+        }
+
+        if (dragSelected) {
+            // Initialize integer Lists for storing all initial selected vertex positions
+            for (int i = 0; i < graph.getSelectedVerticesCount(); i++) {
+                GraphVertex vertex = graph.getSelectedVertices().get(i);
+                initialLocations.add(new Point(vertex.getX(), vertex.getY()));
             }
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (drag) {
-            drag = false;
+        if (dragSelected) {
+            initialLocations.clear();
+            dragSelected = false;
         }
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        for (GraphVertex v : graph.getSelectedVertices()) {
-            v.setLocation(e.getX(), e.getY());
+
+        if (dragSelected) {
+            // We drag the selected vertices
+            for (int i = 0; i < graph.getSelectedVerticesCount(); i++) {
+                GraphVertex vertex = graph.getSelectedVertices().get(i);
+                int initX = initialLocations.get(i).x;
+                int initY = initialLocations.get(i).y;
+
+                vertex.setLocation(initX + (e.getX() - (int) dragStart.getX()), initY + (e.getY() - (int) dragStart.getY()));
+            }
         }
+
+
     }
 
     @Override
