@@ -21,16 +21,15 @@ public class SelectionController implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 2)
-            vertexRenaming(e);
+        if (!vertexRenaming(e))
+            if (!vertexSelection(e))
+                if (!edgeSelection(e))
+                    graph.deselectAll();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (!vertexSelection(e))
-            if (!edgeSelection(e))
-                if (!vertexRenaming(e))
-                    graph.deselectAll();
+        preDraggingVertexSelection(e);
     }
 
     @Override
@@ -45,7 +44,24 @@ public class SelectionController implements MouseListener {
     public void mouseExited(MouseEvent e) {
     }
 
+    // TODO: REMOVE and move to the vertex dragger.
+    private boolean preDraggingVertexSelection(MouseEvent e) {
+        System.out.println("Came to the dumb one");
+        // We go trough the vertices list backwards so in case of overlap the vertex on top is selected.
+        for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
+            GraphVertex vertex = graph.getVertices().get(i);
+
+            if (vertex.intersects(e.getPoint())) {
+                graph.select(vertex);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private boolean vertexSelection(MouseEvent e) {
+        System.out.println("Came to the good one");
         // We go trough the vertices list backwards so in case of overlap the vertex on top is selected.
         for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
             GraphVertex vertex = graph.getVertices().get(i);
@@ -92,8 +108,20 @@ public class SelectionController implements MouseListener {
     }
 
     private boolean vertexRenaming(MouseEvent e) {
-        System.out.println("asfdasd");
-        // TODO: Implement with double click.
+        // Only if double clicked.
+        if (e.getClickCount() != 2)
+            return false;
+
+        // We go trough the vertices list backwards so in case of overlap the vertex on top is selected.
+        for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
+            GraphVertex vertex = graph.getVertices().get(i);
+
+            if (vertex.intersects(e.getPoint())) {
+                System.out.println("RENAMING"); // TODO: Call renaming action
+                return true;
+            }
+        }
+
         return false;
     }
 }
