@@ -1,11 +1,12 @@
 package graphEditor.model;
 
 import java.awt.*;
+import java.util.Observable;
 
 /**
  * A temporary edge class which connects one vertex to a point location (where the cursor will be, in this case)
  */
-public class GraphTempEdge {
+public class GraphTempEdge extends Observable {
     private GraphVertex v1;
     private Point endPoint;
 
@@ -36,6 +37,9 @@ public class GraphTempEdge {
      */
     public void setEndPoint(Point endPoint) {
         this.endPoint = endPoint;
+
+        setChanged();
+        notifyObservers();
     }
 
     /**

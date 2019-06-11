@@ -2,6 +2,7 @@ package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
+import graphEditor.view.GraphPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import java.util.Observer;
 public class AddEdgeAction extends AbstractAction implements Observer {
     private GraphModel graph;
     private GraphFrame parentJFrame;
+    private GraphPanel panel;
 
     /**
      * Creates the Add Edge action.
@@ -32,8 +34,8 @@ public class AddEdgeAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("ActionAddEdge!");
-        parentJFrame.getPanel().addMouseListener(new AddEdgeListener(graph, parentJFrame));
+        System.out.println("Action");
+        new AddEdgeListener(graph, parentJFrame);
         setEnabled(false);
     }
 
