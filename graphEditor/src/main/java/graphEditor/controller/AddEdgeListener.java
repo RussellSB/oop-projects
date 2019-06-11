@@ -2,8 +2,10 @@ package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
+import graphEditor.view.GraphFrame;
 import graphEditor.view.GraphPanel;
 
+import javax.swing.*;
 import javax.swing.event.MouseInputListener;
 import java.awt.event.MouseEvent;
 
@@ -12,12 +14,15 @@ public class AddEdgeListener implements MouseInputListener {
     private GraphVertex v1;
     private GraphModel graph;
     private GraphPanel panel;
+    private GraphFrame parentJFrame;
 
-    public AddEdgeListener(GraphModel graph, GraphPanel panel) {
+    public AddEdgeListener(GraphModel graph, GraphFrame parentJFrame) {
         System.out.println("listenEdge");
         this.v1 = graph.getSelectedVertices().get(0);
+
         this.graph = graph;
-        this.panel = panel;
+        this.parentJFrame = parentJFrame;
+        this.panel = parentJFrame.getPanel();
     }
 
     @Override
@@ -33,7 +38,7 @@ public class AddEdgeListener implements MouseInputListener {
                     graph.addEdge(v1, v2);
                     break;
                 } catch (Exception RuntimeException) {
-                    System.out.println("Already added!");
+                    JOptionPane.showMessageDialog(parentJFrame, "You already have an edge there!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
             }

@@ -171,7 +171,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addAddEdgeMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new AddEdgeAction(graph, parentJFrame.getPanel()));
+        menuItem.setAction(new AddEdgeAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
 
