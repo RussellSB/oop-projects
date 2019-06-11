@@ -29,15 +29,15 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (!vertexRenaming(e))
-            if (!vertexSelection(e))
-                if (!edgeSelection(e))
-                    graph.deselectAll();
+
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        //preDraggingVertexSelection(e);
+        if (!vertexRenaming(e))
+            if (!vertexSelection(e))
+                if (!edgeSelection(e))
+                    graph.deselectAll();
     }
 
     @Override
@@ -74,14 +74,16 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.intersects(e.getPoint())) {
-                if (isControlDown) {
+                if (isControlDown) { // If CTRL is held down add/remove vertex from selection
                     if (graph.isSelected(vertex))
                         graph.deSelect(vertex);
                     else
                         graph.select(vertex);
                 } else {
-                    graph.deselectAll();
-                    graph.select(vertex);
+                    if (!graph.isSelected(vertex)) { // If not selected, deselect all and select
+                        graph.deselectAll();
+                        graph.select(vertex);
+                    }
                 }
 
                 return true;

@@ -7,7 +7,7 @@ import java.util.Observable;
  * A simple vertex class.
  */
 public class GraphVertex extends Observable {
-    static final String DEFAULT_NAME = "Unnamed";
+    static final String DEFAULT_NAME = "Node";
     private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 100);
     private Rectangle rectangle;
     private String name;
