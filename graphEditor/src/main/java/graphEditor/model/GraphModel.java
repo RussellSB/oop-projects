@@ -1,5 +1,6 @@
 package graphEditor.model;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class GraphModel extends Observable implements Observer {
     private List<GraphEdge> edges;
     private List<GraphVertex> selectedVertices;
     private List<GraphEdge> selectedEdges;
+    private List<GraphTempEdge> tempEdges; //could be length 1 or 0
 
     /**
      * Creates an empty graph.
@@ -24,6 +26,7 @@ public class GraphModel extends Observable implements Observer {
         edges = new ArrayList<>();
         selectedVertices = new ArrayList<>();
         selectedEdges = new ArrayList<>();
+        tempEdges = new ArrayList<>();
     }
 
     /**
@@ -38,6 +41,13 @@ public class GraphModel extends Observable implements Observer {
      */
     public List<GraphEdge> getEdges() {
         return edges;
+    }
+
+    /**
+     * Gets temporary edge if it exists
+     */
+    public List<GraphTempEdge> getTempEdges() {
+        return tempEdges;
     }
 
     /**
@@ -60,6 +70,7 @@ public class GraphModel extends Observable implements Observer {
     public List<GraphVertex> getSelectedVertices() {
         return selectedVertices;
     }
+
 
     /**
      * Gets the total number of vertices contained in the graph.
@@ -196,6 +207,30 @@ public class GraphModel extends Observable implements Observer {
 
         edges.add(e);
 
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Adds a new edge to the graph that connects the specified vertices.
+     *
+     * @throws RuntimeException if an edge between v1 and v2 already exists.
+     * @throws RuntimeException if the vertices don't belong to the graph.
+     */
+    public void addTempEdge(GraphVertex v1, Point endPoint) throws RuntimeException {
+        // Check that an edge between v1 and v2 doesn't exist already:
+        if (tempEdges.size() > 1)
+            throw new RuntimeException("More than one temporary edge shouldn't exist!");
+
+        GraphTempEdge te = new GraphTempEdge(v1, endPoint);
+        tempEdges.add(te);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    public void removeAllTempEdges() {
+        tempEdges.clear();
         setChanged();
         notifyObservers();
     }

@@ -21,7 +21,6 @@ public class GraphEditor {
         GraphFrame frame = new GraphFrame(graph);
 
         new SelectionController(graph, frame);
-
         new VertexDragger(graph, frame.getPanel());
 
         // When the program is executed by using "java graphEdit filename" the graph from the file "filename" has to be loaded and used.
