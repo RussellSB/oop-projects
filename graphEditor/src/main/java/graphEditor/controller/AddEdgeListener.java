@@ -28,8 +28,14 @@ public class AddEdgeListener implements MouseInputListener {
 
             if (v2.intersects(e.getPoint())) {
                 System.out.println("CLICKsuccess");
-                graph.addEdge(v1, v2);
-                break;
+
+                try {
+                    graph.addEdge(v1, v2);
+                    break;
+                } catch (Exception RuntimeException) {
+                    System.out.println("Already added!");
+                }
+
             }
         }
         System.out.println("StoplistenEdge");

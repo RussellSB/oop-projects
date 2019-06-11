@@ -45,9 +45,9 @@ public class GraphEditor {
         graph.addVertex(v2);
         graph.addVertex(v3);
 
-        graph.addEdge(v1, v2);
-        graph.addEdge(v2, v3);
-        graph.addEdge(v3, v1);
+        //graph.addEdge(v1, v2);
+        //graph.addEdge(v2, v3);
+        //graph.addEdge(v3, v1);
         //////////////////////////////// TESTING ///////////////////////////////
         ////////////////////////////////////////////////////////////////////////
     }

@@ -31,7 +31,7 @@ public class AddEdgeAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("actionEdge");
+        System.out.println("ActionAddEdge!");
         panel.addMouseListener(new AddEdgeListener(graph, panel));
         setEnabled(false);
     }
