@@ -225,6 +225,8 @@ public class GraphModel extends Observable implements Observer {
         GraphTempEdge te = new GraphTempEdge(v1, endPoint);
         tempEdges.add(te);
 
+        te.addObserver(this);
+
         setChanged();
         notifyObservers();
     }
