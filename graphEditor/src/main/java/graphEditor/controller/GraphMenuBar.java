@@ -1,6 +1,7 @@
 package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
 import java.awt.event.InputEvent;
@@ -11,12 +12,12 @@ import java.awt.event.KeyEvent;
  */
 public class GraphMenuBar extends JMenuBar {
     private GraphModel graph;
-    private JFrame parentJFrame;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates a new menu bar with all its menus.
      */
-    public GraphMenuBar(GraphModel graph, JFrame parentJFrame) {
+    public GraphMenuBar(GraphModel graph, GraphFrame parentJFrame) {
         this.graph = graph;
         this.parentJFrame = parentJFrame;
 
@@ -170,7 +171,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addAddEdgeMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new AddEdgeAction(graph));
+        menuItem.setAction(new AddEdgeAction(graph, parentJFrame.getPanel()));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
 
