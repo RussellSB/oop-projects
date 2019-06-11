@@ -127,8 +127,6 @@ public class GraphPanel extends JPanel implements Observer {
             endPointX = endPoint.x;
             endPointY = endPoint.y;
 
-            System.out.println("Painting tempEdge!");
-
             Graphics2D g2 = (Graphics2D) g;
 
             g2.setColor(Color.BLACK);

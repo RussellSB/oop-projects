@@ -34,7 +34,6 @@ public class AddEdgeAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Action");
         new AddEdgeListener(graph, parentJFrame);
         setEnabled(false);
     }
