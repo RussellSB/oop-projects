@@ -221,9 +221,10 @@ public class GraphMenuBar extends JMenuBar {
         JMenu menu = new JMenu("Window");
         menu.getAccessibleContext().setAccessibleDescription("The window menu for modifying the program's window.");
 
+        addNewWindowMenuItem(menu);
         addDefaultSizeMenuItem(menu);
 
-        menu.add(new JSeparator()); // Separator
+        //menu.add(new JSeparator()); // Separator
 
         // Add menu to this bar
         this.add(menu);
@@ -235,7 +236,20 @@ public class GraphMenuBar extends JMenuBar {
     private void addDefaultSizeMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new DefaultSizeAction(parentJFrame));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Re-size the window to its default size");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Creates new live window / frame
+     */
+    private void addNewWindowMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new NewWindowAction(graph));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.SHIFT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Creates new window with the graph's current snapshot");
 
         menu.add(menuItem);
     }

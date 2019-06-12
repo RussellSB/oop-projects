@@ -1,10 +1,8 @@
 package graphEditor;
 
-import graphEditor.controller.SelectionController;
-import graphEditor.controller.VertexDragger;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
-import graphEditor.view.GraphFrame;
+import graphEditor.view.Window;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -17,18 +15,14 @@ public class GraphEditor {
      */
     public static void main(String[] args) {
         GraphModel graph = new GraphModel();
-
-        GraphFrame frame = new GraphFrame(graph);
-
-        new SelectionController(graph, frame);
-        new VertexDragger(graph, frame.getPanel());
+        Window window = new Window(graph);
 
         // When the program is executed by using "java graphEdit filename" the graph from the file "filename" has to be loaded and used.
         if (args.length == 1) {
             try {
                 graph.load(args[0]);
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(frame, e.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(window.getFrame(), e.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
