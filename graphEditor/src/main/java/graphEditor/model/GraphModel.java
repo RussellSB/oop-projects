@@ -411,8 +411,14 @@ public class GraphModel extends Observable implements Observer {
         }
 
         reader.close();
+
+        this.selectedVertices.clear();
+        this.selectedEdges.clear();
         this.vertices = vertices;
         this.edges = edges;
+
+        for (GraphVertex vertex : vertices)
+            vertex.addObserver(this);
 
         setChanged();
         notifyObservers();

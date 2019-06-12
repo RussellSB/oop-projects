@@ -34,6 +34,8 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        parentJFrame.requestFocus();
+
         if (!vertexRenaming(e))
             if (!vertexSelection(e))
                 if (!edgeSelection(e))
@@ -142,10 +144,12 @@ public class SelectionController implements MouseListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         isControlDown = e.isControlDown();
+        System.out.println(isControlDown); // TODO: Remove when testing is finished.
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         isControlDown = e.isControlDown();
+        System.out.println(isControlDown); // TODO: Remove when testing is finished.
     }
 }
