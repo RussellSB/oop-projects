@@ -2,7 +2,7 @@ package graphEditor;
 
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
-import graphEditor.view.Window;
+import graphEditor.view.GraphWindow;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -15,7 +15,7 @@ public class GraphEditor {
      */
     public static void main(String[] args) {
         GraphModel graph = new GraphModel();
-        Window window = new Window(graph);
+        GraphWindow window = new GraphWindow(graph);
 
         // When the program is executed by using "java graphEdit filename" the graph from the file "filename" has to be loaded and used.
         if (args.length == 1) {

@@ -1,7 +1,7 @@
 package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
-import graphEditor.view.Window;
+import graphEditor.view.GraphWindow;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +25,6 @@ public class NewWindowAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        new Window(graph);
+        new GraphWindow(graph);
     }
 }

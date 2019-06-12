@@ -7,11 +7,11 @@ import graphEditor.model.GraphModel;
 /**
  * Simply creates new window with a new frame, with a graph fed into it
  */
-public class Window {
+public class GraphWindow {
 
     private GraphFrame frame;
 
-    public Window(GraphModel graph) {
+    public GraphWindow(GraphModel graph) {
         frame = new GraphFrame(graph);
         frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
         new SelectionController(graph, frame);
