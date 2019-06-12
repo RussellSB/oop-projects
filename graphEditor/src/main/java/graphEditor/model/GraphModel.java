@@ -459,6 +459,7 @@ public class GraphModel extends Observable implements Observer {
         edges.clear();
         selectedVertices.clear();
         selectedEdges.clear();
+        tempEdges.clear();
 
         setChanged();
         notifyObservers();

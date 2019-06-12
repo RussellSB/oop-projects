@@ -1,6 +1,7 @@
 package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -13,12 +14,12 @@ import java.io.IOException;
  */
 public class OpenAction extends AbstractAction {
     private GraphModel graph;
-    private JFrame parentJFrame;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates the Open action.
      */
-    OpenAction(GraphModel graph, JFrame parentJFrame) {
+    OpenAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Open");
         this.graph = graph;
         this.parentJFrame = parentJFrame;
@@ -30,6 +31,7 @@ public class OpenAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File(System.getProperty("user.dir"))); // sets to current directory
         fc.setFileFilter(new FileNameExtensionFilter(".txt", "txt"));
         fc.setAcceptAllFileFilterUsed(false);
 

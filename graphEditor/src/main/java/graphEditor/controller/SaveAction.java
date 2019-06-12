@@ -30,6 +30,7 @@ public class SaveAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();
+        fc.setCurrentDirectory(new File(System.getProperty("user.dir"))); // sets to current directory
         fc.setFileFilter(new FileNameExtensionFilter(".txt", "txt"));
         fc.setAcceptAllFileFilterUsed(false);
 
