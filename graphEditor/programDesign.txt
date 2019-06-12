@@ -25,7 +25,7 @@
 37 695 100 100 RenameVertexAction
 715 807 100 100 SaveAction
 820 809 100 100 SelectAllAction
-823 687 100 100 SelectionController
+823 687 100 100 NewWindowAction
 3 0
 3 2
 1 5

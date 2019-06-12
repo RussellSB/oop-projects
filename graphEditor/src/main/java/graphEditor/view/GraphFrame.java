@@ -12,6 +12,7 @@ public class GraphFrame extends JFrame {
     public static final int DEFAULT_WIDTH = 1000;
     public static final int DEFAULT_HEIGHT = 700;
     private GraphPanel panel;
+    private boolean ctrlFlag;
 
     /**
      * Create a new GraphFrame with a GraphPanel.
@@ -32,5 +33,13 @@ public class GraphFrame extends JFrame {
      */
     public GraphPanel getPanel() {
         return panel;
+    }
+
+    public boolean getCtrlFlag() {
+        return ctrlFlag;
+    }
+
+    public void setCtrlFlag(boolean ctrlFlag) {
+        this.ctrlFlag = ctrlFlag;
     }
 }

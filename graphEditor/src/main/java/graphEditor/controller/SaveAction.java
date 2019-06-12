@@ -1,6 +1,7 @@
 package graphEditor.controller;
 
 import graphEditor.model.GraphModel;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -13,12 +14,12 @@ import java.io.IOException;
  */
 public class SaveAction extends AbstractAction {
     private GraphModel graph;
-    private JFrame parentJFrame;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates the Save action.
      */
-    SaveAction(GraphModel graph, JFrame parentJFrame) {
+    SaveAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Save");
         this.graph = graph;
         this.parentJFrame = parentJFrame;
@@ -49,5 +50,7 @@ public class SaveAction extends AbstractAction {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
         }
+
+        parentJFrame.setCtrlFlag(false); // updates CTRL Flag in the scenario that this is accessed holding down CTRL
     }
 }

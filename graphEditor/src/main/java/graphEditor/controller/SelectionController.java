@@ -5,7 +5,6 @@ import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphFrame;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -16,15 +15,13 @@ import java.awt.event.MouseListener;
  */
 public class SelectionController implements MouseListener, KeyListener {
     private GraphModel graph;
-    private JFrame parentJFrame;
-    private boolean isControlDown;
+    private GraphFrame parentJFrame;
 
     public SelectionController(GraphModel graph, GraphFrame parentJFrame) {
         this.graph = graph;
         this.parentJFrame = parentJFrame;
+        parentJFrame.addKeyListener(this);
         parentJFrame.getPanel().addMouseListener(this);
-        parentJFrame.getPanel().addKeyListener(this);
-        parentJFrame.getPanel().requestFocus();
     }
 
     @Override
@@ -34,8 +31,6 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        parentJFrame.requestFocus();
-
         if (!vertexRenaming(e))
             if (!vertexSelection(e))
                 if (!edgeSelection(e))
@@ -48,26 +43,11 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-    }
-
-    // TODO: REMOVE and move to the vertex dragger.
-    private boolean preDraggingVertexSelection(MouseEvent e) {
-        System.out.println("Came to the dumb one");
-        // We go trough the vertices list backwards so in case of overlap the vertex on top is selected.
-        for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
-            GraphVertex vertex = graph.getVertices().get(i);
-
-            if (vertex.intersects(e.getPoint())) {
-                graph.select(vertex);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private boolean vertexSelection(MouseEvent e) {
@@ -76,7 +56,7 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.intersects(e.getPoint())) {
-                if (isControlDown) { // If CTRL is held down add/remove vertex from selection
+                if (parentJFrame.getCtrlFlag()) { // If CTRL is held down add/remove vertex from selection
                     if (graph.isSelected(vertex))
                         graph.deSelect(vertex);
                     else
@@ -101,12 +81,14 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphEdge edge = graph.getEdges().get(i);
 
             if (edge.intersects(e.getPoint())) {
-                if (isControlDown) { // TODO: Ctrl button is kept pressed
+                if (parentJFrame.getCtrlFlag()) { // TODO: Ctrl button is kept pressed
                     if (graph.isSelected(edge))
                         graph.deSelect(edge);
                     else
+                        System.out.println("Ctrl Sel");
                         graph.select(edge);
                 } else {
+                    System.out.println("Sel");
                     graph.deselectAll();
                     graph.select(edge);
                 }
@@ -143,13 +125,11 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        isControlDown = e.isControlDown();
-        System.out.println(isControlDown); // TODO: Remove when testing is finished.
+        parentJFrame.setCtrlFlag(e.isControlDown());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        isControlDown = e.isControlDown();
-        System.out.println(isControlDown); // TODO: Remove when testing is finished.
+        parentJFrame.setCtrlFlag(e.isControlDown());
     }
 }

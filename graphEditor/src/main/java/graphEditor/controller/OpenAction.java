@@ -44,5 +44,7 @@ public class OpenAction extends AbstractAction {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
         }
+
+        parentJFrame.setCtrlFlag(false); // updates CTRL Flag in the scenario that this is accessed holding down CTRL
     }
 }
