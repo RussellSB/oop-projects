@@ -24,6 +24,6 @@ public class AddVertexAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.createNewVertex();
+        graph.getUndoManager().addEdit(new UndoableAddVertexEdit(graph));
     }
 }

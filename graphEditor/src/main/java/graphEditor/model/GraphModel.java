@@ -1,5 +1,6 @@
 package graphEditor.model;
 
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class GraphModel extends Observable implements Observer {
     private List<GraphVertex> selectedVertices;
     private List<GraphEdge> selectedEdges;
     private List<GraphTempEdge> tempEdges; //could be length 1 or 0
+    private UndoManager undoManager;
 
     /**
      * Creates an empty graph.
@@ -27,6 +29,14 @@ public class GraphModel extends Observable implements Observer {
         selectedVertices = new ArrayList<>();
         selectedEdges = new ArrayList<>();
         tempEdges = new ArrayList<>();
+        undoManager = new UndoManager();
+    }
+
+    /**
+     * Gets undo manager
+     */
+    public UndoManager getUndoManager() {
+        return this.undoManager;
     }
 
     /**

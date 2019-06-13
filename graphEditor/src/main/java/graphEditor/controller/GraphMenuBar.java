@@ -135,7 +135,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addUndoMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new UndoAction());
+        menuItem.setAction(new UndoAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Reverts graph to previous state");
 
@@ -147,7 +147,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addRedoMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new RedoAction());
+        menuItem.setAction(new RedoAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Reverts the previous undo action");
 
