@@ -4,27 +4,36 @@ import graphEditor.controller.GraphMenuBar;
 import graphEditor.model.GraphModel;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
- * Frame for the Graph Editor
+ * Frame for the Graph Editor.
  */
 public class GraphFrame extends JFrame {
-    public static final int DEFAULT_WIDTH = 1000;
-    public static final int DEFAULT_HEIGHT = 700;
+    public static final Dimension PREFERRED_SIZE = new Dimension(1000, 700);
     private GraphPanel panel;
-    private boolean ctrlFlag;
+    private boolean ctrlIsDown; // Boolean for the ctrl button status.
 
     /**
-     * Create a new GraphFrame with a GraphPanel.
+     * Creates a new GraphFrame with a scrollable GraphPanel and the GraphMenuBar.
      */
     public GraphFrame(GraphModel graph) {
         super("Graph Editor");
+
+        setSize(PREFERRED_SIZE);
+        setPreferredSize(PREFERRED_SIZE);
+        setMaximumSize(PREFERRED_SIZE);
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
         panel = new GraphPanel(graph);
 
-        setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        getContentPane().add(panel);
+        JScrollPane scrollPane = new JScrollPane(panel);
+
+        getContentPane().add(scrollPane);
+
         setJMenuBar(new GraphMenuBar(graph, this));
+
         setVisible(true);
     }
 
@@ -35,11 +44,17 @@ public class GraphFrame extends JFrame {
         return panel;
     }
 
-    public boolean getCtrlFlag() {
-        return ctrlFlag;
+    /**
+     * Checks if the ctrl button is being pressed or not.
+     */
+    public boolean ctrlIsDown() {
+        return ctrlIsDown;
     }
 
-    public void setCtrlFlag(boolean ctrlFlag) {
-        this.ctrlFlag = ctrlFlag;
+    /**
+     * Sets ctrlIsDown.
+     */
+    public void setCtrlIsDown(boolean ctrlIsDown) {
+        this.ctrlIsDown = ctrlIsDown;
     }
 }

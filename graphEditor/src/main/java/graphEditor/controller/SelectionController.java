@@ -56,7 +56,7 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.intersects(e.getPoint())) {
-                if (parentJFrame.getCtrlFlag()) { // If CTRL is held down add/remove vertex from selection
+                if (parentJFrame.ctrlIsDown()) { // If CTRL is held down add/remove vertex from selection
                     if (graph.isSelected(vertex))
                         graph.deSelect(vertex);
                     else
@@ -81,7 +81,7 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphEdge edge = graph.getEdges().get(i);
 
             if (edge.intersects(e.getPoint())) {
-                if (parentJFrame.getCtrlFlag()) { // TODO: Ctrl button is kept pressed
+                if (parentJFrame.ctrlIsDown()) { // TODO: Ctrl button is kept pressed
                     if (graph.isSelected(edge))
                         graph.deSelect(edge);
                     else
@@ -125,11 +125,11 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        parentJFrame.setCtrlFlag(e.isControlDown());
+        parentJFrame.setCtrlIsDown(e.isControlDown());
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        parentJFrame.setCtrlFlag(e.isControlDown());
+        parentJFrame.setCtrlIsDown(e.isControlDown());
     }
 }

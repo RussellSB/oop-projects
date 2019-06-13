@@ -25,6 +25,6 @@ public class DefaultSizeAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        parentJFrame.setSize(GraphFrame.DEFAULT_WIDTH, GraphFrame.DEFAULT_HEIGHT);
+        parentJFrame.setSize(GraphFrame.PREFERRED_SIZE);
     }
 }
