@@ -7,24 +7,21 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
- * Represents the Default Size action.
+ * Represents the New Window action.
  */
 public class NewWindowAction extends AbstractAction {
-    private GraphModel graph;
-
     /**
-     * Creates the New Window action, in the scenario that frame isn't already fed
+     * Creates the New Window action.
      */
-    NewWindowAction(GraphModel graph) {
+    NewWindowAction() {
         super("New Window");
-        this.graph = graph;
     }
 
     /**
-     * Creates new window
+     * Opens a new Graph Editor window.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        new GraphWindow(graph);
+        new GraphWindow(new GraphModel());
     }
 }
