@@ -1,6 +1,6 @@
 package graphEditor.controller.listeners;
 
-import graphEditor.controller.actions.RenameVertexAction;
+import graphEditor.controller.undoableEdits.RenameVertexUndoableEdit;
 import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
@@ -92,7 +92,7 @@ public class SelectionController implements MouseListener, KeyListener {
             GraphVertex vertex = graph.getVertices().get(i);
 
             if (vertex.intersects(e.getPoint())) {
-                RenameVertexAction.renameVertex(graph, parentJFrame);
+                graph.getUndoManager().addEdit(new RenameVertexUndoableEdit(graph, parentJFrame)); //renames on double click
                 return true;
             }
         }
