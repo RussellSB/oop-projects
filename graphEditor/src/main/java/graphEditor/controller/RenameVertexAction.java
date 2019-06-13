@@ -20,8 +20,10 @@ public class RenameVertexAction extends AbstractAction implements Observer {
      */
     RenameVertexAction(GraphModel graph, JFrame parentJFrame) {
         super("Rename Vertex");
+
         this.graph = graph;
         this.parentJFrame = parentJFrame;
+
         graph.addObserver(this);
         setEnabled(false);
     }
@@ -40,7 +42,11 @@ public class RenameVertexAction extends AbstractAction implements Observer {
         String newName = JOptionPane.showInputDialog(parentJFrame, "Introduce the new name for the vertex:", vertex.getName());
 
         if (newName != null)
-            vertex.setName(newName);
+            try {
+                vertex.setName(newName);
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(parentJFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
     }
 
     /**

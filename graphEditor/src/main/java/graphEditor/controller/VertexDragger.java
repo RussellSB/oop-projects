@@ -75,21 +75,17 @@ public class VertexDragger implements MouseInputListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
     }
 }

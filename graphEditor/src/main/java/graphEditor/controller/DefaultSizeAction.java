@@ -15,8 +15,7 @@ public class DefaultSizeAction extends AbstractAction {
      * Creates the Default Size action.
      */
     DefaultSizeAction(JFrame parentJFrame) {
-        //super("Reset to default size (" + GraphFrame.DEFAULT_WIDTH + " x " + GraphFrame.DEFAULT_HEIGHT + ")");
-        super("Reset Size");
+        super("Default Size");
         this.parentJFrame = parentJFrame;
     }
 
@@ -25,6 +24,6 @@ public class DefaultSizeAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        parentJFrame.setSize(GraphFrame.DEFAULT_WIDTH, GraphFrame.DEFAULT_HEIGHT);
+        parentJFrame.setSize(GraphFrame.PREFERRED_SIZE);
     }
 }

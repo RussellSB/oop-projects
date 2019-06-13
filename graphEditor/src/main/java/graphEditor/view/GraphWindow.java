@@ -5,19 +5,27 @@ import graphEditor.controller.VertexDragger;
 import graphEditor.model.GraphModel;
 
 /**
- * Simply creates new window with a new frame, with a graph fed into it
+ * Window for the GraphEditor. Contains the GraphFrame that contains the GraphPanel.
  */
 public class GraphWindow {
-
     private GraphFrame frame;
 
+    /**
+     * Creates the GraphWindow creating the GraphFrame, the SelectionController and the VertexDragger.
+     */
     public GraphWindow(GraphModel graph) {
-        frame = new GraphFrame(graph);
-        frame.setDefaultCloseOperation(frame.DISPOSE_ON_CLOSE);
+        this.frame = new GraphFrame(graph);
+
         new SelectionController(graph, frame);
+
         new VertexDragger(graph, frame.getPanel());
+
+        // TODO: Edge creator (add to comments too)
     }
 
+    /**
+     * Gets the GraphFrame.
+     */
     public GraphFrame getFrame() {
         return frame;
     }

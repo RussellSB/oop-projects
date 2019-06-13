@@ -88,7 +88,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addQuitMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new QuitAction(parentJFrame));
+        menuItem.setAction(new QuitAction());
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Quit program.");
 
@@ -116,11 +116,11 @@ public class GraphMenuBar extends JMenuBar {
 
         menu.add(new JSeparator()); // Separator
 
-        addSelectAllMenuItem(menu);
+        addRenameVertexMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
 
-        addRenameVertexMenuItem(menu);
+        addSelectAllMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
 
@@ -173,7 +173,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new AddEdgeAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two nodes");
+        menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two vertices");
 
         menu.add(menuItem);
     }
@@ -222,9 +222,12 @@ public class GraphMenuBar extends JMenuBar {
         menu.getAccessibleContext().setAccessibleDescription("The window menu for modifying the program's window.");
 
         addNewWindowMenuItem(menu);
-        addDefaultSizeMenuItem(menu);
 
-        //menu.add(new JSeparator()); // Separator
+        addDuplicateWindowMenuItem(menu);
+
+        menu.add(new JSeparator()); // Separator
+
+        addDefaultSizeMenuItem(menu);
 
         // Add menu to this bar
         this.add(menu);
@@ -236,20 +239,30 @@ public class GraphMenuBar extends JMenuBar {
     private void addDefaultSizeMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new DefaultSizeAction(parentJFrame));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.SHIFT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Re-size the window to its default size");
 
         menu.add(menuItem);
     }
 
     /**
-     * Creates new live window / frame
+     * Adds the New Window menu item to the menu.
      */
     private void addNewWindowMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new NewWindowAction(graph));
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.SHIFT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Creates new window with the graph's current snapshot");
+        menuItem.setAction(new NewWindowAction());
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Open a new window");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Duplicate Window menu item to the menu.
+     */
+    private void addDuplicateWindowMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new DuplicateWindowAction(graph));
+        menuItem.getAccessibleContext().setAccessibleDescription("Duplicates the current window");
 
         menu.add(menuItem);
     }

@@ -45,6 +45,6 @@ public class OpenAction extends AbstractAction {
             }
         }
 
-        parentJFrame.setCtrlFlag(false); // updates CTRL Flag in the scenario that this is accessed holding down CTRL
+        parentJFrame.setCtrlIsDown(false); // updates CTRL Flag in the scenario that this is accessed holding down CTRL
     }
 }
