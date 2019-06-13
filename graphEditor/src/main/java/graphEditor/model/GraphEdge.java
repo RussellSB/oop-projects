@@ -7,6 +7,7 @@ import java.awt.geom.Line2D;
  * A simple edge class which connects two vertices.
  */
 public class GraphEdge {
+    private static final int SELECTION_SQUARE_RADIUS = 5; // Radius (in pixels) of the imaginary square we create around the click to make selecting edges easier.
     private GraphVertex v1;
     private GraphVertex v2;
 
@@ -49,13 +50,12 @@ public class GraphEdge {
      * Checks if the edge intersects with the specified click coordinates.
      */
     public boolean intersects(Point click) {
-        // We create an imaginary rectangle around the click coordinates to make it easier to click the edge. This rectangle is 'RADIUS' pixels around the click coordinates. Then we just intersect this rectangle with the edge line.
-        int RADIUS = 5;
+        // We create an imaginary square around the click coordinates to make it easier to click the edge. This rectangle is 'SELECTION_SQUARE_RADIUS' pixels around the click coordinates. Then we just intersect this rectangle with the edge line.
         Rectangle clickRectangle = new Rectangle(
-                (int) click.getX() - RADIUS,
-                (int) click.getY() - RADIUS,
-                RADIUS * 2,
-                RADIUS * 2);
+                (int) click.getX() - SELECTION_SQUARE_RADIUS,
+                (int) click.getY() - SELECTION_SQUARE_RADIUS,
+                SELECTION_SQUARE_RADIUS * 2,
+                SELECTION_SQUARE_RADIUS * 2);
 
         int v1CenterX = v1.getX() + v1.getWidth() / 2;
         int v1CenterY = v1.getY() + v1.getHeight() / 2;
