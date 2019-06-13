@@ -246,6 +246,7 @@ public class GraphMenuBar extends JMenuBar {
         menuItem.setSelected(true);
         menuItem.setText("Show Tool Bar");
         menuItem.addActionListener(new ShowToolBarAction(parentJFrame));
+        menuItem.getAccessibleContext().setAccessibleDescription("Show/Hide the Tool Bar");
 
         menu.add(menuItem);
     }
