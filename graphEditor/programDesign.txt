@@ -1,10 +1,10 @@
-27 26
+28 30
 284 208 100 100 Model
 424 206 100 100 View
 586 210 100 100 Controller
 424 56 100 100 GraphEditor
-491 475 100 100 GraphPanel
-365 475 100 100 GraphFrame
+501 421 100 100 GraphPanel
+370 419 100 100 GraphFrame
 222 439 100 100 GraphVertex
 75 435 100 100 GraphTempEdge
 143 307 100 100 GraphModel
@@ -26,6 +26,7 @@
 715 807 100 100 SaveAction
 820 809 100 100 SelectAllAction
 823 687 100 100 NewWindowAction
+433 534 100 100 GraphWindow
 3 0
 3 2
 1 5
@@ -52,3 +53,7 @@
 18 21
 18 24
 18 25
+1 27
+27 5
+27 4
+5 4
