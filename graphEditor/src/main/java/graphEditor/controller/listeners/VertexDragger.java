@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.listeners;
 
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;

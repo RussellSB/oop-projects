@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,7 @@ public class QuitAction extends AbstractAction {
     /**
      * Creates the Quit action.
      */
-    QuitAction() {
+    public QuitAction() {
         super("Quit");
     }
 

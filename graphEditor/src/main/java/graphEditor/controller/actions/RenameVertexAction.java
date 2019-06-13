@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
@@ -18,7 +18,7 @@ public class RenameVertexAction extends AbstractAction implements Observer {
     /**
      * Creates the Rename Vertex action.
      */
-    RenameVertexAction(GraphModel graph, JFrame parentJFrame) {
+    public RenameVertexAction(GraphModel graph, JFrame parentJFrame) {
         super("Rename Vertex");
 
         this.graph = graph;
@@ -31,7 +31,7 @@ public class RenameVertexAction extends AbstractAction implements Observer {
     /**
      * Renames the selected vertex.
      */
-    static void renameVertex(GraphModel graph, JFrame parentJFrame) {
+    public static void renameVertex(GraphModel graph, JFrame parentJFrame) {
         if (graph.getSelectedVerticesCount() > 1) {
             JOptionPane.showMessageDialog(parentJFrame, "You can only rename one vertex at a time!", "Error", JOptionPane.ERROR_MESSAGE);
             return;

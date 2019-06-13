@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
@@ -19,7 +19,7 @@ public class OpenAction extends AbstractAction {
     /**
      * Creates the Open action.
      */
-    OpenAction(GraphModel graph, GraphFrame parentJFrame) {
+    public OpenAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Open");
         this.graph = graph;
         this.parentJFrame = parentJFrame;

@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
@@ -19,7 +19,7 @@ public class SaveAction extends AbstractAction {
     /**
      * Creates the Save action.
      */
-    SaveAction(GraphModel graph, GraphFrame parentJFrame) {
+    public SaveAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Save");
         this.graph = graph;
         this.parentJFrame = parentJFrame;

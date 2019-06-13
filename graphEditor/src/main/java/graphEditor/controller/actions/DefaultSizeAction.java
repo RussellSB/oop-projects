@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.view.GraphFrame;
 
@@ -14,7 +14,7 @@ public class DefaultSizeAction extends AbstractAction {
     /**
      * Creates the Default Size action.
      */
-    DefaultSizeAction(JFrame parentJFrame) {
+    public DefaultSizeAction(JFrame parentJFrame) {
         super("Default Size");
         this.parentJFrame = parentJFrame;
     }

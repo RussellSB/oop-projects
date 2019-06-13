@@ -1,5 +1,6 @@
-package graphEditor.controller;
+package graphEditor.controller.undoableEdits;
 
+import graphEditor.controller.listeners.AddEdgeListener;
 import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
@@ -13,7 +14,7 @@ public class AddEdgeUndoableEdit extends AbstractUndoableEdit {
     private GraphModel graph;
     private GraphEdge undoneEdge;
 
-    AddEdgeUndoableEdit(GraphModel graph, GraphFrame parentJFrame) {
+    public AddEdgeUndoableEdit(GraphModel graph, GraphFrame parentJFrame) {
         this.graph = graph;
         new AddEdgeListener(graph, parentJFrame);
     }

@@ -1,5 +1,6 @@
 package graphEditor.controller;
 
+import graphEditor.controller.actions.*;
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
 

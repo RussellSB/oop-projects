@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 
@@ -14,7 +14,7 @@ public class SelectAllAction extends AbstractAction {
     /**
      * Creates the Select All action.
      */
-    SelectAllAction(GraphModel graph) {
+    public SelectAllAction(GraphModel graph) {
         super("Select All");
         this.graph = graph;
     }

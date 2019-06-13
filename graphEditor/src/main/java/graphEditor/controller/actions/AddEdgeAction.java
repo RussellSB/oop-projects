@@ -1,5 +1,6 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.AddEdgeUndoableEdit;
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
 import graphEditor.view.GraphPanel;
@@ -20,7 +21,7 @@ public class AddEdgeAction extends AbstractAction implements Observer {
     /**
      * Creates the Add Edge action.
      */
-    AddEdgeAction(GraphModel graph, GraphFrame parentJFrame) {
+    public AddEdgeAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Add Edge");
         this.graph = graph;
         this.parentJFrame = parentJFrame;

@@ -1,7 +1,7 @@
 package graphEditor.view;
 
-import graphEditor.controller.SelectionController;
-import graphEditor.controller.VertexDragger;
+import graphEditor.controller.listeners.SelectionController;
+import graphEditor.controller.listeners.VertexDragger;
 import graphEditor.model.GraphModel;
 
 /**

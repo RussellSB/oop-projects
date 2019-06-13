@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
@@ -17,7 +17,7 @@ public class DuplicateWindowAction extends AbstractAction {
     /**
      * Creates the Duplicate Window action.
      */
-    DuplicateWindowAction(GraphModel graph, GraphFrame parentJFrame) {
+    public DuplicateWindowAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Duplicate Window");
         this.graph = graph;
         this.parentJFrame = parentJFrame;

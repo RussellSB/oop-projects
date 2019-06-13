@@ -1,5 +1,6 @@
-package graphEditor.controller;
+package graphEditor.controller.listeners;
 
+import graphEditor.controller.actions.RenameVertexAction;
 import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;

@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 
@@ -14,7 +14,7 @@ public class NewGraphAction extends AbstractAction {
     /**
      * Creates the New Graph action.
      */
-    NewGraphAction(GraphModel graph) {
+    public NewGraphAction(GraphModel graph) {
         super("New Graph");
         this.graph = graph;
     }

@@ -1,5 +1,6 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.AddVertexUndoableEdit;
 import graphEditor.model.GraphModel;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class AddVertexAction extends AbstractAction {
     /**
      * Creates the Add Vertex action.
      */
-    AddVertexAction(GraphModel graph) {
+    public AddVertexAction(GraphModel graph) {
         super("Add Vertex");
         this.graph = graph;
     }

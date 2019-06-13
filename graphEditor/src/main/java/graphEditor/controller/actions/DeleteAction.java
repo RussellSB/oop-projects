@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 
@@ -16,7 +16,7 @@ public class DeleteAction extends AbstractAction implements Observer {
     /**
      * Creates the Delete Selection action.
      */
-    DeleteAction(GraphModel graph) {
+    public DeleteAction(GraphModel graph) {
         super("Delete Selection");
         this.graph = graph;
         graph.addObserver(this);

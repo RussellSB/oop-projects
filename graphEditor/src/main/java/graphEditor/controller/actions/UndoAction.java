@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
 import graphEditor.model.GraphModel;
 
@@ -8,32 +8,32 @@ import java.util.Observable;
 import java.util.Observer;
 
 /**
- * Represents the Redo action.
+ * Represents the Undo action.
  */
-public class RedoAction extends AbstractAction implements Observer {
+public class UndoAction extends AbstractAction implements Observer {
     private GraphModel graph;
 
     /**
-     * Creates the Redo action.
+     * Creates the Undo action.
      */
-    RedoAction(GraphModel graph) {
-        super("Redo");
+    public UndoAction(GraphModel graph) {
+        super("Undo");
         this.graph = graph;
         setEnabled(false);
         graph.addObserver(this); //TODO: make it update without having to click panel
     }
 
     /**
-     * Redo
+     * Undo.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.getUndoManager().redo();
+        graph.getUndoManager().undo();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        if (graph.getUndoManager().canRedo()) {
+        if (graph.getUndoManager().canUndo()) {
             setEnabled(true);
         } else {
             setEnabled(false);

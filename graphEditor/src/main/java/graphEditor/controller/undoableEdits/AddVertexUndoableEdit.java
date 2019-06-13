@@ -1,4 +1,4 @@
-package graphEditor.controller;
+package graphEditor.controller.undoableEdits;
 
 import graphEditor.model.GraphModel;
 
@@ -10,7 +10,7 @@ public class AddVertexUndoableEdit extends AbstractUndoableEdit {
 
     private GraphModel graph;
 
-    AddVertexUndoableEdit(GraphModel graph) {
+    public AddVertexUndoableEdit(GraphModel graph) {
         this.graph = graph;
         graph.createNewVertex();
     }
