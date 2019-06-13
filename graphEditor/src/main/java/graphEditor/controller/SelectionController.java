@@ -146,10 +146,8 @@ public class SelectionController implements MouseListener, KeyListener {
                     else
                         graph.select(edge);
                 } else {
-                    if (!graph.isSelected(edge)) { // If not selected, deselect all and select:
-                        graph.deselectAll();
-                        graph.select(edge);
-                    }
+                    graph.deselectAll();
+                    graph.select(edge);
                 }
 
                 return true;
