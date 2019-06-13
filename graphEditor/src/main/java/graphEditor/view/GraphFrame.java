@@ -1,6 +1,7 @@
 package graphEditor.view;
 
 import graphEditor.controller.GraphMenuBar;
+import graphEditor.controller.GraphToolBar;
 import graphEditor.model.GraphModel;
 
 import javax.swing.*;
@@ -11,8 +12,9 @@ import java.awt.*;
  */
 public class GraphFrame extends JFrame {
     public static final Dimension PREFERRED_SIZE = new Dimension(1000, 700);
-    private GraphPanel panel;
     private boolean ctrlIsDown; // Boolean for the ctrl button status.
+    private GraphPanel panel;
+    private GraphToolBar toolBar;
 
     /**
      * Creates a new GraphFrame with a scrollable GraphPanel and the GraphMenuBar.
@@ -28,11 +30,12 @@ public class GraphFrame extends JFrame {
 
         panel = new GraphPanel(graph);
 
-        JScrollPane scrollPane = new JScrollPane(panel);
+        getContentPane().add(new JScrollPane(panel)); // Add panel inside of a JScrollPane.
 
-        getContentPane().add(scrollPane);
+        setJMenuBar(new GraphMenuBar(graph, this)); // Add Menu bar.
 
-        setJMenuBar(new GraphMenuBar(graph, this));
+        toolBar = new GraphToolBar(graph, this);
+        add(toolBar, BorderLayout.PAGE_START); // Add Tool bar.
 
         setVisible(true);
     }
@@ -42,6 +45,13 @@ public class GraphFrame extends JFrame {
      */
     public GraphPanel getPanel() {
         return panel;
+    }
+
+    /**
+     * Gets the GraphToolBar.
+     */
+    public GraphToolBar getToolBar() {
+        return toolBar;
     }
 
     /**

@@ -222,6 +222,10 @@ public class GraphMenuBar extends JMenuBar {
         JMenu menu = new JMenu("Window");
         menu.getAccessibleContext().setAccessibleDescription("The window menu for modifying the program's window.");
 
+        addShowToolBarMenuItem(menu);
+
+        menu.add(new JSeparator()); // Separator
+
         addNewWindowMenuItem(menu);
 
         addDuplicateWindowMenuItem(menu);
@@ -232,6 +236,18 @@ public class GraphMenuBar extends JMenuBar {
 
         // Add menu to this bar
         this.add(menu);
+    }
+
+    /**
+     * Adds the Show Tool Bar menu item to the menu.
+     */
+    private void addShowToolBarMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JCheckBoxMenuItem();
+        menuItem.setSelected(true);
+        menuItem.setText("Show Tool Bar");
+        menuItem.addActionListener(new ShowToolBarAction(parentJFrame));
+
+        menu.add(menuItem);
     }
 
     /**
