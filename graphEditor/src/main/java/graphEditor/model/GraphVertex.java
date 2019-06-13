@@ -11,6 +11,7 @@ public class GraphVertex extends Observable {
     private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 100);
     private Rectangle rectangle;
     private String name;
+    private Point snapshotLocation;
 
     /**
      * Creates a new vertex with the default values.
@@ -98,13 +99,27 @@ public class GraphVertex extends Observable {
     }
 
     /**
-     * Moves the rectangle to the specified location.
+     * Moves the rectangle to the specified location, remembering were it was previously
      */
     public void setLocation(int x, int y) {
         rectangle.setLocation(x, y);
 
         setChanged();
         notifyObservers();
+    }
+
+    /**
+     * Sets the rectangle's previous location by taking a snapshot of the current
+     */
+    public void snapshotLocation() {
+        snapshotLocation = this.getLocation();
+    }
+
+    /**
+     * Gets the rectangle's snapshot location.
+     */
+    public Point getSnapshotLocation() {
+        return snapshotLocation;
     }
 
     /**

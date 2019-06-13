@@ -1,5 +1,6 @@
 package graphEditor.controller.listeners;
 
+import graphEditor.controller.undoableEdits.VertexDragUndoableEdit;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphPanel;
@@ -18,7 +19,7 @@ public class VertexDragger implements MouseListener, MouseMotionListener {
     private GraphModel graph;
     private boolean dragging = false; // Flag that enables dragging.
     private Point dragStartingPoint; // Initial dragging point.
-    private List<Point> initialLocations; // Initial location of the dragged vertices.
+    private List<Point> initialLocations; // Initial locations of the dragged vertices.
 
     /**
      * Creates the Vertex Dragger.
@@ -48,8 +49,12 @@ public class VertexDragger implements MouseListener, MouseMotionListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        if (dragging)
+        if (dragging &&
+                e.getX() != (int) dragStartingPoint.getX() &&
+                e.getY() != (int) dragStartingPoint.getY()) {
+            System.out.println("EP: " + e.getX() + "," + e.getY() + "..." + "SP: " + dragStartingPoint.getX() + "," + dragStartingPoint.getY());
             finishDrag(e);
+        }
     }
 
     /**
@@ -95,6 +100,7 @@ public class VertexDragger implements MouseListener, MouseMotionListener {
      * Prepares the VertexDragger to start dragging.
      */
     private void startDrag(MouseEvent e) {
+
         // Save the starting point of the drag:
         dragStartingPoint = new Point(e.getX(), e.getY());
 
@@ -102,6 +108,7 @@ public class VertexDragger implements MouseListener, MouseMotionListener {
         for (int i = 0; i < graph.getSelectedVerticesCount(); i++) {
             GraphVertex vertex = graph.getSelectedVertices().get(i);
             initialLocations.add(new Point(vertex.getX(), vertex.getY()));
+            vertex.snapshotLocation();
         }
     }
 
@@ -131,10 +138,17 @@ public class VertexDragger implements MouseListener, MouseMotionListener {
     private void finishDrag(MouseEvent e) {
         if (allVerticesInsidePanel()) {
             // TODO: Drag one last time as an Undoable operation!!!
+            List<GraphVertex> draggedVertices = new ArrayList<>();
+            for (int i = 0; i < graph.getSelectedVerticesCount(); i++) {
+                GraphVertex vertex = graph.getSelectedVertices().get(i);
+                draggedVertices.add(vertex);
+            }
+            graph.getUndoManager().addEdit(new VertexDragUndoableEdit(graph, draggedVertices));
         } else {
             // Move vertices back to their original position:
             for (int i = 0; i < graph.getSelectedVerticesCount(); i++)
                 graph.getSelectedVertices().get(i).setLocation(initialLocations.get(i).x, initialLocations.get(i).y);
+
         }
 
         initialLocations.clear();
