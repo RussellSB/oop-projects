@@ -6,11 +6,11 @@ import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
-public class UndoableAddVertexEdit extends AbstractUndoableEdit {
+public class AddVertexUndoableEdit extends AbstractUndoableEdit {
 
     private GraphModel graph;
 
-    UndoableAddVertexEdit(GraphModel graph) {
+    AddVertexUndoableEdit(GraphModel graph) {
         this.graph = graph;
         graph.createNewVertex();
     }

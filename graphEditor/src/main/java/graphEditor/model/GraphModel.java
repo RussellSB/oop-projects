@@ -221,6 +221,20 @@ public class GraphModel extends Observable implements Observer {
         notifyObservers();
     }
 
+    public void addEdge(GraphEdge edge) throws RuntimeException { // useful for the case of redoing an edge
+        GraphVertex v1 = edge.getV1();
+        GraphVertex v2 = edge.getV2();
+
+        // Check that an edge between v1 and v2 doesn't exist already:
+        if (hasEdge(v1, v2))
+            throw new RuntimeException("An edge between v1 and v2 already exists");
+
+        edges.add(edge);
+
+        setChanged();
+        notifyObservers();
+    }
+
     /**
      * Adds a new edge to the graph that connects the specified vertices.
      *
