@@ -249,7 +249,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addNewWindowMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new NewWindowAction());
+        menuItem.setAction(new NewWindowAction(parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Open a new window");
 
@@ -261,7 +261,8 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addDuplicateWindowMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new DuplicateWindowAction(graph));
+        menuItem.setAction(new DuplicateWindowAction(graph, parentJFrame));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Duplicates the current window");
 
         menu.add(menuItem);

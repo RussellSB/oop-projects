@@ -15,7 +15,6 @@ public class GraphEditor {
      */
     public static void main(String[] args) {
         GraphModel graph = new GraphModel();
-
         GraphWindow window = new GraphWindow(graph);
 
         // When the program is executed by using "java graphEdit filename" the graph from the file "filename" has to be loaded and used:
