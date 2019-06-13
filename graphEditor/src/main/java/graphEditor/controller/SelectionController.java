@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 /**
- * Selection Controllers: Allows to select vertices and edges.
+ * Selection Controller: Allows to select vertices and edges.
  */
 public class SelectionController implements MouseListener, KeyListener {
     private GraphModel graph;
