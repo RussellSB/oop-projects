@@ -19,8 +19,6 @@ public class GraphWindow {
         new SelectionController(graph, frame);
 
         new VertexDragger(graph, frame.getPanel());
-
-        // TODO: Edge creator (add to comments too)
     }
 
     /**
