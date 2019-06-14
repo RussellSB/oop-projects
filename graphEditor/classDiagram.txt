@@ -1,4 +1,4 @@
-28 30
+31 30
 284 208 100 100 Model
 424 206 100 100 View
 586 210 100 100 Controller
@@ -27,6 +27,9 @@
 820 809 100 100 SelectAllAction
 823 687 100 100 NewWindowAction
 433 534 100 100 GraphWindow
+1338 469 100 100 Alex for TA of the year
+1333 327 100 100 Please give us bonus marks anyways
+1332 185 100 100 This is slightly outdated but you know... the sentiment is still there
 3 0
 3 2
 1 5
