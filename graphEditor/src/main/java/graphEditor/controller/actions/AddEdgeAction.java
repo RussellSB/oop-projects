@@ -1,9 +1,8 @@
 package graphEditor.controller.actions;
 
-import graphEditor.controller.undoableEdits.AddEdgeUndoableEdit;
+import graphEditor.controller.listeners.AddEdgeListener;
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
-import graphEditor.view.GraphPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,26 +15,26 @@ import java.util.Observer;
 public class AddEdgeAction extends AbstractAction implements Observer {
     private GraphModel graph;
     private GraphFrame parentJFrame;
-    private GraphPanel panel;
 
     /**
      * Creates the Add Edge action.
      */
     public AddEdgeAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Add Edge");
+
         this.graph = graph;
         this.parentJFrame = parentJFrame;
+
         graph.addObserver(this);
         setEnabled(false);
     }
 
     /**
-     * Adds a new edge between the selected vertex and the one that will be clicked afterwards.
+     * Creates a new AddEdgeListener that will take care of adding a new edge between the selected vertex and the one that will be clicked afterwards.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        //new AddEdgeListener(graph, parentJFrame);
-        graph.getUndoManager().addEdit(new AddEdgeUndoableEdit(graph, parentJFrame));
+        new AddEdgeListener(graph, parentJFrame);
         setEnabled(false);
     }
 

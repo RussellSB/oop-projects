@@ -1,7 +1,8 @@
 package graphEditor.model;
 
+import javafx.scene.shape.Line;
+
 import javax.swing.undo.UndoManager;
-import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,8 @@ public class GraphModel extends Observable implements Observer {
     private List<GraphEdge> edges;
     private List<GraphVertex> selectedVertices;
     private List<GraphEdge> selectedEdges;
-    private List<GraphTempEdge> tempEdges; //could be length 1 or 0
+    private boolean addingEdgeMode = false; // Flag that indicates if we are in the middle of the process of adding a new edge.
+    private Line addingEdgeLine = new Line(); // Line used to add edges in a visual way.
     private UndoManager undoManager;
 
     /**
@@ -28,8 +30,53 @@ public class GraphModel extends Observable implements Observer {
         edges = new ArrayList<>();
         selectedVertices = new ArrayList<>();
         selectedEdges = new ArrayList<>();
-        tempEdges = new ArrayList<>();
         undoManager = new UndoManager();
+    }
+
+    /**
+     * Checks if the graph is in "Adding Edge Mode"; checks if we are in the middle of the process of adding a new edge.
+     */
+    public boolean isAddingEdgeMode() {
+        return addingEdgeMode;
+    }
+
+    /**
+     * Sets the value of addingEdgeMode.
+     */
+    public void setAddingEdgeMode(boolean addingEdgeMode) {
+        this.addingEdgeMode = addingEdgeMode;
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Gets the addingEdgeLine; line used to add edges in a visual way.
+     */
+    public Line getAddingEdgeLine() {
+        return addingEdgeLine;
+    }
+
+    /**
+     * Sets the start point of the addingEdgeLine.
+     */
+    public void setAddingEdgeLineStart(int startX, int startY) {
+        addingEdgeLine.setStartX(startX);
+        addingEdgeLine.setStartY(startY);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Sets the end point of the addingEdgeLine.
+     */
+    public void setAddingEdgeLineEnd(int endX, int endY) {
+        addingEdgeLine.setEndX(endX);
+        addingEdgeLine.setEndY(endY);
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -51,13 +98,6 @@ public class GraphModel extends Observable implements Observer {
      */
     public List<GraphEdge> getEdges() {
         return edges;
-    }
-
-    /**
-     * Gets temporary edge if it exists
-     */
-    public List<GraphTempEdge> getTempEdges() {
-        return tempEdges;
     }
 
     /**
@@ -211,7 +251,7 @@ public class GraphModel extends Observable implements Observer {
     public void addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that an edge between v1 and v2 doesn't exist already:
         if (hasEdge(v1, v2))
-            throw new RuntimeException("An edge between v1 and v2 already exists");
+            throw new RuntimeException("You already have an edge there!");
 
         GraphEdge e = new GraphEdge(v1, v2);
 
@@ -231,32 +271,6 @@ public class GraphModel extends Observable implements Observer {
 
         edges.add(edge);
 
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Adds a new edge to the graph that connects the specified vertices.
-     *
-     * @throws RuntimeException if an edge between v1 and v2 already exists.
-     * @throws RuntimeException if the vertices don't belong to the graph.
-     */
-    public void addTempEdge(GraphVertex v1, Point endPoint) throws RuntimeException {
-        // Check that an edge between v1 and v2 doesn't exist already:
-        if (tempEdges.size() > 1)
-            throw new RuntimeException("More than one temporary edge shouldn't exist!");
-
-        GraphTempEdge te = new GraphTempEdge(v1, endPoint);
-        tempEdges.add(te);
-
-        te.addObserver(this);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    public void removeAllTempEdges() {
-        tempEdges.clear();
         setChanged();
         notifyObservers();
     }
@@ -489,7 +503,6 @@ public class GraphModel extends Observable implements Observer {
         edges.clear();
         selectedVertices.clear();
         selectedEdges.clear();
-        tempEdges.clear();
 
         setChanged();
         notifyObservers();

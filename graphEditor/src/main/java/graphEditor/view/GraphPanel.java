@@ -2,8 +2,8 @@ package graphEditor.view;
 
 import graphEditor.model.GraphEdge;
 import graphEditor.model.GraphModel;
-import graphEditor.model.GraphTempEdge;
 import graphEditor.model.GraphVertex;
+import javafx.scene.shape.Line;
 
 import javax.swing.*;
 import java.awt.*;
@@ -111,28 +111,27 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
-     * TODO
+     * Paints the addingEdgeLine (auxiliary line used to add edges visually) in case the graph is in "Adding Edge Mode".
      */
-    private void paintTempEdges(Graphics g) {
-        for (GraphTempEdge te : graph.getTempEdges()) {
-            int v1CenterX, v1CenterY, endPointX, endPointY;
+    private void paintAddingEdgeLine(Graphics g) {
+        // Only if the graph is in "Adding Edge Mode".
+        if (!graph.isAddingEdgeMode())
+            return;
 
-            GraphVertex v1 = te.getV1();
-            Point endPoint = te.getEndPoint();
+        Graphics2D g2 = (Graphics2D) g;
 
-            // Get the center point of v1 and endPoint
-            v1CenterX = v1.getX() + v1.getWidth() / 2;
-            v1CenterY = v1.getY() + v1.getHeight() / 2;
-            endPointX = endPoint.x;
-            endPointY = endPoint.y;
+        Line addingEdgeLine = graph.getAddingEdgeLine();
+        Line2D addingEdgeLine2D = new Line2D.Float(
+                (float) addingEdgeLine.getStartX(),
+                (float) addingEdgeLine.getStartY(),
+                (float) addingEdgeLine.getEndX(),
+                (float) addingEdgeLine.getEndY()
+        );
 
-            Graphics2D g2 = (Graphics2D) g;
-
-            g2.setColor(Color.BLACK);
-            g2.setStroke(new BasicStroke(5));
-            g2.draw(new Line2D.Float(v1CenterX, v1CenterY, endPointX, endPointY));
-            g2.setStroke(new BasicStroke(1)); // Leave the stroke as it was.
-        }
+        g2.setColor(Color.BLACK);
+        g2.setStroke(new BasicStroke(5));
+        g2.draw(addingEdgeLine2D);
+        g2.setStroke(new BasicStroke(1)); // Leave the stroke as it was.
     }
 
     /**
@@ -142,7 +141,7 @@ public class GraphPanel extends JPanel implements Observer {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         paintEdges(g);
-        paintTempEdges(g);
+        paintAddingEdgeLine(g);
         paintVertices(g);
     }
 

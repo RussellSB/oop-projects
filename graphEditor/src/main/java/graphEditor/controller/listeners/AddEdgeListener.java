@@ -1,92 +1,101 @@
 package graphEditor.controller.listeners;
 
 import graphEditor.model.GraphModel;
-import graphEditor.model.GraphTempEdge;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphFrame;
-import graphEditor.view.GraphPanel;
 
 import javax.swing.*;
-import javax.swing.event.MouseInputListener;
-import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class AddEdgeListener implements MouseInputListener {
-
+/**
+ * Add Edge Listener: Allows to add edges.
+ */
+public class AddEdgeListener implements MouseListener, MouseMotionListener {
     private GraphVertex v1;
     private GraphModel graph;
-    private GraphPanel panel;
     private GraphFrame parentJFrame;
 
-    public AddEdgeListener(GraphModel graph, GraphFrame parentJFrame) {
-        int v1CenterX, v1CenterY;
+    /**
+     * Creates the AddEdgeListener.
+     */
+    public AddEdgeListener(GraphModel graph, GraphFrame parentJFrame) throws RuntimeException {
+        if (graph.getSelectedVerticesCount() > 1)
+            throw new RuntimeException("You can only select one edge");
 
-        this.v1 = graph.getSelectedVertices().get(0);
         this.graph = graph;
         this.parentJFrame = parentJFrame;
-        this.panel = parentJFrame.getPanel();
+        this.v1 = graph.getSelectedVertices().get(0); // Selected vertex.
 
-        panel.addMouseListener(this);
-        panel.addMouseMotionListener(this);
+        parentJFrame.getPanel().addMouseListener(this);
+        parentJFrame.getPanel().addMouseMotionListener(this);
 
-        v1CenterX = v1.getX() + v1.getWidth() / 2;
-        v1CenterY = v1.getY() + v1.getHeight() / 2;
+        // Set the starting point of the addingEdgeLine:
+        int v1CenterX = v1.getX() + v1.getWidth() / 2;
+        int v1CenterY = v1.getY() + v1.getHeight() / 2;
+        graph.setAddingEdgeLineStart(v1CenterX, v1CenterY);
 
-        graph.addTempEdge(v1, new Point(v1CenterX, v1CenterY));
+        // Tell the graph (and the GraphPanel) we are adding a new edge:
+        graph.setAddingEdgeMode(true);
     }
 
+    /**
+     * Makes the other end of the addingEdgeLineEnd follow the mouse.
+     */
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        graph.setAddingEdgeLineEnd(e.getX(), e.getY());
+    }
+
+    /**
+     * If the mouse presses a vertex the edge will be added; if not we exit "Adding Edge Mode".
+     */
     @Override
     public void mousePressed(MouseEvent e) {
-        for (int i = 0; i < graph.getVerticesCount(); i++) {
+        // We go trough the vertices list backwards so in case of overlap the vertex on top is selected:
+        for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
             GraphVertex v2 = graph.getVertices().get(i);
 
             if (v2.intersects(e.getPoint())) {
-
                 try {
-                    graph.addEdge(v1, v2);
-                    break;
-                } catch (Exception RuntimeException) {
-                    JOptionPane.showMessageDialog(parentJFrame, "You already have an edge there!", "Error", JOptionPane.ERROR_MESSAGE);
+                    graph.addEdge(v1, v2); // TODO: Use UndoableEdit
+                } catch (RuntimeException ex) {
+                    JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                } finally {
+                    // Exit "Adding Edge Mode" and remove this listener.
+                    graph.setAddingEdgeMode(false); // Exit
+                    parentJFrame.getPanel().removeMouseListener(this);
+                    parentJFrame.getPanel().removeMouseMotionListener(this);
                 }
 
+                break;
             }
         }
-        graph.removeAllTempEdges();
-        panel.removeMouseListener(this);
-        panel.removeMouseMotionListener(this);
-    }
 
-    @Override
-    public void mouseMoved(MouseEvent e) {
-        for (GraphTempEdge te : graph.getTempEdges()) {
-            te.setEndPoint(new Point(e.getX(), e.getY()));
-        }
-
+        // If we don't click in any vertex we simply exit "Adding Edge Mode" and remove this listener.
+        graph.setAddingEdgeMode(false);
+        parentJFrame.getPanel().removeMouseListener(this);
+        parentJFrame.getPanel().removeMouseMotionListener(this);
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
-
 }

@@ -19,7 +19,7 @@ public class GraphEdge {
     GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
         // Self-loops are not allowed
         if (v1 == v2)
-            throw new IllegalArgumentException("Self-loops are not allowed: v1 and v2 must be different");
+            throw new IllegalArgumentException("Self-loops are not allowed");
 
         this.v1 = v1;
         this.v2 = v2;
