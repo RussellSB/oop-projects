@@ -24,6 +24,6 @@ public class NewGraphAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.reset();
+        graph.reset(); // TODO: Replace with NewGraphUndoableEdit.
     }
 }

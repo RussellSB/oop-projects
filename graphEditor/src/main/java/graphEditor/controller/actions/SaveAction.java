@@ -45,12 +45,12 @@ public class SaveAction extends AbstractAction {
                 filename = file.getPath() + ".txt";
 
             try {
-                graph.save(filename);
+                graph.save(filename); // TODO: Replace with saveGraphNonUndoableEdit
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
         }
 
-        parentJFrame.setCtrlIsDown(false); // updates CTRL Flag in the scenario that this is accessed holding down CTRL
+        parentJFrame.setCtrlIsDown(false); // Updates the CTRL flag (after opening a new window the CTRL flag gets stuck in its last state, which could be true if the shortcut was used).
     }
 }

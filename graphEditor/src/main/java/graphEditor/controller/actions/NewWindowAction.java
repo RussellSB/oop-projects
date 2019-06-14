@@ -27,6 +27,6 @@ public class NewWindowAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         new GraphWindow(new GraphModel());
-        parentJFrame.setCtrlIsDown(false); // updates CTRL Flag in the scenario that this is accessed holding down CTRL
+        parentJFrame.setCtrlIsDown(false); // Updates the CTRL flag (after opening a new window the CTRL flag gets stuck in its last state, which could be true if the shortcut was used).
     }
 }
