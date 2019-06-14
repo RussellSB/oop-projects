@@ -75,6 +75,8 @@ public class AddEdgeListener implements MouseInputListener {
                     parentJFrame.getPanel().removeMouseListener(this);
                     parentJFrame.getPanel().removeMouseMotionListener(this);
                 }
+
+                break;
             }
         }
 
