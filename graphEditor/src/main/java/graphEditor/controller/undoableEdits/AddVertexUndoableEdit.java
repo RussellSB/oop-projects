@@ -1,29 +1,42 @@
 package graphEditor.controller.undoableEdits;
 
 import graphEditor.model.GraphModel;
+import graphEditor.model.GraphVertex;
 
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
+/**
+ * An UndoableEdit used to undo/redo the adding of a vertex.
+ */
 public class AddVertexUndoableEdit extends AbstractUndoableEdit {
-
     private GraphModel graph;
+    private GraphVertex addedVertex;
 
+    /**
+     * Adds the vertex to the graph and saves it for future use.
+     */
     public AddVertexUndoableEdit(GraphModel graph) {
         this.graph = graph;
-        graph.createNewVertex();
+        this.addedVertex = graph.createNewVertex();
     }
 
+    /**
+     * Undo the edit by deleting the added vertex.
+     */
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
-        graph.deleteVertex(graph.getVertices().get(graph.getVerticesCount() - 1)); // delete last
+        graph.deleteVertex(addedVertex);
     }
 
+    /**
+     * Redo the edit by adding the vertex again.
+     */
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-        graph.createNewVertex(); // add again
+        graph.addVertex(addedVertex);
     }
 }

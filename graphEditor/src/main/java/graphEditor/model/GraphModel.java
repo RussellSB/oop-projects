@@ -255,6 +255,8 @@ public class GraphModel extends Observable implements Observer {
      *
      * @throws RuntimeException if an edge between v1 and v2 already exists.
      * @throws RuntimeException if the vertices don't belong to the graph.
+     *
+     * @return the just created edge.
      */
     public GraphEdge addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that an edge between v1 and v2 doesn't exist already:
@@ -271,6 +273,7 @@ public class GraphModel extends Observable implements Observer {
         return e;
     }
 
+    // TODO
     public void addEdge(GraphEdge edge) throws RuntimeException { // useful for the case of redoing an edge
         GraphVertex v1 = edge.getV1();
         GraphVertex v2 = edge.getV2();
@@ -387,8 +390,9 @@ public class GraphModel extends Observable implements Observer {
     /**
      * Creates a new vertex with the default name and position.
      * Name and position will be changed so they don't conflict with already existing vertices.
+     * @return the just created vertex.
      */
-    public void createNewVertex() {
+    public GraphVertex createNewVertex() {
         GraphVertex v = new GraphVertex();
         int i = 0;
 
@@ -404,6 +408,8 @@ public class GraphModel extends Observable implements Observer {
 
         setChanged();
         notifyObservers();
+
+        return v;
     }
 
     /**

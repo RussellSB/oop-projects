@@ -9,7 +9,7 @@ import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
 /**
- * An UndoableEdit used to undo the adding of an edge.
+ * An UndoableEdit used to undo/redo the adding of an edge.
  */
 public class AddEdgeUndoableEdit extends AbstractUndoableEdit {
     private GraphModel graph;
