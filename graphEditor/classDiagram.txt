@@ -1,4 +1,4 @@
-45 47
+44 47
 476 237 100 50 Model
 616 235 100 50 View
 778 239 100 50 Controller
@@ -43,7 +43,6 @@
 1414 163 311 50 This is a demonstration of the program design
 1414 198 312 50 design, made using the program we designed.
 1508 255 127 50 It's low key meta.
-474 111 100 50 Vertex 0
 3 0
 3 2
 1 5
