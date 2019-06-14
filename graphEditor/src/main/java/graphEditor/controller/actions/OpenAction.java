@@ -1,5 +1,6 @@
 package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.loadGraphNonUndoableEdit;
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
 
@@ -39,7 +40,7 @@ public class OpenAction extends AbstractAction {
             File file = fc.getSelectedFile();
 
             try {
-                graph.load(file.getPath()); // TODO: Replace with loadGraphNonUndoableEdit.
+                graph.addUndoableEdit(new loadGraphNonUndoableEdit(graph, file.getPath()));
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
