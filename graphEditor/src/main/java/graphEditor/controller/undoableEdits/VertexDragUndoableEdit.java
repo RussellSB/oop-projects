@@ -7,61 +7,51 @@ import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An UndoableEdit used to undo/redo the dragging of a vertices.
+ * WARNING: This class assumes that the vertices have already been moved to their final location.
+ */
 public class VertexDragUndoableEdit extends AbstractUndoableEdit {
+    private List<GraphVertex> draggedVertices;
+    private List<Point> initialLocations; // Initial location of the dragged vertices.
+    private List<Point> newLocations; // New location of the dragged vertices.
 
-    private GraphModel graph;
-    private List<GraphVertex> draggedVertices; // List of dragged vertices
-    private Point snapshotLocation;
+    /**
+     * Saves the draggedVertices, initialLocations and newLocations.
+     */
+    public VertexDragUndoableEdit(GraphModel graph, List<Point> initialLocations) {
+        this.draggedVertices = new ArrayList<>();
+        this.initialLocations = new ArrayList<>();
+        this.newLocations = new ArrayList<>();
 
-    public VertexDragUndoableEdit(GraphModel graph, List<GraphVertex> draggedVertices) {
-        System.out.println("VertexDragUndoableEdit!");
-        this.graph = graph;
-        this.draggedVertices = draggedVertices;
+        this.draggedVertices.addAll(graph.getSelectedVertices());
+        this.initialLocations.addAll(initialLocations);
+
+        // Save the new position of the dragged vertices:
+        for (GraphVertex vertex : draggedVertices)
+            newLocations.add(new Point(vertex.getX(), vertex.getY()));
     }
 
+    /**
+     * Undo the drag by moving the vertices back to their original position
+     */
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
-        /*
-        for(GraphVertex vertexDragged : draggedVertices){
-            System.out.println("a");
-            System.out.println(vertexDragged.getName());
-        }
-
-         */
-
-        for (GraphVertex vertex : graph.getVertices()) {
-            for (GraphVertex vertexDragged : draggedVertices) {
-                // set to old location
-                if (vertex.equals(vertexDragged)) {
-                    System.out.println(vertex.getName());
-                    snapshotLocation = vertex.getSnapshotLocation();
-                    vertex.snapshotLocation();
-                    vertex.setLocation((int) snapshotLocation.getX(), (int) snapshotLocation.getY());
-                }
-            }
-        }
-
-        System.out.println("Undone!");
+        for (int i = 0; i < draggedVertices.size(); i++)
+            draggedVertices.get(i).setLocation(initialLocations.get(i).x, initialLocations.get(i).y);
     }
 
+    /**
+     * Redo the drag by moving the vertices again to their new position
+     */
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-        System.out.println("Redone!");
-        for (GraphVertex vertex : graph.getVertices()) {
-            for (GraphVertex vertexDragged : draggedVertices) {
-                // set to old location
-                if (vertex.equals(vertexDragged)) {
-                    snapshotLocation = vertex.getSnapshotLocation();
-                    vertex.snapshotLocation();
-                    vertex.setLocation((int) snapshotLocation.getX(), (int) snapshotLocation.getY());
-                }
-            }
-        }
+        for (int i = 0; i < draggedVertices.size(); i++)
+            draggedVertices.get(i).setLocation(newLocations.get(i).x, newLocations.get(i).y);
     }
-
-
 }
