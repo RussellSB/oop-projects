@@ -3,6 +3,7 @@ package graphEditor.controller.actions;
 import graphEditor.controller.undoableEdits.RenameVertexUndoableEdit;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,12 +15,12 @@ import java.util.Observer;
  */
 public class RenameVertexAction extends AbstractAction implements Observer {
     private GraphModel graph;
-    private JFrame parentJFrame;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates the Rename Vertex action.
      */
-    public RenameVertexAction(GraphModel graph, JFrame parentJFrame) {
+    public RenameVertexAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Rename Vertex");
 
         this.graph = graph;
@@ -31,7 +32,7 @@ public class RenameVertexAction extends AbstractAction implements Observer {
     /**
      * Renames the selected vertex.
      */
-    public static void renameVertex(GraphModel graph, JFrame parentJFrame) {
+    public static void renameVertex(GraphModel graph, GraphFrame parentJFrame) {
         if (graph.getSelectedVerticesCount() > 1) {
             JOptionPane.showMessageDialog(parentJFrame, "You can only rename one vertex at a time!", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -43,7 +44,7 @@ public class RenameVertexAction extends AbstractAction implements Observer {
 
         if (newName != null)
             try {
-                graph.addUndoableEdit(new RenameVertexUndoableEdit(graph, vertex, newName));
+                graph.addUndoableEdit(new RenameVertexUndoableEdit(graph, vertex, newName, parentJFrame));
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(parentJFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }

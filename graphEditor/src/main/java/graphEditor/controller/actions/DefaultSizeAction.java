@@ -9,12 +9,12 @@ import java.awt.event.ActionEvent;
  * Represents the Default Size action.
  */
 public class DefaultSizeAction extends AbstractAction {
-    private JFrame parentJFrame;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates the Default Size action.
      */
-    public DefaultSizeAction(JFrame parentJFrame) {
+    public DefaultSizeAction(GraphFrame parentJFrame) {
         super("Default Size");
         this.parentJFrame = parentJFrame;
     }

@@ -2,6 +2,7 @@ package graphEditor.controller.undoableEdits;
 
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
@@ -12,6 +13,7 @@ import javax.swing.undo.CannotUndoException;
  */
 public class RenameVertexUndoableEdit extends AbstractUndoableEdit {
     private GraphModel graph;
+    private GraphFrame parentJFrame;
     private GraphVertex vertex;
     private String oldName;
     private String newName;
@@ -19,13 +21,14 @@ public class RenameVertexUndoableEdit extends AbstractUndoableEdit {
     /**
      * Renames the vertex and saves the old and the new name for future use.
      */
-    public RenameVertexUndoableEdit(GraphModel graph, GraphVertex vertex, String newName) throws RuntimeException {
+    public RenameVertexUndoableEdit(GraphModel graph, GraphVertex vertex, String newName, GraphFrame parentJFrame) throws RuntimeException {
         this.graph = graph;
+        this.parentJFrame = parentJFrame;
         this.vertex = vertex;
         this.newName = newName;
         this.oldName = vertex.getName();
 
-        vertex.setName(newName);
+        vertex.setName(newName, parentJFrame.getPanel().getFontMetrics());
     }
 
     /**
@@ -35,7 +38,7 @@ public class RenameVertexUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
-        vertex.setName(oldName);
+        vertex.setName(oldName, parentJFrame.getPanel().getFontMetrics());
 
         graph.deselectAll();
         graph.select(vertex);
@@ -48,7 +51,7 @@ public class RenameVertexUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-        vertex.setName(newName);
+        vertex.setName(newName, parentJFrame.getPanel().getFontMetrics());
 
         graph.deselectAll();
         graph.select(vertex);

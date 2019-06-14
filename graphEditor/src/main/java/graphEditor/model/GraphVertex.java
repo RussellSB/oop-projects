@@ -8,8 +8,9 @@ import java.util.Observable;
  */
 public class GraphVertex extends Observable {
     static final String DEFAULT_NAME = "Vertex";
-    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 100);
+    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 50);
     private static final int MAX_NAME_SIZE = 50; // Max numbers of characters allowed for the vertex name.
+    private static final int TEXT_PADDING = 20; // Space (in pixels) between the text and the vertex border.
     private Rectangle rectangle;
     private String name;
 
@@ -60,9 +61,8 @@ public class GraphVertex extends Observable {
 
     /**
      * Sets the width of the rectangle.
-     * TODO: Remove if not used.
      */
-    public void setWidth(int width) {
+    private void setWidth(int width) {
         rectangle.setSize(width, (int) rectangle.getHeight());
 
         setChanged();
@@ -89,13 +89,37 @@ public class GraphVertex extends Observable {
      * @throws RuntimeException if the name is an empty string.
      * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
      */
-    public void setName(String name) throws RuntimeException {
+    void setName(String name) throws RuntimeException {
         if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
         if (name.length() > MAX_NAME_SIZE)
             throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
 
         this.name = name;
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Sets the name of the vertex and resizes the vertex if needed.
+     *
+     * @throws RuntimeException if the name is an empty string.
+     * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
+     */
+    public void setName(String name, FontMetrics fontMetrics) throws RuntimeException {
+        if (name.isEmpty())
+            throw new RuntimeException("Name cannot be left empty");
+        if (name.length() > MAX_NAME_SIZE)
+            throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
+
+        this.name = name;
+
+        // Resize vertex according to the string length:
+        if (fontMetrics.stringWidth(name) + TEXT_PADDING > DEFAULT_RECTANGLE.getWidth())
+            setWidth(fontMetrics.stringWidth(name) + TEXT_PADDING);
+        else
+            setWidth((int) DEFAULT_RECTANGLE.getWidth());
 
         setChanged();
         notifyObservers();

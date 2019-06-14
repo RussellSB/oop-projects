@@ -135,6 +135,13 @@ public class GraphPanel extends JPanel implements Observer {
     }
 
     /**
+     * Gets the font metrics.
+     */
+    public FontMetrics getFontMetrics() {
+        return getGraphics().getFontMetrics();
+    }
+
+    /**
      * Paints all the items that this class is responsible for.
      */
     @Override
