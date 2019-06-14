@@ -27,7 +27,7 @@ public class DeleteAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.deleteSelected();
+        graph.deleteSelection();
     }
 
     /**

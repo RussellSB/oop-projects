@@ -35,33 +35,102 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Adds an undoable edit to the undoManager.
+     * Gets the list of edges.
      */
-    public void addUndoableEdit(AbstractUndoableEdit edit) {
-        undoManager.addEdit(edit);
-
-        setChanged();
-        notifyObservers();
+    public List<GraphEdge> getEdges() {
+        return edges;
     }
 
     /**
-     * Undo the last edit.
+     * Gets the list of vertices.
      */
-    public void undo() {
-        undoManager.undo();
-
-        setChanged();
-        notifyObservers();
+    public List<GraphVertex> getVertices() {
+        return vertices;
     }
 
     /**
-     * Redo the last undo.
+     * Gets the list of selected vertices.
      */
-    public void redo() {
-        undoManager.redo();
+    public List<GraphVertex> getSelectedVertices() {
+        return selectedVertices;
+    }
 
-        setChanged();
-        notifyObservers();
+    /**
+     * Gets the total number of vertices contained in the graph.
+     */
+    public int getVerticesCount() {
+        return vertices.size();
+    }
+
+    /**
+     * Gets the total number of edges contained in the graph.
+     */
+    public int getEdgesCount() {
+        return edges.size();
+    }
+
+    /**
+     * Gets the total number of selected vertices contained in the graph.
+     */
+    public int getSelectedVerticesCount() {
+        return selectedVertices.size();
+    }
+
+    /**
+     * Gets a list with the edges connected to the specified vertex.
+     *
+     * @throws RuntimeException if the vertex v doesn't belong to the graph.
+     */
+    private List<GraphEdge> getConnectedEdges(GraphVertex v) throws RuntimeException {
+        // Check that v belongs to the graph:
+        if (!hasVertex(v))
+            throw new RuntimeException("Vertex must belong to the graph");
+
+        List<GraphEdge> list = new ArrayList<>();
+
+        for (GraphEdge edge : edges)
+            if (edge.hasVertex(v))
+                list.add(edge);
+
+        return list;
+    }
+
+    /**
+     * Gets undo manager
+     */
+    public UndoManager getUndoManager() {
+        return this.undoManager;
+    }
+
+    /**
+     * Checks if the graph contains the specified vertex.
+     */
+    private boolean hasVertex(GraphVertex v) {
+        return vertices.contains(v);
+    }
+
+    /**
+     * Checks if the graph doesn't contain the specified edge.
+     */
+    private boolean hasNotEdge(GraphEdge e) {
+        return !edges.contains(e);
+    }
+
+    /**
+     * Checks if the graph contains an edge between the specified vertices.
+     *
+     * @throws RuntimeException if the vertices don't belong to the graph.
+     */
+    private boolean hasEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
+        // Check that both v1 and v2 belong to the graph:
+        if (!hasVertex(v1) || !hasVertex(v2))
+            throw new RuntimeException("Vertices must belong to the graph");
+
+        for (GraphEdge edge : edges)
+            if (edge.hasVertex(v1) && edge.hasVertex(v2))
+                return true;
+
+        return false;
     }
 
     /**
@@ -89,170 +158,25 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Sets the start point of the addingEdgeLine.
+     * Checks if there's another vertex with the same name as v.
      */
-    public void setAddingEdgeLineStart(int startX, int startY) {
-        addingEdgeLine.setStartX(startX);
-        addingEdgeLine.setStartY(startY);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Sets the end point of the addingEdgeLine.
-     */
-    public void setAddingEdgeLineEnd(int endX, int endY) {
-        addingEdgeLine.setEndX(endX);
-        addingEdgeLine.setEndY(endY);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Gets undo manager
-     */
-    public UndoManager getUndoManager() {
-        return this.undoManager;
-    }
-
-    /**
-     * Gets the index of the specified vertex.
-     */
-    public int getVertexIndex(GraphVertex vertex) {
-        return vertices.indexOf(vertex);
-    }
-
-    /**
-     * Gets the list of edges.
-     */
-    public List<GraphEdge> getEdges() {
-        return edges;
-    }
-
-    /**
-     * Gets the list of vertices.
-     */
-    public List<GraphVertex> getVertices() {
-        return vertices;
-    }
-
-    /**
-     * Gets the list of selected edges.
-     */
-    public List<GraphEdge> getSelectedEdges() {
-        return selectedEdges;
-    }
-
-    /**
-     * Gets the list of selected vertices.
-     */
-    public List<GraphVertex> getSelectedVertices() {
-        return selectedVertices;
-    }
-
-
-    /**
-     * Gets the total number of vertices contained in the graph.
-     */
-    public int getVerticesCount() {
-        return vertices.size();
-    }
-
-    /**
-     * Gets the total number of edges contained in the graph.
-     */
-    public int getEdgesCount() {
-        return edges.size();
-    }
-
-    /**
-     * Gets the total number of selected vertices contained in the graph.
-     */
-    public int getSelectedVerticesCount() {
-        return selectedVertices.size();
-    }
-
-    /**
-     * Gets the total number of selected edges contained in the graph.
-     */
-    public int getSelectedEdgesCount() {
-        return selectedEdges.size();
-    }
-
-    /**
-     * Checks if there is something (edge or vertex) selected.
-     */
-    public boolean somethingIsSelected() {
-        return selectedEdges.size() + selectedVertices.size() > 0;
-    }
-
-    /**
-     * Gets a list with the edges connected to the specified vertex.
-     *
-     * @throws RuntimeException if the vertex v doesn't belong to the graph.
-     */
-    public List<GraphEdge> getConnectedEdges(GraphVertex v) throws RuntimeException {
-        // Check that v belongs to the graph.
-        if (!hasVertex(v))
-            throw new RuntimeException("Vertex must belong to the graph");
-
-        List<GraphEdge> list = new ArrayList<>();
-
-        for (GraphEdge edge : edges)
-            if (edge.hasVertex(v))
-                list.add(edge);
-
-        return list;
-    }
-
-    /**
-     * Checks if the graph contains the specified vertex.
-     */
-    public boolean hasVertex(GraphVertex v) {
-        return vertices.contains(v);
-    }
-
-    /**
-     * Checks if the graph contains the specified edge.
-     */
-    public boolean hasEdge(GraphEdge e) {
-        return edges.contains(e);
-    }
-
-    /**
-     * Checks if the graph contains an edge between the specified vertices.
-     *
-     * @throws RuntimeException if the vertices don't belong to the graph.
-     */
-    public boolean hasEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
-        // Check that both v1 and v2 belong to the graph.
-        if (!hasVertex(v1) || !hasVertex(v2))
-            throw new RuntimeException("Vertices must belong to the graph");
-
-        for (GraphEdge edge : edges)
-            if (edge.hasVertex(v1) && edge.hasVertex(v2))
+    private boolean conflictingName(GraphVertex v) {
+        for (GraphVertex vertex : vertices)
+            if (vertex.getName().equals(v.getName()) && vertex != v)
                 return true;
 
         return false;
     }
 
     /**
-     * Returns the edge that connects the specified vertices (null if it doesn't exist).
-     *
-     * @throws RuntimeException if the vertices don't belong to the graph.
+     * Checks if there's another vertex with the same position as v.
      */
-    public GraphEdge findEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
-        // Check that both v1 and v2 belong to the graph.
-        if (!hasVertex(v1) || !hasVertex(v2))
-            throw new RuntimeException("Vertices must belong to the graph");
+    private boolean conflictingLocation(GraphVertex v) {
+        for (GraphVertex vertex : vertices)
+            if (vertex.getX() == v.getX() && vertex.getY() == v.getY() && vertex != v)
+                return true;
 
-        for (GraphEdge edge : edges)
-            if (edge.hasVertex(v1) && edge.hasVertex(v2))
-                return edge;
-
-        return null;
+        return false;
     }
 
     /**
@@ -261,7 +185,7 @@ public class GraphModel extends Observable implements Observer {
      * @throws RuntimeException if the introduced vertex is already in the graph.
      */
     public void addVertex(GraphVertex v) throws RuntimeException {
-        // Check if v is already in the graph.
+        // Check if v is already in the graph:
         if (hasVertex(v))
             throw new RuntimeException("The introduced vertex is already in the graph");
 
@@ -276,10 +200,9 @@ public class GraphModel extends Observable implements Observer {
     /**
      * Adds a new edge to the graph that connects the specified vertices.
      *
+     * @return the just created edge.
      * @throws RuntimeException if an edge between v1 and v2 already exists.
      * @throws RuntimeException if the vertices don't belong to the graph.
-     *
-     * @return the just created edge.
      */
     public GraphEdge addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that an edge between v1 and v2 doesn't exist already:
@@ -296,14 +219,15 @@ public class GraphModel extends Observable implements Observer {
         return e;
     }
 
-    // TODO
-    public void addEdge(GraphEdge edge) throws RuntimeException { // useful for the case of redoing an edge
-        GraphVertex v1 = edge.getV1();
-        GraphVertex v2 = edge.getV2();
-
+    /**
+     * Adds the edge to the graph.
+     *
+     * @throws RuntimeException if an edge between v1 and v2 already exists.
+     */
+    public void addEdge(GraphEdge edge) throws RuntimeException {
         // Check that an edge between v1 and v2 doesn't exist already:
-        if (hasEdge(v1, v2))
-            throw new RuntimeException("An edge between v1 and v2 already exists");
+        if (hasEdge(edge.getV1(), edge.getV2()))
+            throw new RuntimeException("You already have an edge there!");
 
         edges.add(edge);
 
@@ -312,107 +236,9 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Removes the specified vertex and all the edges connected to it.
-     *
-     * @throws RuntimeException if the vertex doesn't belong to the graph.
-     */
-    public void deleteVertex(GraphVertex v) throws RuntimeException {
-        // Check that v belongs to the graph:
-        if (!hasVertex(v))
-            throw new RuntimeException("Vertex must belong to the graph");
-
-        // Remove every connected edge.
-        List<GraphEdge> connectedEdges = getConnectedEdges(v);
-        for (GraphEdge edge : connectedEdges)
-            edges.remove(edge);
-
-        vertices.remove(v);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Removes the specified edge.
-     *
-     * @throws RuntimeException if the edge doesn't belong to the graph.
-     */
-    public void deleteEdge(GraphEdge e) throws RuntimeException {
-        // Check that e belongs to the graph:
-        if (!hasEdge(e))
-            throw new RuntimeException("Edge must belong to the graph");
-
-        edges.remove(e);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Removes the edge that connects v1 and v2.
-     *
-     * @throws RuntimeException if there's no edge between v1 and v2.
-     */
-    public void deleteEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
-        GraphEdge e = findEdge(v1, v2);
-
-        // Check that we found the edge.
-        if (e == null)
-            throw new RuntimeException("There must be an edge between v1 and v2");
-
-        edges.remove(e);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Deletes the selection (whether they are vertices or edges).
-     */
-    public void deleteSelected() {
-        // Delete edges connected to the selected vertices:
-        for (GraphVertex v : selectedVertices) {
-            edges.removeAll(getConnectedEdges(v));
-            selectedEdges.removeAll(getConnectedEdges(v));
-        }
-
-        // Delete selected vertices:
-        vertices.removeAll(selectedVertices);
-        selectedVertices.clear();
-
-        // Delete selected edges:
-        edges.removeAll(selectedEdges);
-        selectedEdges.clear();
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Checks if there's another vertex with the same name as v.
-     */
-    public boolean conflictingName(GraphVertex v) {
-        for (GraphVertex vertex : vertices)
-            if (vertex.getName().equals(v.getName()) && vertex != v)
-                return true;
-
-        return false;
-    }
-
-    /**
-     * Checks if there's another vertex with the same position as v.
-     */
-    public boolean conflictingLocation(GraphVertex v) {
-        for (GraphVertex vertex : vertices)
-            if (vertex.getX() == v.getX() && vertex.getY() == v.getY() && vertex != v)
-                return true;
-
-        return false;
-    }
-
-    /**
      * Creates a new vertex with the default name and position.
      * Name and position will be changed so they don't conflict with already existing vertices.
+     *
      * @return the just created vertex.
      */
     public GraphVertex createNewVertex() {
@@ -436,17 +262,62 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Saves a graph to a file with the given name.
+     * Removes the specified vertex and all the edges connected to it.
      *
-     * @throws IOException if there's a problem while creating/opening the file.
+     * @throws RuntimeException if the vertex doesn't belong to the graph.
      */
-    public void save(String filename) throws IOException {
-        PrintWriter printWriter = new PrintWriter(new File(filename));
+    public void deleteVertex(GraphVertex v) throws RuntimeException {
+        // Check that v belongs to the graph:
+        if (!hasVertex(v))
+            throw new RuntimeException("Vertex must belong to the graph");
 
-        printWriter.println(vertices.size() + " " + edges.size());
-        vertices.forEach(vertex -> printWriter.println(vertex.toString()));
-        edges.forEach(edge -> printWriter.println(vertices.indexOf(edge.getV1()) + " " + vertices.indexOf(edge.getV2())));
-        printWriter.close();
+        // Remove every connected edge:
+        List<GraphEdge> connectedEdges = getConnectedEdges(v);
+        for (GraphEdge edge : connectedEdges)
+            edges.remove(edge);
+
+        vertices.remove(v);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Removes the specified edge.
+     *
+     * @throws RuntimeException if the edge doesn't belong to the graph.
+     */
+    public void deleteEdge(GraphEdge e) throws RuntimeException {
+        // Check that e belongs to the graph:
+        if (hasNotEdge(e))
+            throw new RuntimeException("Edge must belong to the graph");
+
+        edges.remove(e);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Deletes the selection (whether they are vertices or edges).
+     */
+    public void deleteSelection() {
+        // Delete edges connected to the selected vertices:
+        for (GraphVertex v : selectedVertices) {
+            edges.removeAll(getConnectedEdges(v));
+            selectedEdges.removeAll(getConnectedEdges(v));
+        }
+
+        // Delete selected vertices:
+        vertices.removeAll(selectedVertices);
+        selectedVertices.clear();
+
+        // Delete selected edges:
+        edges.removeAll(selectedEdges);
+        selectedEdges.clear();
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
@@ -472,7 +343,7 @@ public class GraphModel extends Observable implements Observer {
             words = line.split(" ");
             StringBuilder name = new StringBuilder(words[4]);
 
-            // For vertices with names that contain spaces.
+            // For vertices with names that contain spaces:
             for (int j = 5; j < words.length; j++) {
                 name.append(" ");
                 name.append(words[j]);
@@ -494,6 +365,7 @@ public class GraphModel extends Observable implements Observer {
         this.vertices = vertices;
         this.edges = edges;
 
+        // Set the graph to observe the new vertices:
         for (GraphVertex vertex : vertices)
             vertex.addObserver(this);
 
@@ -502,11 +374,25 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Saves a graph to a file with the given name.
+     *
+     * @throws IOException if there's a problem while creating/opening the file.
+     */
+    public void save(String filename) throws IOException {
+        PrintWriter printWriter = new PrintWriter(new File(filename));
+
+        printWriter.println(vertices.size() + " " + edges.size());
+        vertices.forEach(vertex -> printWriter.println(vertex.toString()));
+        edges.forEach(edge -> printWriter.println(vertices.indexOf(edge.getV1()) + " " + vertices.indexOf(edge.getV2())));
+        printWriter.close();
+    }
+
+    /**
      * Checks the file format line by line using regular expressions.
      *
      * @throws IOException if there's a problem while opening the file.
      */
-    public boolean fileFormatIsOK(String filename) throws IOException {
+    private boolean fileFormatIsOK(String filename) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(filename));
 
         String line = reader.readLine();
@@ -573,7 +459,7 @@ public class GraphModel extends Observable implements Observer {
      */
     public void select(GraphEdge e) throws RuntimeException {
         // Check that e belongs to the graph:
-        if (!hasEdge(e))
+        if (hasNotEdge(e))
             throw new RuntimeException("Edge must belong to the graph");
 
         selectedEdges.add(e);
@@ -583,7 +469,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Marks the specified vertex as not selected.
+     * Marks the specified vertex as not selected as well as the edges connected to it.
      *
      * @throws RuntimeException if the vertex doesn't belong to the graph.
      */
@@ -612,7 +498,7 @@ public class GraphModel extends Observable implements Observer {
      */
     public void deSelect(GraphEdge e) throws RuntimeException {
         // Check that e belongs to the graph:
-        if (!hasEdge(e))
+        if (hasNotEdge(e))
             throw new RuntimeException("Edge must belong to the graph");
 
         selectedEdges.remove(e);
@@ -641,10 +527,17 @@ public class GraphModel extends Observable implements Observer {
      */
     public boolean isSelected(GraphEdge e) throws RuntimeException {
         // Check that e belongs to the graph:
-        if (!hasEdge(e))
+        if (hasNotEdge(e))
             throw new RuntimeException("Edge must belong to the graph");
 
         return selectedEdges.contains(e);
+    }
+
+    /**
+     * Checks if there is something (edge or vertex) selected.
+     */
+    public boolean somethingIsSelected() {
+        return selectedEdges.size() + selectedVertices.size() > 0;
     }
 
     /**
@@ -664,6 +557,58 @@ public class GraphModel extends Observable implements Observer {
     public void deselectAll() {
         selectedVertices.clear();
         selectedEdges.clear();
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Sets the start point of the addingEdgeLine.
+     */
+    public void setAddingEdgeLineStart(int startX, int startY) {
+        addingEdgeLine.setStartX(startX);
+        addingEdgeLine.setStartY(startY);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Sets the end point of the addingEdgeLine.
+     */
+    public void setAddingEdgeLineEnd(int endX, int endY) {
+        addingEdgeLine.setEndX(endX);
+        addingEdgeLine.setEndY(endY);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Adds an UndoableEdit to the undoManager.
+     */
+    public void addUndoableEdit(AbstractUndoableEdit edit) {
+        undoManager.addEdit(edit);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Undo the last edit.
+     */
+    public void undo() {
+        undoManager.undo();
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Redo the last undo.
+     */
+    public void redo() {
+        undoManager.redo();
 
         setChanged();
         notifyObservers();

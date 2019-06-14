@@ -25,7 +25,7 @@ public class GraphVertex extends Observable {
      *
      * @throws RuntimeException if the name is an empty string.
      */
-    public GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
+    GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
         if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
 
@@ -48,13 +48,6 @@ public class GraphVertex extends Observable {
     }
 
     /**
-     * Returns the location of the rectangle.
-     */
-    public Point getLocation() {
-        return rectangle.getLocation();
-    }
-
-    /**
      * Returns the width of the rectangle.
      */
     public int getWidth() {
@@ -62,17 +55,21 @@ public class GraphVertex extends Observable {
     }
 
     /**
+     * Sets the width of the rectangle.
+     * TODO: Remove if not used.
+     */
+    public void setWidth(int width) {
+        rectangle.setSize(width, (int) rectangle.getHeight());
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * Returns the height of the rectangle.
      */
     public int getHeight() {
         return (int) rectangle.getHeight();
-    }
-
-    /**
-     * Returns the rectangle that represents the vertex.
-     */
-    public Rectangle getRectangle() {
-        return rectangle;
     }
 
     /**
@@ -102,16 +99,6 @@ public class GraphVertex extends Observable {
      */
     public void setLocation(int x, int y) {
         rectangle.setLocation(x, y);
-
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Sets the size of the rectangle to the specified width and height.
-     */
-    public void setSize(int width, int height) {
-        rectangle.setSize(width, height);
 
         setChanged();
         notifyObservers();
