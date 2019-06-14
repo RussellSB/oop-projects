@@ -1,4 +1,4 @@
-42 47
+44 47
 284 208 100 100 Model
 424 206 100 100 View
 586 210 100 100 Controller
@@ -40,7 +40,9 @@
 954 369 100 100 GraphToolBar
 86 1056 100 100 DuplicateWindowAction
 78 827 100 100 ShowToolbarAction
-1219 134 100 100 This is a demonstration of the program design, made using the program we designed. It's low key meta. 
+1219 134 100 100 This is a demonstration of the program
+1258 191 100 100 design, made using the program
+1290 251 100 100 we designed. It's low key meta.
 3 0
 3 2
 1 5

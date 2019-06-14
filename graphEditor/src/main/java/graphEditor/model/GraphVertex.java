@@ -7,8 +7,9 @@ import java.util.Observable;
  * A simple vertex class.
  */
 public class GraphVertex extends Observable {
-    static final String DEFAULT_NAME = "Vertex ";
+    static final String DEFAULT_NAME = "Vertex";
     private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 100);
+    private static final int MAX_NAME_SIZE = 50; // Max numbers of characters allowed for the vertex name.
     private Rectangle rectangle;
     private String name;
 
@@ -24,10 +25,13 @@ public class GraphVertex extends Observable {
      * Creates a new vertex with the introduced parameters.
      *
      * @throws RuntimeException if the name is an empty string.
+     * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
      */
     public GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
         if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
+        if (name.length() > MAX_NAME_SIZE)
+            throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
 
         this.rectangle = new Rectangle(x, y, width, height);
         this.name = name;
@@ -83,10 +87,13 @@ public class GraphVertex extends Observable {
      * Sets the name of the vertex.
      *
      * @throws RuntimeException if the name is an empty string.
+     * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
      */
     public void setName(String name) throws RuntimeException {
         if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
+        if (name.length() > MAX_NAME_SIZE)
+            throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
 
         this.name = name;
 

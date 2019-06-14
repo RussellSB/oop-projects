@@ -4,7 +4,6 @@ import graphEditor.model.GraphModel;
 import graphEditor.view.GraphWindow;
 
 import javax.swing.*;
-import java.io.IOException;
 
 /**
  * Graph Editor Program.
@@ -21,8 +20,8 @@ public class GraphEditor {
         if (args.length == 1) {
             try {
                 graph.load(args[0]);
-            } catch (IOException e) {
-                JOptionPane.showMessageDialog(window.getFrame(), e.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(window.getFrame(), e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
