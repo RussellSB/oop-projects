@@ -15,7 +15,7 @@ import java.util.Observer;
  * Panel for the graph editor, where vertices and edges will be painted.
  */
 public class GraphPanel extends JPanel implements Observer {
-    public static final Dimension PREFERRED_SIZE = new Dimension(2000, 1500);
+    public static final Dimension PREFERRED_SIZE = new Dimension(5000, 5000);
     public static final int BORDER_THICKNESS = 30;
     private static final int V_ARC_HEIGHT = 20; // Height of the arc of the corners of the vertices.
     private static final int V_ARC_WIDTH = 20; // Width of the arc of the corners of the vertices.
