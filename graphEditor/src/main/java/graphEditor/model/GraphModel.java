@@ -580,7 +580,10 @@ public class GraphModel extends Observable implements Observer {
      * Marks all the vertices (and edges) as selected.
      */
     public void selectAll() {
+        selectedVertices.clear();
         selectedVertices.addAll(vertices);
+
+        selectedEdges.clear();
         selectedEdges.addAll(edges);
 
         setChanged();
