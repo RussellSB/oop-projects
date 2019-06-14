@@ -64,13 +64,15 @@ public class AddEdgeListener implements MouseListener, MouseMotionListener {
                 } catch (RuntimeException ex) {
                     JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {
-                    // Exit "Adding Edge Mode" and remove this listener.
+                    // v2 gets selected when we click on it but we want v1 to stay selected:
+                    graph.deSelect(v2);
+                    graph.select(v1);
+
+                    // Exit "Adding Edge Mode" and remove this listener:
                     graph.setAddingEdgeMode(false); // Exit
                     parentJFrame.getPanel().removeMouseListener(this);
                     parentJFrame.getPanel().removeMouseMotionListener(this);
                 }
-
-                break;
             }
         }
 

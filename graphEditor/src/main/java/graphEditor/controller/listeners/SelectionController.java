@@ -58,7 +58,6 @@ public class SelectionController implements MouseListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     /**
