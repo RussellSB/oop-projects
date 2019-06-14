@@ -36,7 +36,7 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
     }
 
     /**
-     * Undo the drag by moving the vertices back to their original position
+     * Undo the drag by moving the vertices back to their original position.
      */
     @Override
     public void undo() throws CannotUndoException {
@@ -46,7 +46,7 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
     }
 
     /**
-     * Redo the drag by moving the vertices again to their new position
+     * Redo the drag by moving the vertices again to their new position.
      */
     @Override
     public void redo() throws CannotRedoException {
