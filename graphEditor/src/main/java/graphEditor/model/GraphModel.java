@@ -243,8 +243,27 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Allows to add a list of vertices and edges to the graph.
+     * These vertices and edges will be selected after being added.
+     */
+    public void paste(List<GraphVertex> vertices, List<GraphEdge> edges) {
+        deselectAll();
+
+        for (GraphVertex v : vertices) {
+            addVertex(v);
+            select(v);
+        }
+
+        for (GraphEdge e : edges) {
+            addEdge(e);
+            select(e);
+        }
+    }
+
+    /**
      * Creates a new vertex with the default name and position.
      * Name and position will be changed so they don't conflict with already existing vertices.
+     * The new vertex will be selected after being added.
      *
      * @return the just created vertex.
      */

@@ -25,7 +25,7 @@ public class GraphVertex extends Observable {
      *
      * @throws RuntimeException if the name is an empty string.
      */
-    GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
+    public GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
         if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
 

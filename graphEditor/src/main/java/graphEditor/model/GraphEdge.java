@@ -16,7 +16,7 @@ public class GraphEdge {
      *
      * @throws IllegalArgumentException if v1 and v2 are the same.
      */
-    GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
+    public GraphEdge(GraphVertex v1, GraphVertex v2) throws IllegalArgumentException {
         // Self-loops are not allowed
         if (v1 == v2)
             throw new IllegalArgumentException("Self-loops are not allowed");

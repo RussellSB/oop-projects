@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 public class GraphMenuBar extends JMenuBar {
     private GraphModel graph;
     private GraphFrame parentJFrame;
+    private CopyPasteManager copyPasteManager;
 
     /**
      * Creates a new menu bar with all its menus.
@@ -21,6 +22,7 @@ public class GraphMenuBar extends JMenuBar {
     public GraphMenuBar(GraphModel graph, GraphFrame parentJFrame) {
         this.graph = graph;
         this.parentJFrame = parentJFrame;
+        this.copyPasteManager = new CopyPasteManager(graph);
 
         addFileMenu();
         addEditMenu();
@@ -35,9 +37,7 @@ public class GraphMenuBar extends JMenuBar {
         menu.getAccessibleContext().setAccessibleDescription("The File menu for file related functions.");
 
         addNewGraphMenuItem(menu);
-
         addOpenMenuItem(menu);
-
         addSaveMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
@@ -104,15 +104,17 @@ public class GraphMenuBar extends JMenuBar {
         menu.getAccessibleContext().setAccessibleDescription("The edit menu for modifying current graph.");
 
         addUndoMenuItem(menu);
-
         addRedoMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
 
-        // TODO: Copy, cut, paste (plus separator) will go here in that order.
+        addCopyMenuItem(menu);
+        addCutMenuItem(menu);
+        addPasteMenuItem(menu);
+
+        menu.add(new JSeparator()); // Separator
 
         addAddVertexMenuItem(menu);
-
         addAddEdgeMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
@@ -151,6 +153,42 @@ public class GraphMenuBar extends JMenuBar {
         menuItem.setAction(new RedoAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Revert the previous undo action");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Copy menu item to the menu.
+     */
+    private void addCopyMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new CopyAction(copyPasteManager));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Copy selected vertices with the edges between them");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Cut menu item to the menu.
+     */
+    private void addCutMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new CutAction(copyPasteManager));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Cut selected vertices with the edges between them");
+
+        menu.add(menuItem);
+    }
+
+    /**
+     * Adds the Paste menu item to the menu.
+     */
+    private void addPasteMenuItem(JMenu menu) {
+        JMenuItem menuItem = new JMenuItem();
+        menuItem.setAction(new PasteAction(copyPasteManager));
+        menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
+        menuItem.getAccessibleContext().setAccessibleDescription("Copy selected vertices with the edges between them");
 
         menu.add(menuItem);
     }
@@ -227,7 +265,6 @@ public class GraphMenuBar extends JMenuBar {
         menu.add(new JSeparator()); // Separator
 
         addNewWindowMenuItem(menu);
-
         addDuplicateWindowMenuItem(menu);
 
         menu.add(new JSeparator()); // Separator
