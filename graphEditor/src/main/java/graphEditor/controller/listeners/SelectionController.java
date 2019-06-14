@@ -26,7 +26,6 @@ public class SelectionController implements MouseListener, KeyListener {
         this.parentJFrame = parentJFrame;
 
         parentJFrame.addKeyListener(this);
-        parentJFrame.requestFocus();
         parentJFrame.getPanel().addMouseListener(this);
     }
 
@@ -45,12 +44,16 @@ public class SelectionController implements MouseListener, KeyListener {
                     graph.deselectAll();
     }
 
+    /**
+     * Every time the mouse enters in the panel we request focus to the parentJFrame so the KeyListener keeps working.
+     */
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseEntered(MouseEvent e) {
+        parentJFrame.requestFocus();
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseReleased(MouseEvent e) {
     }
 
     @Override
@@ -66,7 +69,6 @@ public class SelectionController implements MouseListener, KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println(e.isControlDown());
         parentJFrame.setCtrlIsDown(e.isControlDown());
     }
 
@@ -75,7 +77,6 @@ public class SelectionController implements MouseListener, KeyListener {
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println(e.isControlDown());
         parentJFrame.setCtrlIsDown(e.isControlDown());
     }
 
