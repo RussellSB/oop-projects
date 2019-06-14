@@ -1,5 +1,6 @@
 package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.saveGraphNonUndoableEdit;
 import graphEditor.model.GraphModel;
 import graphEditor.view.GraphFrame;
 
@@ -45,7 +46,7 @@ public class SaveAction extends AbstractAction {
                 filename = file.getPath() + ".txt";
 
             try {
-                graph.save(filename); // TODO: Replace with saveGraphNonUndoableEdit
+                graph.addUndoableEdit(new saveGraphNonUndoableEdit(graph, filename));
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
