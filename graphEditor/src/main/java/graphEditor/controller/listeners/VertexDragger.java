@@ -59,7 +59,7 @@ public class VertexDragger implements MouseInputListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         if (dragging)
-            finishDrag(e);
+            finishDrag();
     }
 
     @Override
@@ -129,7 +129,7 @@ public class VertexDragger implements MouseInputListener {
     /**
      * Checks if the drag can be performed and finishes it (vertices are not allowed to be dragged out of the panel).
      */
-    private void finishDrag(MouseEvent e) {
+    private void finishDrag() {
         if (allVerticesInsidePanel()) {
             graph.addUndoableEdit(new VertexDragUndoableEdit(graph, initialLocations));
         } else {
