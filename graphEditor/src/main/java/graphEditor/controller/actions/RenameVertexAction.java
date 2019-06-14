@@ -63,9 +63,6 @@ public class RenameVertexAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        if (graph.getSelectedVerticesCount() == 1)
-            setEnabled(true);
-        else
-            setEnabled(false);
+        setEnabled(graph.getSelectedVerticesCount() == 1);
     }
 }
