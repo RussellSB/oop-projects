@@ -17,9 +17,9 @@ public class AddVertexUndoableEdit extends AbstractUndoableEdit {
     /**
      * Adds the vertex to the graph and saves it for future use.
      */
-    public AddVertexUndoableEdit(GraphModel graph) {
+    public AddVertexUndoableEdit(GraphModel graph, int x, int y) {
         this.graph = graph;
-        this.addedVertex = graph.createNewVertex();
+        this.addedVertex = graph.createNewVertex(x, y);
     }
 
     /**

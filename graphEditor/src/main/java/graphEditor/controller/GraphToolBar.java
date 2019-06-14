@@ -45,7 +45,7 @@ public class GraphToolBar extends JToolBar {
 
         add(new JSeparator(SwingConstants.VERTICAL)); // Separator
 
-        add(new JButton(new AddVertexAction(graph)));
+        add(new JButton(new AddVertexAction(graph, parentJFrame.getPanel())));
         add(new JButton(new AddEdgeAction(graph, parentJFrame)));
 
         add(new JSeparator(SwingConstants.VERTICAL)); // Separator

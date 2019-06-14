@@ -261,19 +261,22 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Creates a new vertex with the default name and position.
+     * Creates a new vertex with the default name and size in the specified position.
      * Name and position will be changed so they don't conflict with already existing vertices.
      * The new vertex will be selected after being added.
      *
      * @return the just created vertex.
      */
-    public GraphVertex createNewVertex() {
+    public GraphVertex createNewVertex(int x, int y) {
         GraphVertex v = new GraphVertex();
-        int i = 0;
+        v.setLocation(x, y);
 
+        // Change the name if there is a conflict with another vertex:
+        int i = 0;
         while (conflictingName(v))
             v.setName(GraphVertex.DEFAULT_NAME + " " + ++i);
 
+        // Change the location if there is a conflict with another vertex:
         while (conflictingLocation(v))
             v.setLocation(v.getX() + 40, v.getY() + 30);
 

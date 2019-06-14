@@ -8,7 +8,7 @@ import java.util.Observable;
  */
 public class GraphVertex extends Observable {
     static final String DEFAULT_NAME = "Vertex";
-    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 50);
+    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(0, 0, 100, 50);
     private static final int MAX_NAME_SIZE = 50; // Max numbers of characters allowed for the vertex name.
     private static final int TEXT_PADDING = 20; // Space (in pixels) between the text and the vertex border.
     private Rectangle rectangle;
