@@ -20,7 +20,6 @@ public class DeleteAction extends AbstractAction implements Observer {
         super("Delete Selection");
         this.graph = graph;
         graph.addObserver(this);
-        setEnabled(false);
     }
 
     /**

@@ -19,8 +19,7 @@ public class UndoAction extends AbstractAction implements Observer {
     public UndoAction(GraphModel graph) {
         super("Undo");
         this.graph = graph;
-        setEnabled(false);
-        graph.addObserver(this); //TODO: make it update without having to click panel
+        graph.addObserver(this);
     }
 
     /**
@@ -31,6 +30,9 @@ public class UndoAction extends AbstractAction implements Observer {
         graph.getUndoManager().undo();
     }
 
+    /**
+     * Checks the undoManager state to determine if this action can be enabled or not.
+     */
     @Override
     public void update(Observable o, Object arg) {
         setEnabled(graph.getUndoManager().canUndo());

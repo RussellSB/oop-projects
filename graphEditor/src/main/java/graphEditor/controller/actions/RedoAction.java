@@ -19,8 +19,7 @@ public class RedoAction extends AbstractAction implements Observer {
     public RedoAction(GraphModel graph) {
         super("Redo");
         this.graph = graph;
-        setEnabled(false);
-        graph.addObserver(this); //TODO: make it update without having to click panel
+        graph.addObserver(this);
     }
 
     /**
@@ -31,6 +30,9 @@ public class RedoAction extends AbstractAction implements Observer {
         graph.getUndoManager().redo();
     }
 
+    /**
+     * Checks the undoManager state to determine if this action can be enabled or not.
+     */
     @Override
     public void update(Observable o, Object arg) {
         setEnabled(graph.getUndoManager().canRedo());
