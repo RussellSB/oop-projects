@@ -33,10 +33,6 @@ public class RedoAction extends AbstractAction implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (graph.getUndoManager().canRedo()) {
-            setEnabled(true);
-        } else {
-            setEnabled(false);
-        }
+        setEnabled(graph.getUndoManager().canRedo());
     }
 }

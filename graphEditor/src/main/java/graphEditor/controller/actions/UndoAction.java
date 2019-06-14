@@ -33,10 +33,6 @@ public class UndoAction extends AbstractAction implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (graph.getUndoManager().canUndo()) {
-            setEnabled(true);
-        } else {
-            setEnabled(false);
-        }
+        setEnabled(graph.getUndoManager().canUndo());
     }
 }
