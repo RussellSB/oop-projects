@@ -8,13 +8,13 @@ import java.io.IOException;
 /**
  * A not undoable edit: It won't be possible to undo the edits done before saving the graph to a file.
  */
-public class saveGraphNonUndoableEdit extends AbstractUndoableEdit {
+public class SaveGraphNonUndoableEdit extends AbstractUndoableEdit {
     /**
      * Saves a graph to a file with the given name.
      *
      * @throws IOException if there's a problem while creating/opening the file.
      */
-    public saveGraphNonUndoableEdit(GraphModel graph, String filePath) throws IOException {
+    public SaveGraphNonUndoableEdit(GraphModel graph, String filePath) throws IOException {
         graph.save(filePath);
     }
 

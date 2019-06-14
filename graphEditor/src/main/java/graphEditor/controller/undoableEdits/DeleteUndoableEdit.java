@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * An UndoableEdit used to undo/redo the deletion of vertices and edges.
  */
-public class deleteUndoableEdit extends AbstractUndoableEdit {
+public class DeleteUndoableEdit extends AbstractUndoableEdit {
     private GraphModel graph;
     private List<GraphVertex> deletedVertices;
     private List<GraphEdge> deletedEdges;
@@ -21,7 +21,7 @@ public class deleteUndoableEdit extends AbstractUndoableEdit {
     /**
      * Deletes all the selected vertices and edges after storing them.
      */
-    public deleteUndoableEdit(GraphModel graph) {
+    public DeleteUndoableEdit(GraphModel graph) {
         this.graph = graph;
 
         this.deletedVertices = new ArrayList<>();
