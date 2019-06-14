@@ -1,55 +1,42 @@
 package graphEditor.controller.undoableEdits;
 
-import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 
-import javax.swing.*;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
+/**
+ * An UndoableEdit used to undo/redo the renaming of a vertex.
+ */
 public class RenameVertexUndoableEdit extends AbstractUndoableEdit {
-
-    private GraphModel graph;
+    private GraphVertex vertex;
     private String oldName;
     private String newName;
-    private GraphVertex vertex;
-    private JFrame parentJFrame;
 
-    public RenameVertexUndoableEdit(GraphModel graph, JFrame parentJFrame) {
-        this.graph = graph;
-        this.parentJFrame = parentJFrame;
-        renameVertex(graph);
+    /**
+     * Renames the vertex and saves the old and the new name for future use.
+     */
+    public RenameVertexUndoableEdit(GraphVertex vertex, String newName) throws RuntimeException {
+        this.vertex = vertex;
+        this.newName = newName;
+        this.oldName = vertex.getName();
+
+        vertex.setName(newName);
     }
 
     /**
-     * Renames the selected vertex.
+     * Undo the edit by renaming the vertex to its original name.
      */
-    public void renameVertex(GraphModel graph) {
-        if (graph.getSelectedVerticesCount() > 1) {
-            JOptionPane.showMessageDialog(parentJFrame, "You can only rename one vertex at a time!", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        vertex = graph.getSelectedVertices().get(0);
-        oldName = vertex.getName();
-
-        newName = JOptionPane.showInputDialog(parentJFrame, "Introduce the new name for the vertex:", vertex.getName());
-
-        if (newName != null)
-            try {
-                vertex.setName(newName);
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(parentJFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            }
-    }
-
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
         vertex.setName(oldName);
     }
 
+    /**
+     * Redo the edit by renaming the vertex again.
+     */
     @Override
     public void redo() throws CannotRedoException {
         super.redo();

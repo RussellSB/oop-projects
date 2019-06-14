@@ -27,7 +27,7 @@ public class UndoAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.getUndoManager().undo();
+        graph.undo();
     }
 
     /**

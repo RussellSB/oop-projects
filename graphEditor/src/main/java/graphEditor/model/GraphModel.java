@@ -39,6 +39,29 @@ public class GraphModel extends Observable implements Observer {
      */
     public void addUndoableEdit(AbstractUndoableEdit edit) {
         undoManager.addEdit(edit);
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Undo the last edit.
+     */
+    public void undo() {
+        undoManager.undo();
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Redo the last undo.
+     */
+    public void redo() {
+        undoManager.redo();
+
+        setChanged();
+        notifyObservers();
     }
 
     /**
