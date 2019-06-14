@@ -55,7 +55,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new NewGraphAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Resets current frame to new graph. Any unsaved changes will be lost.");
+        menuItem.getAccessibleContext().setAccessibleDescription("Reset current frame to new graph. Any unsaved changes will be lost.");
 
         menu.add(menuItem);
     }
@@ -67,7 +67,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new OpenAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Loads specified graph.");
+        menuItem.getAccessibleContext().setAccessibleDescription("Load the specified graph.");
 
         menu.add(menuItem);
     }
@@ -79,7 +79,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new SaveAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Saves current graph.");
+        menuItem.getAccessibleContext().setAccessibleDescription("Save current graph.");
 
         menu.add(menuItem);
     }
@@ -138,7 +138,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new UndoAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Reverts graph to previous state");
+        menuItem.getAccessibleContext().setAccessibleDescription("Revert graph to previous state");
 
         menu.add(menuItem);
     }
@@ -150,7 +150,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new RedoAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Reverts the previous undo action");
+        menuItem.getAccessibleContext().setAccessibleDescription("Revert the previous undo action");
 
         menu.add(menuItem);
     }
@@ -162,7 +162,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new AddVertexAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Adds vertex to graph");
+        menuItem.getAccessibleContext().setAccessibleDescription("Add vertex to graph");
 
         menu.add(menuItem);
     }
@@ -174,7 +174,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new AddEdgeAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.ALT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Adds an edge between two vertices");
+        menuItem.getAccessibleContext().setAccessibleDescription("Add an edge between two vertices");
 
         menu.add(menuItem);
     }
@@ -186,7 +186,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new SelectAllAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Selects all the vertices and edges");
+        menuItem.getAccessibleContext().setAccessibleDescription("Select all the vertices and edges");
 
         menu.add(menuItem);
     }
@@ -198,7 +198,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new RenameVertexAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Renames the selected vertex");
+        menuItem.getAccessibleContext().setAccessibleDescription("Rename the selected vertex");
 
         menu.add(menuItem);
     }
@@ -210,7 +210,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new DeleteAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_BACK_SPACE, InputEvent.CTRL_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Deletes the selected objects");
+        menuItem.getAccessibleContext().setAccessibleDescription("Delete the selected objects");
 
         menu.add(menuItem);
     }
@@ -281,7 +281,7 @@ public class GraphMenuBar extends JMenuBar {
         JMenuItem menuItem = new JMenuItem();
         menuItem.setAction(new DuplicateWindowAction(graph, parentJFrame));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK + InputEvent.SHIFT_MASK));
-        menuItem.getAccessibleContext().setAccessibleDescription("Duplicates the current window");
+        menuItem.getAccessibleContext().setAccessibleDescription("Duplicate the current window");
 
         menu.add(menuItem);
     }
