@@ -30,14 +30,20 @@ public class AddEdgeUndoableEdit extends AbstractUndoableEdit {
     public void undo() throws CannotUndoException {
         super.undo();
         graph.deleteEdge(addedEdge);
+
+        graph.deselectAll();
     }
 
     /**
      * Redo the edit by adding the edge again.
+     * Selects the modified edge.
      */
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
         graph.addEdge(addedEdge);
+
+        graph.deselectAll();
+        graph.select(addedEdge);
     }
 }

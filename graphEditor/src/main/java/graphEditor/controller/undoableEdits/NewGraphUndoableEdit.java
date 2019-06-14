@@ -39,12 +39,7 @@ public class NewGraphUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
-
-        for (GraphVertex vertex : deletedVertices)
-            graph.addVertex(vertex);
-
-        for (GraphEdge edge : deletedEdges)
-            graph.addEdge(edge);
+        graph.paste(deletedVertices, deletedEdges);
     }
 
     /**
@@ -53,7 +48,6 @@ public class NewGraphUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-
         graph.reset();
     }
 }

@@ -29,14 +29,20 @@ public class AddVertexUndoableEdit extends AbstractUndoableEdit {
     public void undo() throws CannotUndoException {
         super.undo();
         graph.deleteVertex(addedVertex);
+
+        graph.deselectAll();
     }
 
     /**
      * Redo the edit by adding the vertex again.
+     * Selects the modified vertex.
      */
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
         graph.addVertex(addedVertex);
+
+        graph.deselectAll();
+        graph.select(addedVertex);
     }
 }

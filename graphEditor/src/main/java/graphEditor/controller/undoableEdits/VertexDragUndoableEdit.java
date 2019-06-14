@@ -15,6 +15,7 @@ import java.util.List;
  * WARNING: This class assumes that the vertices have already been moved to their final location.
  */
 public class VertexDragUndoableEdit extends AbstractUndoableEdit {
+    private GraphModel graph;
     private List<GraphVertex> draggedVertices;
     private List<Point> initialLocations; // Initial location of the dragged vertices.
     private List<Point> newLocations; // New location of the dragged vertices.
@@ -23,6 +24,7 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
      * Saves the draggedVertices, initialLocations and newLocations.
      */
     public VertexDragUndoableEdit(GraphModel graph, List<Point> initialLocations) {
+        this.graph = graph;
         this.draggedVertices = new ArrayList<>();
         this.initialLocations = new ArrayList<>();
         this.newLocations = new ArrayList<>();
@@ -41,8 +43,7 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
-        for (int i = 0; i < draggedVertices.size(); i++)
-            draggedVertices.get(i).setLocation(initialLocations.get(i).x, initialLocations.get(i).y);
+        setLocation(initialLocations);
     }
 
     /**
@@ -51,7 +52,20 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-        for (int i = 0; i < draggedVertices.size(); i++)
-            draggedVertices.get(i).setLocation(newLocations.get(i).x, newLocations.get(i).y);
+        setLocation(newLocations);
+    }
+
+    /**
+     * Auxiliary method to avoid duplicated code.
+     * Moves the draggedVertices to their locations.
+     */
+    private void setLocation(List<Point> locations) {
+        graph.deselectAll();
+
+        for (int i = 0; i < draggedVertices.size(); i++) {
+            GraphVertex v = draggedVertices.get(i);
+            v.setLocation(locations.get(i).x, locations.get(i).y);
+            graph.select(v);
+        }
     }
 }

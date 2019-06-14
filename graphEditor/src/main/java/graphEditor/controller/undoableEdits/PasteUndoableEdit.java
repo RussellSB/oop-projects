@@ -45,6 +45,8 @@ public class PasteUndoableEdit extends AbstractUndoableEdit {
 
         for (GraphVertex v : pastedVertices)
             graph.deleteVertex(v);
+
+        graph.deselectAll();
     }
 
     /**
@@ -53,11 +55,6 @@ public class PasteUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-
-        for (GraphVertex v : pastedVertices)
-            graph.addVertex(v);
-
-        for (GraphEdge e : pastedEdges)
-            graph.addEdge(e);
+        graph.paste(pastedVertices, pastedEdges);
     }
 }

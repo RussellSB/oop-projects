@@ -46,11 +46,7 @@ public class DeleteUndoableEdit extends AbstractUndoableEdit {
     public void undo() throws CannotUndoException {
         super.undo();
 
-        for (GraphVertex vertex : deletedVertices)
-            graph.addVertex(vertex);
-
-        for (GraphEdge edge : deletedEdges)
-            graph.addEdge(edge);
+        graph.paste(deletedVertices, deletedEdges);
     }
 
     /**
@@ -65,5 +61,7 @@ public class DeleteUndoableEdit extends AbstractUndoableEdit {
 
         for (GraphVertex vertex : deletedVertices)
             graph.deleteVertex(vertex);
+
+        graph.deselectAll();
     }
 }

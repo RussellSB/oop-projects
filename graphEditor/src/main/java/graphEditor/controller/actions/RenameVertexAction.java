@@ -43,7 +43,7 @@ public class RenameVertexAction extends AbstractAction implements Observer {
 
         if (newName != null)
             try {
-                graph.addUndoableEdit(new RenameVertexUndoableEdit(vertex, newName));
+                graph.addUndoableEdit(new RenameVertexUndoableEdit(graph, vertex, newName));
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(parentJFrame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
