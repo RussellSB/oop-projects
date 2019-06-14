@@ -1,5 +1,6 @@
 package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.deleteUndoableEdit;
 import graphEditor.model.GraphModel;
 
 import javax.swing.*;
@@ -27,7 +28,7 @@ public class DeleteAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.deleteSelection(); // TODO: Replace with deleteUndoableEdit.
+        graph.addUndoableEdit(new deleteUndoableEdit(graph));
     }
 
     /**

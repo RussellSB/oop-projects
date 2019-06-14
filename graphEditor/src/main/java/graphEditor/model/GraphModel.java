@@ -56,6 +56,13 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Gets the list of selected edges.
+     */
+    public List<GraphEdge> getSelectedEdges() {
+        return selectedEdges;
+    }
+
+    /**
      * Gets the total number of vertices contained in the graph.
      */
     public int getVerticesCount() {
@@ -81,7 +88,7 @@ public class GraphModel extends Observable implements Observer {
      *
      * @throws RuntimeException if the vertex v doesn't belong to the graph.
      */
-    private List<GraphEdge> getConnectedEdges(GraphVertex v) throws RuntimeException {
+    public List<GraphEdge> getConnectedEdges(GraphVertex v) throws RuntimeException {
         // Check that v belongs to the graph:
         if (!hasVertex(v))
             throw new RuntimeException("Vertex must belong to the graph");
