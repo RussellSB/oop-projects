@@ -6,14 +6,13 @@ import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 
 /**
  * Add Edge Listener: Allows to add edges.
  */
-public class AddEdgeListener implements MouseListener, MouseMotionListener {
+public class AddEdgeListener implements MouseInputListener {
     private GraphVertex v1;
     private GraphModel graph;
     private GraphFrame parentJFrame;

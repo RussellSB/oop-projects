@@ -5,17 +5,16 @@ import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphPanel;
 
+import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Vertex Dragger: Allows to drag vertices.
  */
-public class VertexDragger implements MouseListener, MouseMotionListener {
+public class VertexDragger implements MouseInputListener {
     private GraphModel graph;
     private boolean readyToDrag = false; // Flag that enables dragging.
     private boolean dragging = false; // Flag that indicates the dragging has started.
