@@ -475,8 +475,10 @@ public class GraphModel extends Observable implements Observer {
 
         selectedVertices.add(v);
 
-        // Select the connected edges:
-        selectedEdges.addAll(getConnectedEdges(v));
+        // Select the connected edges if they are not selected yet:
+        for (GraphEdge e : getConnectedEdges(v))
+            if (!isSelected(e))
+                selectedEdges.add(e);
 
         setChanged();
         notifyObservers();
