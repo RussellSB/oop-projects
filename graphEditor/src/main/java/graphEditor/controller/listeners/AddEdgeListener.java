@@ -1,5 +1,6 @@
 package graphEditor.controller.listeners;
 
+import graphEditor.controller.undoableEdits.AddEdgeUndoableEdit;
 import graphEditor.model.GraphModel;
 import graphEditor.model.GraphVertex;
 import graphEditor.view.GraphFrame;
@@ -59,7 +60,7 @@ public class AddEdgeListener implements MouseListener, MouseMotionListener {
 
             if (v2.intersects(e.getPoint())) {
                 try {
-                    graph.addEdge(v1, v2); // TODO: Use UndoableEdit
+                    graph.addUndoableEdit(new AddEdgeUndoableEdit(graph, v1, v2));
                 } catch (RuntimeException ex) {
                     JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 } finally {

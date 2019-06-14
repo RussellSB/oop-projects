@@ -2,6 +2,7 @@ package graphEditor.model;
 
 import javafx.scene.shape.Line;
 
+import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.UndoManager;
 import java.io.*;
 import java.util.ArrayList;
@@ -31,6 +32,13 @@ public class GraphModel extends Observable implements Observer {
         selectedVertices = new ArrayList<>();
         selectedEdges = new ArrayList<>();
         undoManager = new UndoManager();
+    }
+
+    /**
+     * Adds an undoable edit to the undoManager.
+     */
+    public void addUndoableEdit(AbstractUndoableEdit edit) {
+        undoManager.addEdit(edit);
     }
 
     /**
@@ -248,7 +256,7 @@ public class GraphModel extends Observable implements Observer {
      * @throws RuntimeException if an edge between v1 and v2 already exists.
      * @throws RuntimeException if the vertices don't belong to the graph.
      */
-    public void addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
+    public GraphEdge addEdge(GraphVertex v1, GraphVertex v2) throws RuntimeException {
         // Check that an edge between v1 and v2 doesn't exist already:
         if (hasEdge(v1, v2))
             throw new RuntimeException("You already have an edge there!");
@@ -259,6 +267,8 @@ public class GraphModel extends Observable implements Observer {
 
         setChanged();
         notifyObservers();
+
+        return e;
     }
 
     public void addEdge(GraphEdge edge) throws RuntimeException { // useful for the case of redoing an edge
