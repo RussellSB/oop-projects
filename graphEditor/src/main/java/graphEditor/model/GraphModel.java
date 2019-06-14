@@ -134,7 +134,7 @@ public class GraphModel extends Observable implements Observer {
             throw new RuntimeException("Vertices must belong to the graph");
 
         for (GraphEdge edge : edges)
-            if (edge.hasVertex(v1) && edge.hasVertex(v2))
+            if (edge.hasVertex(v1) && edge.hasVertex(v2) && v1 != v2)
                 return true;
 
         return false;
@@ -261,6 +261,10 @@ public class GraphModel extends Observable implements Observer {
         vertices.add(v);
 
         v.addObserver(this);
+
+        // Select the newly created vertex:
+        deselectAll();
+        select(v);
 
         setChanged();
         notifyObservers();
