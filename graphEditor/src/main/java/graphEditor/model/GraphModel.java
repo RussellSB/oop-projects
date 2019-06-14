@@ -473,11 +473,13 @@ public class GraphModel extends Observable implements Observer {
         if (!hasVertex(v))
             throw new RuntimeException("Vertex must belong to the graph");
 
-        selectedVertices.add(v);
+        // Select the vertex if it's not selected yet:
+        if (!selectedVertices.contains(v))
+            selectedVertices.add(v);
 
         // Select the connected edges if they are not selected yet:
         for (GraphEdge e : getConnectedEdges(v))
-            if (!isSelected(e))
+            if (!selectedEdges.contains(e))
                 selectedEdges.add(e);
 
         setChanged();
@@ -494,7 +496,9 @@ public class GraphModel extends Observable implements Observer {
         if (hasNotEdge(e))
             throw new RuntimeException("Edge must belong to the graph");
 
-        selectedEdges.add(e);
+        // Select the edge if it's not selected yet.
+        if (!selectedEdges.contains(e))
+            selectedEdges.add(e);
 
         setChanged();
         notifyObservers();
