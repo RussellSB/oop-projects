@@ -36,6 +36,9 @@ public class AddEdgeListener implements MouseInputListener {
         int v1CenterY = v1.getY() + v1.getHeight() / 2;
         graph.setAddingEdgeLineStart(v1CenterX, v1CenterY);
 
+        // Sets initial end point
+        graph.setAddingEdgeLineEnd(v1CenterX, v1CenterY);
+
         // Tell the graph (and the GraphPanel) we are adding a new edge:
         graph.setAddingEdgeMode(true);
     }
