@@ -16,6 +16,7 @@ public class SelectAllAction extends AbstractAction {
      */
     public SelectAllAction(GraphModel graph) {
         super("Select All");
+
         this.graph = graph;
     }
 

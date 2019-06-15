@@ -17,6 +17,7 @@ public class NewGraphAction extends AbstractAction {
      */
     public NewGraphAction(GraphModel graph) {
         super("New Graph");
+
         this.graph = graph;
     }
 

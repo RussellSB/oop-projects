@@ -30,7 +30,7 @@ public class GraphFrame extends JFrame {
 
         panel = new GraphPanel(graph);
 
-        getContentPane().add(new JScrollPane(panel)); // Add panel inside of a JScrollPane.
+        getContentPane().add(new JScrollPane(panel)); // Add the GraphPanel inside of a JScrollPane.
 
         setJMenuBar(new GraphMenuBar(graph, this)); // Add Menu bar.
 

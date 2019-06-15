@@ -43,7 +43,7 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void undo() throws CannotUndoException {
         super.undo();
-        setLocation(initialLocations);
+        setVerticesLocation(initialLocations);
     }
 
     /**
@@ -52,14 +52,14 @@ public class VertexDragUndoableEdit extends AbstractUndoableEdit {
     @Override
     public void redo() throws CannotRedoException {
         super.redo();
-        setLocation(newLocations);
+        setVerticesLocation(newLocations);
     }
 
     /**
      * Auxiliary method to avoid duplicated code.
      * Moves the draggedVertices to their locations.
      */
-    private void setLocation(List<Point> locations) {
+    private void setVerticesLocation(List<Point> locations) {
         graph.deselectAll();
 
         for (int i = 0; i < draggedVertices.size(); i++) {

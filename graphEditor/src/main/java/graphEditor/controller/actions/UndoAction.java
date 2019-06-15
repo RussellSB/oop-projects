@@ -18,7 +18,9 @@ public class UndoAction extends AbstractAction implements Observer {
      */
     public UndoAction(GraphModel graph) {
         super("Undo");
+
         this.graph = graph;
+
         graph.addObserver(this);
     }
 

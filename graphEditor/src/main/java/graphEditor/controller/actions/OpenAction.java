@@ -22,6 +22,7 @@ public class OpenAction extends AbstractAction {
      */
     public OpenAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Open");
+
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }

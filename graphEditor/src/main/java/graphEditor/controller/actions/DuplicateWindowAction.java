@@ -19,6 +19,7 @@ public class DuplicateWindowAction extends AbstractAction {
      */
     public DuplicateWindowAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Duplicate Window");
+
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }

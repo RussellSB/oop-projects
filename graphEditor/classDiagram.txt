@@ -1,50 +1,48 @@
 44 47
-476 237 100 50 Model
-616 235 100 50 View
-778 239 100 50 Controller
-616 85 100 50 GraphEditor
-693 450 100 50 GraphPanel
-562 448 100 50 GraphFrame
-396 564 100 50 GraphVertex
-333 439 100 50 GraphModel
-262 567 100 50 GraphEdge
-1160 977 139 50 SelectionController
-1178 863 126 50 AddEdgeListener
-1323 977 111 50 VertexDragger
-574 863 115 50 AddEdgeAction
-703 860 123 50 AddVertexAction
-833 860 100 50 DeleteAction
-503 977 128 50 DefaultSizeAction
-943 858 123 50 NewGraphAction
-1025 395 113 50 GraphMenuBar
-462 863 100 50 RedoAction
-1005 979 100 50 QuitAction
-648 978 100 50 OpenAction
-382 980 100 50 UndoAction
-297 864 150 50 RenameVertexAction
-761 979 100 50 SaveAction
-880 977 112 50 SelectAllAction
-232 981 132 50 NewWindowAction
-625 563 105 50 GraphWindow
-942 562 100 50 Actions
-1088 559 100 50 Listeners
-1280 563 111 50 UndoableEdits
-1525 863 160 50 AddEdgeUndoableEdit
-1719 973 168 50 AddVertexUndoableEdit
-1710 623 145 50 DeleteUndoableEdit
-1521 622 168 50 NewGraphUndoableEdit
-1733 742 197 50 LoadGraphNonUndoableEdit
-1524 740 195 50 RenameVertexUndoableEdit
-1708 866 197 50 SaveGraphNonUndoableEdit
-1528 973 174 50 VertexDragUndoableEdit
-1146 398 105 50 GraphToolBar
-55 981 165 50 DuplicateWindowAction
-130 865 139 50 ShowToolbarAction
-1414 163 311 50 This is a demonstration of the program design
-1414 198 312 50 design, made using the program we designed.
-1508 255 127 50 It's low key meta.
-3 0
-3 2
+461 195 100 50 Model
+601 193 100 50 View
+763 197 100 50 Controller
+601 43 100 50 GraphEditor
+667 408 100 50 GraphPanel
+536 406 100 50 GraphFrame
+381 522 100 50 GraphVertex
+318 397 100 50 GraphModel
+247 523 100 50 GraphEdge
+1149 916 139 50 SelectionController
+1184 817 126 50 AddEdgeListener
+1312 916 111 50 VertexDragger
+938 817 115 50 AddEdgeAction
+563 821 123 50 AddVertexAction
+693 821 100 50 DeleteAction
+492 916 128 50 DefaultSizeAction
+803 819 123 50 NewGraphAction
+1010 353 113 50 GraphMenuBar
+447 821 100 50 RedoAction
+994 918 100 50 QuitAction
+637 917 100 50 OpenAction
+371 919 100 50 UndoAction
+282 822 150 50 RenameVertexAction
+750 918 100 50 SaveAction
+869 916 112 50 SelectAllAction
+222 919 132 50 NewWindowAction
+599 521 105 50 GraphWindow
+927 519 100 50 Actions
+1073 517 100 50 Listeners
+1265 521 111 50 UndoableEdits
+1513 734 160 50 AddEdgeUndoableEdit
+1730 810 168 50 AddVertexUndoableEdit
+1695 581 145 50 DeleteUndoableEdit
+1506 580 168 50 NewGraphUndoableEdit
+1708 657 197 50 LoadGraphNonUndoableEdit
+1491 659 195 50 RenameVertexUndoableEdit
+1708 734 197 50 SaveGraphNonUndoableEdit
+1513 810 174 50 VertexDragUndoableEdit
+1131 356 105 50 GraphToolBar
+44 919 165 50 DuplicateWindowAction
+127 823 139 50 ShowToolbarAction
+1399 121 311 50 This is a demonstration of the program design
+1399 156 312 50 design, made using the program we designed.
+1493 213 127 50 It's low key meta.
 1 5
 1 4
 3 1
@@ -90,3 +88,5 @@
 29 37
 27 40
 27 39
+3 0
+3 2

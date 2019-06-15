@@ -19,6 +19,7 @@ public class AddVertexAction extends AbstractAction {
      */
     public AddVertexAction(GraphModel graph, GraphPanel panel) {
         super("Add Vertex");
+
         this.graph = graph;
         this.panel = panel;
     }
@@ -28,8 +29,10 @@ public class AddVertexAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Get the position of the top left corner inside the visible rectangle of the panel:
         int x = (int) panel.getVisibleRect().getX() + GraphPanel.BORDER_THICKNESS + 10;
         int y = (int) panel.getVisibleRect().getY() + GraphPanel.BORDER_THICKNESS + 10;
+
         graph.addUndoableEdit(new AddVertexUndoableEdit(graph, x, y));
     }
 }

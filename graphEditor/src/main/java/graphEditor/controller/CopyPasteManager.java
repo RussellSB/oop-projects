@@ -17,7 +17,7 @@ import java.util.Observer;
 public class CopyPasteManager extends Observable implements Observer {
     private static final int COPIED_LOCATION_OFFSET = 30; // Offset added to the location of the pasted vertices.
     private GraphModel graph;
-    private boolean copied = false; // Flag that indicates if the CopyPasteManager has copied something or not.
+    private boolean copied; // Flag that indicates if the CopyPasteManager has copied something or not.
     private List<GraphVertex> copiedVertices;
     private List<GraphEdge> copiedEdges;
     private List<GraphVertex> newVertices;
@@ -28,12 +28,13 @@ public class CopyPasteManager extends Observable implements Observer {
      */
     CopyPasteManager(GraphModel graph) {
         this.graph = graph;
-        graph.addObserver(this);
+        this.copied = false;
+        this.copiedVertices = new ArrayList<>();
+        this.newVertices = new ArrayList<>();
+        this.copiedEdges = new ArrayList<>();
+        this.newEdges = new ArrayList<>();
 
-        copiedVertices = new ArrayList<>();
-        newVertices = new ArrayList<>();
-        copiedEdges = new ArrayList<>();
-        newEdges = new ArrayList<>();
+        graph.addObserver(this);
     }
 
     /**
@@ -86,7 +87,8 @@ public class CopyPasteManager extends Observable implements Observer {
 
         // Create a new version of the copied vertices:
         for (GraphVertex v : copiedVertices)
-            newVertices.add(new GraphVertex(v.getX() + COPIED_LOCATION_OFFSET,
+            newVertices.add(new GraphVertex(
+                    v.getX() + COPIED_LOCATION_OFFSET,
                     v.getY() + COPIED_LOCATION_OFFSET,
                     v.getWidth(),
                     v.getHeight(),

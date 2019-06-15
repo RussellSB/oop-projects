@@ -16,6 +16,7 @@ public class DefaultSizeAction extends AbstractAction {
      */
     public DefaultSizeAction(GraphFrame parentJFrame) {
         super("Default Size");
+
         this.parentJFrame = parentJFrame;
     }
 
