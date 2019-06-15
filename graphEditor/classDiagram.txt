@@ -1,48 +1,53 @@
-44 47
+49 54
 476 237 100 50 Model
 616 235 100 50 View
 778 239 100 50 Controller
 616 85 100 50 GraphEditor
-693 450 100 50 GraphPanel
-562 448 100 50 GraphFrame
+692 526 100 50 GraphPanel
+562 524 100 50 GraphFrame
 396 564 100 50 GraphVertex
 333 439 100 50 GraphModel
-262 567 100 50 GraphEdge
-1160 977 139 50 SelectionController
-1178 863 126 50 AddEdgeListener
-1323 977 111 50 VertexDragger
-574 863 115 50 AddEdgeAction
-703 860 123 50 AddVertexAction
-833 860 100 50 DeleteAction
-503 977 128 50 DefaultSizeAction
-943 858 123 50 NewGraphAction
+261 564 100 50 GraphEdge
+1174 862 139 50 SelectionController
+1173 957 126 50 AddEdgeListener
+1310 956 111 50 VertexDragger
+663 868 115 50 AddEdgeAction
+792 865 123 50 AddVertexAction
+922 865 100 50 DeleteAction
+519 956 128 50 DefaultSizeAction
+959 1044 123 50 NewGraphAction
 1025 395 113 50 GraphMenuBar
-462 863 100 50 RedoAction
-1005 979 100 50 QuitAction
-648 978 100 50 OpenAction
-382 980 100 50 UndoAction
-297 864 150 50 RenameVertexAction
-761 979 100 50 SaveAction
-880 977 112 50 SelectAllAction
-232 981 132 50 NewWindowAction
-625 563 105 50 GraphWindow
+551 868 100 50 RedoAction
+823 1040 100 50 QuitAction
+664 957 100 50 OpenAction
+398 959 100 50 UndoAction
+386 869 150 50 RenameVertexAction
+777 958 100 50 SaveAction
+896 956 112 50 SelectAllAction
+248 960 132 50 NewWindowAction
+620 372 105 50 GraphWindow
 942 562 100 50 Actions
 1088 559 100 50 Listeners
 1280 563 111 50 UndoableEdits
 1525 863 160 50 AddEdgeUndoableEdit
-1719 973 168 50 AddVertexUndoableEdit
+1706 952 168 50 AddVertexUndoableEdit
 1710 623 145 50 DeleteUndoableEdit
 1521 622 168 50 NewGraphUndoableEdit
 1733 742 197 50 LoadGraphNonUndoableEdit
 1524 740 195 50 RenameVertexUndoableEdit
 1708 866 197 50 SaveGraphNonUndoableEdit
-1528 973 174 50 VertexDragUndoableEdit
+1515 952 174 50 VertexDragUndoableEdit
 1146 398 105 50 GraphToolBar
-55 981 165 50 DuplicateWindowAction
-130 865 139 50 ShowToolbarAction
-1414 163 311 50 This is a demonstration of the program design
-1414 198 312 50 design, made using the program we designed.
-1508 255 127 50 It's low key meta.
+251 1038 165 50 DuplicateWindowAction
+219 870 139 50 ShowToolbarAction
+1414 163 274 50 This is a demonstration of the program design
+1414 198 275 50 made using the program we designed.              
+1483 265 127 50 It's low key meta.
+1072 333 128 50 CopyPasteManager
+1623 1041 127 50 PasteUndoableEdit
+697 1040 100 50 PaseAction
+568 1046 100 50 CopyAction
+439 1040 100 50 CutAction
 3 0
 3 2
 1 5
@@ -90,3 +95,10 @@
 29 37
 27 40
 27 39
+2 44
+29 45
+44 29
+44 27
+27 46
+27 47
+27 48
