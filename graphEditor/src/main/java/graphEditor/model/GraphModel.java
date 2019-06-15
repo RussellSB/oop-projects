@@ -19,19 +19,21 @@ public class GraphModel extends Observable implements Observer {
     private List<GraphEdge> edges;
     private List<GraphVertex> selectedVertices;
     private List<GraphEdge> selectedEdges;
-    private boolean addingEdgeMode = false; // Flag that indicates if we are in the middle of the process of adding a new edge.
-    private Line addingEdgeLine = new Line(); // Line used to add edges in a visual way.
+    private boolean addingEdgeMode; // Flag that indicates if we are in the middle of the process of adding a new edge.
+    private Line addingEdgeLine; // Line used to add edges in a visual way.
     private UndoManager undoManager;
 
     /**
      * Creates an empty graph.
      */
     public GraphModel() {
-        vertices = new ArrayList<>();
-        edges = new ArrayList<>();
-        selectedVertices = new ArrayList<>();
-        selectedEdges = new ArrayList<>();
-        undoManager = new UndoManager();
+        this.vertices = new ArrayList<>();
+        this.edges = new ArrayList<>();
+        this.selectedVertices = new ArrayList<>();
+        this.selectedEdges = new ArrayList<>();
+        this.addingEdgeMode = false;
+        this.addingEdgeLine = new Line();
+        this.undoManager = new UndoManager();
     }
 
     /**
@@ -103,7 +105,7 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
-     * Gets undo manager
+     * Gets the Undo Manager.
      */
     public UndoManager getUndoManager() {
         return this.undoManager;
@@ -148,6 +150,13 @@ public class GraphModel extends Observable implements Observer {
     }
 
     /**
+     * Gets the addingEdgeLine; line used to add edges in a visual way.
+     */
+    public Line getAddingEdgeLine() {
+        return addingEdgeLine;
+    }
+
+    /**
      * Sets the value of addingEdgeMode.
      */
     public void setAddingEdgeMode(boolean addingEdgeMode) {
@@ -155,13 +164,6 @@ public class GraphModel extends Observable implements Observer {
 
         setChanged();
         notifyObservers();
-    }
-
-    /**
-     * Gets the addingEdgeLine; line used to add edges in a visual way.
-     */
-    public Line getAddingEdgeLine() {
-        return addingEdgeLine;
     }
 
     /**
@@ -244,6 +246,7 @@ public class GraphModel extends Observable implements Observer {
 
     /**
      * Allows to add a list of vertices and edges to the graph.
+     * Useful for the paste operation.
      * These vertices and edges will be selected after being added.
      */
     public void paste(List<GraphVertex> vertices, List<GraphEdge> edges) {

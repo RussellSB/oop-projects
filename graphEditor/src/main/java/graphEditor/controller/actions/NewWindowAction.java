@@ -18,6 +18,7 @@ public class NewWindowAction extends AbstractAction {
      */
     public NewWindowAction(GraphFrame parentJFrame) {
         super("New Window");
+
         this.parentJFrame = parentJFrame;
     }
 

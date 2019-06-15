@@ -18,12 +18,14 @@ public class RedoAction extends AbstractAction implements Observer {
      */
     public RedoAction(GraphModel graph) {
         super("Redo");
+
         this.graph = graph;
+
         graph.addObserver(this);
     }
 
     /**
-     * Redo
+     * Redo.
      */
     @Override
     public void actionPerformed(ActionEvent e) {

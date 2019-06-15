@@ -22,6 +22,7 @@ public class SaveAction extends AbstractAction {
      */
     public SaveAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Save");
+
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }

@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class VertexDragger implements MouseInputListener {
     private GraphModel graph;
-    private boolean readyToDrag = false; // Flag that enables dragging.
-    private boolean dragging = false; // Flag that indicates the dragging has started.
-    private Point dragStartingPoint; // Initial dragging mouse point.
+    private boolean readyToDrag; // Flag that enables dragging.
+    private boolean dragging; // Flag that indicates the dragging has started.
+    private Point dragStartingPoint; // Initial point of the mouse when the drag starts.
     private List<Point> initialLocations; // Initial location of the dragged vertices.
 
     /**
@@ -28,6 +28,8 @@ public class VertexDragger implements MouseInputListener {
         this.graph = graph;
 
         this.initialLocations = new ArrayList<>();
+        this.readyToDrag = false;
+        this.dragging = false;
 
         panel.addMouseListener(this);
         panel.addMouseMotionListener(this);
@@ -42,7 +44,7 @@ public class VertexDragger implements MouseInputListener {
     }
 
     /**
-     * Calls all the actions that should be performed when the mouse is dragged.
+     * Calls all the actions that should be performed while the mouse is being dragged.
      */
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -135,7 +137,8 @@ public class VertexDragger implements MouseInputListener {
         } else {
             // Move vertices back to their original position:
             for (int i = 0; i < graph.getSelectedVerticesCount(); i++)
-                graph.getSelectedVertices().get(i).setLocation(initialLocations.get(i).x, initialLocations.get(i).y);
+                graph.getSelectedVertices().get(i).setLocation(
+                        initialLocations.get(i).x, initialLocations.get(i).y);
         }
 
         initialLocations.clear();
