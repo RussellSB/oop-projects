@@ -1,5 +1,6 @@
 package graphEditor.model;
 
+import graphEditor.controller.CopyPasteManager;
 import javafx.scene.shape.Line;
 
 import javax.swing.undo.AbstractUndoableEdit;
@@ -22,6 +23,7 @@ public class GraphModel extends Observable implements Observer {
     private boolean addingEdgeMode; // Flag that indicates if we are in the middle of the process of adding a new edge.
     private Line addingEdgeLine; // Line used to add edges in a visual way.
     private UndoManager undoManager;
+    private CopyPasteManager copyPasteManager;
 
     /**
      * Creates an empty graph.
@@ -34,6 +36,7 @@ public class GraphModel extends Observable implements Observer {
         this.addingEdgeMode = false;
         this.addingEdgeLine = new Line();
         this.undoManager = new UndoManager();
+        this.copyPasteManager = new CopyPasteManager(this);
     }
 
     /**
@@ -109,6 +112,13 @@ public class GraphModel extends Observable implements Observer {
      */
     public UndoManager getUndoManager() {
         return this.undoManager;
+    }
+
+    /**
+     * Gets the Copy Paste Manager.
+     */
+    public CopyPasteManager getCopyPasteManager() {
+        return copyPasteManager;
     }
 
     /**

@@ -1,6 +1,7 @@
 package graphEditor.controller.actions;
 
 import graphEditor.controller.CopyPasteManager;
+import graphEditor.model.GraphModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,10 @@ public class CopyAction extends AbstractAction implements Observer {
     /**
      * Creates the Copy action.
      */
-    public CopyAction(CopyPasteManager copyPasteManager) {
+    public CopyAction(GraphModel graph) {
         super("Copy");
 
-        this.copyPasteManager = copyPasteManager;
+        this.copyPasteManager = graph.getCopyPasteManager();
 
         copyPasteManager.addObserver(this);
     }

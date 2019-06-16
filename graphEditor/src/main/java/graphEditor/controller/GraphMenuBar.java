@@ -14,7 +14,6 @@ import java.awt.event.KeyEvent;
 public class GraphMenuBar extends JMenuBar {
     private GraphModel graph;
     private GraphFrame parentJFrame;
-    private CopyPasteManager copyPasteManager;
 
     /**
      * Creates a new menu bar with all its menus.
@@ -22,7 +21,6 @@ public class GraphMenuBar extends JMenuBar {
     public GraphMenuBar(GraphModel graph, GraphFrame parentJFrame) {
         this.graph = graph;
         this.parentJFrame = parentJFrame;
-        this.copyPasteManager = new CopyPasteManager(graph);
 
         addFileMenu();
         addEditMenu();
@@ -162,7 +160,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addCopyMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new CopyAction(copyPasteManager));
+        menuItem.setAction(new CopyAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Copy selected vertices with the edges between them");
 
@@ -174,7 +172,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addCutMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new CutAction(copyPasteManager));
+        menuItem.setAction(new CutAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Cut selected vertices with the edges between them");
 
@@ -186,7 +184,7 @@ public class GraphMenuBar extends JMenuBar {
      */
     private void addPasteMenuItem(JMenu menu) {
         JMenuItem menuItem = new JMenuItem();
-        menuItem.setAction(new PasteAction(copyPasteManager));
+        menuItem.setAction(new PasteAction(graph));
         menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, InputEvent.CTRL_MASK));
         menuItem.getAccessibleContext().setAccessibleDescription("Copy selected vertices with the edges between them");
 

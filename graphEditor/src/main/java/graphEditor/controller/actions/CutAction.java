@@ -1,6 +1,7 @@
 package graphEditor.controller.actions;
 
 import graphEditor.controller.CopyPasteManager;
+import graphEditor.model.GraphModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +17,10 @@ public class CutAction extends AbstractAction implements Observer {
     /**
      * Creates the Cut action.
      */
-    public CutAction(CopyPasteManager copyPasteManager) {
+    public CutAction(GraphModel graph) {
         super("Cut");
 
-        this.copyPasteManager = copyPasteManager;
+        this.copyPasteManager = graph.getCopyPasteManager();
 
         copyPasteManager.addObserver(this);
     }

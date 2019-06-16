@@ -26,7 +26,7 @@ public class CopyPasteManager extends Observable implements Observer {
     /**
      * Creates the CopyPasteManager.
      */
-    CopyPasteManager(GraphModel graph) {
+    public CopyPasteManager(GraphModel graph) {
         this.graph = graph;
         this.copied = false;
         this.copiedVertices = new ArrayList<>();
