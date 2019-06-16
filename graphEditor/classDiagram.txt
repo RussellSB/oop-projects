@@ -40,11 +40,11 @@
 1146 398 105 50 GraphToolBar
 251 1038 165 50 DuplicateWindowAction
 219 870 139 50 ShowToolbarAction
-1414 163 274 50 This is a demonstration of the program design
-1414 198 275 50 made using the program we designed.              
+1391 163 311 50 This is a demonstration of the program design
+1414 198 262 50 made using the program we designed.
 1483 265 127 50 It's low key meta.
-1072 333 128 50 CopyPasteManager
-1623 1041 127 50 PasteUndoableEdit
+1072 333 141 50 CopyPasteManager
+1623 1041 140 50 PasteUndoableEdit
 697 1040 100 50 PaseAction
 568 1046 100 50 CopyAction
 439 1040 100 50 CutAction
