@@ -35,7 +35,7 @@ public class GraphFrame extends JFrame {
         setJMenuBar(new GraphMenuBar(graph, this)); // Add Menu bar.
 
         toolBar = new GraphToolBar(graph, this);
-        add(toolBar, BorderLayout.PAGE_START); // Add Tool bar.
+        getContentPane().add(toolBar, BorderLayout.PAGE_START); // Add Tool bar.
 
         setVisible(true);
     }
