@@ -22,6 +22,8 @@ public class RedoAction extends AbstractAction implements Observer {
         this.graph = graph;
 
         graph.addObserver(this);
+
+        setEnabled(false);
     }
 
     /**

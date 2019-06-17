@@ -26,6 +26,8 @@ public class AddEdgeAction extends AbstractAction implements Observer {
         this.parentJFrame = parentJFrame;
 
         graph.addObserver(this);
+
+        setEnabled(false);
     }
 
     /**

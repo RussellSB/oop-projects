@@ -23,6 +23,8 @@ public class CopyAction extends AbstractAction implements Observer {
         this.copyPasteManager = graph.getCopyPasteManager();
 
         copyPasteManager.addObserver(this);
+
+        setEnabled(false);
     }
 
     /**
