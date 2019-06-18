@@ -41,7 +41,7 @@ public class SaveAction extends AbstractAction {
             File file = fc.getSelectedFile();
 
             String filename;
-            if (file.getName().endsWith(".txt"))
+            if (file.getName().toLowerCase().endsWith(".txt"))
                 filename = file.getPath();
             else
                 filename = file.getPath() + ".txt";
