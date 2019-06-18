@@ -73,11 +73,19 @@ public class SelectionController implements MouseListener, KeyListener {
     }
 
     /**
-     * Controls if the ctrl button is released.
+     * Controls if the ctrl button is released and if the ESC button is pressed and released.
      */
     @Override
     public void keyReleased(KeyEvent e) {
         parentJFrame.setCtrlIsDown(e.isControlDown());
+
+        // If ESC is pressed we deselect all:
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            graph.deselectAll();
+
+            // Disable Adding Edge Mode in case it was enabled.
+            graph.setAddingEdgeMode(false);
+        }
     }
 
     /**

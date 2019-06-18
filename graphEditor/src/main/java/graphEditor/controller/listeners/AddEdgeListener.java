@@ -48,7 +48,14 @@ public class AddEdgeListener implements MouseInputListener {
      */
     @Override
     public void mouseMoved(MouseEvent e) {
-        graph.setAddingEdgeLineEnd(e.getX(), e.getY());
+        if (graph.getSelectedVerticesCount() == 1) {
+            graph.setAddingEdgeLineEnd(e.getX(), e.getY());
+        } else {
+            // If we unselect the origin vertex we cancel the Add Edge action:
+            graph.setAddingEdgeMode(false);
+            parentJFrame.getPanel().removeMouseListener(this);
+            parentJFrame.getPanel().removeMouseMotionListener(this);
+        }
     }
 
     /**
