@@ -3,6 +3,7 @@ package graphEditor.controller.actions;
 import graphEditor.model.GraphModel;
 
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 import java.awt.event.ActionEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,7 +12,7 @@ import java.util.Observer;
  * Represents the Redo action.
  */
 public class RedoAction extends AbstractAction implements Observer {
-    private GraphModel graph;
+    private UndoManager undoManager;
 
     /**
      * Creates the Redo action.
@@ -19,7 +20,7 @@ public class RedoAction extends AbstractAction implements Observer {
     public RedoAction(GraphModel graph) {
         super("Redo");
 
-        this.graph = graph;
+        this.undoManager = graph.getUndoManager();
 
         graph.addObserver(this);
 
@@ -31,7 +32,7 @@ public class RedoAction extends AbstractAction implements Observer {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.redo();
+        undoManager.redo();
     }
 
     /**
@@ -39,6 +40,6 @@ public class RedoAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        setEnabled(graph.getUndoManager().canRedo());
+        setEnabled(undoManager.canRedo());
     }
 }

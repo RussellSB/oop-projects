@@ -41,6 +41,6 @@ public class DeleteAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        setEnabled(graph.somethingIsSelected());
+        setEnabled(graph.hasSomethingSelected());
     }
 }

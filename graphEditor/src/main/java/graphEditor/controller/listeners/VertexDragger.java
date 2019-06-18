@@ -86,7 +86,7 @@ public class VertexDragger implements MouseInputListener {
     private void checkDragging(MouseEvent e) {
         // Dragging starts if the mouse is pressed on top of one of the selected vertices.
         for (GraphVertex vertex : graph.getSelectedVertices())
-            if (vertex.intersects(e.getPoint())) {
+            if (vertex.isClicked(e.getPoint())) {
                 readyToDrag = true;
                 return;
             }

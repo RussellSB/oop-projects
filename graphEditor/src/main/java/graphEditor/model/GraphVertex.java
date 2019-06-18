@@ -138,7 +138,7 @@ public class GraphVertex extends Observable {
     /**
      * Checks if the vertex intersects with the specified click coordinates.
      */
-    public boolean intersects(Point click) {
+    public boolean isClicked(Point click) {
         return rectangle.contains(click);
     }
 

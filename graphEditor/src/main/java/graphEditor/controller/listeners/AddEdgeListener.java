@@ -67,7 +67,7 @@ public class AddEdgeListener implements MouseInputListener {
         for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
             GraphVertex v2 = graph.getVertices().get(i);
 
-            if (v2.intersects(e.getPoint())) {
+            if (v2.isClicked(e.getPoint())) {
                 try {
                     graph.addUndoableEdit(new AddEdgeUndoableEdit(graph, v1, v2));
                 } catch (RuntimeException ex) {

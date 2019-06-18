@@ -102,7 +102,7 @@ public class SelectionController implements MouseListener, KeyListener {
         for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
             GraphVertex vertex = graph.getVertices().get(i);
 
-            if (vertex.intersects(e.getPoint())) {
+            if (vertex.isClicked(e.getPoint())) {
                 RenameVertexAction.renameVertex(graph, parentJFrame);
                 return true;
             }
@@ -121,7 +121,7 @@ public class SelectionController implements MouseListener, KeyListener {
         for (int i = graph.getVerticesCount() - 1; i >= 0; i--) {
             GraphVertex vertex = graph.getVertices().get(i);
 
-            if (vertex.intersects(e.getPoint())) {
+            if (vertex.isClicked(e.getPoint())) {
                 if (parentJFrame.ctrlIsDown()) { // If CTRL is held down, add/remove vertex from selection:
                     if (graph.isSelected(vertex))
                         graph.deSelect(vertex);
@@ -151,7 +151,7 @@ public class SelectionController implements MouseListener, KeyListener {
         for (int i = graph.getEdgesCount() - 1; i >= 0; i--) {
             GraphEdge edge = graph.getEdges().get(i);
 
-            if (edge.intersects(e.getPoint())) {
+            if (edge.isClicked(e.getPoint())) {
                 if (parentJFrame.ctrlIsDown()) { // If CTRL is held down, add/remove edge from selection:
                     if (graph.isSelected(edge))
                         graph.deSelect(edge);

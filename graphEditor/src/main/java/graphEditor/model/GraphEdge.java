@@ -49,7 +49,7 @@ public class GraphEdge {
     /**
      * Checks if the edge intersects with the specified click coordinates.
      */
-    public boolean intersects(Point click) {
+    public boolean isClicked(Point click) {
         // We create an imaginary square around the click coordinates to make it easier to click the edge. This rectangle is 'SELECTION_SQUARE_RADIUS' pixels around the click coordinates. Then we just intersect this rectangle with the edge line.
         Rectangle clickRectangle = new Rectangle(
                 (int) click.getX() - SELECTION_SQUARE_RADIUS,
