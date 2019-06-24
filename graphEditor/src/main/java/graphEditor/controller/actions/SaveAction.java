@@ -1,9 +1,11 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.SaveGraphNonUndoableEdit;
 import graphEditor.model.GraphModel;
-import graphEditor.util.TxtFileFilter;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -13,13 +15,14 @@ import java.io.IOException;
  */
 public class SaveAction extends AbstractAction {
     private GraphModel graph;
-    private JFrame parentJFrame;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates the Save action.
      */
-    SaveAction(GraphModel graph, JFrame parentJFrame) {
+    public SaveAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Save");
+
         this.graph = graph;
         this.parentJFrame = parentJFrame;
     }
@@ -30,23 +33,26 @@ public class SaveAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         JFileChooser fc = new JFileChooser();
-        fc.addChoosableFileFilter(new TxtFileFilter());
+        fc.setCurrentDirectory(new File(System.getProperty("user.dir"))); // sets to current directory
+        fc.setFileFilter(new FileNameExtensionFilter(".txt", "txt"));
         fc.setAcceptAllFileFilterUsed(false);
 
         if (fc.showSaveDialog(parentJFrame) == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
 
             String filename;
-            if (file.getName().endsWith(".txt"))
+            if (file.getName().toLowerCase().endsWith(".txt"))
                 filename = file.getPath();
             else
                 filename = file.getPath() + ".txt";
 
             try {
-                graph.save(filename);
+                graph.addUndoableEdit(new SaveGraphNonUndoableEdit(graph, filename));
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(parentJFrame, ex.getMessage(), "IO error", JOptionPane.ERROR_MESSAGE);
             }
         }
+
+        parentJFrame.setCtrlIsDown(false); // Updates the CTRL flag (after opening a new window the CTRL flag gets stuck in its last state, which could be true if the shortcut was used).
     }
 }

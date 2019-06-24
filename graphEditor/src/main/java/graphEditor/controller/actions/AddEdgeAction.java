@@ -1,7 +1,8 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
+import graphEditor.controller.listeners.AddEdgeListener;
 import graphEditor.model.GraphModel;
-import graphEditor.model.GraphVertex;
+import graphEditor.view.GraphFrame;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,24 +14,28 @@ import java.util.Observer;
  */
 public class AddEdgeAction extends AbstractAction implements Observer {
     private GraphModel graph;
+    private GraphFrame parentJFrame;
 
     /**
      * Creates the Add Edge action.
      */
-    AddEdgeAction(GraphModel graph) {
+    public AddEdgeAction(GraphModel graph, GraphFrame parentJFrame) {
         super("Add Edge");
+
         this.graph = graph;
+        this.parentJFrame = parentJFrame;
+
         graph.addObserver(this);
+
         setEnabled(false);
     }
 
     /**
-     * Adds a new edge between the selected vertex and the one that will be clicked afterwards.
+     * Creates a new AddEdgeListener that will take care of adding a new edge between the selected vertex and the one that will be clicked afterwards.
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(e.getActionCommand()); // TODO: Remove when implemented.
-        // TODO: Implement.
+        new AddEdgeListener(graph, parentJFrame);
     }
 
     /**
@@ -39,15 +44,6 @@ public class AddEdgeAction extends AbstractAction implements Observer {
      */
     @Override
     public void update(Observable o, Object arg) {
-        int nVerticesSelected = 0;
-
-        for (GraphVertex vertex : graph.getVertices())
-            if (vertex.isSelected())
-                nVerticesSelected++;
-
-        if (nVerticesSelected == 1)
-            setEnabled(true);
-        else
-            setEnabled(false);
+        setEnabled(graph.getSelectedVerticesCount() == 1);
     }
 }

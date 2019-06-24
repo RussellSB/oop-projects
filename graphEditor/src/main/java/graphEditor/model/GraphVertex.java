@@ -1,36 +1,38 @@
 package graphEditor.model;
 
-import graphEditor.util.Selectable;
-
 import java.awt.*;
 import java.util.Observable;
 
 /**
  * A simple vertex class.
  */
-public class GraphVertex extends Observable implements Selectable {
-    static final String DEFAULT_NAME = "Unnamed";
-    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(30, 30, 100, 100);
+public class GraphVertex extends Observable {
+    static final String DEFAULT_NAME = "Vertex";
+    private static final Rectangle DEFAULT_RECTANGLE = new Rectangle(0, 0, 100, 50);
+    private static final int MAX_NAME_SIZE = 50; // Max numbers of characters allowed for the vertex name.
+    private static final int TEXT_PADDING = 20; // Space (in pixels) between the text and the vertex border.
     private Rectangle rectangle;
     private String name;
-    private boolean isSelected = false;
 
     /**
      * Creates a new vertex with the default values.
      */
-    public GraphVertex() {
-        this.rectangle = new Rectangle(DEFAULT_RECTANGLE);
-        this.name = DEFAULT_NAME + " 0";
+    GraphVertex() {
+        rectangle = new Rectangle(DEFAULT_RECTANGLE);
+        name = DEFAULT_NAME + " 0";
     }
 
     /**
      * Creates a new vertex with the introduced parameters.
      *
      * @throws RuntimeException if the name is an empty string.
+     * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
      */
     public GraphVertex(int x, int y, int width, int height, String name) throws RuntimeException {
-        if (name.equals(""))
+        if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
+        if (name.length() > MAX_NAME_SIZE)
+            throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
 
         this.rectangle = new Rectangle(x, y, width, height);
         this.name = name;
@@ -51,13 +53,6 @@ public class GraphVertex extends Observable implements Selectable {
     }
 
     /**
-     * Returns the location of the rectangle.
-     */
-    public Point getLocation() {
-        return rectangle.getLocation();
-    }
-
-    /**
      * Returns the width of the rectangle.
      */
     public int getWidth() {
@@ -65,17 +60,20 @@ public class GraphVertex extends Observable implements Selectable {
     }
 
     /**
+     * Sets the width of the rectangle.
+     */
+    private void setWidth(int width) {
+        rectangle.setSize(width, (int) rectangle.getHeight());
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
      * Returns the height of the rectangle.
      */
     public int getHeight() {
         return (int) rectangle.getHeight();
-    }
-
-    /**
-     * Returns the rectangle that represents the vertex.
-     */
-    public Rectangle getRectangle() {
-        return rectangle;
     }
 
     /**
@@ -89,12 +87,39 @@ public class GraphVertex extends Observable implements Selectable {
      * Sets the name of the vertex.
      *
      * @throws RuntimeException if the name is an empty string.
+     * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
      */
-    public void setName(String name) throws RuntimeException {
-        if (name.equals(""))
+    void setName(String name) throws RuntimeException {
+        if (name.isEmpty())
             throw new RuntimeException("Name cannot be left empty");
+        if (name.length() > MAX_NAME_SIZE)
+            throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
 
         this.name = name;
+
+        setChanged();
+        notifyObservers();
+    }
+
+    /**
+     * Sets the name of the vertex and resizes the vertex if needed.
+     *
+     * @throws RuntimeException if the name is an empty string.
+     * @throws RuntimeException if the name is longer than MAX_NAME_SIZE.
+     */
+    public void setName(String name, FontMetrics fontMetrics) throws RuntimeException {
+        if (name.isEmpty())
+            throw new RuntimeException("Name cannot be left empty");
+        if (name.length() > MAX_NAME_SIZE)
+            throw new RuntimeException("Name cannot be longer than " + MAX_NAME_SIZE + " characters");
+
+        this.name = name;
+
+        // Resize vertex according to the string length:
+        if (fontMetrics.stringWidth(name) + TEXT_PADDING > DEFAULT_RECTANGLE.getWidth())
+            setWidth(fontMetrics.stringWidth(name) + TEXT_PADDING);
+        else
+            setWidth((int) DEFAULT_RECTANGLE.getWidth());
 
         setChanged();
         notifyObservers();
@@ -111,13 +136,10 @@ public class GraphVertex extends Observable implements Selectable {
     }
 
     /**
-     * Sets the size of the rectangle to the specified width and height.
+     * Checks if the vertex intersects with the specified click coordinates.
      */
-    public void setSize(int width, int height) {
-        rectangle.setSize(width, height);
-
-        setChanged();
-        notifyObservers();
+    public boolean isClicked(Point click) {
+        return rectangle.contains(click);
     }
 
     /**
@@ -125,34 +147,6 @@ public class GraphVertex extends Observable implements Selectable {
      */
     @Override
     public String toString() {
-        return this.getX() + " " + this.getY() + " " + this.getWidth() + " " + this.getHeight() + " " + this.name;
-    }
-
-    /**
-     * Marks the vertex as selected.
-     */
-    @Override
-    public void select() {
-        this.isSelected = true;
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Marks the vertex as not selected.
-     */
-    @Override
-    public void deselect() {
-        this.isSelected = false;
-        setChanged();
-        notifyObservers();
-    }
-
-    /**
-     * Checks if the vertex is selected or not.
-     */
-    @Override
-    public boolean isSelected() {
-        return this.isSelected;
+        return getX() + " " + getY() + " " + getWidth() + " " + getHeight() + " " + name;
     }
 }

@@ -1,5 +1,6 @@
-package graphEditor.controller;
+package graphEditor.controller.actions;
 
+import graphEditor.controller.undoableEdits.NewGraphUndoableEdit;
 import graphEditor.model.GraphModel;
 
 import javax.swing.*;
@@ -14,8 +15,9 @@ public class NewGraphAction extends AbstractAction {
     /**
      * Creates the New Graph action.
      */
-    NewGraphAction(GraphModel graph) {
+    public NewGraphAction(GraphModel graph) {
         super("New Graph");
+
         this.graph = graph;
     }
 
@@ -24,6 +26,6 @@ public class NewGraphAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        graph.reset();
+        graph.addUndoableEdit(new NewGraphUndoableEdit(graph));
     }
 }
